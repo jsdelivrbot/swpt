@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		#content{
+			width: 974px;
+			height: 600px;
+			margin-top:-180px;
+			overflow: auto;
+			border:1px solid black;
+			margin-left: 360px;
+			}
+	</style>
+	<body>
+		<script>
+			var url = 'test1.pdf';
+				var oldPage = 1;
+				
+				var oldPage = false;
+				
+				PDFJS.workerSrc = 'pdf.worker.js';
+				var pdfDoc = null,
+				
+				//初始化页码
+				    pageNum = 4,
+				    pageRendering = false,
+				    pageNumPending = null,
+				
+				    //pdf缩放的比例
+				    scale = 1.6,
+				
+				    canvas = document.getElementByIdx_x('the-canvas'),
+				    ctx = canvas.getContext('2d');
+				
+				
+				    //页面跳转函数
+				function renderPage(num) {
+				 pageRendering = true;
+				 pdfDoc.getPage(num).then(function(page) {
+				   var viewport = page.getViewport(scale);
+				   canvas.height = viewport.height;
+				   canvas.width = viewport.width;
+				   var renderContext = {
+				     canvasContext: ctx,
+				     viewport: viewport
+				   };
+				   var renderTask = page.render(renderContext);
+				   renderTask.promise.then(function() {
+				     pageRendering = false;
+				     if (pageNumPending !== null) {
+				       renderPage(pageNumPending);
+				       pageNumPending = null;
+				     }
+				   });
+				 });
+				 document.getElementByIdx_x('page_num').textContent = pageNum;
+				}
+				
+				
+				//改变pageNumRending并实现页面跳转
+				function queueRenderPage(num) {
+				 if (pageRendering) {
+				   pageNumPending = num;
+				 } else {
+				   renderPage(num);
+				 }
+				}
+				
+				//上一页函数
+				function onPrevPage() {
+				 if (pageNum <= 1) {
+				   return;
+				 }
+				 pageNum--;
+				 queueRenderPage(pageNum);
+				}
+				
+				//下一页函数
+				function onNextPage() {
+				 if (pageNum >= pdfDoc.numPages) {
+				   return;
+				 }
+				 pageNum++;
+				 queueRenderPage(pageNum);
+				}
+				
+				
+				//将文件放入canvas中
+				PDFJS.getDocument(url).then(function(pdfDoc_) {
+				 pdfDoc = pdfDoc_;
+				 document.getElementByIdx_x('page_count').textContent = pdfDoc.numPages;
+				 renderPage(pageNum);
+				});
+				
+				document.getElementByIdx_x('pre').onclick=function(){
+				onPrevPage();
+				}
+				
+				document.getElementByIdx_x('next').onclick=function(){
+				onNextPage();
+				}
+				
+				//跳转函数
+				document.getElementByIdx_x('btn').onclick=function(){
+				var page = document.getElementByIdx_x('txt').value;
+				//获取到的是字符型，需要转为整数型
+				if(page != ''){
+				pageNum = parseInt(page);
+				queueRenderPage(pageNum);
+				document.getElementByIdx_x('page_num').textContent = pageNum;
+				}
+		</script>
+	</body>
+</html>

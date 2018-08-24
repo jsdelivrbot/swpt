@@ -1,0 +1,28 @@
+.body {
+    padding: 0;
+    .bodyMain {
+        display: none;
+    }
+}
+.project {
+    display: block !important;
+    table {
+        th {
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+        }
+        td {
+            text-align: center;
+            white-space: nowrap;
+            padding: .266667rem /* 20/75 */;
+        }
+        .control {
+            cursor: pointer;
+            color: #DF3F29;
+        }
+    }
+}
+#swiperBody .swiper-slide {
+    overflow-x: auto;
+}

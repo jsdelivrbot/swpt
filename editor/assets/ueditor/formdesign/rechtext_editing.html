@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>富文本编辑器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+
+    <link rel="stylesheet" href="self/css/colpick.css">
+    <script type="text/javascript" src="self/js/Palette.js"></script>
+
+    <script type="text/javascript" src="./cropper/cropper.js"></script>
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+
+    <script type="text/javascript" src="../httpData.config.js"></script>
+
+    <style>
+        *{
+            margin: 0;padding: 0;
+        }
+        button{
+            width: 0;
+            height: 0;
+            text-align: center;
+            vertical-align:middle;
+        }
+        ul{
+            list-style-type:none;
+            margin: 0;
+            padding: 0;
+        }
+       
+        #txtTitle{
+            width:100%;
+            height:25px;
+        }
+        #Article_Content{
+            background-color:rgba(223, 224, 207, 0.80);
+        }
+        #Article_Content>ul{
+            width:100%;
+            list-style-type:none;
+           
+        }
+        #Article_Content>ul>li{
+            width:100%;
+        }
+        .li_Content{
+            height:520px;
+            border:0px solid red;
+        }
+        .li_Content>table{
+            width:100%;
+        }
+        .divOne{
+            width:100%;
+            border:1px solid #808080;
+        }
+                
+        .table_ContentToolbar{
+            height:30px;
+        }
+        .One_table_FontColor{
+            border:0px solid red;
+        }
+        .trOne{
+            width:100%;
+        }
+            .trOne > td {
+                width:35px;
+                height:35px;
+                border:0px solid red;
+            }
+            .trOne>td>table:hover{
+            background-color:rgba(2, 8, 97, 0.22);
+            border:1px solid #000000;
+        }
+        .One_FontImage_A{
+            height:15px;
+            width:17px;
+            background:url(../../images/icons.gif) repeat -723px -1px;
+        }
+        .One_FontColor_A{
+            width:15px;
+            height:3px;
+            background-color:#000000;
+        }
+        .One_FontColor_Last{
+            width: 8px;
+            height: 20px;
+            background:url(../../images/icons.gif) repeat -742px -0px;
+        }
+        .One_blod{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat 0px 0px;
+        }
+        .One_italic{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -60px 0px;
+        }
+        .One_strikethrough{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -120px 0px;
+        }
+        .One_unorderedNo{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -20px 0px;
+        }
+        .One_well-aligned{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -80px 0px;
+        }
+        .One_keepleft{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -460px 0px;
+        }
+        .One_middle{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -420px 0px;
+        }
+        .One_keepright{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -480px 0px;
+        }
+        .One_AddUrl{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -500px 0px;
+        }
+        .One_ClearUrl{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -640px 0px;
+        }
+        .One_AddImage{
+            width:20px;
+            height:20px;
+            background:url(../../images/icons.gif) repeat -380px 0px;
+        }
+        .One_paragraph{
+            width:70px;
+            height:28px;
+            font-size:10pt;
+        }
+        .One_Fontfamily{
+            width:70px;
+            height:28px;
+            font-size:10pt;
+        }
+        .One_FontSize{
+            width:100px;
+            height:28px;
+            font-size:10pt;
+        }
+        .SelColor{
+            width:100%;height:100%;
+        }
+            .SelColor > tr {
+            height:14px;width:100%;
+            }
+            .SelColor_td{
+                width:14px;
+                height:14px;
+                border:1px solid red;
+            }
+
+        .backgroundColor {
+            background-color:rgba(2, 8, 97, 0.22);
+            border:1px solid #000000;
+        }
+        .backgroundColor {
+            background-color:rgba(2, 8, 97, 0.22);
+            border:1px solid #000000;
+        }
+
+        .Background_AddUrl{
+
+            user-select:none;
+            -moz-user-select:none;
+            -webkit-user-select:none;
+
+            width:300px;
+            height:125px;
+            border:1px solid #000000;
+            background-color:#ffffff;
+            position:absolute;
+            padding-left:5px;
+            padding-top:5px;
+            display:none;
+            font-size:11pt;
+        }
+        #txtUrlTitle,#txtUrl{
+            width:80%;
+        }
+        #btnUrlOk,#btnUrlReset{
+           
+            height: 25px;
+            width: 50px;
+            margin-top:10px;
+        }
+        
+        .Background_AddImage{
+            user-select:none;
+            -moz-user-select:none;
+            -webkit-user-select:none;
+
+            width:150px;
+            height:150px;
+            border:1px solid #000000;
+            background-color:#ffffff;
+            position:absolute;
+            font-size:11pt;
+            display:none;
+        }
+        .Background_AddImage>ul>li{
+            width:100%;
+            position:relative;
+            list-style-type:none;
+            padding:0;
+        }
+        .AddImage_top{
+            height:30px;
+        }
+        .AddImage_middle{
+            height:100px;
+        }
+        .AddImage_bottom{
+        height:20px;
+        }
+        #AddImage_Show{
+            width:90px;
+            height:90px;
+            border:1px solid #808080;
+            text-align:center;
+            line-height:90px;
+            position:relative;
+            left:50%;
+            margin-left:-45px;
+        }
+        #btnUp{
+            width:100%;
+        }
+        #AddImage_progress{
+            width:0%;
+            height:100%;
+            background-color:rgba(0, 121, 255, 0.58);
+            position:relative;
+            margin-top:-20px;
+            transition:width 1s;
+            -moz-transition:width 1s;
+            -webkit-transition :width 1s;
+        
+        }
+        #Content_iframe{
+            border:1px solid #808080;
+            width:99.9%;
+            height:100%;
+            background-color:#ffffff;
+        }
+        .input_padding_important input{
+            padding: 0 !important;
+        }
+    </style>
+    <div id="script_div" style="display: none;">
+            <script>
+        
+                    function One_table_AddUrl_Click() {
+                        var $One_table_AddUrl = $(".One_table_AddUrl");
+                        var $Background_AddUrl = $(".Background_AddUrl");
+                        var $btnUrlOk = $("#btnUrlOk");
+                        var $txtUrl = $("#txtUrl");
+                        var $txtUrlTitle = $("#txtUrlTitle");
+                        var $btnUrlReset = $("#btnUrlReset");
+                        var $One_a_AddUrl = $("#One_a_AddUrl");
+                
+                        var click = 1;
+                
+                        $One_a_AddUrl.click(function () {
+                            if(click==1){
+                                click = 0;
+                                $One_table_AddUrl.addClass("backgroundColor");
+                                $Background_AddUrl.show();
+                            }else {
+                                click = 1;
+                                $Background_AddUrl.hide();
+                                $One_table_AddUrl.removeClass("backgroundColor");
+                            }
+                           
+                            return;
+                        });
+                
+                        $btnUrlOk.click(function () {
+                            $Background_AddUrl.hide();
+                            $One_table_AddUrl.removeClass("backgroundColor");
+                            click = 1;
+                            createLink($txtUrlTitle.val(), "http://" + $txtUrl.val());
+                        });
+                
+                        $btnUrlReset.click(function () {
+                            $txtUrlTitle.val("");
+                            $txtUrl.val("");
+                        });
+                
+                }   
+                    
+                    function btnUp_Click() {
+                        var $btnUp = $("#btnUp");
+                        var $selFile = $("#selFile");
+                
+                        var $Background_AddImage = $(".Background_AddImage");
+                
+                        $btnUp.click(function () {
+                            $selFile.click();
+                        });
+                
+                        $selFile.change(function () {
+                            var filename = $selFile.val().split('\\');
+                            //filename = filename[0].split('/');
+                            var fname = filename[filename.length - 1];
+                            var suffix = fname.split('.');
+                            suffix = suffix[suffix.length - 1];
+                            var name = $(location).attr("href").split('=')[1];
+                
+                            switch (suffix) {
+                                case "jpg":
+                                case "jpeg":
+                                case "png":
+                                    $btnUp.attr("title", fname);
+                                    //showFileHint("#000000", "已选择文件：" + fname);
+                                    
+                                    //判断当前浏览器是否能使用
+                                    if (window.FormData) {
+                                        //创建FormData表单对象
+                                        var formData = new FormData();
+                
+                                        //获取文件添加进去
+                                        formData.append("upfile", document.getElementById("selFile").files[0]);
+                
+                                        //创建XMLHttpRequest对象
+                                        var xmlHttp = new XMLHttpRequest();
+                
+                
+                                        /*
+                                            这里需要上传图片的地址,
+                                            根据不同的客户获取不一样的上传地址，当然也可固定一个地址
+                                        */
+                
+                                        //xmlHttp.open("POST", "ashx/upFile.ashx?name=" + name + "&&cover=1");
+                                        
+                                        //进度条
+                                        //xmlHttp.upload.addEventListener("progress", upFileProgress, false);
+                                        //是否上传成功
+                                        // xmlHttp.onload = function () {
+                                        //     if (xmlHttp.status==200) {
+                                        //         showFileHint("#000000", "文件上传成功！");
+                                        //         $Background_AddImage.fadeOut(1000);
+                                        //         $(".One_table_AddImage").removeClass("backgroundColor");
+                                        //         eval("var ret=" + xmlHttp.responseText);
+                                            
+                                        //         var url = "images/SaveImage/"+ ret.fileName;
+                                        //         InsertImage(url);
+                                        //         $btnUp.attr("title", "未选择图片");
+                                        //         $selFile.val("");
+                                        //     } else {
+                                        //         showFileHint("red", "文件上传失败！");
+                                        //     }
+                                        // };
+                                        // xmlHttp.send(formData);
+                                    }
+                                    
+                                    previewImage();
+                                    
+                                    break;
+                                default:
+                                    $selFile.val("");
+                                    showFileHint("red","选择文件有误，请重新选择！");
+                                    break;
+                            }
+                
+                        });
+                
+                        function previewImage() {
+                            // 检查是否支持FileReader对象：预览图片
+                            if (typeof FileReader != 'undefined') {
+                
+                                var acceptedTypes = {
+                                    'image/png': true,
+                                    'image/jpeg': true,
+                                    'image/gif': true
+                                };
+                
+                                //预览图片
+                                if (acceptedTypes[document.getElementById('selFile').files[0].type] === true) {
+                        
+                                    var reader = new FileReader();
+                                    reader.onload = function (event) {
+                                        var image = new Image();
+                                        image.src = event.target.result;
+                                        image.width = 90;
+                                        //document.body.appendChild(image);
+                                        $("#AddImage_Show").html(image);
+                                    };
+                                    reader.readAsDataURL(document.getElementById('selFile').files[0]);
+                
+                                }
+                            } else {
+                                showFileHint("red","不支持预览");
+                            }
+                        }
+                    }
+                    
+                    function upFileProgress(evt) {
+                        var $AddImage_progress = $("#AddImage_progress");
+                        var $AddImage_Number = $("#AddImage_Number");
+                
+                        $("#AddImage_progress").css("width", "0%");
+                        if (evt.lengthComputable) {
+                            var thisProgress = Math.round(evt.loaded * 100 / evt.total);
+                            var per = thisProgress + "%";
+                            $("#AddImage_progress").css("width", per);
+                            //$AddImage_progress.css("width", per);
+                            $AddImage_Number.html(per);
+                            
+                        } else {
+                            showFileHint("red","计算出错！");
+                        }
+                
+                    }
+                
+                    function showFileHint(color,content) {
+                        var $divHint = $("#divHint");
+                        var $divHint_Content = $("#divHint_Content");
+                        $divHint.show();
+                        $divHint_Content.css("color", color);
+                        $divHint_Content.html(content);
+                        $divHint.delay(3000).fadeOut(500);
+                
+                    }
+                
+                    function One_table_AddImage_click() {
+                        var $One_table_AddImage = $(".One_table_AddImage");
+                        var $Background_AddImage = $(".Background_AddImage");
+                
+                        var $One_a_AddImage = $("#One_a_AddImage");
+                
+                
+                        var click = 1;
+                
+                        $One_table_AddImage.click(function () {
+                            if (click==1) {
+                                $One_table_AddImage.addClass("backgroundColor");
+                                $Background_AddImage.show();
+                                click++;
+                            } else {
+                                $One_table_AddImage.removeClass("backgroundColor");
+                                $Background_AddImage.hide();
+                                click--;
+                            }
+                        
+                        });
+                
+                
+                
+                    }
+                
+                    function Load_Paragraph_Click() {
+                        var $setParagraph = $("#setParagraph");
+                
+                        var AllTitle = ["标题1", "标题2", "标题3", "标题4", "标题5", "标题6"];
+                         var AllFont_Size = ["25","20","15","12","10","5"];
+                        // var AllValie = ["h1", "h2", "h3", "h4", "h5", "h6"];
+                
+                        var option = "<option>标题</option>";
+                        for (var i = 0; i < AllTitle.length; i++) {
+                            option += "<option style='font-size:" + AllFont_Size [i]+ "pt;font-weight:550;'>" + AllTitle[i] + " </option>";
+                        }
+                        $setParagraph.html(option);
+                
+                       
+                    }
+                
+                    function Load_setFamily_Click() {
+                        var $setFamily = $("#setFamily");
+                
+                        var family = ["宋体", "仿宋", "黑体", "楷体", "隶书", "华文彩云",
+                            "华文细黑", "华文新魏", "华文行楷", "华文中宋", "幼圆",
+                            "Arial", "Comic Sans MS", "Courier New", "Tahoma", "Times New Roman", "Wingdings"];
+                        var f_length = family.length;
+                
+                        var option = "<option>字体</option>";
+                
+                        for (var i = 0; i < f_length; i++) {
+                            option += "<option style='font-family:" + family[i] + "'>" + family[i] + "</option>";
+                        }
+                
+                        $setFamily.html(option);
+                
+                        
+                
+                    }
+                
+                    function Load_setFontSize_Click() {
+                        var $setFontSize = $("#setFontSize");
+                
+                        var size = ["特小", "较小", "小", "中", "大", "较大", "特大"];
+                        var s_length = size.length;
+                
+                        var option = "<option >字体大小</option>";
+                
+                        for (var i = 0; i < s_length; i++) {
+                            option += "<option>" + size[i] + "</option>";
+                        }
+                
+                        $setFontSize.html(option);
+                
+                        
+                
+                    }
+                    
+                    function GetColor() {
+                        
+                        var $colpick_new_color = $(".colpick_new_color");
+                        var $colpick_submit = $(".colpick_submit");
+                        var $One_FontColor_A = $(".One_FontColor_A");
+                        var $colpick = $(".colpick");
+
+                        $colpick_submit.click(function () {
+                        var color = $colpick_new_color.css("background-color");
+                        console.log($colpick_new_color.css("background-color"));
+                        $One_FontColor_A.css("background-color", color);
+                        foreColor(color);
+                        $colpick.hide();
+                        });
+                    }
+                
+                
+                
+                    $(function(){
+                        $("#collorpicker_1").remove().ready(function(){
+                            $("#One_table_FontColorId").colpick();
+                            GetColor();
+                        });
+                       
+
+                        One_table_AddUrl_Click();
+                        Load_setFontSize_Click();
+                        Load_setFamily_Click();
+                        Load_Paragraph_Click();
+                        One_table_AddImage_click();
+                        showFileHint();
+                        btnUp_Click();
+                        
+                        //upFileProgress();
+                        
+                    });
+            </script>
+    </div>
+</head>
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr><td colspan="2">
+                <span style="font-weight: 600;">控件名称</span>
+                <span  class="label label-important">*</span>
+                <span><input id="txtControlName" type="text" value="" placeholder=" * 必填"></span>
+            </td></tr>
+            <tr><th>
+                <span>数据源</span>
+            </th><th><span>数据字段</span></th></tr>
+            <tr><td>
+               <select style="width: 80%;" id="datasource">
+                   <option value="0">请选择</option>
+               </select>
+            </td><td>
+                <select id="datafield" style="width: 80%;">
+                    <option value="0">请选择</option>
+                </select>
+            </td></tr>
+        </table>
+
+    </div>
+
+    <div id="rech_text" style="display: none;"> <!--style="display: none;"-->
+        <!-- <div  style="padding-top:5px;width:100%;background-color:rgba(223, 224, 207, 0.80)font-size:10pt;">
+            <label style="size:20pt;">标题</label> <input type="text" id="txtTitle" value="" placeholder="请在此输入文章标题 [请根据要求输入标题，禁止输入违法等相关知识标题]" />
+        </div> -->
+        <div id="Article_Content" class="input_padding_important">
+            <ul>
+                <li class="li_Content">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="divOne">
+                                    <table class="table_ContentToolbar">
+                                        <tbody>
+                                            <tr class="trOne">
+                                                <!-- 字体颜色 -->
+                                                <td>
+                                                    <table id="One_table_FontColorId" class="One_table_FontColor" title="文字颜色">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_FontImage_A"></div>
+                                                                    <div class="One_FontColor_A"></div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="One_FontColor_Last"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 粗体 -->
+                                                <td >
+                                                    <table class="One_table_bold" title="粗体" onclick="bold();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_blod"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 斜体 -->
+                                                <td>
+                                                    <table class="One_table_italic" title="斜体" onclick="italic();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_italic"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 删除线 -->
+                                                <td>
+                                                    <table class="One_table_strikethrough" title="删除线" onclick="strikeThrough();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_strikethrough"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 无序编号 -->
+                                                <td>
+                                                    <table class="One_table_unorderedNo" title="无序列表" onclick="insertUnorderedList();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_unorderedNo"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 有序编号 -->
+                                                <td>
+                                                    <table class="One_table_well-aligned" title="有序列表" onclick="insertOrderedList();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_well-aligned"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 对齐方式:靠左 -->
+                                                <td>
+                                                    <table class="One_table_keepleft" title="靠左对齐" onclick="justifyLeft();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_keepleft"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 对齐方式:居中 -->
+                                                <td>
+                                                    <table class="One_table_middle" title="居中对齐" onclick="justifyCenter();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_middle"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 对齐方式:靠右 -->
+                                                <td>
+                                                    <table class="One_table_keepright" title="靠右对齐" onclick="justifyRight();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_keepright"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 添加链接 -->
+                                                <td>
+                                                    <table class="One_table_AddUrl" title="添加链接">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a id="One_a_AddUrl" href="javascript:;" >
+                                                                            <div class="One_AddUrl"></div>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                    </table>
+                                                    <div class="Background_AddUrl">
+                                                        <span>标题:
+                                                            <input id="txtUrlTitle" type="text" value="" placeholder="请输入链接标题" />
+                                                        </span>
+                                                        <br />
+                                                        <br />
+                                                        <span>网址:
+                                                            <input id="txtUrl" type="url" value="" placeholder="请输入链接" />
+                                                        </span>
+                                                        <br />
+                                                        <span>
+                                                            <input id="btnUrlOk" class="button"  type="button" value="OK" />
+
+                                                            <input id="btnUrlReset"  class="button"   type="button" value="重置" />
+                                                        </span>
+                                                        
+                                                    </div>
+                                                </td>
+                                                <!-- 清除链接 -->
+                                                <td>
+                                                    <table class="One_table_ClearUrl" title="清除链接(需要选择清除链接信息)" onclick="unlink();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_ClearUrl"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 添加图片 -->
+                                                <td>
+                                                    <table class="One_table_AddImage"  title="添加图片(功能尚未开放)">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a id="One_a_AddImage"  style="pointer-events:none; cursor:no-drop;"  href="javascript:;">
+                                                                        <div class="One_AddImage"></div>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="Background_AddImage">
+                                                        <ul>
+                                                            <li class="AddImage_top">
+                                                                <input type="file" id="selFile" value="" style="display: none;" hidden="hidden" />
+                                                                <input id="btnUp" type="button" value="上传" style="width: 100%;" title="请选择图片"  />
+                                                                <div id="divHint">
+                                                                    <div id="divHint_triangle"></div>
+                                                                    <div id="divHint_Content"></div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="AddImage_middle">
+                                                                <div id="AddImage_Show">
+                                                                    图片浏览
+                                                                </div>
+                                                            </li>
+                                                            <li class="AddImage_bottom">
+                                                                <div id="AddImage_Number" style="width:100%;height:100%;border:0;border-top:1px solid #808080; text-align:center;">
+                                                                    进度君
+                                                                </div>
+                                                                <div id="AddImage_progress"> </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <!-- 段落 -->
+                                                <td>
+                                                    <table class="One_table_paragraph" title="标题">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_paragraph">
+                                                                        <select id="setParagraph" style=" width:100%;height:100%;" onchange="setParagraph_change();">
+                                                                            <option value="" >标题</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 字体 -->
+                                                <td>
+                                                    <table class="One_table_Fontfamily" title="字体">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_Fontfamily"  style="width:100px;" >
+                                                                        <select id="setFamily" style="width:100%;height:100%;" onchange="setFamily_change();">
+                                                                            <option>字体</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- 字体大小 -->
+                                                <td>
+                                                    <table  class="One_table_FontSize" title="字体大小"  onchange="setFontSize();">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="One_FontSize">
+                                                                        <select id="setFontSize" style="width:100%;height:100%;">
+                                                                            <option>字体大小</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:0px solid #808080;border-top:0;height:470px;">
+                                <iframe id="Content_iframe" contenteditable="true" ></iframe> 
+                                <script>
+                                    
+                                    var explorer=window.navigator.userAgent;
+
+                                    if (explorer.indexOf('Firefox')>=0) {
+                                        var ifa = document.getElementById('Content_iframe');
+
+                                        
+
+                                        $(function () {
+                                            $("#btnSend").css("display", "none");
+                                            $("#btnSend").val("禁止发送");
+                                        });
+                                        ifa.contentWindow.document.contentEditable = false;
+                                        ifa.contentWindow.document.open();
+                                        ifa.contentWindow.document.write('<html><head></head><body style="font-size:12pt;">对不起，您当前使用的是火狐浏览器！<br />现在暂时不支持火狐浏览器进行操作，谢谢！<br/> </body></html>');
+                                        ifa.contentWindow.document.close();
+                                    } else {
+                                        document.getElementById("Content_iframe").contentDocument.documentElement.contentEditable = "true";
+                                    }
+                                    
+
+                                </script>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </li>
+            </ul>
+        </div>
+   
+        <script type="text/javascript">
+        
+        function editors(command,isTrue,isNull){
+            editor=document.getElementById("Content_iframe").contentWindow;
+            editor.document.execCommand(command,isTrue,isNull);
+        }
+        function bold() {
+            editors("bold",true,null);
+        }
+
+        function italic() {
+            editors("italic", true, null);
+        }
+
+        function strikeThrough() {
+            editors("strikeThrough", true, null);
+        }
+
+        function insertUnorderedList() {
+            editors("insertUnorderedList", true, null);
+        }
+
+        function insertOrderedList() {
+            editors("insertOrderedList", true, null);
+        }
+
+        function justifyLeft() {
+            editors("justifyLeft", true, null);
+        }
+
+        function justifyCenter() {
+            editors("justifyCenter", true, null);
+        }
+
+        function justifyRight() {
+            editors("justifyRight", true, null);
+        }
+
+        function createLink(title,url) {
+            editors("insertHTML", true, "&nbsp;<a href='" + url + "'>" + title + "</a>&nbsp;");
+        }
+
+        function unlink() {
+            editors("unlink", true, null);
+        };
+
+        function InsertImage(url) {
+            editors("InsertImage", true, url);
+        }
+
+        function formatBlock(block) {
+            editors("formatBlock", true, block);
+        }
+
+        function foreColor(color) {
+            editors("foreColor", true, color);
+        }
+
+        function fontName(name) {
+            editors("fontName", true, name);
+        }
+
+        function fontSize(size) {
+            editors("fontSize", true, size);
+        }    
+
+        function setFamily_change () {
+            var $setFamily=document.getElementById("setFamily");
+            fontName($setFamily.options[$setFamily.selectedIndex].text);
+            }
+
+        function setParagraph_change (){
+            var $setParagraph=document.getElementById("setParagraph");
+            var AllTitle = ["标题1", "标题2", "标题3", "标题4", "标题5", "标题6"];
+            //var AllFont_Size = ["25","20","15","12","10","5"];
+            var AllValie = ["h1", "h2", "h3", "h4", "h5", "h6"];
+            var val = "";
+            switch ($setParagraph.options[$setParagraph.selectedIndex].text) {
+                case AllTitle[0]:                    
+                    val=AllValie[0];
+                    break;
+                case AllTitle[1]:
+                    val = AllValie[1];
+                    break;
+            case AllTitle[2]:
+                    val = AllValie[2];
+                    break;
+                case AllTitle[3]:
+                    val = AllValie[3];
+                    break;
+                case AllTitle[4]:
+                    val = AllValie[4];
+                    break;
+                case AllTitle[5]:
+                    val = AllValie[5];
+                    break;
+                case AllTitle[6]:
+                    val = AllValie[6];
+                    break;
+                default:
+                    val = "p";
+                    break;
+                }
+
+                var browser = window.navigator.userAgent;
+                if (browser.indexOf('MSIE')>=0) {
+                    val = "<" + val + ">"
+                }
+                formatBlock(val);
+            }
+                
+        function setFontSize() {
+                var size = ["特小", "较小", "小", "中", "大", "较大", "特大"];
+                var setSize = "";
+                var $setFontSize=document.getElementById("setFontSize");
+
+                switch ($setFontSize.options[$setFontSize.selectedIndex].text){
+                    case size[0]:
+                        setSize = 1;
+                        break;
+                    case size[1]:
+                        setSize = 2;
+                        break;
+                    case size[2]:
+                        setSize = 3;
+                        break;
+                    case size[3]:
+                        setSize = 4;
+                        break;
+                    case size[4]:
+                        setSize = 5;
+                        break;
+                    case size[5]:
+                        setSize = 6;
+                        break;
+                    case size[6]:
+                        setSize = 7;
+                        break;
+                }
+                fontSize(setSize);
+            };
+        </script>
+        <script type="text/javascript">
+        window.onload=function(){
+            $(".divOne").html($(".divOne").html().replace(/&/ig,"").replace(/nbsp;/ig,""));
+            var rech_script=$("#script_div").html();
+            $("head").append("<div id='script_div' style='display: none;'>"+rech_script+"</div>");
+        }
+        
+        </script>
+     </div>
+     <script type="text/javascript">
+        var oNode = null,
+            gdataSource=null,
+            thePlugins = 'rechtext_editing';
+            var html;
+            
+            
+            window.onload=function(){
+                $G('txtControlName').select();
+                if(UE.plugins[thePlugins].editdom){
+                    oNode=UE.plugins[thePlugins].editdom;
+                    $G( 'txtControlName' ).value = oNode.getAttribute('title');
+                    gdataSource=nNode.getAttribute('datasource');
+                }
+                var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+                var nodeId = $('#node_id',window.parent.document).val();
+                $.ajax( {
+                    url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+                    method: 'GET',
+                    success: function ( res ) {
+                        $.each( res.msg, function ( index, value ) {
+                            $( "#datasource" ).append( '<option value=' + value.id +'>' + value.value + '</option>' );
+                        } )
+                    $("#datasource option[value="+1004+"]").prop('selected','selected');
+                    },
+                    error: function ( res ) {
+                        alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                    }
+                } );
+            $(document).on("change","#datasource",function(e){
+                var nodeParentId = $(this).val();
+                $("#datazid").empty();
+                $.ajax({
+                    url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + nodeParentId,
+                    method:"GET",
+                    success:function(res){
+                        $.each( res.msg, function ( index, value ) {
+                            $( "#datafield").append( '<option value=' + value.value +'>' + value.text + '</option>' );
+                        })
+                    }
+                })
+            });
+                
+                
+            }
+        dialog.onok=function(){
+            var rech_script=$("#script_div").html();
+            var $txtName=$("#txtControlName");
+            if($txtName.val()==""||$txtName.val()==null)
+            {
+                alert("控件名称不能为空！");
+                return false;
+            }
+            html="<head>"+$("head").html()+"<div id='script_div' style='display: none;'>"+rech_script+"</div></head><body>"+$("#rech_text").html()+"</body>";
+            console.log(html);
+            editor.execCommand("insertHtml",html);
+
+            var gTitle=$G('txtControlName').value.replace(/\"/ig,"&quot;"),
+            gds=$G("datasource").value,
+            datasource;
+            if($G('datasource').value==0){
+                gdataS=$("#datasource option:selected").text();
+            }
+            if($G('datafield').value==0){
+                gdataId = $G('datafield').value;
+            }
+            datasource = '{\"data\":\"' + gdataS + '\",\"field\":\"' + gdataId + '\"}';
+            delete UE.plugins[thePlugins].editdom;
+        }
+     </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>成员详情</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet" href="./css/partyItem.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="../../pluy-in/config.js"></script>
+    <script src="../../pluy-in/base.js"></script>
+    <script src="./js/partyItem.js"></script>
+</head>
+<body>
+<div class="header f15">
+    <div class="iconfont icon-zuo quit"></div>
+    党支部书记
+</div>
+<div class="bodies">
+    <div class="b_head">
+        <div class="bg f14">
+            <div class="message">
+                <div class="name"><span id="change_name"></span></div>
+                <div class="studytime">
+                    学习时长 : <span id="change_st">100小时</span>
+                </div>
+            </div>
+            <div class="logintime">
+                最近登陆 : <span id="change_lt">1天前</span>
+            </div>
+        </div>
+        <div class="like">
+            <span class="iconfont icon-shoucang red"></span>
+            <span class="iconfont icon-shoucang red"></span>
+            <span class="iconfont icon-shoucang red"></span>
+            <span class="iconfont icon-shoucang red"></span>
+            <span class="iconfont icon-shoucang red"></span>
+        </div>
+        <div class="photo">
+            <img src="" alt="">
+        </div>
+    </div>
+    <div class="headline">
+        <div class="title f16">
+            /&nbsp;&nbsp;组织&nbsp;&nbsp;/
+        </div>
+        <div class="organized f14">
+            <div id="change_title">
+
+            </div>
+            <!--<div class="iconfont icon-qiehuanzuzhi btn_title"></div>-->
+        </div>
+    </div>
+    <div class="column f14">
+        <div class="data">
+            <div class="joinparty item">
+                <span class="iconfont icon-shijian1"></span>
+                入党时间&nbsp;&nbsp;
+                <span id="change_party">2017-07-11</span>
+            </div>
+            <!--<div class="joinus item">-->
+                <!--<span class="iconfont icon-shijian"></span>-->
+                <!--加入时间&nbsp;&nbsp;-->
+                <!--<span id="change_joinus">2018-09-11</span>-->
+            <!--</div>-->
+        </div>
+        <div class="contact">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

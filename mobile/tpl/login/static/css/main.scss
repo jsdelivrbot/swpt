@@ -1,0 +1,110 @@
+.wrapper {
+    background: url('../image/bg@2x.png') no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    background-position: 0 0;
+    .close {
+        position: absolute;
+        top: 2%;
+        right: 5%;
+        i {
+            font-size: .8rem /* 60/75 */;
+            color: #707070;
+        }
+    }
+    .loginForm {
+        width: 8.533333rem /* 640/75 */;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%);
+        font-size: .426667rem /* 32/75 */;
+        .formLabel {
+            position: relative;
+            width: 8.533333rem /* 640/75 */;
+            height: 1.173333rem /* 88/75 */;
+            display: block;
+            i {
+                color: #707070;
+                font-size: .773333rem /* 58/75 */;
+                position: absolute;
+                top: 53%;
+                transform: translate(0, -50%);
+                left: .666667rem /* 50/75 */;
+            }
+            input {
+                width: 100%;
+                height: 100%;
+                border: 1px solid #ccc;
+                background: #fff;
+                padding-left: 1.6rem /* 120/75 */;
+                box-sizing: border-box;     
+            }
+        }
+        .wrongMsg {
+            font-size: .373333rem /* 28/75 */;
+            color: #F4585A;
+            margin: .2rem /* 15/75 */ 0;
+            display: none;
+        }
+        .submit {
+            margin-top: 1.6rem /* 120/75 */;
+            background: #65c9cd;
+            width: 8.533333rem /* 640/75 */;
+            height: 1.173333rem /* 88/75 */;
+            color: #fff;
+            font-size: .426667rem /* 32/75 */;
+            outline: none;
+            border: none;
+        }
+        .bBtn {
+            font-size: .373333rem /* 28/75 */;
+            .explain {
+                margin-top: .266667rem /* 20/75 */;
+                float: left;
+                width: .426667rem /* 32/75 */;
+                height: .426667rem /* 32/75 */;
+            }
+            .explainC {
+                display: inline-block;
+                margin-top: .173333rem /* 13/75 */;
+                .explainDesc {
+                    color: #F4585A;
+                }
+            }
+            .getAcc {
+                color: #65c9cd;
+                float: right;
+                margin-top: .173333rem /* 13/75 */;
+            }
+        }
+    }
+    
+    .getAccBody {
+        margin: 0 auto;
+        text-align: center;
+        padding: .266667rem /* 20/75 */;
+        color: #fff;
+        .content {
+            margin-top: .8rem /* 60/75 */;
+            p {
+                line-height: .666667rem /* 50/75 */;
+                font-size: .4rem /* 30/75 */;
+                .important {
+                    font-size: .453333rem /* 34/75 */;
+                }
+            }
+        }
+    }
+}
+
+// 获取账号 layer 样式
+.layui-layer-nobg {
+    box-shadow: none !important;
+}
+
+.layui-layer-shade {
+    opacity: .8 !important;
+}
+

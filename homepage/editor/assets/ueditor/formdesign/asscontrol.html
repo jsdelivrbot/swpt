@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>关联控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">  
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>	
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+  	  <script type="text/javascript">
+        /* Thank you by  
+           http://www.alt-tag.com/blog/2006/02/ie-dom-bugs/ */
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '"/>' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+</head>
+<body>
+<div class="content">
+    <table class="table table-bordered table-striped table-hover">
+    <tr>
+    	 <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+        <th>
+           <span>关联表</span>
+        </th>
+        
+    </tr>
+    <tr> 
+    	<td>
+            <input type="text" id="orgname" onclick="javascript:this.select()" placeholder="必填项" value="文本框">
+         </td>
+        <td>
+        	<select name="asscontrol" id="pName">
+        		<option value="0">---请输入关联表--</option>
+        	</select>
+         </td>
+        
+    </tr>
+    <tr>
+       <th colspan="2">
+             <span>关联表是否可以为空</span>
+       </th>
+    </tr>
+    <tr>
+    	  <td colspan="2">
+            <label class="checkbox inline">
+               <input id="assYes" type="checkbox"  />是</label>
+         </td>
+    </tr>
+    </table>
+</div>
+<script type="text/javascript">
+  var oNode = null,thePlugins = 'asscontrol';
+window.onload = function(){
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            var nodeId = $("#node_id",window.parent.document).val();
+            $.ajax( {
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+                method: 'GET',
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( "#pName").append( '<option value=' + value.id +'>' + value.value + '</option>' );
+                    } )
+              if ( UE.plugins[ thePlugins ].editdom ) {
+                 oNode = UE.plugins[ thePlugins ].editdom;
+                var gpName =  $G('pName').value;
+                gname = oNode.getAttribute('title');
+                $G('orgname').value = gname;
+                 nonull = oNode.getAttribute( 'nonull' ),
+                 eid = oNode.getAttribute('eid');
+               if(nonull == "0") $G("assYes").setAttribute("checked","");
+                 $("#pName option[value="+eid+"]").prop('selected','selected');
+               }  
+                },
+                error: function ( res ) {
+                  alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                }
+            });
+   };
+   dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+    };
+dialog.onok = function (){
+	         var eid = $G("pName").value;
+        	 var nodeParentname = $( '#node_name', window.parent.document ).val();
+        	 
+        	 if($G("pName").value == 0){
+        	 	var pName ="";
+        	 }else{
+        	   pName =$('#pName option:selected').text();	
+        	 }
+        	 var gname = $G("orgname").value;
+       if( !oNode ) {
+             try {
+        	        oNode = createElement( 'input', 'leipiNewField' );
+        	         oNode.setAttribute( 'name', 'leipiNewField' );
+                     oNode.setAttribute( 'leipiPlugins', thePlugins );
+                     oNode.setAttribute("style","width: 30px;height: 30px;background: red;border-radius: 50%;border: 0;cursor: pointer;box-shadow:5px 2px 6px #000;")
+                     oNode.setAttribute('eid',eid);
+                     oNode.setAttribute('pname',nodeParentname);
+                     oNode.setAttribute('title',gname);
+                     oNode.setAttribute('ename',pName); 
+                  $G( 'assYes' ).checked ? oNode.setAttribute( 'nonull',0) : oNode.setAttribute( 'nonull',1);
+        	      editor.execCommand('insertHtml',oNode.outerHTML);
+        	     return true;
+            } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+              }
+         } else {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+</script>
+</body>
+</html>

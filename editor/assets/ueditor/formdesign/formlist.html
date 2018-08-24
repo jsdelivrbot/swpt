@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>列表控件属性</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="./jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+    <script type="text/javascript">
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+  <link rel="stylesheet" href="self/formlist/css/css.css">
+</head>
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th width="40%">
+                        <span> 控件名称 ：</span>
+                        <input id="orgname" onclick="javascript:this.select()" placeholder="必填项" type="text" class="input-medium" value="列表控件" />
+                        <span class="label label-important">*</span>
+                    </th>
+                    <th>
+                        <!--<label title="控件占页面的宽度">
+                      宽
+                      <input title="控件占页面的宽度" id="orgwidth" type="text" value="100%" class="input-small span1" placeholder="auto" />
+                    </label>-->
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <span>数据源</span>
+                    </th>
+                    <th>
+                        <span>数据字段</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                       <select id="datasource">
+                           <option value="0">请选择</option>
+                       </select>
+                   </td>
+                   <td>
+                       <!--<select id="datazid">
+                           <option value="0">请选择</option>
+                       </select>-->
+                     <div id="datazid"></div>
+                   </td>
+               </tr>
+                <tr>
+                  <th>
+                    <span>页数</span>
+                  </th>
+                  <th>
+                    <span>功能选择</span>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <input name="pagesize" type="number" value="5">
+                  </td>
+                  <td>
+                    <input type="checkbox" value="1" name="frmhead"> 是否显示表头
+                    <input type="checkbox" value="1" name="frmedit"> 编辑
+                    <input type="checkbox" value="1" name="frmdel"> 删除
+                  </td>
+                </tr>
+            </thead>
+        </table>
+      <div class="listtype">
+        <dl>
+          <dt><img src="self/formlist/img/tpl1.png"/></dt>
+          <dd><input type="radio" name="tplselect" value="gtpl" checked> 普通</dd>
+        </dl>
+        <dl>
+          <dt><img src="self/formlist/img/tpl1.png"/></dt>
+          <dd><input type="radio" name="tplselect" value="gtpl2"> 普通2</dd>
+        </dl>
+      </div>
+    </div>
+    <script type="text/javascript">
+        var oNode = null,
+            gdataSource=null,
+            thePlugins = 'formlist';
+
+        window.onload = function () {
+            $G('orgname').select();
+
+            //弹出窗口初始化函数
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                $G( 'orgname' ).value = oNode.getAttribute( 'title' );
+                var datasource = oNode.getAttribute( 'datasource' );
+                var datafield = oNode.getAttribute( 'datafield' );
+                var pagesize = oNode.getAttribute( 'pagesize' );
+                var headshow = oNode.getAttribute( 'headshow' );
+                var frmedit = oNode.getAttribute( 'frmedit' );
+                var frmdel = oNode.getAttribute( 'frmdel' );
+                var tpl = oNode.getAttribute( 'tpl' );
+                var datasource2=datasource.split(":");
+                $( "#datasource" ).prepend( '<option value="' + datasource +'" selected>' + datasource2[1] + '</option>');
+                datafield=datafield.substr(1).split(",");
+                $.ajax({
+                  url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + datasource2[0],
+                  method:"GET",
+                  success:function(res){
+                    // console.log('get')
+                    var html='';
+                    var flag='';
+                    $( "#datazid").html('');
+                    $.each( res.msg, function ( index, value ) {
+                      // $( "#datazid").append( '<option value=' + value.value +'>' + value.text + '</option>' );
+                      flag='';
+                      for(var i=0;i<datafield.length;i++){
+                        if(value.value==datafield[i]){
+                          flag='checked';
+                          break;
+                        }
+                      }
+                      html='<input type="checkbox" name="nd_' + value.value +'" value=' + value.value +' '+flag+'>' + value.text + ' ';
+                      $( "#datazid").append( html );
+                    })
+                  }
+                })
+              $("input[name=pagesize]").val(pagesize);
+              if(headshow=="1")$("[name='frmhead']").attr("checked",'true');
+              if(frmedit=="1")$("[name='frmedit']").attr("checked",'true');
+              if(frmdel=="1")$("[name='frmdel']").attr("checked",'true');
+              $("input[value='"+tpl+"']").attr("checked",'true');
+            }
+
+            /*
+             * 绑定数据源
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            var nodeId = $('#node_id',window.parent.document).val();
+            $.ajax( {
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+                method: 'GET',
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( "#datasource" ).append( '<option value=' + value.id +':'+value.value+'>' + value.value + '</option>' );
+                    } )
+                  //$("#datasource option[value="+1004+"]").prop('selected','selected');
+                },
+                error: function ( res ) {
+                    alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                }
+            } );
+            $(document).on("change","#datasource",function(e){
+              var nodeParentId = $(this).val().split(":");
+              console.log(nodeParentId);
+                $("#datazid").empty();
+                $.ajax({
+                  url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + nodeParentId[0],
+                  method:"GET",
+                  success:function(res){
+                    // console.log('get')
+                     $.each( res.msg, function ( index, value ) {
+                             // $( "#datazid").append( '<option value=' + value.value +'>' + value.text + '</option>' );
+                              $( "#datazid").append( '<input type="checkbox" name="nd_' + value.value +'" value=' + value.value +'>' + value.text + ' ' );
+                          })
+                  }
+                })
+            });
+        }
+
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+
+        dialog.onok = function () {
+            var gName = $G( 'orgname' ).value.replace( /\"/g, "&quot;" );
+            var datasource=$("#datasource").val();
+            var datafield='';
+            var pagesize=$("input[name=pagesize]").val();
+            var headshow=$("input[name=frmhead]").is(':checked')?1:0;
+            var frmedit=$("input[name=frmedit]").is(':checked')?1:0;
+            var frmdel=$("input[name=frmdel]").is(':checked')?1:0;
+            var tpl=$("input[name=tplselect]:checked").val();
+            if ( gName == '' ) {
+                alert( '控件名称不能为空' );
+                $G( 'orgname' ).focus();
+                return false;
+            }
+            if(datasource=='0'){
+              alert( '没有选择数据源' );
+              return false;
+            }
+            $("#datazid input:checked").each(function () {
+              datafield+=","+$(this).val();
+            });
+
+            var gTitle = '';
+            if ( !oNode ) {
+                try {
+                    oNode = createElement( 'input', 'leipiNewField' );
+                    oNode.setAttribute( 'leipiPlugins', thePlugins );
+                    oNode.setAttribute( 'type', 'text' );
+                    oNode.setAttribute( 'value', '{列表}' );
+                    oNode.setAttribute( 'title', gName );
+                    oNode.setAttribute( 'datasource', datasource );
+                    oNode.setAttribute( 'datafield', datafield );
+                    oNode.setAttribute( 'pagesize', pagesize );
+                    oNode.setAttribute( 'headshow', headshow );
+                    oNode.setAttribute( 'tpl', tpl );
+                    oNode.setAttribute( 'frmedit', frmedit );
+                    oNode.setAttribute( 'frmdel', frmdel );
+                    oNode.style.width="60px";
+                    editor.execCommand( 'insertHtml', oNode.outerHTML );
+                    return true;
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                //修改
+                oNode.setAttribute( 'leipiPlugins', thePlugins );
+                oNode.setAttribute( 'title', gName );
+                oNode.setAttribute( 'datasource', datasource );
+                oNode.setAttribute( 'datafield', datafield );
+                oNode.setAttribute( 'pagesize', pagesize );
+                oNode.setAttribute( 'headshow', headshow );
+                oNode.setAttribute( 'tpl', tpl );
+                oNode.setAttribute( 'frmedit', frmedit );
+                oNode.setAttribute( 'frmdel', frmdel );
+                delete UE.plugins[ thePlugins ].editdom; //使用后清空这个对象，变回新增模式
+            }
+        };
+
+    </script>
+</body>
+
+</html>

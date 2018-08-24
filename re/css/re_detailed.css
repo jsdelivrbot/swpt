@@ -1,0 +1,40 @@
+.detailed-content{
+    padding: 10px;
+}
+.detailed-content h2{
+    font-size: 18px;
+    text-align: center;
+}
+.re-download{
+    cursor: pointer;
+}
+.detailed-content .fileDown{
+	display: inline-block;
+    width: 5rem;
+    height: 2rem;
+    line-height: 2rem;
+    background: #53dfa9;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 3px 4px 4px #888888;
+}
+#ie_historyFrame { width: 0px; height: 0px; display:none }
+#firefox_anchorDiv { width: 0px; height: 0px; display:none }
+#safari_formDiv { width: 0px; height: 0px; display:none }
+#safari_rememberDiv { width: 0px; height: 0px; display:none }
+.desPrev{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    margin-top: 8rem;
+    margin-bottom: 2rem;
+}
+.activeDes{
+	width:0 !important;
+	height: 0 !important;
+}
+

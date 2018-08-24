@@ -1,0 +1,848 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>查看进度</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/查看进度/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/查看进度/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (图片) -->
+      <div id="u5234" class="ax_default _图片">
+        <img id="u5234_img" class="img " src="images/班级阅卷/u0.png"/>
+        <!-- Unnamed () -->
+        <div id="u5235" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u5236" class="ax_default _图片">
+        <img id="u5236_img" class="img " src="images/班级阅卷/u2.png"/>
+        <!-- Unnamed () -->
+        <div id="u5237" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5238" class="ax_default box_1">
+        <img id="u5238_img" class="img " src="images/扫描完成/u80.png"/>
+        <!-- Unnamed () -->
+        <div id="u5239" class="text" style="visibility: visible;">
+          <p><span>智能阅卷</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5240" class="ax_default box_1">
+        <img id="u5240_img" class="img " src="images/班级阅卷/u32.png"/>
+        <!-- Unnamed () -->
+        <div id="u5241" class="text" style="visibility: visible;">
+          <p><span>智能阅卷</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u5240_ann" class="annotation"></div>
+
+      <!-- Unnamed (热区) -->
+      <div id="u5242" class="ax_default">
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5243" class="ax_default box_1">
+        <img id="u5243_img" class="img " src="images/扫描上传答题卡/u52.png"/>
+        <!-- Unnamed () -->
+        <div id="u5244" class="text" style="visibility: visible;">
+          <p><span>2016-2017学年下学期三年级单元考</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5245" class="ax_default box_1">
+        <img id="u5245_img" class="img " src="images/分配题目/u102.png"/>
+        <!-- Unnamed () -->
+        <div id="u5246" class="text" style="visibility: visible;">
+          <p><span>数学</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5247" class="ax_default box_1">
+        <img id="u5247_img" class="img " src="images/分配题目/u102.png"/>
+        <!-- Unnamed () -->
+        <div id="u5248" class="text" style="visibility: visible;">
+          <p><span>全年级</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5249" class="ax_default box_1">
+        <img id="u5249_img" class="img " src="images/分配题目/u106.png"/>
+        <!-- Unnamed () -->
+        <div id="u5250" class="text" style="visibility: visible;">
+          <p><span>批改进度</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u5251" class="ax_default line">
+        <img id="u5251_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u5252" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- 批改进度 (动态面板) -->
+      <div id="u5253" class="ax_default" data-label="批改进度">
+        <div id="u5253_state0" class="panel_state" data-label="全部批改进度">
+          <div id="u5253_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5254" class="ax_default box_1">
+              <img id="u5254_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5255" class="text" style="visibility: visible;">
+                <p><span>题号</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5256" class="ax_default box_1">
+              <img id="u5256_img" class="img " src="images/查看批改进度/u2974.png"/>
+              <!-- Unnamed () -->
+              <div id="u5257" class="text" style="visibility: visible;">
+                <p><span>批改进度</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5258" class="ax_default box_1">
+              <img id="u5258_img" class="img " src="images/查看进度/u5258.png"/>
+              <!-- Unnamed () -->
+              <div id="u5259" class="text" style="visibility: visible;">
+                <p><span>阅卷老师</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5260" class="ax_default box_1">
+              <img id="u5260_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5261" class="text" style="visibility: visible;">
+                <p><span>第06题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5262" class="ax_default box_1">
+              <img id="u5262_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5263" class="text" style="visibility: visible;">
+                <p><span>第07题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5264" class="ax_default box_1">
+              <img id="u5264_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5265" class="text" style="visibility: visible;">
+                <p><span>第08题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5266" class="ax_default box_1">
+              <img id="u5266_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5267" class="text" style="visibility: visible;">
+                <p><span>第09题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5268" class="ax_default box_1">
+              <img id="u5268_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5269" class="text" style="visibility: visible;">
+                <p><span>第10题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5270" class="ax_default box_1">
+              <img id="u5270_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5271" class="text" style="visibility: visible;">
+                <p><span>第11题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5272" class="ax_default line">
+              <img id="u5272_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5273" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5274" class="ax_default line">
+              <img id="u5274_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5275" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5276" class="ax_default line">
+              <img id="u5276_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5277" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5278" class="ax_default line">
+              <img id="u5278_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5279" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5280" class="ax_default line">
+              <img id="u5280_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5281" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5282" class="ax_default line">
+              <img id="u5282_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5283" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5284" class="ax_default line">
+              <img id="u5284_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5285" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5286" class="ax_default box_1">
+              <div id="u5286_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5287" class="text" style="visibility: visible;">
+                <p><span>100%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5288" class="ax_default box_1">
+              <div id="u5288_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5289" class="text" style="visibility: visible;">
+                <p><span>75%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5290" class="ax_default box_1">
+              <div id="u5290_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5291" class="text" style="visibility: visible;">
+                <p><span>75%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5292" class="ax_default box_1">
+              <div id="u5292_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5293" class="text" style="visibility: visible;">
+                <p><span>0%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5294" class="ax_default box_1">
+              <div id="u5294_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5295" class="text" style="visibility: visible;">
+                <p><span>100%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5296" class="ax_default box_1">
+              <div id="u5296_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5297" class="text" style="visibility: visible;">
+                <p><span>75%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5298" class="ax_default line">
+              <img id="u5298_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5299" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u5300" class="ax_default line">
+              <img id="u5300_img" class="img " src="images/查看批改进度/u3026.png"/>
+              <!-- Unnamed () -->
+              <div id="u5301" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u5302" class="ax_default line">
+              <img id="u5302_img" class="img " src="images/查看批改进度/u3026.png"/>
+              <!-- Unnamed () -->
+              <div id="u5303" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- 3 (矩形) -->
+            <div id="u5304" class="ax_default box_1" data-label="3">
+              <div id="u5304_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5305" class="text" style="visibility: visible;">
+                <p><span>周杰伦&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- 2 (矩形) -->
+            <div id="u5306" class="ax_default box_1" data-label="2">
+              <div id="u5306_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5307" class="text" style="visibility: visible;">
+                <p><span>陈奕迅&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- 1 (矩形) -->
+            <div id="u5308" class="ax_default box_1" data-label="1">
+              <div id="u5308_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5309" class="text" style="visibility: visible;">
+                <p><span style="color:#000000;">小明</span><span style="color:#FFFFFF;">&nbsp;&nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- 4 (矩形) -->
+            <div id="u5310" class="ax_default box_1" data-label="4">
+              <div id="u5310_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5311" class="text" style="visibility: visible;">
+                <p><span>周杰伦</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5312" class="ax_default box_1">
+              <div id="u5312_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5313" class="text" style="visibility: visible;">
+                <p><span>汪峰&nbsp; &nbsp; &nbsp;&nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5314" class="ax_default box_1">
+              <div id="u5314_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5315" class="text" style="visibility: visible;">
+                <p><span>孙燕姿&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5316" class="ax_default box_1">
+              <div id="u5316_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5317" class="text" style="visibility: visible;">
+                <p><span>莫文蔚&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5318" class="ax_default box_1">
+              <div id="u5318_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5319" class="text" style="visibility: visible;">
+                <p><span>小莫&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5320" class="ax_default box_1">
+              <div id="u5320_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5321" class="text" style="visibility: visible;">
+                <p><span>小王&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u5322" class="ax_default line">
+              <img id="u5322_img" class="img " src="images/查看批改进度/u3026.png"/>
+              <!-- Unnamed () -->
+              <div id="u5323" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5324" class="ax_default box_1">
+              <img id="u5324_img" class="img " src="images/查看进度/u5258.png"/>
+              <!-- Unnamed () -->
+              <div id="u5325" class="text" style="visibility: visible;">
+                <p><span>操作</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5326" class="ax_default primary_button">
+              <div id="u5326_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5327" class="text" style="visibility: visible;">
+                <p><span>继续批改</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5328" class="ax_default primary_button">
+              <div id="u5328_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5329" class="text" style="visibility: visible;">
+                <p><span>复查</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5330" class="ax_default button">
+              <div id="u5330_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5331" class="text" style="visibility: visible;">
+                <p><span>确认提交</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="u5253_state1" class="panel_state" data-label="只显示我的">
+          <div id="u5253_state1_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5332" class="ax_default box_1">
+              <img id="u5332_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5333" class="text" style="visibility: visible;">
+                <p><span>题号</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5334" class="ax_default box_1">
+              <img id="u5334_img" class="img " src="images/查看批改进度/u2974.png"/>
+              <!-- Unnamed () -->
+              <div id="u5335" class="text" style="visibility: visible;">
+                <p><span>批改进度</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5336" class="ax_default box_1">
+              <img id="u5336_img" class="img " src="images/查看批改进度/u2974.png"/>
+              <!-- Unnamed () -->
+              <div id="u5337" class="text" style="visibility: visible;">
+                <p><span>阅卷老师</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5338" class="ax_default box_1">
+              <img id="u5338_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5339" class="text" style="visibility: visible;">
+                <p><span>第06题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5340" class="ax_default box_1">
+              <img id="u5340_img" class="img " src="images/分配题目/u110.png"/>
+              <!-- Unnamed () -->
+              <div id="u5341" class="text" style="visibility: visible;">
+                <p><span>第07题</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5342" class="ax_default line">
+              <img id="u5342_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5343" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5344" class="ax_default line">
+              <img id="u5344_img" class="img " src="images/分配题目/u152.png"/>
+              <!-- Unnamed () -->
+              <div id="u5345" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5346" class="ax_default line">
+              <img id="u5346_img" class="img " src="images/查看进度/u5346.png"/>
+              <!-- Unnamed () -->
+              <div id="u5347" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5348" class="ax_default box_1">
+              <div id="u5348_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5349" class="text" style="visibility: visible;">
+                <p><span>100%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5350" class="ax_default box_1">
+              <div id="u5350_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5351" class="text" style="visibility: visible;">
+                <p><span>75%</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u5352" class="ax_default line">
+              <img id="u5352_img" class="img " src="images/查看进度/u5346.png"/>
+              <!-- Unnamed () -->
+              <div id="u5353" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u5354" class="ax_default line">
+              <img id="u5354_img" class="img " src="images/查看进度/u5354.png"/>
+              <!-- Unnamed () -->
+              <div id="u5355" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u5356" class="ax_default line">
+              <img id="u5356_img" class="img " src="images/查看进度/u5354.png"/>
+              <!-- Unnamed () -->
+              <div id="u5357" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- 3 (矩形) -->
+            <div id="u5358" class="ax_default box_1" data-label="3">
+              <div id="u5358_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5359" class="text" style="visibility: visible;">
+                <p><span>周杰伦&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- 2 (矩形) -->
+            <div id="u5360" class="ax_default box_1" data-label="2">
+              <div id="u5360_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5361" class="text" style="visibility: visible;">
+                <p><span>陈奕迅&nbsp; &nbsp; </span></p>
+              </div>
+            </div>
+
+            <!-- 4 (矩形) -->
+            <div id="u5362" class="ax_default box_1" data-label="4">
+              <div id="u5362_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5363" class="text" style="visibility: visible;">
+                <p><span>周杰伦</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u5364" class="ax_default line">
+              <img id="u5364_img" class="img " src="images/查看进度/u5354.png"/>
+              <!-- Unnamed () -->
+              <div id="u5365" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5366" class="ax_default box_1">
+              <img id="u5366_img" class="img " src="images/查看批改进度/u2974.png"/>
+              <!-- Unnamed () -->
+              <div id="u5367" class="text" style="visibility: visible;">
+                <p><span>操作</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5368" class="ax_default primary_button">
+              <div id="u5368_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5369" class="text" style="visibility: visible;">
+                <p><span>继续批改</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5370" class="ax_default primary_button">
+              <div id="u5370_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5371" class="text" style="visibility: visible;">
+                <p><span>复查</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5372" class="ax_default button">
+              <div id="u5372_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5373" class="text" style="visibility: visible;">
+                <p><span>提交结果</span></p>
+              </div>
+            </div>
+
+            <!-- 提交结果面板 (动态面板) -->
+            <div id="u5374" class="ax_default ax_default_hidden" data-label="提交结果面板" style="display: none; visibility: hidden">
+              <div id="u5374_state0" class="panel_state" data-label="State1">
+                <div id="u5374_state0_content" class="panel_state_content">
+
+                  <!-- Unnamed (矩形) -->
+                  <div id="u5375" class="ax_default box_1">
+                    <div id="u5375_div" class=""></div>
+                    <!-- Unnamed () -->
+                    <div id="u5376" class="text" style="display: none; visibility: hidden">
+                      <p><span></span></p>
+                    </div>
+                  </div>
+
+                  <!-- Unnamed (矩形) -->
+                  <div id="u5377" class="ax_default box_1">
+                    <img id="u5377_img" class="img " src="images/查看进度/u5377.png"/>
+                    <!-- Unnamed () -->
+                    <div id="u5378" class="text" style="visibility: visible;">
+                      <p><span>确认提交批改结果？</span></p>
+                    </div>
+                  </div>
+
+                  <!-- Unnamed (矩形) -->
+                  <div id="u5379" class="ax_default primary_button">
+                    <div id="u5379_div" class=""></div>
+                    <!-- Unnamed () -->
+                    <div id="u5380" class="text" style="visibility: visible;">
+                      <p><span>确定</span></p>
+                    </div>
+                  </div>
+
+                  <!-- Unnamed (矩形) -->
+                  <div id="u5381" class="ax_default button">
+                    <div id="u5381_div" class=""></div>
+                    <!-- Unnamed () -->
+                    <div id="u5382" class="text" style="visibility: visible;">
+                      <p><span>取消</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 提交成功面板 (矩形) -->
+            <div id="u5383" class="ax_default box_1 ax_default_hidden" data-label="提交成功面板" style="display: none; visibility: hidden">
+              <div id="u5383_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5384" class="text" style="visibility: visible;">
+                <p><span>提交成功</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u5385" class="ax_default line">
+        <img id="u5385_img" class="img " src="images/分配题目/u154.png"/>
+        <!-- Unnamed () -->
+        <div id="u5386" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u5387" class="ax_default _图片">
+        <img id="u5387_img" class="img " src="images/分配题目/u168.png"/>
+        <!-- Unnamed () -->
+        <div id="u5388" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5389" class="ax_default box_1">
+        <img id="u5389_img" class="img " src="images/查看批改进度/u3022.png"/>
+        <!-- Unnamed () -->
+        <div id="u5390" class="text" style="visibility: visible;">
+          <p><span>总人数600人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5391" class="ax_default box_1">
+        <img id="u5391_img" class="img " src="images/查看批改进度/u3022.png"/>
+        <!-- Unnamed () -->
+        <div id="u5392" class="text" style="visibility: visible;">
+          <p><span>已提交100份</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (复选框) -->
+      <div id="u5393" class="ax_default checkbox">
+        <label for="u5393_input">
+          <!-- Unnamed () -->
+          <div id="u5394" class="text" style="visibility: visible;">
+            <p><span>只显示我的批改进度</span></p>
+          </div>
+        </label>
+        <input id="u5393_input" type="checkbox" value="checkbox"/>
+      </div>
+
+      <!-- 提交结果面板 (动态面板) -->
+      <div id="u5395" class="ax_default ax_default_hidden" data-label="提交结果面板" style="display: none; visibility: hidden">
+        <div id="u5395_state0" class="panel_state" data-label="State1">
+          <div id="u5395_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5396" class="ax_default box_1">
+              <div id="u5396_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5397" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5398" class="ax_default box_1">
+              <img id="u5398_img" class="img " src="images/查看进度/u5377.png"/>
+              <!-- Unnamed () -->
+              <div id="u5399" class="text" style="visibility: visible;">
+                <p><span>确认提交批改结果？</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5400" class="ax_default primary_button">
+              <div id="u5400_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5401" class="text" style="visibility: visible;">
+                <p><span>确定</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u5402" class="ax_default button">
+              <div id="u5402_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u5403" class="text" style="visibility: visible;">
+                <p><span>取消</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提交成功面板 (矩形) -->
+      <div id="u5404" class="ax_default box_1 ax_default_hidden" data-label="提交成功面板" style="display: none; visibility: hidden">
+        <div id="u5404_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5405" class="text" style="visibility: visible;">
+          <p><span>提交成功</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

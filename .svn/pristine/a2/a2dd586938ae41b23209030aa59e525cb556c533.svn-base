@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>展示图片</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <link rel="stylesheet" href="./cropper/cropper.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <script type="text/javascript" src="./cropper/cropper.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+
+   <script src="../httpData.config.js"></script>
+ 
+ 
+  <style>
+        /* addImage modal */
+
+        #avatar-modal {
+            height: 610px;
+            width: 860px;
+            overflow: hidden;
+            margin-left: -430px;
+        }
+
+        #avatar-modal .modal-dialog {
+            height: 100%;
+        }
+
+        #avatar-modal .modal-dialog .modal-content {
+            height: 100%;
+        }
+
+        #avatar-modal .modal-dialog .modal-content .modal-body {
+            max-height: 520px;
+            height: 520px;
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #previewImg {
+            width: 100%;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- addImage modal -->
+    <div style="display:none;" class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="100%" src="addimage-modal.html?show" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /addImage modal -->
+    <table class="table table-bordered table-striped table-hover">
+
+
+        <tr>
+            <th style="text-align:center;font-size:15px;" colspan="2">
+                <span>请选择你需要的操作</span>
+            </th>
+        </tr>
+        <tr>
+            <td style="text-align:center;" colspan="2">
+                <label for="showPic" class="menuLabel">
+                    <input type="radio" name="pic" value="showPic" id="showPic"> 展示图片
+                </label>
+                <label for="uploadPic" class="menuLabel">
+                    <input type="radio" name="pic" value="uploadPic" id="uploadPic"> 上传图片
+                </label>
+                <label for="uploadVideo" class="menuLabel">
+                    <input type="radio" name="pic" value="uploadVideo" id="uploadVideo"> 上传视频
+                </label>
+                <label for="uploadData" class="menuLabel">
+                    <input type="radio" name="pic" value="uploadData" id="uploadData"> 上传文件
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-align:center" colspan="2">
+                <button class="btn btn-info" id="configSelect">确定选择</button>
+            </td>
+        </tr>
+    </table>
+
+</body>
+<script type="text/javascript">
+    function createElement( type, name ) {
+        var element = null;
+        try {
+            element = document.createElement( '<' + type + ' name="' + name + '">' );
+        } catch ( e ) {}
+        if ( element == null ) {
+            element = document.createElement( type );
+            element.name = name;
+        }
+        return element;
+    }
+    var oNode = null,
+        thePlugins = 'uploadimage';
+    window.onload = function () {
+        // $G( 'orgname' ).select();
+        if ( UE.plugins[ thePlugins ].editdom ) {
+            oNode = UE.plugins[ thePlugins ].editdom;
+            var gTitle = oNode.getAttribute( 'identity' );
+            if ( gTitle === '图片上传' ) {
+                selfTarget = 'uploadPic';
+            } else if ( gTitle === '视频上传' ) {
+                selfTarget = 'uploadVideo';
+            } else if ( gTitle === '文件上传' ) {
+                selfTarget = 'uploadData';
+            }
+            renderHtml( selfTarget );
+            $( function () {
+                var gTitle = oNode.getAttribute( 'title' ).replace( /&quot;/g, "\"" );
+                var allowUpload = oNode.getAttribute( 'allowupload' );
+                allowUpload === 'allow' ? $( '#allowUpload' ).prop( 'checked', true ) : $( '#allowupload' ).prop( 'checked', false );
+                gTitle = gTitle == null ? '' : gTitle;
+                $G( 'orgname' ).value = gTitle;
+            } )
+        }
+    }
+    dialog.oncancel = function () {
+        if ( UE.plugins[ thePlugins ].editdom ) {
+            delete UE.plugins[ thePlugins ].editdom;
+        }
+    };
+    dialog.onok = function () {
+        var identity;
+        if ( selfTarget === 'showPic' ) {
+            identity = '展示图片';
+        } else if ( selfTarget === 'uploadPic' ) {
+            identity = '图片上传';
+        } else if ( selfTarget === 'uploadVideo' ) {
+            identity = '视频上传';
+        } else if ( selfTarget === 'uploadData' ) {
+            identity = '文件上传';
+        }
+        if ( selfTarget === 'showPic' ) { // 如果是展示图片的话
+            var image = createElement( 'img', 'addimage' );
+            image.setAttribute( 'src', showImage );
+            image.style.width = $( '#orgwidth' ).val() + 'px';
+            image.style.height = $( '#orgheight' ).val() + 'px';
+            editor.execCommand( 'insertHtml', image.outerHTML );
+        } else { // 否则就是 上传图片 了
+            var allowUpload;
+            if ( $( '#allowUpload' ).prop( 'checked' ) === false ) {
+                allowUpload = 'notallow';
+            } else {
+                allowUpload = $( '#allowUpload' ).val();
+            }
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '请输入控件名称' );
+                return false;
+            }
+            var gdataSource, gTitle, gdatazId;
+            gTitle = $( '#orgname' ).val();
+            if ( $G( 'datasource' ).value == 0 ) {
+                var gdataSource = "";
+            } else {
+                gdataSource = $( "#datasource option:selected" ).text();
+            }
+            if ( $G( 'datazid' ).value == 0 ) {
+                gdatazId = "";
+            } else {
+                gdatazId = $G( 'datazid' ).value;
+            }
+            var datasource = '{\"data\":\"' + gdataSource + '\",\"field\":\"' + gdatazId + '\"}';
+            if ( !oNode ) {
+                try {
+                    oNode = createElement( 'input', 'leipiNewField' );
+                    oNode.setAttribute( 'type', 'text' );
+                    oNode.setAttribute( 'title', gTitle );
+                    oNode.setAttribute( 'value', gTitle + ' - 控件' );
+                    oNode.setAttribute( 'name', 'leipiNewField' );
+                    oNode.setAttribute( 'datasource', datasource );
+                    oNode.setAttribute( 'allowUpload', allowUpload );
+                    oNode.setAttribute( 'leipiPlugins', thePlugins );
+                    oNode.setAttribute( 'identity', identity );
+                    editor.execCommand( 'insertHtml', oNode.outerHTML );
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                oNode.setAttribute( 'title', gTitle );
+                oNode.setAttribute( 'value', gTitle + ' - 控件' );
+                oNode.setAttribute( 'identity', identity );
+                oNode.setAttribute( 'allowUpload', allowUpload );
+                oNode.setAttribute( 'datasource', datasource );
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        }
+
+    };
+
+</script>
+<script>
+    var showImage,
+        selfTarget;
+    /*
+     * 选择操作的按钮
+     *
+     */
+    $( '#configSelect' ).on( 'click', function (e) {
+        var html;
+        $( '[name="pic"]' ).each( function ( index, elem ) {
+            if ( elem.checked ) selfTarget = elem.id;
+        } )
+
+
+        $( document ).on( "change", "#datasource", function ( e ) {
+            var nodeParentId = $( this ).val();
+            $( "#datazid" ).empty();
+            $.ajax( {
+                url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + nodeParentId,
+                method: "GET",
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( "#datazid" ).append( '<option value=' + value.value + '>' + value.text + '</option>' );
+                    } )
+                }
+            } )
+        } );
+        renderHtml( selfTarget );
+    } )
+
+    function renderHtml( elem ) {
+        // 渲染 选中的 页面
+        if ( elem === 'uploadPic' ) {
+            html = '<tr><th style="text-align:center;font-size:15px;" colspan="2"><span>点击确认后即可生成上传图片控件</span></th></tr>' +
+                '<tr><th><span>控件名称</span><span class="label label-important">*</span></th><th>允许用户上传</th></tr>' +
+                '<tr><td><input type="text" id="orgname" onclick="javascript:this.select()" placeholder="必填项" value="图片上传">' +
+                '</td><td><input type="checkbox" id="allowUpload" value="allow"> 允许</td></tr>' +
+                ' <tr><th><span>数据源</span></th><th><span>数据字段</span></th></tr><tr><td><select id="datasource"><option value="0" >请选择</option></select></td>' +
+                '<td><select id="datazid"><option value="0">请选择</option></select></td></tr>';
+        } else if ( elem === 'uploadVideo' ) {
+            html = '<tr><th style="text-align:center;font-size:15px;" colspan="2"><span>点击确认后即可生成上传视频控件</span></th></tr>' +
+                '<tr><th><span>控件名称</span><span class="label label-important">*</span></th><th>允许用户上传</th></tr>' +
+                '<tr><td><input type="text" id="orgname" onclick="javascript:this.select()" placeholder="必填项" value="视频上传">' +
+                '</td><td><input type="checkbox" id="allowUpload" value="allow"> 允许</td></tr>' +
+                ' <tr><th><span>数据源</span></th><th><span>数据字段</span></th></tr><tr><td><select id="datasource"><option value="0" >请选择</option></select></td>' +
+                '<td><select id="datazid"><option value="0">请选择</option></select></td></tr>';
+        } else if ( elem === 'uploadData' ) {
+            html = '<tr><th style="text-align:center;font-size:15px;" colspan="2"><span>点击确认后即可生成上传文件控件</span></th></tr>' +
+                '<tr><th><span>控件名称</span><span class="label label-important">*</span></th><th>允许用户上传</th></tr>' +
+                '<tr><td><input type="text" id="orgname" onclick="javascript:this.select()" placeholder="必填项" value="文件上传">' +
+                '</td><td><input type="checkbox" id="allowUpload" value="allow"> 允许</td></tr>' +
+                ' <tr><th><span>数据源</span></th><th><span>数据字段</span></th></tr><tr><td><select id="datasource"><option value="0" >请选择</option></select></td>' +
+                '<td><select id="datazid"><option value="0">请选择</option></select></td></tr>';
+        } else {
+            html = '<tr><th><span>图片样式</span></th><th><span>图片形状</span></th></tr>' +
+                '<tr><td style="padding-top:16px;">高<input type="text" class="input-small span1" name="orgheight" id="orgheight" title="图片高度" value="50"> px &nbsp;&nbsp;' +
+                '宽<input type="text" class="input-small span1" name="orgheight" id="orgheight" title="图片宽度" value="50"> px</td>' +
+                '<td><label><input class="radio" type="radio" name="shape" value="0">默认 </label>' +
+                '<label><input class="radio" type="radio" name="shape" value="1">圆形 </label></td></tr>' +
+                '<tr><th><span>点击按钮上传图片</span></th><th>图片预览</th></tr>' +
+                '<tr><td><button class="btn btn-primary btn-small uploadImage" data-toggle="modal">上传图片</button></td>' +
+                '<td style="width:170px;"><div id="previewImg"></div></td></tr>';
+        }
+        $( '.table' ).html( html );
+
+        /*
+         * 链接后台获取 数据链接
+         *
+         */
+        var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+        var nodeId =$("#node_id",window.parent.document).val();
+        $.ajax( {
+            url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+            method: 'GET',
+            success: function ( res ) {
+                console.log( res )
+                $.each( res.msg, function ( index, value ) {
+                    $( "#datasource" ).append( '<option value=' + value.id + '>' + value.value + '</option>' );
+                } )
+            },
+            error: function ( res ) {
+                alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+            }
+        } );
+        $( document ).on( "change", "#datasource", function ( e ) {
+            var nodeParentId = $( this ).val();
+            $( "#datazid" ).empty();
+            $.ajax( {
+                url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + nodeParentId,
+                method: "GET",
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( "#datazid" ).append( '<option value=' + value.value + '>' + value.text + '</option>' );
+                    } )
+                }
+            } )
+        } );
+    }
+    // 上传图片
+    $( 'body' ).on( 'click', '.uploadImage', function ( e ) {
+        e.preventDefault();
+        $( '#avatar-modal' ).modal( 'show' );
+        window.getImageTarget = function () {
+            return e.target;
+        }
+        $( '#avatar-modal' ).css( {
+            'height': '400px',
+            'width': '860px',
+            'overflow': 'auto'
+        } )
+    } )
+
+    // 点击其他区域就关闭modal
+    $( 'body' ).on( 'click', '.modal-backdrop', function ( e ) {
+        $( '#avatar-modal' ).modal( 'hide' );
+    } )
+
+    window.shutdown = function () {
+        $( '#avatar-modal' ).modal( 'hide' );
+    }
+
+</script>

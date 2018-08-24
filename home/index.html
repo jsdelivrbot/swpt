@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gzsw">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<script src="../data/data.js"></script>
+</head>
+<body ng-cloak>
+<div id="index" ng-view></div>
+</body>
+<script>
+    Array.prototype.getIndexWithArr = function (_obj) {
+        var _arr = this
+        var len = _arr.length;
+        console.log(_arr)
+        for(var i = 0; i < len; i++)
+        {
+            console.log(_arr[i] == _obj)
+            if(_arr[i] == _obj)
+            {
+                return parseInt(i);
+            }
+        }
+        return -1;
+    };
+    Array.prototype.removeObjWithArr = function (_arr,_obj) {
+        var length = _arr.length;
+        for(var i = 0; i < length; i++)
+        {
+            if(_arr[i] == _obj)
+            {
+                if(i == 0)
+                {
+                    _arr.shift(); //删除并返回数组的第一个元素
+                    return;
+                }
+                else if(i == length-1)
+                {
+                    _arr.pop();  //删除并返回数组的最后一个元素
+                    return;
+                }
+                else
+                {
+                    _arr.splice(i,1); //删除下标为i的元素
+                    return;
+                }
+            }
+        }
+    };
+</script>
+<script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script src="../public/part/angular/angular.min.js"></script>
+<script src="../public/part/angular/angular-route.js"></script>
+<script src="../public/config.js"></script>
+<script src="./js/config.js"></script>
+<script src="../js/getdata.js"></script>
+<script src="../home/js/app.js"></script>

@@ -1,0 +1,8 @@
+.anchor {
+    color: #65a9ff;
+    cursor: pointer;
+}
+.anchor-dot {
+    color: #000;
+    cursor: default;
+}

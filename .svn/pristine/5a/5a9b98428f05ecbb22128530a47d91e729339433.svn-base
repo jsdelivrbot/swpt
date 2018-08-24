@@ -1,0 +1,82 @@
+( function ( $ ) {
+
+    'use strict';
+
+    var Methods = {
+        filesArr: {},
+        init: function ( options, that ) {
+            var elemName;
+            if ( Methods.elem !== undefined ) {
+                elemName = 'elem_' + new Date().getTime();
+                Methods[ elemName ] = that;
+                that.data( 'elem', elemName );
+            } else {
+                elemName = 'elem';
+                Methods[ elemName ] = that;
+                that.data( 'elem', 'elem' );
+            }
+            Methods.elemName = elemName;
+            this.prepareOptions( options );
+            this.process( elemName );
+        },
+        prepareOptions: function ( options ) {
+            optionsInit = $.extend( optionsInit, options );
+        },
+        process: function ( elemName ) {
+            this.renderInput( elemName );
+            this.control();
+        },
+        renderInput: function ( elemName ) {
+            var timeStamp = new Date().getTime();
+            this[ elemName ].append( '<div class="uploadAdd"><label for="aFiles_' + timeStamp + '" class="add"></label><input type="file" id="aFiles_' + timeStamp + '" data-con=' + this.elemName + ' class="aFiles" name="aFiles"></div>' );
+        },
+        renderPrevent: function ( fileInfo, elem ) {
+            var preventUrl = window.URL.createObjectURL( fileInfo ),
+                type = fileInfo.type.split( '/' )[ 0 ];
+
+            if ( type === 'image' ) {
+                this[ elem ].prepend( '<div data-id=' + fileInfo.lastModified + ' class= "uploadImg uploadTarget" > <img src=' + preventUrl + '><span class="closed"><img src="../../../../public/images/a7.png"></span></div>' );
+            } else if ( type === 'video' ) {
+                this[ elem ].prepend( '<div data-id=' + fileInfo.lastModified + ' class= "uploadVideo uploadTarget" > <i class="iconfont">&#xe768;</i><span class="closed"><img src="../../../../public/images/a7.png"></span></div>' );
+            }
+        },
+        control: function () {
+            // uploading..
+            this[ this.elemName ].on( 'change', '.aFiles', function ( event ) {
+                var elemCon = this.dataset.con;
+                console.log(Methods.filesArr['elemCon']);
+                console.log(Methods.filesArr);
+                console.log(Methods.filesArr['elemCon'].push(this.files[0]) );
+                if ( Methods.filesArr.length < optionsInit.limit ) { // 判断现在文件数量超过限制数量则不允许上传。
+
+                    if ( this.files.length > 0 ) Methods.filesArr.elemName.push( this.files[ 0 ] );
+                    Methods.renderPrevent( this.files[ 0 ], elemCon );
+                } else alert( '最多上传' + optionsInit.limit + '个文件' );
+                Methods.filesArr.length >= optionsInit.limit ? $( '.uploadAdd' ).hide() : $( '.uploadAdd' ).show();
+            } );
+
+
+            // delete fold..
+            this[ this.elemName ].on( 'click', '.closed', function ( event ) {
+                var flagId = $( event.currentTarget ).parents( '.uploadTarget' )[ 0 ].dataset.id;
+                Methods.filesArr.forEach( function ( val, index ) {
+                    if ( val.lastModified === parseInt( flagId ) ) {
+                        Methods.filesArr.splice( index, 1 );
+                        $( '.uploadTarget[data-id=' + flagId + ']' ).remove();
+                    }
+                } );
+                Methods.filesArr.length >= optionsInit.limit ? $( '.uploadAdd' ).hide() : $( '.uploadAdd' ).show();
+            } );
+        }
+    };
+
+    $.fn.mUpload = function ( options ) {
+        var upload = Object.create( Methods );
+        upload.init( options, this );
+    };
+
+    var optionsInit = {
+        limit: 3
+    };
+
+} )( jQuery );

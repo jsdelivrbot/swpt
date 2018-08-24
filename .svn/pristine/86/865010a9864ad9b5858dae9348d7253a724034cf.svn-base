@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html ng-app="gzsw" ng-controller="myController">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/comm.css" />
+    <link rel="stylesheet" type="text/css" href="css/customer_service.css" />
+</head>
+
+<body>
+    <div class="outer">
+        <div class="l_top">
+            <div class="l_container clearfix">
+                <a href="./index.html">
+                    <div class="l_logo">
+                        <h2 class="title">省科学院</h2>
+                        <p class="desc">Provincial academy of sciences</p>
+                    </div>
+                </a>
+                <div class="phoneNav" id="phoneNav">
+                    <span class="icon-bar animation03"></span>
+                </div>
+                <nav class="l_t_nav animation03">
+                    <a href="index.html" class="firstTag">首页</a>
+                    <a href="network_resource.html">网络资源</a>
+                    <a href="price.html">产品介绍</a>
+                    <a href="customer_service.html" class="navActive">解决方案</a>
+                    <a href="customer_service.html">成功案例</a>
+                    <a href="customer_service.html">关于我们</a>
+                    <div class="userContainer">
+                        <a href="../account" class="user" ng-show="!userState">{{userName}}</a>
+                        <ul>
+                            <li>
+                                <a href="javascript:;" ng-click="outLogin()">退出登陆</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="appContainer">
+                        <a href="../download" class="appDownload">App下载</a>
+                    </div>
+                    <div class="loginContainer" ng-show="userState">
+                        <a href="../login2?register" class="register">免费注册</a>
+                        <a href="../login2/#" class="login">登录</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-wrap clearfix">
+                <h2>售后服务</h2>
+                <p>购买胜网协同OA系统只是我们合作的开始，胜网协同OA系统的优质服务，尽可能使我们的客户安枕无忧，尽享协同OA系统带来的无限办公乐趣！</p>
+                <h4>我们的服务</h4>
+                <ul class="list">
+                    <li>提供1小时内的服务请求响应</li>
+                    <li>简单问题8小时内提供解决方案</li>
+                    <li>复杂问题24小时内提供解决方案</li>
+                    <li>服务器内免费同版本升级服务</li>
+                    <li>服务期内免费指导OA相关数据备份</li>
+                    <li>服务期内免费协助重新安装OA系统、数据恢复工作</li>
+                    <li>服务期内免费指导涉及到本OA的软、硬件及计算机网络技术</li>
+                    <li>服务期内接受客户的系统管理员前来公司免费培训、学习</li>
+                </ul>
+                <div class="content-box">
+                    <h2>服务内容</h2>
+                    <ul class="clearfix">
+                        <li>
+                            <a href="">
+                                <i></i>
+                                <span>定制服务</span>
+                            </a>
+                            <p>
+                                根据客户的具体办公模式，我们会与客户共同分析办公流程和其中的数据逻辑变化，以及特殊商业规则，免费把这些具有客户行业特征、日常 运作特性的管理功能整理成适合客户的实用、贴身、低成本的解决方案，并将方案配置实现，即根据客户的需求定制办公自动化系统。
+                            </p>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i></i>
+                                <span>升级服务</span>
+                            </a>
+                            <p>
+                                对于购买产品的客户，我们提供产品升级服务，为保持产品的先进性，胜网OA系统会持续进行技术研发和升级，各版本的客户可享受随系统升级 而升级的服务，将使自己的系统保持在最先进的状态。
+                            </p>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i></i>
+                                <span>二次开发服务</span>
+                            </a>
+                            <p>
+                                随着用户使用的深入和企业的发展，客户往往需要对系统进行二次开发乃至多次开发，我们将根据用户的需求提供相关服务。对于有技术条件的 用户，我们将提供二次开发接口和必要的技术支持，使客户能够自行开发。
+                            </p>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i></i>
+                                <span>咨询服务</span>
+                            </a>
+                            <p>
+                                在客户的整个实施、使用服务中，我们提供随时的咨询服务。这些咨询服务包括对系统的使用、对新系统分析、对现有系统的调整，我们的系统 工程师随时恭候。
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--<div class="footer">
+				<div class="footer-wrap">
+					<ul class="clearfix">
+						<li>
+							<a href="">产品中心</a>
+							<a href="">在线试用</a>
+							<a href="">下载试用</a>
+							<a href="">版本介绍</a>
+						</li>
+						<li>
+							<a href="">联系我们</a>
+							<a href="">帮助中心</a>
+							<a href="">用户协议</a>
+							<a href="">在线客服</a>
+						</li>
+						<li>
+							<a href="">关于我们</a>
+							<a href="">公司介绍</a>
+							<a href="">招聘信息</a>
+							<a href="">联系我们</a>
+						</li>
+						<li>
+							<a href="">社区</a>
+							<a href="">微博</a>
+							<a href="">论坛</a>
+							<a href="">微信公众平台</a>
+						</li>
+					</ul>
+					<div class="footer_nav">
+						<ul>
+							<li>供货商入口</li>
+							<li>招聘</li>
+							<li>合作</li>
+							<li>网站管理</li>
+						</ul>
+					</div>
+				</div>
+			</div>-->
+        <div class="footer">
+            <div class="footer-wrap">
+                <dl>
+                    <dt>产品</dt>
+                    <dd>
+                        <a href="">产品中心</a>
+                    </dd>
+                    <dd>
+                        <a href="">在线试用</a>
+                    </dd>
+                    <dd>
+                        <a href="">下载试用</a>
+                    </dd>
+                    <dd>
+                        <a href="">版本介绍</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>公司</dt>
+                    <dd>
+                        <a href="">联系我们</a>
+                    </dd>
+                    <dd>
+                        <a href="">帮助中心</a>
+                    </dd>
+                    <dd>
+                        <a href="">用户协议</a>
+                    </dd>
+                    <dd>
+                        <a href="">在线客服</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>社区</dt>
+                    <dd>
+                        <a href="">官方论坛</a>
+                    </dd>
+                    <dd>
+                        <a href="">官方博客</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>热门推荐</dt>
+                    <dd>
+                        <a href="">供应商入口</a>
+                    </dd>
+                    <dd>
+                        <a href="">招聘信息</a>
+                    </dd>
+                    <dd>
+                        <a href="">合作咨询</a>
+                    </dd>
+                    <dd>
+                        <a href="">后台管理</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="footer-right">
+                <div class="footer-right_top">
+                    <span>教　育　云</span>
+                    <div>Education Cloud</div>
+                </div>
+                <div class="footer-right_bottom">&copy; 2017　教育云科技有限公司</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script src="../public/part/angular/angular.min.js"></script>
+<script src="../public/part/angular/angular-route.js"></script>
+<script src="../js/getdata.js"></script>
+<script src="../public/config.js"></script>
+<!-- <script src="../login2/js/app.js"></script> -->
+<script src="./js/app.js"></script>
+<script>
+    $( function () {
+        // 展开手机导航栏
+        $( '#phoneNav' ).on( 'click', function ( e ) {
+            if ( e.target.className.indexOf( 'isClick' ) === -1 ) {
+                $( e.target ).addClass( 'isClick' );
+                $( '.l_container' ).addClass( 'phone' );
+                $( 'body' ).css( 'overflow', 'hidden' );
+            } else {
+                $( e.target ).removeClass( 'isClick' );
+                $( '.l_container' ).removeClass( 'phone' );
+                $( 'body' ).css( 'overflow', 'auto' );
+            }
+        } )
+        $( window ).resize( function ( e ) {
+            if ( ( window.innerWidth + 60 ) > 960 ) {
+                if ( $( '.l_container' ) )
+                    $( '.l_container' ).removeClass( 'phone' );
+            }
+        } )
+        // 登陆后移动到用户信息
+
+        $('.userContainer').hover(function () {
+            if ($.inArray('phone', $('.l_container').prop('classList')) === -1) {
+                $('.userContainer ul').slideDown(100);
+            }
+        }, function () {
+            if ($.inArray('phone', $('.l_container').prop('classList')) === -1) {
+                $('.userContainer ul').slideUp(100);
+            }
+        })
+    } )
+
+</script>

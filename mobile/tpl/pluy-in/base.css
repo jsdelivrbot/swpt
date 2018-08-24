@@ -1,0 +1,361 @@
+@charset "utf-8";
+html {
+    color: #000;
+    background: #fff;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+
+html * {
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+html, body {
+    font-family: '方正兰亭', sans-serif
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0
+}
+
+input, select, textarea {
+    font-size: 100%
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+fieldset, img {
+    border: 0
+}
+
+abbr, acronym {
+    border: 0;
+    font-variant: normal
+}
+
+del {
+    text-decoration: line-through
+}
+
+address, caption, cite, code, dfn, em, th, var {
+    font-style: normal;
+    font-weight: 500
+}
+
+ol, ul {
+    list-style: none
+}
+
+caption, th {
+    text-align: left
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 500
+}
+
+q:before, q:after {
+    content: ''
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+
+sup {
+    top: -.5em
+}
+
+sub {
+    bottom: -.25em
+}
+
+html a {
+    color: #555;
+}
+
+.quit {
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: none
+}
+
+ins, a {
+    text-decoration: none !important;
+}
+
+input, textarea, select, button {
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+}
+
+/*input {*/
+/*-webkit-appearance: textfield;*/
+/*-webkit-rtl-ordering: logical;*/
+/*cursor: text;*/
+/*}*/
+
+/*input:focus, textarea:focus, select:focus {*/
+/*outline-offset: -2px;*/
+/*}*/
+/*.b_control:focus {*/
+/*border-color: #66afe9;*/
+/*outline: 0;*/
+/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);*/
+/*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)*/
+/*}*/
+.b_control {
+    background-image: none;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.red {
+    color: #fe5656 !important;
+}
+
+.pass {
+    color: #fe5656
+}
+
+.audit {
+    color: #3c0
+}
+
+.wait {
+    color: #626262
+}
+
+.btn_pass {
+    color: #d20a0a;
+}
+
+.btn_audit {
+    color: #3c0;
+}
+
+.btn_pass:active {
+    color: #c15656
+}
+
+.btn_audit:active {
+    color: #339900;
+}
+
+.btn_invite {
+    color: #3366cc;
+}
+
+.btn_invite:active {
+    color: #3300cc;
+}
+
+.btn_chakan {
+    color: #1296db;
+}
+
+.btn_chakan:active {
+    color: #0070db;
+}
+
+html {
+    background-color: #fdfdfd !important;
+}
+
+.header {
+    z-index: 99999;
+    height: 1.17333333rem;
+    width: 100%;
+    align-items: center;
+    line-height: 1.17333333rem;
+    position: relative;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    background-color: #f23a3a;
+}
+
+.header .quit {
+    position: absolute;
+    left: 4%;
+    width: 10%;
+    color: #fff;
+}
+
+.bodies {
+    margin: 0.11333333rem 0.1933333rem .5rem;
+    background-color: #fafafa;
+}
+
+.btn_active {
+    background-color: #e13f2a;
+}
+
+.btn_active:active {
+    background-color: #d20a0a !important;
+}
+
+.f16 {
+    font-size: 16px;
+}
+
+.f14 {
+    font-size: 14px;
+}
+
+.f15 {
+    font-size: 15px;
+}
+
+.f17 {
+    font-size: 17px;
+}
+
+.f18 {
+    font-size: 18px;
+}
+
+#modal {
+    width: 100%;
+    background-color: rgba(33, 33, 33, 0.6);
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    top: 0;
+    transition: all .3s linear;
+    font-size: 15px;
+}
+
+#modal #modal_box_approver, #modal #modal_box_capyto {
+    width: 0rem;
+    margin-top: 2rem;
+    background-color: #fff;
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    opacity: 0;
+    margin-left: -3.5rem;
+    transition: all .3s
+}
+
+#modal .moadl_title {
+    color: #fff;
+    font-size: 16px;
+    height: 0.83333rem;
+    text-align: center;
+    background-color: #f23a3a;
+    line-height: 0.83333rem;
+}
+
+#modal .modal_select {
+    display: flex;
+    align-items: center;
+    height: 0.8rem;
+}
+
+#modal .modal_select div {
+    width: 1.6666rem;
+    padding: 0.03rem 0;
+    color: #fff;
+    text-align: center;
+    margin-left: 0.5rem;
+    background-color: red;
+}
+
+#modal #modal_box_approver {
+
+}
+
+#modal #modal_box_capyto {
+
+}
+
+#modal #modal_box {
+    background-color: #fff;
+}
+
+.m_t_10 {
+    margin-top: 0.266666rem;
+}
+
+.m_t_20 {
+    margin-top: 0.53333rem;
+}
+
+.m_t_40 {
+    margin-top: 1.06rem;
+}
+
+.t_c {
+    text-align: center;
+}
+
+.load, .prevent {
+    display: none;
+}
+
+.load {
+    text-align: center;
+}
+
+.prevent {
+    font-size: 18px;
+    color: #454545;
+}
+
+.modal {
+    transition: none;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    top: 0;
+    width: 100%;
+    font-size: 15px;
+    justify-content: center;
+    background-color: rgba(33, 33, 33, 0) !important
+}
+
+.modal .modal_box {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 999999;
+    transition: all .05s linear;
+    display: flex;
+    padding: 0.1rem .2rem;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: rgba(33, 33, 33, .8)
+}
+
+.modal .modal_box .a, .modal .modal_box .b, .modal .modal_box .c, .modal .modal_box .d, .modal .modal_box .e, .modal .modal_box .f, .modal .modal_box .g, .modal .modal_box .h {
+    display: none
+}
+

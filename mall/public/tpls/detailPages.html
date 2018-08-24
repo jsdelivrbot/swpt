@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<div>
+    <div ng-repeat="dm in vip_moudle">
+        <div>
+            {{dm.m_name}}
+        </div>
+        <ul>
+            <li ng-repeat="list in dm.child">
+                {{list.name}}
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<header class="cole-head head-bar posi-re">
+    <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+    <p class="color-white">考试结果</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main class="exre-main">
+    <div class="content text-center">
+        <div class="exre-score">
+            <p>
+                <span class="color-ccc font-30">考试得分:</span>
+            </p>
+            <span>
+                80
+            </span>
+        </div>
+        <div class="exre-time">
+            <span class="color-ccc  font-30">
+                用时:
+            </span>
+            <span class="font-36">
+                55分钟
+            </span>
+        </div>
+    </div>
+    <div class="btn text-center">
+        <button class="font-34 color-white no-border" view>查看答案</button>
+        <button class="font-34 color-white no-border" continue>继续答题</button>
+    </div>
+    <p class="font-30 text-center">答案页面可以创建笔记哦</p>
+</main>
+<script>
+    if ( dj.getStorage( 'questionStatus' ) != '0' ) {
+        $( '.exre-main .content' ).html( '<p class="font-40 text-center">对不起，评分失败！</p>' );
+    } else {
+        $( '.exre-score>span' ).html( dj.getStorage( 'questionSum' ) );
+        $( '.exre-time .font-36' ).html( dj.getStorage( 'questionTotalTime' ) );
+    }
+    $( '.col-head .color-white' ).html( '考试结果' );
+    $( '.exre-main' ).hide().fadeIn( 'slow' );
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+    $( '.exre-main button[view]' ).unbind().click( function () { //查看答案
+        $( 'body' ).nextPage( './answer-view.html' );
+    } );
+    $( '.exre-main button[continue]' ).unbind().click( function () { //返回首页继续答题
+        $( 'body' ).load( './main-school.html' );
+        sessionStorage.setItem( 'data', '{"jump":[], "currentPage":"./main-school.html"}' );
+    } );
+
+</script>

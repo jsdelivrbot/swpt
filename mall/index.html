@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商城中心</title>
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link href="../public/part/ligerlib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../public/part/ligerlib/ligerUI/skins/Gray/css/all.css">
+    <script type="text/javascript" src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+    <script src="../public/part/ligerlib/ligerUI/js/ligerui.min.js"></script>
+    <script src="../public/part/ligerlib/ligerUI/js/plugins/ligerTree.js"></script>
+    <script src="../public/config.js"></script>
+    <link rel="stylesheet" href="./css/app.css">
+    <!--   <link rel="stylesheet" href="./font/iconfont.css">
+
+       <script type="text/javascript" src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+       <script type="text/javascript" src="../public/part/angular/angular.min.js"></script>
+       <script type="text/javascript" src="../public/part/angular/angular-ui-router.min.js"></script>
+       <script type="text/javascript" src="../data/vip_module.js"></script>
+       <script type="text/javascript" src="../js/getdata.js"></script>
+       <script type="text/javascript" src="../public/config.js"></script>
+       <script type="text/javascript" src="./js/config.js"></script>
+       <script type="text/javascript" src="./js/app.js"></script>-->
+    <script>
+       // var loginpwd=window.prompt("输入[1388w总站模板/资源库]使用密码：");
+       // if(loginpwd!="5656")history.back();
+       var user=window.localStorage['user']?JSON.parse(window.localStorage['user']):null;
+       if(user==null){
+           alert("你还没有登录");
+           window.location.href="/login2";
+       }
+        var getSearchInfoRole = DEFAULT_URL + "nodeQueryFacade/getUpWebsiteTreeNode?uid="+user.id;
+        //var sumitUrl=DEFAULT_URL+"nodeOperatorFacade/copyTree";
+        var sumitUrl=DEFAULT_URL+"nodeOperatorFacade/selectTreeNodeToSite";
+       var dataTreeUrl = root_url + "/htNodeService/getNodeMenu?uid="+user.id;
+        var curdata=[];
+        var curPnode=null;
+        Array.prototype.minus = function (arr) {
+            var result = new Array();
+            var obj = {};
+            for (var i = 0; i < arr.length; i++) {
+                obj[arr[i]] = 1;
+            }
+            for (var j = 0; j < this.length; j++) {
+                if (!obj[this[j]])
+                {
+                    obj[this[j]] = 1;
+                    result.push(this[j]);
+                }
+            }
+            return result;
+        };
+
+        $(function () {
+            $.ajax( {
+                url: getSearchInfoRole,
+                type: "POST",
+                success: function ( data ) {
+                    if ( data.msg == "error" ) {
+                        alert("发生异常，请联系管理员！");
+                        return false;
+                    };
+                    // 角色窗口关闭图标
+                    var Objdata = [data.msg.allNode];
+                    curPnode=data.msg.id;
+                    
+                    window.from_tree = $( "#from_tree" ).ligerTree( {
+                        textFieldName: 'value',
+                        parentIDFieldName: 'parent_id',
+                        nodeWidth: 200,
+                        data:Objdata,
+                        isExpand: 2,
+                        render:function(node){
+                            return node.value;
+                        },
+                        parentIcon: null,
+                        childIcon: null
+                    } );
+                    
+                    $( "#from_tree" ).css( "width","100%" );
+                    if(data.msg.selectNode.length){
+                        from_tree.selectNode(function (tree) {
+                            if (data.msg.selectNode.indexOf(tree.id) > -1) {
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
+                    /*$.ajax( {
+                        url: dataTreeUrl,
+                        type: "GET",
+                        success: function ( sedata ) {
+                            console.log(sedata);
+                            /!*from_tree.selectNode(function (tree) {
+                                if (arr.indexOf(tree.id) > -1) {
+                                    return true;
+                                }
+                                return false;
+                            });*!/
+                        }
+                    });*/
+                }
+            } );
+            $(document).on("click","#postfromid",function () {
+                /*$.ajax( {
+                    url: "http://192.168.0.239:8080",
+                    type: "POST",
+                    data:JSON.stringify({"nodeld":12,"excludeNode":321312}),
+                    success: function ( data ) {
+                        console.log(data);
+                    }
+                } );
+                return;*/
+
+                var UserHasNode={
+                    "uId":user.id,
+                    "nodeId":'',
+                    "roleId":'',
+                    "posId":'',
+                    "createUid":user.id
+                };
+                //var fids=from_tree.getSelected();
+                var arr = from_tree.getChecked();
+                var ids = [3];
+                var id=0;
+                for (var i = 0; i < arr.length; i++) {
+                    ids.push(arr[i].data.id);
+                }
+                console.log(ids);
+                /*var ft=from_tree.getParent();
+                var pt=from_tree.getParentTreeItem();
+                console.log(ft);
+                console.log(pt);
+                var ids = [];
+                for (var i = 0; i < arr.length; i++) {
+                    ids.push(arr[i].data.id);
+                }
+                var user=window.localStorage['user']?JSON.parse(window.localStorage[user]):null;
+                if(user!=null){
+                    var fdata={"user":user.id,"ids":ids.splice()};
+                }
+                console.log(ids);*/
+               // var tmptree=from_tree.hasChildren(3);
+                //var pids=curdata.minus(ids);
+                //sumitUrl+="nodeOperatorFacade/copyTree?nodeld="+curPnode+"&excludeNode="+pids.join();
+
+                $.ajax( {
+                    url: sumitUrl,
+                    type: "POST",
+                    data:JSON.stringify({"UserHasNode":UserHasNode,"nodeIds":ids.join()}),
+                    contentType:"application/json",
+                    success: function ( data ) {
+                        if(data.status==1){
+                            alert("复制成功");
+                            window.location.href="../workbench/workbenchs.html";
+                        }else{
+                            alert("复制失败");
+                        }
+                    }
+                } );
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="from_tree" style="">
+    <ul id="from_tree" style="margin-top:3px;width: 100%;">
+    </ul>
+</div>
+<button id="postfromid">确定提交</button>
+<!--<body ng-controller="masterControl">-->
+       <!--<div class="header">
+           <div class="logo">
+               <img src="./img/yingyognshangcheng.png" alt="">
+               <div class="logo_right"><p>胜网服务</p></div>
+           </div>
+           <div class="nav">
+               <div class="divafter" ui-sref="productList">服务中心</div>
+               <div ui-sref="myfunction">我的功能</div>
+           </div>
+       </div>
+       <div ui-view>
+       </div>-->
+       <!--<div class="shopping">-->
+            <!--<ul class="s_ul">-->
+                <!--<li class="s_li"><span class=""></span></li>-->
+                <!--<li class="s_li" ng-click="gouwuche($event)">-->
+                    <!--<span class="s_li_text">-->
+                        <!--购物车-->
+                    <!--</span>-->
+                    <!--<span class="iconfont icon-gouwuche s_li_icon"></span>-->
+                <!--</li>-->
+                <!--<li class="s_li"><span class=""></span></li>-->
+            <!--</ul>-->
+            <!--<div class="s_box">-->
+
+            <!--</div>-->
+       <!--</div>-->
+   <!--<div class="footer">
+
+   </div>-->
+       <!--加载动画-->
+   <div id="preloader">
+       <div id="status">
+           <img src="img/timg.gif" alt="">
+           <span>加载中</span>
+       </div>
+   </div>
+</body>
+<script>
+    window.onload = function () {
+        var  H = window.innerHeight
+        var  shopping = document.getElementsByClassName('shopping')[0]
+//        shopping.style.height= H + 'px'
+        $('#status').fadeOut();
+        $('#preloader').delay(300).fadeOut('slow');
+    }
+//    window.onresize = function(){
+//        var  H = window.innerHeight
+//        var  shopping = document.getElementsByClassName('shopping')[0]
+//        shopping.style.height= H + 'px'
+//    }
+</script>
+</html>

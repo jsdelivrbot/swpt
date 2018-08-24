@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="upfile">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../public/part/bootstrap/css/bootstrap3.min.css">
+    <script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+    <link href="css/page.css" rel="stylesheet" type="text/css"/>
+	
+	<!-- tree 组件-->
+    <link rel="stylesheet" type="text/css" href="./css/tree-control.css">  
+    <link rel="stylesheet" type="text/css" href="./css/tree-control-attribute.css">  
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	
+	
+    <title>文件资源</title>
+    <style type="text/css">
+        .mbot10{
+            margin-bottom: 10px;
+        }
+        .modal-header{
+            background-color: #00a8b3;
+            color: #ffffff;
+        }
+        .upfile_progress{
+            width: 500px;
+            height: 100px;
+            margin: 100px auto;
+            background-color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #cccccc;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius:4px;
+        }
+        .upfile_progress .load-bar {
+            width: 100%;
+            height: 10px;
+            border-radius: 30px;
+            background-color: #D9D9D9;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), inset 0 2px 3px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+        .upfile_progress .load-bar-inner {
+            height: 99%;
+            width: 10%;
+            border-radius: inherit;
+            position: relative;
+            background-color: #0096F5;
+        }
+        .upfile_progress p{
+            font-size: 14px;
+            line-height: 30px;
+        }
+		.arrowContainer{
+			position: relative;
+		}
+		.arrowContainer th:not(:last-of-type){
+			cursor:pointer;
+		}
+		.arrowContainer th{
+			-webkit-user-select: none;
+		}
+		.arrowUp,
+        .arrowDown {
+            position: relative;
+        }
+		.arrowUp:after{
+			content:'';
+			width:0;
+			height:0;   
+			border-left:5px solid transparent;   
+			border-right:5px solid transparent;   
+			border-bottom:5px solid #000;
+			position: absolute;
+			top: 50%;
+			margin-top: -5px;
+			margin-left: 5px;
+		}
+		.arrowDown:after{
+			content:'';
+			width:0;   
+			height:0;   
+			border-left:5px solid transparent;   
+			border-right:5px solid transparent;   
+			border-top:5px solid #000; 
+			position: absolute;
+			top: 50%;
+			margin-top: -5px;
+			margin-left: 5px;
+		}
+		.left{
+			display: inline-block;
+		}
+		.right{
+			margin:0;
+			float:right;
+			width:auto;
+		}
+        .displayHide {
+            visibility: hidden;
+        }
+    </style>
+    <script src="../data/data.js"></script>
+	
+</head>
+<body ng-controller="upfilectr">
+<div class="container mbot10">
+    <div class="row">
+        <div class="col-sm-12">
+			<div class='left'>
+                <!--<a href="#" class="btn btn-info" ng-repeat="item in items" id="{{item.id}}" data-toggle="modal" data-target="{{item.dataTarget}}" ng-show="{{item.show}}"><span class="glyphicon glyphicon-cloud-upload"></span> {{item.title}}</a>-->
+				<a class="btn btn-info displayHide" href="#" role="button" data-loading-text="上传中..." id="upfile"><span class="glyphicon glyphicon-cloud-upload"></span> 上传资料</a>
+				<a href="#" class="btn btn-success displayHide" data-toggle="modal" data-target="#myModal" id="newfolder"><span class="glyphicon glyphicon-folder-close"></span> 新建文件夹</a>
+				<a class="btn btn-danger displayHide" href="#" role="button" id="pdel" ng-click="dels()"><span class="glyphicon glyphicon-remove-sign"></span> 删除</a>
+				<!--<a class="btn btn-info" href="#" role="button" id="pzip"><span class="glyphicon glyphicon-duplicate"></span> 压缩</a>-->
+				<a class="btn btn-info displayHide" href="#" data-toggle="modal" data-target="#Modalmovefile" id="movefile" ng-click="getAllFolder()"><span class="glyphicon glyphicon-paste"></span> 移动</a>
+				<a class="btn btn-info displayHide" href="#" data-toggle="modal" data-target="#Modaldelfile" id="delfile"><span class="glyphicon glyphicon-paste"></span> 回收站</a>
+				<a class="btn btn-info displayHide" href="#" data-toggle="modal" data-target="#Modalnewfile" id="newfile"><span class="glyphicon glyphicon-duplicate"></span> 新建文档</a>
+			</div>
+			<div class="zySearch right" id="zySearch"></div>
+		</div>
+							
+    </div>
+</div>
+
+
+<div class="container mbot10">
+    <div class="row">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                <li><a href="javascript:void();" ng-click="goFileList(pid,false,f.path)">返回上一级</a></li>
+                <!--<li><a href="###" ng-click="goFileList(0,false,f.path)">根目录</a></li>-->
+                <!--<li class="active">{{cur_dir}}</li>-->
+                <li ng-repeat="n in cur_nav"><a href="###" ng-click="goFileList(n.id,false,n.path)">{{n.dirname}}</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="container mbot10">
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="sw_file_list" action="" method="post" id="sw_file_list">
+                <table class="table table-hover">
+                    <tr class="arrowContainer" ng-click="getSort($event)">
+                        <th id="name" class="arrowUp"><input type="checkbox" name="all" class="allcheck" ng-model="selectfile" ng-click="allFileSelect(selectfile)">名称</th>
+                        <th id="file_length" class="arrowUp">大小</th>
+                        <th id="create_time" class="arrowUp">上传时间</th>
+                        <th id="option">操作</th>
+                    </tr>
+                    <!--<tr>
+                        <td>
+                            <input type="checkbox" name="files[]" value="{{f.id}}" ng-click="setSwIds(f.id)" />
+                            &lt;!&ndash;<input type="checkbox" name="files[]" value="{{f.id}}" ng-click="setSwIds(f.id)" />&lt;!&ndash;ng-click="setSwIds(f.id)"&ndash;&gt;&ndash;&gt;
+                            <img src="img/wenjian.png" ng-if="f.isFile" class="file_icon">
+                            <img src="img/wenjianjia.png" ng-if="!f.isFile" class="file_icon">
+                            <span class="file_name" ng-click="goFileList(f.id,f.isFile,f.path,f.pId,f.name)">{{f.name}}</span>
+                        </td>
+                        <td>{{f.fileLength|filesize}}</td>
+                        <td>{{f.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td><span class="btn btn-info btn-xs" role="button" ng-click="modalSharFile(f.id)">分享</span> <span class="btn btn-warning btn-xs" ng-click="modalRenameFile(f.id)">重命名</span> &lt;!&ndash;<a class="btn btn-danger btn-xs" role="button" ng-click="del(f.id)">删除</a>&ndash;&gt;  <a ng-if="f.isFile" class="btn btn-info btn-xs" role="button" ng-click="fileDownload(f.id)">下载</a></td>
+                    </tr>-->
+                    <tr ng-repeat="f in files">
+                        <td>
+                            <input type="checkbox" name="files[]" value="{{f.id}}"  ng-checked="selectfile" ng-model="f.state" />
+                            <!--<input type="checkbox" name="files[]" value="{{f.id}}" ng-click="setSwIds(f.id)" />&lt;!&ndash;ng-click="setSwIds(f.id)"&ndash;&gt;-->
+                            <img src="img/wenjian.png" ng-if="f.isFile" class="file_icon">
+                            <img src="img/wenjianjia.png" ng-if="!f.isFile" class="file_icon">
+                            <span class="file_name" ng-click="goFileList(f.id,f.isFile,f.path,f.pId,f.name)">{{f.name}}</span>
+                        </td>
+                        <td>{{f.fileLength|filesize}}</td>
+                        <td>{{f.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>                    <!--   <a ng-if="f.isFile" class="btn btn-info btn-xs" role="button" ng-click="fileDownload(f.id)">下载</a></td> -->
+                        <td><span class="btn btn-info btn-xs displayHide" role="button" ng-click="modalSharFile(f.id)" id="sharFile">分享</span>
+                            <span class="btn btn-warning btn-xs displayHide" ng-click="modalRenameFile(f.id,f.name)" id="renameFile">重命名</span>
+                            <!--<a class="btn btn-danger btn-xs" role="button" ng-click="del(f.id)">删除</a>-->
+                            <a class="btn btn-info btn-xs displayHide" role="button" ng-click="fileDownload(f.id)" id="fileDownload">下载</a>
+                        </td>
+                    </tr>
+                    <tr ng-if="files==null">
+                        <td class="no-file">没有文件</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+            <div class="page">
+            </div>
+        </div>
+    </div>
+</div>
+<!--新建目录-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">新建目录</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="filename">目录名：</label>
+                        <input type="text" name="filename" id="dirfilename" value="" ng-model="dirfilename" style="width:160px;">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submitform" ng-click="createDir()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--移动文件-->
+<div class="modal fade" id="Modalmovefile" tabindex="-1" role="dialog" aria-labelledby="Modalmovefile">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="Modalmovefile">移动文件</h4>
+            </div>
+           <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="filename">移动到：</label>
+                       <!--  <select name="movedirfilename" ng-model="move_dir_id" ng-change="setMoveFileID(move_dir_id)">
+                            <option value="{{f.id}}" ng-repeat="f in move_dir_list" ng-selected ="{{move_dir_id}}">{{f.dirname}}</option>
+                        </select>-->
+						
+
+						<treecontrol class="tree-classic"
+						   tree-model="dataForTheTree"
+						   options="treeOptions"
+						   on-selection="showSelected(node)"
+						>
+						   {{node.name}} 
+						</treecontrol>
+
+						
+						
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submovefile" ng-click="subMoveFile()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--新建文件-->
+<div class="modal fade bs-example-modal-lg" id="Modalnewfile" tabindex="-1" role="dialog" aria-labelledby="Modalnewfile">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="Modalmovefile">新建文档</h4>
+            </div>
+            <div class="modal-body">
+                <script id="container" name="content" type="text/plain"></script>
+                <div style="padding-top: 10px;">
+                    文档名：<input type="text" name="new_file_name"  placeholder="文档名称" style="padding-left: 3px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="subnewfile" ng-click="subNewFile()">保存</button>
+                <button type="button" class="btn btn-default"  ng-click="closeNewFile()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--回收站文件-->
+<div class="modal fade bs-example-modal-lg" id="Modaldelfile" tabindex="-1" role="dialog" aria-labelledby="Modaldelfile">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">回收站文档</h4>
+            </div>
+            <div class="modal-body">
+                <div style="padding-bottom: 5px;">
+                    <a href="#" class="btn btn-primary btn-xs" role="button" ng-click="delFileDo('recovery')">恢复</a> <a class="btn btn-danger btn-xs" role="button" ng-click="delFileDo('del')">永久删除</a>
+                </div>
+
+                <table class="table table-hover">
+                    <tr>
+                        <th><input type="checkbox" name="all" ng-model="delallselect" class="allcheck" ng-click="allDelSelect(delallselect)"> 名称</th>
+                        <!--<th>路径</th>-->
+                        <th>大小</th>
+                        <th>删除时间</th>
+                    </tr>
+                    <!-- <tr>
+                         <td>
+                             <input type="checkbox"  />
+                             <!--<input type="checkbox" name="files[]" value="{{f.id}}" ng-click="setSwIds(f.id)" />&lt;!&ndash;ng-click="setSwIds(f.id)"&ndash;&gt;
+                            <img src="img/wenjian.png" ng-if="f.isFile" class="file_icon">
+                            <img src="img/wenjianjia.png" ng-if="!f.isFile" class="file_icon">
+                            <span class="file_name" ng-click="goFileList(f.id,f.isFile,f.path,f.pId,f.name)">fff</span>
+                        </td>
+                        <td>{{f.fileLength|filesize}}</td>
+                        <td>{{f.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    </tr>
+                    <tr>
+                        <td class="no-file">没有文件</td>
+                        <td></td>
+                        <td></td>
+                    </tr>-->
+                    <tr ng-repeat="f in delfiles">
+                        <td>
+                            <input type="checkbox" name="files[]" value="{{f.id}}" ng-checked="delallselect" ng-model="f.state" />
+                            <!--<input type="checkbox" name="files[]" value="{{f.id}}" ng-click="setSwIds(f.id)" />&lt;!&ndash;ng-click="setSwIds(f.id)"&ndash;&gt;-->
+                            <img src="img/wenjian.png" ng-if="f.isFile" class="file_icon">
+                            <img src="img/wenjianjia.png" ng-if="!f.isFile" class="file_icon">
+                            <span class="file_name" ng-click="goFileList(f.id,f.isFile,f.path,f.pId,f.name)">{{f.name}}</span>
+                        </td>
+                        <!--<td>{{f.path}}</td>-->
+                        <td>{{f.fileLength|filesize}}</td>
+                        <td>{{f.updateTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    </tr>
+                    <tr ng-if="delfiles==null">
+                        <td class="no-file">没有文件</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--重命名-->
+<div class="modal fade bs-example-modal-lg" id="Modalrenamefile" tabindex="-1" role="dialog" aria-labelledby="Modalrenamefile">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">文档重命名</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="re_oldfilenameid" name="re_oldfilenameid" value="">
+                <table class="table table-hover">
+                    <tr>
+                        <td>
+                           旧文档
+                        </td>
+                        <td><span class="re_oldfilename"></span></td>
+                    </tr>
+                    <tr>
+                        <td>新文件名</td>
+                        <td><input type="text" class="re_newfilename" name="re_newfilename"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <span class="btn btn-primary" ng-click="subReNameFile()">确定修改</span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分享文件-->
+<div class="modal fade bs-example-modal-lg" id="Modalsharfile" tabindex="-1" role="dialog" aria-labelledby="Modalsharfile">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">分享文档</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li><input type="checkbox" checked>公用</li>
+                    <li><input type="checkbox">自定义</li>
+                </ul>
+                <div class="sharfile_user">
+                    <h2>角色列表  <input type="text" placeholder="角色名"><button>搜索</button></h2>
+                    <ul class="sharfile_user_list">
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                    </ul>
+                </div>
+                <div class="sharfile_user">
+                    <h2>用户列表  <input type="text" placeholder="用户名"><button>搜索</button></h2>
+                    <ul class="sharfile_user_list">
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                        <li><input type="checkbox">&nbsp;陈小雷</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="upfile_progress" style="display:none;position: fixed;width: 100%;height: 100%;top:0;left: 0;background:rgba(236,233,233,.3);z-index: 100;">
+    <div class="upfile_progress">
+        <div class="load-bar">
+            <div class="load-bar-inner"></div>
+        </div>
+        <p>文件上传中,请等待...  <span id="counter">0%</span></p>
+    </div>
+</div>
+<div id="loading_dig">
+    <img src="../public/img/loading.gif" id="loading">
+</div>
+<script src="../public/part/angular/angular.min.js"></script>
+<script src="../public/part/bootstrap/js/bootstrap3.min.js"></script>
+<script src="../public/part/plupload/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="../public/part/editor/ueditor.config.js"></script>
+<script type="text/javascript" src="../public/part/editor/ueditor.all.js"></script>
+<script src="../js/getdata.js"></script>
+<script src="../public/config.js"></script>
+<script src="./js/app.js"></script>
+<script src="./js/angular-tree-control.js"></script>  
+<script src="js/zySearch.js"></script>
+<script type="text/javascript">
+
+	
+    $(function(){
+
+        /*var interval = setInterval(increment,100);
+        var current = 0;
+
+        function increment(){
+            current++;
+            $('#counter').html(current+'%');
+            if(current == 100) { current = 0; }
+        }
+
+        $('.load-bar').mouseover(function(){
+            clearInterval(interval);
+        }).mouseout(function(){
+            interval = setInterval(increment,100);
+        });*/
+		
+		//var sort = false;
+		$('.arrowContainer').on('click',function(e){
+			/*if( sort ) {
+				$('.arrowContainer th').each(function(index,value){
+					value.className = 'arrowUp';
+				})
+			}*/
+			if ( e.target.id !== 'option' ){ 
+				if ( e.target.className === 'arrowUp' ) e.target.className = 'arrowDown';
+				else e.target.className = 'arrowUp';
+			}
+			
+			
+		
+			//sort = true;
+			
+		})
+    });
+</script>
+</body>
+</html>

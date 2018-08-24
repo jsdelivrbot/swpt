@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./css/base.css" />
+    <script src="./js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        ( function ( doc, win ) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if ( !clientWidth ) return;
+                    docEl.style.fontSize = 50 * ( clientWidth / 375 ) + 'px';
+                };
+            if ( !doc.addEventListener ) return;
+            win.addEventListener( resizeEvt, function () {
+                clearTimeout( tid );
+                tid = setTimeout( recalc, 300 );
+            }, false );
+            win.addEventListener( 'pageshow', function ( e ) {
+                if ( e.persisted ) {
+                    clearTimeout( tid );
+                    tid = setTimeout( recalc, 300 );
+                }
+            }, false );
+            doc.addEventListener( 'DOMContentLoaded', function () {
+                tid = setTimeout( recalc, 0 );
+            }, false );
+            recalc();
+        } )( document, window );
+
+    </script>
+</head>
+
+<body>
+</body>
+<script src="./js/base.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    localStorage.setItem( 'user', '{"id":499,"username":"17512345678","companyExit":false,"jsessionid":"C088E318CC871ABD419ADDA1D02C7B9F","user":{"id":null,"version":0,"createTime":1524794630083,"uId":499,"username":"17512345678","chinese_name":null,"password":"JfnnlDI7RTiF9RgfG2JNCw==","reg_data":"2018-03-19","reg_ip":null,"lastloginip":null,"lastlogintime":0,"level":0,"email":null,"face":null,"is_online":0,"mobile":null,"sex":0,"address":null,"family_phone":null,"registerCompanyName":null,"approvalStatus":null,"companyId":null,"picblog":null,"isadmin":"1"}}' );
+    $( 'body' ).load( './main-school.html' );
+    sessionStorage.setItem( 'data', '{"jump":[], "currentPage":"./main-school.html", "userId":"' + JSON.parse( localStorage.getItem( 'user' ) ).id + '", "type":"0"}' ); //预设sessionStorage
+    var $x = {},
+        imgSrc = 'http://192.168.0.192:8888',
+        ajaxUrl = 'http://' + localHost + ':21008';
+
+</script>
+
+</html>

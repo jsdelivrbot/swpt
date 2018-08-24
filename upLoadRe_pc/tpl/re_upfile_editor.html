@@ -1,0 +1,191 @@
+<link rel="stylesheet" href="../upLoadRe_pc/css/re_public.css">
+<link rel="stylesheet" href="../upLoadRe_pc/css/re_upfile_des.css">
+<link rel="stylesheet" href="/upLoadRe_pc/css/re_index.css">
+<link href="../upLoadRe_pc/js/context/context.standalone.css" rel="stylesheet" >
+<style>
+    .modal-footer{
+        text-align: center;
+    }
+</style>
+<!-- <div class="re_upfile_top">
+    <span class="top-return" onclick="javascript:history.go(-1);"></span>
+    编辑上传
+</div> -->
+<form  enctype="multipart/form-data" method="post" id="uploadForm" name="upfiledes">
+    <!-- 上传信息 -->
+<div class="re-material lrp10 mt10">
+        <div class="re-material_l"><span><i></i>上传信息：{{cmp.source_type_name}}{{source_type_name}} {{cmp.rec_object_name}}{{rec_object_name}} {{cmp.book_type_name}}{{book_type_name}} {{cmp.free_type_name}}{{free_type_name}}</span></div>
+        <div class="re-material_r"><h5 ng-click="sw_teaching()">切换上传信息</h5></div>
+</div>
+<!-- 编辑内容 -->
+<div class="re_upfile_from" style="margin-bottom: 0px;">
+    <h4 class="re_upfile_title">名称<span class="error_msg" ng-show="upfiledes.bookName.$error.required">(标题不能为空)</span><span class="error_msg" ng-show="upfiledes.bookName.$error.maxlength">(名称太长了,字数最多22个)</span></h4>
+    <div class="re_uf_style">
+        <input type="text" ng-model="file_name"  name="bookName" value="" ng-maxlength="22" required placeholder="请输入名称，字数最多22个">
+    </div>
+    <h4 class="re_upfile_title">作者</h4>
+    <div class="re_uf_style">
+        <input type="text" ng-model="file_author" name="bookAuthor" value=""  placeholder="请输作者">
+    </div>
+    <h4 class="re_upfile_title">出版社</h4>
+    <div class="re_uf_style">
+        <input type="text" ng-model="file_press" name="bookPress" value=""  required placeholder="请输入出版社">
+    </div>
+    <h4 class="re_upfile_title">IBSN</h4>
+    <div class="re_uf_style">
+        <input type="text" ng-model="file_ibsn" name="bookIBSN" value=""  required placeholder="请输入IBSN">
+    </div>
+    <h4 class="re_upfile_title">推荐理由</h4>
+    <div class="re_uf_style">
+        <input type="text" ng-model="file_introduce" name="recommendedReasons" value=""  required placeholder="请输入推荐理由">
+    </div>
+    <h4 class="re_upfile_title">简介内容<span class="error_msg" ng-show="upfiledes.briefIntroduction.$error.maxlength">(简介内容太长了,字数最多150个)</span></h4>
+    <div class="re_uf_style">
+        <textarea rows="4" ng-model="file_explain" name="briefIntroduction" ng-maxlength="150" placeholder="请输入内容说明，字数最多150个"></textarea>
+    </div>
+</div>
+
+
+    <div class="re_upfile_from mb0">  
+            <h4 class="re_upfile_title">上传{{des.picture.title}}封面</h4>
+            <div class="re_upfile_block" ng-click="uploadcover()">
+                <p>上传{{des.picture.title}}</p>
+                <div class="uploadcovercontent">
+                    <div class="file_icon">
+                        <img src="/upLoadRe_pc/img/re_upfile_des/upfile_icon/icon_tupian.png">
+                    </div>
+                    <div class="file_name">
+                        上传{{des.picture.title}}20%
+                    </div>
+                    <!--<progress id="upfile_progress_bar" value="0"></progress>-->
+                    <div class="upfile_progress_bar">
+                        <div class="upfile_progress"></div>
+                    </div>
+                    <div class="upfile_type">
+                        word/0M
+                    </div>
+                </div>
+            </div>
+            <div class="re_uf_bldes">
+               <div style="display:none">     <span class="uf" >名称</span><input type="text" ng-model="fileCoverName" class="ufName uploadcoverName" value="{{fileCoverName}}">{{fileName}}</br></div>
+                限制大小为：{{des.picture.upfile_video_size}}MB &nbsp;<span ng-if="curtype==14">数量限制：20张</span><br />（格式:{{des.picture.upfile_video_ext|myjoin:","}} ）
+                <input type="file" accept="image/png,image/gif,image/jpeg" name="coverImg" id="uploadcover" onchange="angular.element(this).scope().fileSelected('uploadcover')">
+            </div>
+        </div>
+<!-- 评论 -->
+    <div class="resources_type">
+        <span class="res">是否允许评论</span>
+        <label for="Tcomment"><input type="radio" ng-value="0" ng-model="Rcomment" name="bookComment" id="Tcomment">是</label>
+        <label for="Ncomment"><input type="radio" ng-value="1" ng-model="Rcomment" name="bookComment" id="Ncomment"  ng-checked="true" >否</label> 
+  
+    </div>
+    <!-- 分享 -->
+    <div class="resources_type">
+      
+        <span class="res">是否允许分享</span>
+         <label for="Tfree"><input type="radio" ng-value="0" ng-model="Rshare"  name="bookShare" id="Tfree" ng-checked="true" >是</label> 
+         <label for="Nfree"><input type="radio" ng-value="1" ng-model="Rshare"   name="bookShare" id="Nfree">否</label> 
+     
+     </div>
+
+    <!-- 章节收费 -->
+    <div class="resources_type chapter_t">
+        本章节<span class="res">
+            <input  type="text"  name="chargePrice" ng-model="cur_var.file_price" ng-keyup="clearNoNum(cur_var,'chapter')" placeholder="请输入价格" class="chapter_input"></span> 元/节
+    </div>
+    <!-- 按套收费 -->
+    <div class="resources_type chapter_free">
+            整套<span class="res">
+                <input  type="text"  name="benchargePrice" ng-model="cur_var.file_price" ng-keyup="clearNoNum(cur_var,'chapter')" placeholder="请输入价格" class="chapter_input"></span> 元/节
+        </div>
+    <!-- <div class="resources_type chapter_free">
+        <span class="res">本章节是否免费</span> 
+        <label for="Tshare"><input type="radio" name="share" id="Tshare" >是</label>  
+        <label for="Nshare"><input type="radio" name="share" id="Nshare" checked>否</label> 
+    </div> -->
+   <div class="modal-footer resources_type">
+        <button type="button" class="btn btn-default " >
+                取消
+        </button>	
+        <button type="button" class="btn btn-primary"ng-click="nextFile()">
+            确定
+        </button>
+   </div>
+    <!-- 切换上传对象 -->
+<div id="p_sw_material" ng-cloak class="p_dig" >
+        <div class="p_dig_content" style="padding-bottom: 50px;">
+            <div class="p_sw_material_content">
+                <div>
+                    <div class="p_sw_material_block" class="one">
+                        <h2>上传类型</h2>
+                            <ul>
+                                <li><div ng-repeat="c in sourceType" class="{{gcss[$index%3]}}"><span ng-click="setSourceType(c.id,c.uploadTypeName)" ng-class="(c.id==(cmp.source_type_id || source_type_id))?'pc_list_act':''">{{c.uploadTypeName}}</span></div></li>
+                            </ul>
+                    </div>
+                    <div class="p_sw_material_block" >
+                        <h2>推荐对象</h2>
+                        <ul>
+                            <li><div ng-repeat="s in recObject" class="{{gcss[$index%3]}}"><span ng-click="setRecObject(s.id,s.recommendedObjectName)" ng-class="(s.id==(cmp.rec_object_id || rec_object_id ))?'pc_list_act':''">{{s.recommendedObjectName}}</span></div></li>
+                        </ul>
+                    </div>
+                    <div class="p_sw_material_block">
+                        <h2>书籍类型</h2>
+                        <ul>
+                            <li><div ng-repeat="v in bookType" class="{{gcss[$index%3]}}"><span ng-click="setBookType(v.id,v.bookTypeName)" ng-class="(v.id==(cmp.book_type_id ||book_type_id ))?'pc_list_act':''">{{v.bookTypeName}}</span></div></li>
+                        </ul>
+                    </div>
+                    <div class="p_sw_material_block" >
+                        <h2>发布模式</h2>
+                        <ul>
+                            <li><div ng-repeat="s in sourceFree" class="{{gcss[$index%3]}}"><span ng-click="setFree(s.id,s.chargeType)" ng-class="(s.id==(cmp.free_type_id || free_type_id))?'pc_list_act':''">{{s.chargeType}}</span></div></li>
+                        </ul>
+                    </div>
+                </div>            
+            </div>
+            <div class="clear p_sw_bttool">
+                <div class="p_cancelBtn" ng-click="uploadCancel()">取消</div>
+                <div class="p_confirmBtn" ng-click="uploadlSubmit()">确定</div>
+            </div>        
+        </div>
+    </div>
+    <div class="sweet-overlay" tabindex="-1" style="opacity: -0.04; display: none;"></div>
+    <div class="sweet-alert hideSweetAlert" data-custom-class="" data-has-cancel-button="false" data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false" data-animation="pop" data-timer="null" style="display: none; margin-top: -177px; opacity: -0.04;">
+        <div class="sa-icon sa-error" style="display: none;">
+          <span class="sa-x-mark">
+            <span class="sa-line sa-left"></span>
+            <span class="sa-line sa-right"></span>
+          </span>
+        </div>
+        <div class="sa-icon sa-warning" style="display: none;">
+          <span class="sa-body"></span>
+          <span class="sa-dot"></span>
+        </div>
+        <div class="sa-icon sa-info" style="display: none;"></div>
+        <div class="sa-icon sa-success" style="display: block;">
+          <span class="sa-line sa-tip"></span>
+          <span class="sa-line sa-long"></span>
+    
+          <div class="sa-placeholder"></div>
+          <div class="sa-fix"></div>
+        </div>
+        <div class="sa-icon sa-custom" style="display: none;"></div>
+        <h2>Good!</h2>
+        <p style="display: block;">弹出了一个操作成功的提示框</p>
+        <fieldset>
+          <input type="text" tabindex="3" placeholder="">
+          <div class="sa-input-error"></div>
+        </fieldset>
+        <div class="sa-error-container">
+          <div class="icon">!</div>
+          <p>Not valid!</p>
+        </div>
+        <div class="sa-button-container">
+          <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">取消</button>
+          <button class="confirm" ng-click="succssConfirm()" tabindex="1" style="display: inline-block; background-color: rgb(174, 222, 244); box-shadow: rgba(174, 222, 244, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">确定</button>
+        </div>
+      
+      
+</form>
+<script src="/upLoadRe_pc/js/re_upfile_des.js"></script>
+<script src="/upLoadRe_pc/js/layer/layer.js"></script>
+<script src="/upLoadRe_pc/js/context/context.js"></script>

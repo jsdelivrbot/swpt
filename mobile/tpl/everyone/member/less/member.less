@@ -1,0 +1,89 @@
+.header{
+  height: 1.17333333rem;
+  width: 100%;
+  align-items: center;
+  line-height: 1.17333333rem;
+  position: relative;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  background-color: #f23a3a;
+  .search_group{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 16px;
+    .search_btn{
+      position: absolute;
+      padding-left: 0.1666666rem;
+      z-index: 999;
+      font-size: 20px;
+      top:2px;
+      color:#999999;
+    }
+    .search_text{
+      width: 70%;
+      text-indent: .6rem;
+      padding:0.11rem 0.12rem;
+      color:#868686;
+      border-radius: 0.106666rem;
+    }
+    .search_cancel{
+      width: 20%;
+      padding: .11rem .12rem;
+      font-size: 18px;
+    }
+  }
+}
+.bodies{
+  font-size: 16px;
+  .b_nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: "方正兰亭";
+    .nav_active{
+      color:#f23a3a;
+    }
+    li{
+      height: 1.0666666rem;
+      font-weight: 500;
+      line-height: 1.0666666rem;
+      display: flex;
+    }
+  }
+  .b_list{
+    padding:0 0.5rem;
+    .everybody{
+      a{
+        display: flex;
+      }
+      .portrait{
+        background-color: #66afe9;
+        width: 1.28rem;
+        height: 1.28rem;
+        img{
+          display: block;
+        }
+      }
+      .content{
+        width: 80%;
+        padding-left: 0.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .describe{
+          display: flex;
+          justify-content: space-around;
+          .state{
+            width: 40%;
+          }
+          .data {
+            width: 60%;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

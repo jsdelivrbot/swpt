@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>模板页</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet" href="../../pluy-in/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/template.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="../../pluy-in/config.js"></script>
+    <script src="./js/editor.js"></script>
+    <script src="../../pluy-in/base.js"></script>
+    <script src="./js/template.js"></script>
+</head>
+<body>
+<div id="template">
+    <div id="template_box">
+        <div class="chart">
+            <div class="header">
+                <a class="iconfont icon-zuo quit"></a>
+                <span class="header_template">申请表单</span>
+            </div>
+            <div class="bodies">
+                <form>
+                    <div class="bodyContent">
+
+                    </div>
+                </form>
+                <div class="flowPath">
+                <div class="title">
+                    <span class="red">*</span>流程图选择
+                </div>
+                <div class="main">
+                    <div class="flowPath_active">
+                        <div class="photo_box">
+
+
+
+                        </div>
+                        <div class="flowPath_box">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="userPath">
+                    <div class="title">
+                        <span class="red">*</span>审批人选择
+                    </div>
+                    <div class="main">
+                        <div class="userPath_active">
+                            <div class="photo_box">
+                                <div class="photo">
+
+                                </div>
+                            </div>
+                            <div class="userPath_box f15">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="next_btn btn_active" id="tplsend">下一步</a>
+            </div>
+            <div class="news">
+            <div class="news_box">
+                <span class="f16 a">请选择流程</span>
+                <span class="f16 d">请选择审批人</span>
+                <span class="f16 b">表单内容不能为空</span>
+                <span class="f16 c">发送成功</span>
+            </div>
+        </div>
+        </div>
+        <div class="modual">
+            <div class="flow">
+                <div class="flow_box">
+                    <div class="header">
+                        <a class="iconfont icon-zuo quit"></a>
+                        流程列表
+                    </div>
+                    <div class="bodies">
+                        <div class="modal_main">
+
+                        </div>
+                        <div class="loading">
+                            <img src="../../pluy-in/img/loading.gif" alt="">
+                        </div>
+                        <div class="hint">
+                            <p>已加载至最底层</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user">
+                <div class="user_box">
+                    <div class="org">
+                        <div class="header">
+                            <a class="iconfont icon-zuo quit"></a>
+                            审批人选择
+                        </div>
+                        <div class="admin" style="margin: 0.11333333rem 0.1933333rem">
+
+                        </div>
+                        <div class="bodies">
+
+
+                        </div>
+                    </div>
+                    <div class="job">
+                        <div class="header">
+                            <a class="iconfont icon-zuo quit"></a>
+                            审批人选择-职位
+                        </div>
+                        <div class="bodies">
+
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="header">
+                            <a class="iconfont icon-zuo quit"></a>
+                            审批人选择-用户
+                        </div>
+                        <div class="bodies">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="modal">
+        <div id="modal_box">
+            <img src="" alt="" class="modal_img">
+        </div>
+    </div>
+</div>
+</body>
+</html>

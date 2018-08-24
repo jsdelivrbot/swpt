@@ -1,0 +1,117 @@
+.header{
+  .quit{
+    position: absolute;
+    left:5%;
+    width: 10%;
+    color:#fff;
+  }
+}
+.bodies{
+  color:#333;
+  font-size: 16px;
+  .navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+  }
+  .condition{
+    display: flex;;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0.4rem;
+    font-size: 18px;
+    color:#666;
+    i{
+      font-size: 24px;
+      vertical-align: middle;
+      padding-right: 5px;
+    }
+  }
+  .moudle{
+    margin-top: 0.8rem;
+    .group,.title{
+      display: flex;
+      text-align: center;
+    }
+    .group{
+      font-size: 12px;
+      line-height:0.8rem;
+    }
+    .name,.groupname{
+      width: 13.5%;
+    }
+    .phone,.groupphone{
+      width: 25.5%;
+    }
+    .time,.grouptime{
+      width: 22.5%
+    }
+    .address,.groupaddress{
+      width: 22.5%;
+    }
+    .operation,.groupoperation{
+      width: 22.5%;
+    }
+    .groupoperation{
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}
+.conditionModal{
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  top: 1.17333333rem;
+  box-sizing: border-box;
+  padding: 0.11333333rem 0.1933333rem .5rem;
+  background-color: rgba(33,33,33,.5);
+  z-index: -1;
+  transition: all .1s;
+  opacity: 0;
+  .box{
+    box-sizing: border-box;
+    transform: translateY(200%);
+    padding: 0.11333333rem 0.1933333rem .5rem;
+    border-radius:0.16rem;
+    transition: all .3s;
+    background: #fff;
+    .CM_head{
+      text-align: center;
+    }
+    .CM_state,.CM_type{
+      margin-top: .4rem;
+    }
+    .CM_title{
+      font-weight: 600;
+      font-size: 17px;
+    }
+    .CM_body{
+      display: flex;
+      flex-wrap: wrap;
+      div{
+        text-align: center;
+        line-height: 0.93333333rem;
+        width: 25%;
+        font-size: 16px;
+        color:#444;
+      }
+    }
+    .CM_button{
+      text-align: center;
+      font-size: 19px;
+      color:#eeeeee;
+      margin:1rem auto;
+      width: 8.37333333rem;
+      height: 1.066666666rem;
+      line-height: 1.066666666rem;
+      background-color:#f23a3a;
+    }
+  }
+  i{
+    font-size: 24px;
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+}

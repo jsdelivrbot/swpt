@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<div>
+    <a href="javascript:;" class="lastpage">上一页</a>
+    <ul>
+        <li ng-repeat=""></li>
+    </ul>
+    <a href="javascript:;" class="afterpage">下一页</a>
+</div>
+<style>
+
+</style>

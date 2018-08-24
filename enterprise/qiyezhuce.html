@@ -1,0 +1,548 @@
+<link rel="stylesheet" href="./css/qiyezhuce.css">
+<link rel="stylesheet" href="../public/part/bootstrap/css/bootstrap.min.css">
+<script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script src="../public/part/bootstrap/js/bootstrap.min.js"></script>
+
+<style>
+   a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+.show{
+    display: block;
+}
+.hien{
+    display: none;
+}
+/* 注册页面 */
+#main_wraper{
+    display: none;
+}
+    /* 用户名提示 */
+    .errortip {
+        color: #f44;
+        font-size: 12px;
+    }	
+    /* 密码提示 */
+    .password_show{
+        color: #f44;
+        font-size: 12px;
+    }
+    /* 手机提示 */
+    .phone_msg{
+        color: #f44;
+        font-size: 12px;
+    }
+    /* 验证码提示 */
+    .Verification_msg{
+        color: #f44;
+        font-size: 12px;
+        margin-top: -17px;
+    }
+    .password_test{
+        color: #f44;
+        font-size: 12px;
+    }
+    /* 点击获取验证码 */
+    /* 验证码 */
+    .yzm{
+        line-height: 46px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .yzm:hover{
+        color:#29e
+    }
+    /* 企业简称 */
+    .enterprise_msg{
+        color: #f44;
+        font-size: 12px;
+    }
+</style>
+<!-- 验证页面 -->
+<div class="wraper" id="wraper">
+        <div id="commonForm">
+            <div class="logo">
+               <span></span>
+                <span class="text">注册省科学院账号</span>
+                <div class="regtypetip ">自由工作，高效管理</div>
+            </div>
+            <div class="tabtoggle">
+                <a href="javascript:;" class="current">
+                    <span class="regnew ">注册</span>
+                </a>
+                <a href="javascript:;">
+                    <span class="enterhas">加入已有企业
+                      <small>(邀请码注册)</small>
+                    </span>
+                </a>
+            </div>
+            <!--内容区-->
+            <div class="register_wrap">
+               <div class="show">
+                   <!-- 企业名称 -->
+                   <div class="auth-code" ng-auth-code="register">
+                        <div class="verify-code from-item">
+                            <div class="img-code-wrap clearfix smswrap" >
+                                <div class="img-code authcode inputwrap img-code-row">
+                                    <div class="code-input-wrap">
+                                        <input class="qiyname" style="background:#fff;" id="code" ng-limit-code="4" ng-keydown="verifyCodeKeyDown($event)" ng-focus="vaCodeFocus($event)"  type="text" placeholder="请输入团队名称/单位" name="password" tabindex="2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--企业/单位简称 -->
+                    <div class="auth-code" ng-auth-code="register">
+                        <div class="verify-code from-item">
+                            <div class="img-code-wrap clearfix smswrap" >
+                                <div class="img-code authcode inputwrap img-code-row">
+                                    <div class="code-input-wrap">
+                                        <input class="enterprise" style="background:#fff;" id="code" ng-limit-code="4" ng-keydown="verifyCodeKeyDown($event)" ng-focus="vaCodeFocus($event)"  type="text" placeholder="请输入企业简称/单位简称" name="password" tabindex="2">
+                                    </div>
+                                </div>
+                                <div class="enterprise_msg" style="display:none">企业名字必须是字母和数字</div>
+                            </div>
+                        </div>
+                    </div>
+                   <!--手机号码-->
+                   <div class="ng-scope">
+                       <!--手机号码输入-->
+                       <div class="inputwrap clearfix email_input_wrap">
+                           <!--区号和提示-->
+                           <div class="mobiarea">
+                               <label id="regway-list-label" class="inline_block username_type_switch">
+                                   <span class="area-code-wrap ng-binding">+86</span>
+                                   <i class="icon-arrowdown ng-hide"></i>
+                               </label>
+                               <ul class="regway-list mobile-phone-area-code" id="regway-list"></ul>
+                           </div>
+                           <!--号码输入框-->
+                           <div class="regmobi">
+                               <input  type="number" id="phone"    placeholder="请输入手机号"  class="padr1" name="username" >
+                           </div>
+                           <div class="phone_msg" style="display:none">请输入正确的手机号(11位)</div>
+                       </div>
+                   </div>
+                   <!--行业信息-->
+                   <div class="ng-scope">
+                       <!--手机号码输入-->
+                       <div class="inputwrap clearfix email_input_wrap">
+                           <select name="industry" style="width: 100%;height: 100%;border: none;">
+                               <option value="0">行业选择</option>
+                               <option value="1">教育/培训</option>
+                               <option value="2">计算机/互联网/通信/电子</option>
+                               <option value="3">会计/金融/银行/保险</option>
+                               <option value="4">贸易/消费/制造/营运</option>
+                               <option value="5">制药/医疗</option>
+                               <option value="6">贸易/消费/制造/营运</option>
+                           </select>
+                       </div>
+                   </div>
+                   <!--验证码-->
+                   <div class="auth-code" ng-auth-code="register">
+                       <div class="verify-code from-item">
+                           <div class="img-code-wrap clearfix smswrap" >
+                               <div class="img-code authcode inputwrap img-code-row">
+                                   <!-- <img class="code-img" ng-click="change_code()" id="codeImg" src="./images/code_image.png"> -->
+                                    <span class="code-img yzm">点击获取验证码</span> 
+                                        <div class="code-input-wrap">
+                                            <input class="code-input" style="background:#fff;" id="code" ng-limit-code="4" ng-keydown="verifyCodeKeyDown($event)" ng-focus="vaCodeFocus($event)" ng-blur="vaCodeBlur($event)" type="text" placeholder="请输入验证码内容" history_value="" name="password" tabindex="2">
+                                        </div>
+                               </div>
+                             
+                           </div>
+                           <div class="Verification_msg bdyz" style="display:none">验证码错误</div>
+                           <!-- 图片验证码初始化状态 -->
+                           <div class="errortip ng-binding ng-hide" ng-class="{error:codeError}" ng-show="codeError" ng-init="codeError=0" ng-bind-html="codeErrorTip|rawHtml"></div>
+                          
+                       </div>
+    
+                   </div>
+                   <!--下一步-->
+                   <div class="submitwrap next">
+                       <a href="javascript:;" class="btn-submit">注册</a>
+                   </div>
+                   <!--了解-->
+                   <div class="backreg">
+                       <!-- ngIf: !isInternational --><a  href="../school" class="ng-binding ng-scope"><!--了解胜网--></a><!-- end ngIf: !isInternational -->
+                       <!-- ngIf: bodyRegisterType==='email' -->
+                       <!-- ngIf: isInternational && bodyRegisterType==='phone' -->
+                   </div>
+               </div>
+                <div class="hien">
+                    <div class="inputwrap clearfix ng-scope" ng-init="iCodeError=0;" ng-class="{errorfocus:iCodeError}">
+                        <select name="industry" style="width: 100%;height: 100%;border: none;">
+                            <option value="0">行业选择</option>
+                            <option value="1">教育/培训</option>
+                            <option value="2">计算机/互联网/通信/电子</option>
+                            <option value="3">会计/金融/银行/保险</option>
+                            <option value="4">贸易/消费/制造/营运</option>
+                            <option value="5">制药/医疗</option>
+                            <option value="6">贸易/消费/制造/营运</option>
+                        </select>
+                    </div>
+                    <div class="inputwrap clearfix ng-scope" ng-init="iCodeError=0;" ng-class="{errorfocus:iCodeError}">
+                        <input type="text" id="iCode" placeholder="邀请码" value="8888" class="cutpad" ng-focus="vCodeFocus($event)" ng-blur="vCodeBlur($event)" name="password" tabindex="1">
+                    </div>
+                    <div class="inputwrap clearfix ng-scope" ng-init="companyCodeError=0;" ng-class="{errorfocus:companyCodeError}">
+                        <input type="text" id="companyCode" placeholder="企业号" class="cutpad" ng-focus="companyCodeFocus($event)" ng-blur="companyCodeBlur($event)" name="password" tabindex="2">
+                    </div>
+                    <div class="inputwrap clearfix ng-scope" style="border: none;margin-bottom: 5px;height: 30px;">
+                       <input type="checkbox" value="1">教师 <input type="checkbox" value="2">学生 <input type="checkbox" value="3">家长
+                    </div>
+                    <div class="submitwrap addcompany ng-scope">
+                        <a href="javascript:void(0);" class="btn-submit ng-binding" submit-click="joinRegister()">下一步</a>
+                    </div>
+                    <div class="backreg ng-scope">
+                        <a data-toggle="modal"  data-target="#myModal" class="ng-binding">没有邀请码？</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- ................................................. -->
+
+<!-- 注册页面 -->
+        <div class="wraper" id="main_wraper">
+            <!-- 头部 -->
+            <div class="register-company-account-wrap">
+                <div class="header">
+                    <h1>
+                        注册胜网帐号
+                    </h1>
+                <h2 class="">
+                        完善信息，注册企业
+                    </h2>
+                </div>
+                <!-- 姓名 -->
+                <div class="register_wrap">
+                    <div class="inputwrap input-person-name">
+                        <input id="personName" type="text" placeholder="姓名" class="cutpad" name="password" tabindex="1">
+                    
+                    </div>
+                    <div class="errortip nametip" style="display:none">名字长度过长</div>
+                <div>
+            </div>
+                    <!-- 密码 -->
+            <div class="inputwrap input-password" >
+                <label class="lable-login"><i class="icon-lock"></i></label>
+                <input id="password" type="password" placeholder="密码" validate="" name="password" class="cutpad"tabindex="2">
+                <a href="javascript:void(0);" class="input-clear inputclear reset_pass"><i class="icon-clear"></i></a>
+            </div>
+            <!-- 确认密码-->
+            <div class="inputwrap input-password" >
+                    <label class="lable-login"><i class="icon-lock"></i></label>
+                    <input id="password2" type="password" placeholder="确认密码" validate="" name="password" class="cutpad"tabindex="2">
+                    <a href="javascript:void(0);" class="input-clear inputclear reset_pass"><i class="icon-clear"></i></a>
+            </div>
+            <div class="errortip passwordtip" style="display:none">两次密码不一致</div>
+            <!-- 协议和注册按钮 -->
+            </div>
+                    <div class="tiptext disagree">
+                        <label for="ieagreelable" class="ng-binding"><i style="display:none;"  class="icon-checked"></i><input id="ieagreelable" type="checkbox" checked="" class="position_hidden">点击“注册”即同意并接受</label>
+                        <!-- ng-model="isAgree" -->
+                        <!-- ngIf: !isInternational -->
+                        <a class="font_blue ng-binding ng-scope" data-toggle="modal"  data-target="#myModal">《服务协议》</a>
+                    
+                    </div>
+                <div class="submitwrap2">
+                    <a href="javascript:void(0);" class="btn-submit ng-binding" submit-click="form_submit()">注册</a>
+                </div>
+                <div class="backreg">
+                    <!--<a ng-click="knowJingoal($event)" href="{{websiteURL}}" target="_blank">{{ 'understandJG' | translate }}</a>-->
+                </div>
+                <!-- <div class="errortip ">企业成员数超过上限，无法创建新帐号。您可以联系管理员停掉其他无用帐号后再尝试创建。</div> -->
+            </div>
+        </div>
+ 
+<!-- 模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+    aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" 
+                    data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    如何获取邀请码?
+                    </h4>
+                </div>
+                <div class="modal-body">
+                        没有邀请码：
+                        员工可以凭管理员发送的邀请码和企业号，在邀请注册页面创建个人帐号并加入企业;
+                        如果您没有收到邀请码，您可以联系这我们的管理员为您创建帐号;
+                        如果您已拥有账号，管理员邀请您加入后，您在我的页面或个人设置页面的邀请信息列表即可看到该家公司，同意加入即可。 
+                </div>
+                <div class="modal-footer">
+                    <input type="checkbox" style="width:45px;height:20px;line-height:20px">
+                        <button type="button" class="btn btn-primary">
+                    同意
+                    </button>
+                </div>
+
+            </div>
+        </div>	<!-- /.modal-content -->
+</div>
+
+<script>
+
+var zhuce = $(".tabtoggle").children()[0]   //注册
+var qiye = $(".tabtoggle").children()[1]       //企业
+
+var zhuces = $(".register_wrap").children()[0]
+var qiyes = $(".register_wrap").children()[1]
+
+var register_wrap = $(".register_wrap").children()
+
+zhuce.onclick = function(){
+    $(this).addClass("current").siblings().removeClass("current")
+    if(zhuces.classList.contains('hien')){
+        $(zhuces).removeClass("show hien")
+    }
+    //点击注册,注册添加show,企业添加hien,删除show
+    $(zhuces).addClass("show")
+    $(qiyes).addClass("hien")
+    $(qiyes).removeClass("show")
+}
+
+qiye.onclick=function(){
+    $(this).addClass("current").siblings().removeClass("current")
+    if(qiyes.classList.contains('hien')){
+        $(qiyes).removeClass("show hien")
+    }
+    $(qiyes).addClass("show")
+    $(zhuces).addClass("hien")
+    $(zhuces).removeClass("show")
+}
+
+
+
+    //验证标记
+    var phoneflag; //手机
+    var yzm; //验证码
+    var dxyzm; //短信验证码
+    var qiyeflag;//企业
+    var enterpriseflag;
+//企业名称/单位
+
+$(".qiyname").on("input",function(){
+    if($(this).val()==""){
+        qiyeflag=false;
+    }else{
+        qiyeflag=true;
+    }
+})
+//企业简称/单位简称
+var userName = /^[a-zA-Z0-9_-]{3,16}$/;
+$(".enterprise").on("input",function(){
+        if(userName.test($(this).val())){
+            enterpriseflag = true;
+            $(".enterprise_msg").fadeOut()
+        }else{
+            $(".enterprise_msg").fadeIn()
+            enterpriseflag=false;
+        }
+})
+
+//手机号验证
+var phone = /^1(3|4|5|7|8)\d{9}$/i;
+$("#phone").on("input",function(){
+    if(phone.test($(this).val())){	
+                $(".phone_msg").fadeOut()
+                phoneflag = true;
+            }else{
+                $(".phone_msg").fadeIn()
+                phoneflag = false;
+                $(".zhuce").attr("disabled",true)
+                $(".check").attr("checked",false)
+            }
+})
+// 点击下一步,显示注册页面
+
+//点击获取验证码
+//随机生成四个字符串
+var code;
+function createCode(){  
+ code = "";   
+ var codeLength = 4;//验证码的长度  
+ var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',  
+ 'S','T','U','V','W','X','Y','Z');//随机数  
+ for(var i = 0; i < codeLength; i++) {//循环操作  
+    var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35）  
+    code += random[index];//根据索引取得随机数加到code上  
+}  
+} 
+$(".yzm").on("click",function(){
+    createCode();
+    $(this).html(code)
+    $(this).css("font-size",25+"px")
+}) 
+$(".code-input").on("input",function(){ 
+if($(this).val().toUpperCase()==code){
+    yzm=true;
+  $(".bdyz").fadeOut()
+}else{
+    yzm=false;
+    $(".bdyz").fadeIn()
+}
+})
+
+//短信验证码
+var dataNum;
+var timestop
+$(".getauth").on("click",function(){
+clearInterval(timestop)
+var count = 60
+    $.ajax({
+        url:"../../data_json/yanzhengma.json",
+        type:"GET",
+        success:function(data){
+            dataNum=data.data
+            timestop = setInterval(function(){   
+                    count--;
+                    $(".getauth").attr("disabled",true)
+                    $(".getauth").html(count+"秒后再发送")
+                    //btn btn-danger no-border
+                    if(count<=0){
+                        $(".getauth").html("获取短信验证码")
+                        $(".getauth").attr("disabled",false)
+                        clearInterval(timestop)
+                    }
+                },1000)
+        }
+    })
+})
+//输入短信验证码
+$("#authCode").on("input",function(){
+if($(this).val()==dataNum){
+    dxyzm=true;
+    $(".dxyz").fadeOut()
+}else{
+    $(".dxyz").fadeIn()
+    dxyzm=false;
+}
+})
+//点击下一步验证
+$(".next").on("click",function(){
+    //  $("#wraper").fadeOut()
+    //     $("#main_wraper").fadeIn()
+    var user = JSON.parse(localStorage.getItem("user"))
+    if(qiyeflag==false){
+        alert("企业名称/单位不能空")
+    }
+    if(phoneflag==true&&yzm==true&&qiyeflag==true){
+        // $("#wraper").fadeOut()
+        // $("#main_wraper").fadeIn()
+        $.ajax({
+            type:"POST",
+            url:company_root_url + "/companyRegiserService/companyRegister",
+            contentType:"application/json",
+            data:JSON.stringify({
+                "companyName":$(".qiyname").val(),
+                "phoneNumber":$("#phone").val(),
+                "companyCode":$(".enterprise").val(),
+                "identifyingCode":$(".getauth").val(),
+                "applicant":user.username
+            }),
+            success:function(data){
+               if(data.status==0){
+                    location.reload();
+                    alert(data.statusMsg)
+               }
+               if(data.status==1){
+                alert(data.statusMsg)
+               }
+               if(data.status==2){
+                alert(data.statusMsg)
+               }
+            }
+        })
+    }
+       
+})
+
+//加入企业
+$(".addcompany").on("click",function(){
+    //  $("#wraper").fadeOut()
+    //     $("#main_wraper").fadeIn()
+    var user = JSON.parse(localStorage.getItem("user"))
+    var icode=$("#iCode").val();
+    var companycode=$("#companyCode").val();
+    if(icode==''||companycode==''){
+        alert("邀请码/企业号不能为空");
+        return;
+    }
+    $.ajax({
+        type:"POST",
+        url:company_root_url + "/companyRegiserService/joinCompany",
+        contentType:"application/json",
+        data:JSON.stringify({
+            "companyCode":companycode,
+            "username":user.username,
+            "invitationCode":icode
+        }),
+        success:function(data){
+            if(data.status==0){
+                location.reload();
+                alert(data.statusMsg)
+            }
+            if(data.status==1){
+                alert(data.statusMsg)
+            }
+            if(data.status==2){
+                alert(data.statusMsg)
+            }
+        }
+    })
+})
+
+// --------------------------------------------------------------
+    //注册
+    var namefalg; //姓名
+    var passfalg; //密码
+    $("#personName").on("input",function(){ //姓名
+            if($(this).val().length>=10&&$(this).val().length!=0){
+                    $(".nametip").fadeIn()
+                    namefalg=false;
+            }else{
+                $(".nametip").fadeOut()
+                namefalg=true;
+            }
+    })
+
+    //第一个密码框,判断确认密码是否有输入,有就判断
+    $("#password").on("input",function(){
+        if($("#password2").val().length!=0){
+              if($("#password2").val()!=$(this).val()){
+                $(".passwordtip").fadeIn()
+                passfalg=false
+              }else{
+                $(".passwordtip").fadeOut()
+                passfalg=true
+              }  
+        }
+    })
+    $("#password2").on("input",function(){  //确认密码
+           if($(this).val()!=$("#password").val()){
+            $(".passwordtip").fadeIn()
+            passfalg=false
+            } else{
+            $(".passwordtip").fadeOut()
+            passfalg=true
+           }
+    })
+
+    //点击注册
+    $(".submitwrap2").on("click",function(){
+            if(namefalg==true&& passfalg==true){
+                    alert("注册成功")
+                    $("input").val("") 
+            }
+    })
+</script>

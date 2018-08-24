@@ -1,0 +1,77 @@
+.wrapper {
+  overflow: hidden;
+}
+
+.mainDetail .banner {
+  height: 4rem;
+}
+
+.mainDetail .banner img {
+  width: 100%;
+  height: 100%;
+}
+
+.mainDetail .activityStatus {
+  color: #FE5C34;
+  background: #F2F2F2;
+  padding: 0.26667rem 0.53333rem;
+}
+
+.mainDetail .activityStatus h2, .mainDetail .activityStatus p {
+  display: inline-block;
+}
+
+.mainDetail .activityStatus p {
+  float: right;
+}
+
+.mainDetail .activityMain {
+  padding: 0.26667rem 0.53333rem;
+  box-sizing: border-box;
+  /* height: 100%;
+        overflow: scroll; */
+}
+
+.mainDetail .activityMain .activityName {
+  font-weight: bold;
+  font-size: 0.48rem;
+  max-height: 1.2rem;
+  height: 0.8rem;
+}
+
+.mainDetail .activityMain p {
+  line-height: 1.33333rem;
+  font-size: 0.37333rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer .footerBtn {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row;
+  text-align: center;
+}
+
+footer .footerBtn span {
+  box-sizing: border-box;
+  background: #fff;
+  float: left;
+  flex: 1;
+  border: 1px solid #ccc;
+  height: 0.93333rem;
+  line-height: 0.93333rem;
+  font-weight: bold;
+  font-size: 0.42667rem;
+}
+
+footer .footerBtn span.inReview {
+  background: #FF0000;
+  color: #FFFF00;
+}

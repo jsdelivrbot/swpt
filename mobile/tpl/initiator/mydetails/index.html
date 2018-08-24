@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>详情页</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet/less" type="text/css" href="css/mydetails.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="../../pluy-in/config.js"></script>
+    <script src="js/mydetails.js"></script>
+</head>
+<body>
+<div class="header">
+    <a onclick="window.history.go(-1)" class="iconfont icon-zuo quit"></a>
+    <span class="alterable">详情页</span>
+</div>
+<div class="bodies">
+    <div class="personage">
+        <div class="photo">
+                <img src="" alt="">
+                <span class="state"></span>
+        </div>
+        <div class="details">
+
+        </div>
+    </div>
+
+    <div class="flow">
+        <!--动态渲染-->
+        <!--审批流程(现在)-->
+        <div class="now">
+            <div class="flowtitle">
+                审批流程
+            </div>
+            <div class="firstflow">
+                <div class="flowphoto">
+                    <img src="" alt="">
+                    <div class="flowborder"></div>
+                </div>
+                <div class="flowname">
+                    <span class="flow_name"></span>&nbsp;&nbsp;发起申请
+                </div>
+                <div class="flowtime">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reminder">
+        <div class="reminder_btn">
+                <img src="img/催办.png" alt="">
+                催办
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="repeal_btn btn_active">
+        撤销申请
+    </div>
+</div>
+<div class="nothing">
+    页面加载失败...
+</div>
+<div class="loading">
+    <img src="../../pluy-in/img/loading.gif" alt="">
+</div>
+<div class="modal">
+    <div class="modal_box">
+        <span class="a">
+              撤回成功
+        </span>
+        <span class="b">
+              请选择审核人
+        </span>
+        <span class="c">
+              提交成功
+        </span>
+        <span class="d">
+            请求错误
+        </span>
+    </div>
+</div>
+</body>
+</html>

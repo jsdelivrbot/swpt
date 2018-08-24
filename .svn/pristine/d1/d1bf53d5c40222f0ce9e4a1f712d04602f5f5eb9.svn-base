@@ -1,0 +1,36 @@
+<style>
+  .modal1{
+    position: fixed;
+    top: 30%;
+    right: 0;
+    left: 0;
+    z-index: 1040;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+  }
+  .modal1 .modal-body{
+      text-align: center;
+      font-size: 1.6rem;
+  }
+  .modal1 .modal-footer{
+      text-align: center;
+      border:0;
+      margin-top: 5rem;
+  }
+</style>
+<div class="modal1" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            
+                <div class="modal-body">
+                    <a>恭喜您! 创建成功 </a>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button type="button" ng-click="success()" class="btn btn-primary" data-dismiss="modal">
+                        确定
+                    </button>
+                </div>
+            
+        </div><!-- /.modal -->
+    </div>

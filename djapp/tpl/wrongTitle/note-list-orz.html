@@ -1,0 +1,293 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+    <p class="color-white">试卷标题</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main class="lirz-main text-center">
+    <form class="text-left">
+        <input type="hidden" name="topic" value="1">
+        <input type="hidden" name="userId" value="1">
+        <input type="hidden" name="sort" value="1">
+        <input type="hidden" name="status" value="1">
+        <label class="font-34">选择题目类型</label>
+        <select name="questiontype"></select>
+        <label class="font-34">选择题目</label>
+        <select name="questiontopic"></select>
+    </form>
+    <article id="topic">
+        <section></section>
+    </article>
+    <div id="lirz-options">
+        <div sort="1">
+            <img src="images/sorting.png">
+            <span>时间</span>
+        </div>
+        <div sort="1">
+            <img src="images/sorting.png">
+            <span>评论</span>
+        </div>
+        <div sort="1">
+            <img src="images/sorting.png">
+            <span>点赞</span>
+        </div>
+        <div sort="1">
+            <img src="images/sorting.png">
+            <span>收藏</span>
+        </div>
+    </div>
+</main>
+<script>
+    $( '.node-main' ).hide();
+    $( 'input[name="userId"]' ).val( dj.getStorage( 'userId' ) );
+    $( '.cole-head p' ).html( dj.getStorage( 'noteTitle' ) );
+
+    $x.listOrz = function ( data ) { //打开页面就执行获取笔记详细信息的操作
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/searchQuestionOrganization',
+            type: 'get',
+            data: data
+        } ).done( function ( m, n ) {
+            var result = m.msg,
+                noteText,
+                note = m.msg.note;
+            if ( !m.msg ) {
+                // $( '.node-main' ).clear().html( '<p class="font-40 text-center">对不起，获取笔记失败！</p>' );
+                $( '.node-main' ).fadeIn( 'slow' );
+                return;
+            }
+            if ( result.topic ) { //插入题目
+                var text = '<p class="text-left">（&nbsp;<span>A</span>&nbsp;）' + result.topic.title + '</p>' +
+                    '<ul>' +
+                    '<li class="color-red">A&nbsp;&nbsp;' + result.topic.answerA + '</li>' +
+                    '<li>B&nbsp;&nbsp;' + result.topic.answerB + '</li>' +
+                    '<li>C&nbsp;&nbsp;' + result.topic.answerC + '</li>' +
+                    '<li>D&nbsp;&nbsp;' + result.topic.answerD + '</li>' +
+                    '</ul>';
+            } else if ( result.note.type == 2 ) {}
+            $( 'article[comment]' ).remove(); //清空原有的评论
+            for ( var i in note ) { //将所有评论展示出来
+                noteText = $( '<article comment="comment" noteid="' + note[ i ].id + '">' +
+                    '<header class="font-42 text-left color-red" > 作者：' + note[ i ].userId + '<span class="font-32 color-666 right">' + dj.getDate( note[ i ].createTime, 'Y-M-D' ) + '</span></header >' +
+                    '<section>' +
+                    '<header class="font-34 text-left">' +
+                    '疑问' +
+                    '</header>' +
+                    '<textarea name="question" disabled="disabled" class="border-box font-30 dis-block margin-auto" placeholder="有什么问题，记录下来吧">' + note[ i ].question + '</textarea>' +
+                    '</section>' +
+                    '<section>' +
+                    '<header class="font-34 text-left">' +
+                    '心得' +
+                    '</header>' +
+                    '<textarea name="experience" disabled="disabled" class="border-box font-30 dis-block margin-auto" placeholder="题做完了，一定有很多心得吧">' + note[ i ].experience + '</textarea>' +
+                    '</section>' +
+                    '<ul class="text-right">' +
+                    '<li>' +
+                    '<img btn="collection" src="images/collection.png">' + //判断是否已经收藏
+                    '<span class="font-28">' + note[ i ].collectionSize + '</span>' +
+                    '</li>' +
+                    '<li>' +
+                    '<img btn="thumbsup" src="images/thumbsup.png">' +
+                    '<span class="font-28">' + note[ i ].thumbsUpSize + '</span>' +
+                    '</li>' +
+                    '<li>' +
+                    '<img btn="comment" src="images/comment.png">' +
+                    '<span class="font-28">' + note[ i ].commentSize + '</span>' +
+                    '</li>' +
+                    '</ul>' +
+                    '</article>' );
+                if ( note[ i ].isCollection == true ) {
+                    noteText.find( 'img[btn="collection"]' ).attr( 'src', 'images/collection-active.png' );
+                }
+                if ( note[ i ].isThumbsUp == true ) {
+                    noteText.find( 'img[btn="thumbsup"]' ).attr( 'src', 'images/thumbsup-active.png' );
+                }
+                $( '.lirz-main' ).append( noteText );
+            }
+            $( '#topic section' ).eq( 0 ).clear().append( text ); //显示查询出来的题目
+            $( '.lirz-main' ).fadeIn( 'slow' );
+        } ).fail( function ( m, n ) {
+            $( '.lirz-main' ).children( '*' ).remove();
+            $( '.lirz-main' ).html( '<p class="font-40 text-center">对不起，获取笔记失败！</p>' );
+            $( '.lirz-main' ).fadeIn( 'slow' );
+        } );
+    }
+
+    $x.listOrzTopic = function ( data ) { //查询试卷题目列表
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/searchQuestionTopic',
+            type: 'get',
+            data: data
+        } ).done( function ( m, n ) {
+            var result = m.msg;
+            if ( m.status == 0 ) {
+                $( '.lirz-main select[name="questiontopic"]' ).clear(); //清空后插入新数据
+                for ( var i in result ) {
+                    $( '.lirz-main select[name="questiontopic"]' ).append( '<option value="' + result[ i ].id + '">' + result[ i ].text + '</option>' );
+                }
+                if ( result[ 0 ] ) {
+                    $( 'input[name="topic"]' ).val( result[ 0 ].id );
+                    $x.listOrz( $( '.lirz-main form' ).getValue( [ 'question', 'experience' ] ) );
+                }
+            }
+        } );
+    }
+
+
+    $x.listOrzType = function ( data ) { //查询试题类型列表
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/searchQuestionType',
+            type: 'get',
+            data: data
+        } ).done( function ( m, n ) {
+            var result = m.msg;
+            if ( m.status == 0 ) {
+                for ( var i in result ) {
+                    $( '.lirz-main select[name="questiontype"]' ).append( '<option value="' + result[ i ].id + '">' + result[ i ].text + '</option>' );
+                }
+                if ( result[ 0 ] ) {
+                    $x.listOrzTopic( { 'id': result[ 0 ].id } );
+                }
+            }
+        } );
+    }
+
+    $x.listOrzType( { 'id': dj.getStorage( 'openTestId' ) } ); //首次加载页面时加载试题类型
+
+    $( '.lirz-main select[name="questiontype"]' ).change( function () { //当题目类型有改动时，自动修改题目
+        $x.listOrzTopic( { 'id': $( this ).val() } );
+    } );
+
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+
+    $( '#lirz-options div' ).click( function () { //排序选项
+        $( '.lirz-main input[name="sort"]' ).val( $( this ).index() );
+        $( '.lirz-main input[name="status"]' ).val( $( this ).attr( 'sort' ) );
+        $( this ).find( 'span' ).addClass( 'lirz-options-active' );
+        $( this ).siblings().find( 'span' ).removeClass( 'lirz-options-active' );
+        if ( $( this ).attr( 'sort' ) == '0' ) {
+            $( this ).attr( 'sort', '1' );
+        } else {
+            $( this ).attr( 'sort', 0 );
+        }
+        $x.listOrz( $( '.lirz-main form' ).getValue( [ 'questiontype', 'questiontopic' ] ) );
+    } );
+
+    $( '.lirz-main' ).off().on( 'click', 'article li', function ( e ) {
+        var img = $( this ).find( 'img' );
+        if ( img.attr( 'btn' ) == 'collection' ) {
+            if ( img.attr( 'src' ) && img.attr( 'src' ).indexOf( 'collection-active' ) == -1 ) { //收藏
+                $.ajax( {
+                    url: ajaxUrl + '/comment/favorite',
+                    type: 'get',
+                    data: { 'nId': $( this ).parents( 'article' ).attr( 'noteid' ), 'userId': dj.getStorage( 'userId' ) }
+                } ).done( function ( m, n ) {
+                    if ( m.status == 0 ) {
+                        img.attr( 'src', 'images/collection-active.png' );
+                        img.siblings( 'span' ).html( parseInt( img.siblings( 'span' ).html() ) + 1 );
+                    } else {
+                        dj.curtain( function () {
+                            dj.bulletMid( {
+                                content: '<p>' + m.statusMsg + '</p>',
+                                f: function () {
+                                    setTimeout( () => {
+                                        dj.curtain();
+                                        dj.bulletMid();
+                                    }, 500 );
+                                }
+                            } );
+                        } );
+                    }
+                } );
+            } else {
+                $.ajax( {
+                    url: ajaxUrl + '/comment/reFavorite',
+                    type: 'get',
+                    data: { 'nId': $( this ).parents( 'article' ).attr( 'noteid' ), 'userId': dj.getStorage( 'userId' ) }
+                } ).done( function ( m, n ) {
+                    if ( m.status == 0 ) {
+                        img.attr( 'src', 'images/collection.png' );
+                        img.siblings( 'span' ).html( parseInt( img.siblings( 'span' ).html() ) - 1 );
+                    } else {
+                        dj.curtain( function () {
+                            dj.bulletMid( {
+                                content: '<p>' + m.statusMsg + '</p>',
+                                f: function () {
+                                    setTimeout( () => {
+                                        dj.curtain();
+                                        dj.bulletMid();
+                                    }, 500 );
+                                }
+                            } );
+                        } );
+                    }
+                } );
+            }
+        } else if ( img.attr( 'btn' ) == 'thumbsup' ) {
+            if ( img.attr( 'src' ) && img.attr( 'src' ).indexOf( 'thumbsup-active' ) == -1 ) { //增加点赞
+                $.ajax( {
+                    url: ajaxUrl + '/comment/signUp',
+                    type: 'get',
+                    data: { 'nId': $( this ).parents( 'article' ).attr( 'noteid' ), 'userId': dj.getStorage( 'userId' ) }
+                } ).done( function ( m, n ) {
+                    if ( m.status == 0 ) {
+                        img.attr( 'src', 'images/thumbsup-active.png' );
+                        img.siblings( 'span' ).html( parseInt( img.siblings( 'span' ).html() ) + 1 );
+                    } else {
+                        dj.curtain( function () {
+                            dj.bulletMid( {
+                                content: '<p>' + m.statusMsg + '</p>',
+                                f: function () {
+                                    setTimeout( () => {
+                                        dj.curtain();
+                                        dj.bulletMid();
+                                    }, 500 );
+                                }
+                            } );
+                        } );
+                    }
+                } );
+            } else { //取消点赞
+                $.ajax( {
+                    url: ajaxUrl + '/comment/reSignUp',
+                    type: 'get',
+                    data: { 'nId': $( this ).parents( 'article' ).attr( 'noteid' ), 'userId': dj.getStorage( 'userId' ) }
+                } ).done( function ( m, n ) {
+                    if ( m.status == 0 ) {
+                        img.attr( 'src', 'images/thumbsup.png' );
+                        img.siblings( 'span' ).html( parseInt( img.siblings( 'span' ).html() ) - 1 );
+                    } else {
+                        dj.curtain( function () {
+                            dj.bulletMid( {
+                                content: '<p>' + m.statusMsg + '</p>',
+                                f: function () {
+                                    setTimeout( () => {
+                                        dj.curtain();
+                                        dj.bulletMid();
+                                    }, 500 );
+                                }
+                            } );
+                        } );
+                    }
+                } );
+            }
+        } else if ( img.attr( 'btn' ) == 'comment' ) { //打开评论页
+            dj.setStorage( {
+                'commentTitle': $( this ).parents( 'article' )[ 0 ].outerHTML,
+                'commentNid': $( this ).parents( 'article' ).attr( 'noteid' )
+            } );
+
+            $( 'body' ).nextPage( './comment-detail.html' );
+        }
+    } );
+
+    $( '.lirz-main select[name="questiontopic"]' ).change( function ( e ) {
+        $( 'input[name="topic"]' ).val( $( this ).val() );
+        $x.listOrz( $( '.lirz-main form' ).getValue( [ 'question', 'experience' ] ) );
+    } );
+
+</script>

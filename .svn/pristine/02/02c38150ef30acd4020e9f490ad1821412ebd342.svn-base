@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<div>
+    <div class="user_move">
+        <div class="um_header">
+            <div class="um_btn iconfont ic-fanhui" ng-click="goUmBtn()" >
+
+            </div>
+            <div class="um_mes">个人信息</div>
+        </div>
+        <div class="um_bodies">
+            <div class="um_img">
+                头像 <img src="./img/touxiang.png" alt="">
+            </div>
+            <div class="um_name">
+                账号：<span ng-bind="{{userName}}"></span>
+            </div>
+            <div class="um_nickname" ui-sref="nickname">昵称:<span >{{userjob.nickname}}</span></div>
+            <div class="um_phone" ui-sref="phone">联系电话:<span >{{userjob.phone}}</span></div>
+            <div class="um_address" ui-sref="address">地址:<span >{{userjob.address}}</span></div>
+        </div>
+    </div>
+</div>

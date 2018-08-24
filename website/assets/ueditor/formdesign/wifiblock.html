@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>热区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+    <script type="text/javascript">
+    
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>提示内容</span>
+                    <span class="label label-important">*</span>
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <input id="orgname" type="text" onclick="javascript:this.select()" placeholder="必填项" value="请输入内容" />
+                </td>
+                <td>
+                    <input type="text" id="orgvalue">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>选择跳转</span>
+                </th>
+                <th>
+                    <span>对齐方式</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="orgFurl" id="orgfUrl">
+                        <option value="0">---请输入网址-</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="orgalign">
+                        <option value="left">左对齐</option>
+                        <option value="center">居中对齐</option>
+                        <option value="right">右对齐</option>
+                       
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>输入框样式</span>
+                </th>
+                <th>
+                    <span>字体大小</span>
+                </th>
+            </tr>
+            <tr>
+                <td>宽
+                    <input id="orgwidth" type="text" value="100%" class="input-small span1" placeholder="auto" /> &nbsp;&nbsp; 高
+                    <input id="orgheight" type="text" value="" class="input-small span1" placeholder="auto" />
+                </td>
+                <td>
+                    字体大小
+                    <input id="orgfontsize" type="text" value="" class="input-small span1" placeholder="auto" /> px
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <span>边框圆角</span>
+                </th>
+                <th>
+                    <span>边框颜色</span>
+                </th>
+            </tr>
+            <tr>
+                <td>大小
+                    <input id="orgradius" type="number" value="1px" class="input-small " placeholder="请输入数字" />
+                </td>
+                <td>
+                    颜色
+                    <input id="orgcolor" type="color" value="" class="input-small" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>隐藏</span>
+                </th>
+                <th>
+                    <span>页面跳转</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label class="checkbox inline">
+                        <input id="orgthide" type="checkbox" checked="" /> 边框 </label>
+                </td>
+                <td>
+                    <label class="radio inline">
+                        <input name="orgJump" class="orgJump" type="radio" value="son" checked="" /> 子窗口 </label>
+                    <label class="radio inline">
+                        <input name="orgJump" class="orgJump" type="radio" value="parent" /> 父窗口 </label>
+                    <label class="radio inline">
+                        <input name="orgJump" class="orgJump" type="radio" value="top" /> 顶窗口 </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'wifiblock';
+        window.onload = function () {
+            $G( 'orgname' ).select();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var gTitle = oNode.getAttribute( 'title' ),
+                    gFontSize = oNode.getAttribute( 'orgfontsize' ),
+                    gAlign = oNode.getAttribute( 'orgalign' ),
+                    gUrl = oNode.getAttribute( 'orgfUrl' ),
+                    gWidth = oNode.getAttribute( 'orgwidth' ),
+                    gHeight = oNode.getAttribute( 'orgheight' ),
+                    gThidden = oNode.getAttribute( 'orgthide' ),
+                    gRadius = oNode.getAttribute( 'orgradius' ),
+                    gColor = oNode.getAttribute( 'orgcolor' ),
+                    gJump = oNode.getAttribute( 'orgjump' );
+                gTitle = gTitle == null ? '' : gTitle;
+                $G( 'orgname' ).value = gTitle;
+                if ( gThidden == '1' ) $G( 'orgthide' ).checked = true;
+                $G( 'orgfontsize' ).value = gFontSize;
+                $G( 'orgwidth' ).value = gWidth;
+                $G( 'orgheight' ).value = gHeight;
+                $G( 'orgalign' ).value = gAlign;
+                $G( 'orgradius' ).value = gRadius;
+                $G( 'orgcolor' ).value = gColor;
+                $G( 'orgfUrl' ).value = gUrl;
+                $( '.orgJump[value=' + gJump + ']' ).prop( 'checked', '' );
+            }
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            var nodeId = $("#node_id",window.parent.document).val();
+            $.ajax( {
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+                method: 'GET',
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( "#orgfUrl" ).append( '<option value=' + value.id + '>' + value.value + '</option>' );
+                    } )
+                },
+                error: function ( res ) {
+                    alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                }
+            } );
+        }
+        dialog.onok = function () {
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '请输入控件名称' );
+                return false;
+            }
+            var gTitle = $G( 'orgname' ).value.replace( /\"/g, "&quot;" ),
+                gFontSize = $G( 'orgfontsize' ).value,
+                gAlign = $G( 'orgalign' ).value,
+                gWidth = $G( 'orgwidth' ).value,
+                gHeight = $G( 'orgheight' ).value,
+                orgradius = $( "#orgradius" ).val(),
+                orgcolor = $( "#orgcolor" ).val(),
+                gThidden = $G( 'orgthide' ).checked,
+                orgUrlName = '',
+                orgUrlId = '',
+                orgJump = $( ':radio[name="orgJump"]:checked' ).val();
+            var gThiddenCss;
+            if ( $G( 'orgthide' ).checked ) {
+                gThidden = 1;
+                gThiddenCss = '1px solid';
+            } else {
+                gThidden = 0;
+                gThiddenCss = '';
+            }
+            if ( $( '#orgfUrl' ).val() == 0 ) {
+                orgfUrl = "";
+            } else {
+                orgfUrl = $( '#orgfUrl' ).val();
+                orgUrlId = $( '#orgfUrl' ).val();
+                orgUrlName = $( '#orgfUrl option[value=' + orgfUrl + ']' ).text();
+            }
+            var html = '<div class="wifiblock" orgurl="http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link=' +
+                orgfUrl + '"name="leipiNewField" leipiplugins="' + thePlugins + '" orgUrlName="' + orgUrlName + '" orgthide="' +
+                gThidden + '";  title="' + gTitle + '" orgJump="' + orgJump + '" orgUrlId="' + orgUrlId + '" orgAlign="' +
+                gAlign + '" orgHeight ="' + gHeight + '" orgWidth="' + gWidth + '" orgfonts="' + gFontSize + '" orgborder="' +
+                gThiddenCss + '" orgColor="' + orgcolor + '" orgradius="' + orgradius + '" style="box-sizing:border-box;border:' + gThiddenCss + ' ' + orgcolor + ';border-radius:' +
+                orgradius + '; float:' + gAlign + ';display:inline-block;width:' + gWidth + ';height:' + gHeight + ';font-size:' + gFontSize + 'px;"orgthide="' +
+                gThidden + '"; >​​&#8203;</div><p></p>';
+            if ( !oNode ) {
+                try {
+                    editor.execCommand( 'insertHtml', html );
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                oNode.outerHTML = html;
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+
+    </script>
+</body>
+
+</html>

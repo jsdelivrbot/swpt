@@ -1,0 +1,27 @@
+@charset "UTF-8";
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.showlogin{
+    text-align: center;
+}
+.logoutlink{
+    cursor: pointer;
+}
+.loginlink{
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    height: 26px;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+}

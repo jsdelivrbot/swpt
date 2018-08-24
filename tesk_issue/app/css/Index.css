@@ -1,0 +1,11 @@
+*{align-content: center;vertical-align: middle; margin: 0;padding: 0;}
+.i_top>div{height: 100%;}
+.i_botton>div{height: 100%;}
+#FindTypeId{padding: 2px; height: 90%;width: 100%;border:0;outline: none;background-color:rgba(241, 241, 241, 1);border-radius: 5px 0 0 5px;}
+#txtContent{border-radius: 0 5px 5px 0;outline: none !important; padding:5px; height:90%;width: 75%;margin-top:1.5%;background-color:rgba(241, 241, 241, 1);border: 0;}
+#txtContent:hover{outline: none !important;}
+.topSelect{z-index: 9999; margin-top:1.5%;color: #2697EB;}
+.topSelect:click{
+    color: red;
+}
+

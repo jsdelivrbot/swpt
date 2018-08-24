@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>校园端已经批改完成信息</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/校园端已经批改完成信息/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/校园端已经批改完成信息/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (图片) -->
+      <div id="u1653" class="ax_default _图片">
+        <img id="u1653_img" class="img " src="images/班级阅卷/u0.png"/>
+        <!-- Unnamed () -->
+        <div id="u1654" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u1655" class="ax_default _图片">
+        <img id="u1655_img" class="img " src="images/班级阅卷/u2.png"/>
+        <!-- Unnamed () -->
+        <div id="u1656" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1657" class="ax_default box_1">
+        <img id="u1657_img" class="img " src="images/班级阅卷/u32.png"/>
+        <!-- Unnamed () -->
+        <div id="u1658" class="text" style="visibility: visible;">
+          <p><span>智能阅卷</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u1659" class="ax_default _图片">
+        <img id="u1659_img" class="img " src="images/校园端已经批改完成信息/u1659.png"/>
+        <!-- Unnamed () -->
+        <div id="u1660" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (表格) -->
+      <div id="u1661" class="ax_default">
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1662" class="ax_default table_cell">
+          <img id="u1662_img" class="img " src="images/校园端已经批改完成信息/u1662.png"/>
+          <!-- Unnamed () -->
+          <div id="u1663" class="text" style="visibility: visible;">
+            <p><span>科目</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1664" class="ax_default table_cell">
+          <img id="u1664_img" class="img " src="images/校园端已经批改完成信息/u1664.png"/>
+          <!-- Unnamed () -->
+          <div id="u1665" class="text" style="visibility: visible;">
+            <p><span>试卷名称</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1666" class="ax_default table_cell">
+          <img id="u1666_img" class="img " src="images/校园端已经批改完成信息/u1666.png"/>
+          <!-- Unnamed () -->
+          <div id="u1667" class="text" style="visibility: visible;">
+            <p><span>操作</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1668" class="ax_default table_cell">
+          <img id="u1668_img" class="img " src="images/校园端已经批改完成信息/u1668.png"/>
+          <!-- Unnamed () -->
+          <div id="u1669" class="text" style="visibility: visible;">
+            <p><span>语文</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1670" class="ax_default table_cell">
+          <img id="u1670_img" class="img " src="images/校园端已经批改完成信息/u1670.png"/>
+          <!-- Unnamed () -->
+          <div id="u1671" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（语文）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1672" class="ax_default table_cell">
+          <img id="u1672_img" class="img " src="images/校园端已经批改完成信息/u1672.png"/>
+          <!-- Unnamed () -->
+          <div id="u1673" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1674" class="ax_default table_cell">
+          <img id="u1674_img" class="img " src="images/校园端已经批改完成信息/u1668.png"/>
+          <!-- Unnamed () -->
+          <div id="u1675" class="text" style="visibility: visible;">
+            <p><span>数学</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1676" class="ax_default table_cell">
+          <img id="u1676_img" class="img " src="images/校园端已经批改完成信息/u1670.png"/>
+          <!-- Unnamed () -->
+          <div id="u1677" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（数学）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1678" class="ax_default table_cell">
+          <img id="u1678_img" class="img " src="images/校园端已经批改完成信息/u1672.png"/>
+          <!-- Unnamed () -->
+          <div id="u1679" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1680" class="ax_default table_cell">
+          <img id="u1680_img" class="img " src="images/校园端已经批改完成信息/u1680.png"/>
+          <!-- Unnamed () -->
+          <div id="u1681" class="text" style="visibility: visible;">
+            <p><span>英语</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1682" class="ax_default table_cell">
+          <img id="u1682_img" class="img " src="images/校园端已经批改完成信息/u1682.png"/>
+          <!-- Unnamed () -->
+          <div id="u1683" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（英语）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1684" class="ax_default table_cell">
+          <img id="u1684_img" class="img " src="images/校园端已经批改完成信息/u1684.png"/>
+          <!-- Unnamed () -->
+          <div id="u1685" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1686" class="ax_default table_cell">
+          <img id="u1686_img" class="img " src="images/校园端已经批改完成信息/u1686.png"/>
+          <!-- Unnamed () -->
+          <div id="u1687" class="text" style="visibility: visible;">
+            <p><span>物理</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1688" class="ax_default table_cell">
+          <img id="u1688_img" class="img " src="images/校园端已经批改完成信息/u1688.png"/>
+          <!-- Unnamed () -->
+          <div id="u1689" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（物理）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1690" class="ax_default table_cell">
+          <img id="u1690_img" class="img " src="images/校园端已经批改完成信息/u1690.png"/>
+          <!-- Unnamed () -->
+          <div id="u1691" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1692" class="ax_default table_cell">
+          <img id="u1692_img" class="img " src="images/校园端已经批改完成信息/u1692.png"/>
+          <!-- Unnamed () -->
+          <div id="u1693" class="text" style="visibility: visible;">
+            <p><span>化学</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1694" class="ax_default table_cell">
+          <img id="u1694_img" class="img " src="images/校园端已经批改完成信息/u1694.png"/>
+          <!-- Unnamed () -->
+          <div id="u1695" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（化学）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1696" class="ax_default table_cell">
+          <img id="u1696_img" class="img " src="images/校园端已经批改完成信息/u1696.png"/>
+          <!-- Unnamed () -->
+          <div id="u1697" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1698" class="ax_default table_cell">
+          <img id="u1698_img" class="img " src="images/校园端已经批改完成信息/u1698.png"/>
+          <!-- Unnamed () -->
+          <div id="u1699" class="text" style="visibility: visible;">
+            <p><span>历史</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1700" class="ax_default table_cell">
+          <img id="u1700_img" class="img " src="images/校园端已经批改完成信息/u1700.png"/>
+          <!-- Unnamed () -->
+          <div id="u1701" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（历史）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1702" class="ax_default table_cell">
+          <img id="u1702_img" class="img " src="images/校园端已经批改完成信息/u1702.png"/>
+          <!-- Unnamed () -->
+          <div id="u1703" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1704" class="ax_default table_cell">
+          <img id="u1704_img" class="img " src="images/校园端已经批改完成信息/u1704.png"/>
+          <!-- Unnamed () -->
+          <div id="u1705" class="text" style="visibility: visible;">
+            <p><span>政治</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1706" class="ax_default table_cell">
+          <img id="u1706_img" class="img " src="images/校园端已经批改完成信息/u1706.png"/>
+          <!-- Unnamed () -->
+          <div id="u1707" class="text" style="visibility: visible;">
+            <p><span>2016-2017学年上学期广州市越秀区第一中学三年级月考（政治）</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u1708" class="ax_default table_cell">
+          <img id="u1708_img" class="img " src="images/校园端已经批改完成信息/u1708.png"/>
+          <!-- Unnamed () -->
+          <div id="u1709" class="text" style="display: none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u1710" class="ax_default line">
+        <img id="u1710_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u1711" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u1712" class="ax_default line">
+        <img id="u1712_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u1713" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1714" class="ax_default primary_button">
+        <div id="u1714_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1715" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u1714_ann" class="annotation"></div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1716" class="ax_default primary_button">
+        <div id="u1716_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1717" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1718" class="ax_default primary_button">
+        <div id="u1718_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1719" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1720" class="ax_default primary_button">
+        <div id="u1720_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1721" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1722" class="ax_default primary_button">
+        <div id="u1722_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1723" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1724" class="ax_default primary_button">
+        <div id="u1724_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1725" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1726" class="ax_default primary_button">
+        <div id="u1726_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1727" class="text" style="visibility: visible;">
+          <p><span>查看测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1728" class="ax_default box_1">
+        <img id="u1728_img" class="img " src="images/校园端已经批改完成信息/u1728.png"/>
+        <!-- Unnamed () -->
+        <div id="u1729" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1730" class="ax_default box_1">
+        <img id="u1730_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1731" class="text" style="visibility: visible;">
+          <p><span>全年级考生</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1732" class="ax_default box_1">
+        <img id="u1732_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1733" class="text" style="visibility: visible;">
+          <p><span>高一1班&nbsp;&nbsp; 58人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1734" class="ax_default box_1">
+        <img id="u1734_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1735" class="text" style="visibility: visible;">
+          <p><span>高一2班&nbsp;&nbsp; 58人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1736" class="ax_default box_1">
+        <img id="u1736_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1737" class="text" style="visibility: visible;">
+          <p><span>高一3班&nbsp;&nbsp; 58人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1738" class="ax_default box_1">
+        <img id="u1738_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1739" class="text" style="visibility: visible;">
+          <p><span>高一4班&nbsp;&nbsp; 58人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1740" class="ax_default box_1">
+        <img id="u1740_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1741" class="text" style="visibility: visible;">
+          <p><span>高一5班&nbsp;&nbsp; 58人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1742" class="ax_default box_1">
+        <img id="u1742_img" class="img " src="images/校园端已经批改完成信息/u1730.png"/>
+        <!-- Unnamed () -->
+        <div id="u1743" class="text" style="visibility: visible;">
+          <p><span>测试详情</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1744" class="ax_default primary_button">
+        <div id="u1744_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1745" class="text" style="visibility: visible;">
+          <p><span>考情分析</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u1744_ann" class="annotation"></div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1746" class="ax_default primary_button">
+        <div id="u1746_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u1747" class="text" style="visibility: visible;">
+          <p><span>查看总成绩</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u1746_ann" class="annotation"></div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1748" class="ax_default box_1">
+        <img id="u1748_img" class="img " src="images/扫描完成/u80.png"/>
+        <!-- Unnamed () -->
+        <div id="u1749" class="text" style="visibility: visible;">
+          <p><span>智能阅卷</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (热区) -->
+      <div id="u1750" class="ax_default">
+      </div>
+    </div>
+  </body>
+</html>

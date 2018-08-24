@@ -1,0 +1,201 @@
+<html>
+
+<head>
+    <title>组合控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="./images/font_icon/iconfont.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <link rel="stylesheet" href="./self/css/pagedetails.css">
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+
+    <script type="text/javascript">
+        function createElement(type, name) {
+            var element = null;
+            try {
+                element = document.createElement('<' + type + ' name="' + name + '">');
+            } catch (e) {}
+            if (element == null) {
+                element = document.createElement(type);
+                element.name = name;
+            }
+            return element;
+        }
+    </script>
+    <style>
+        input {
+            padding: 4px 6px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr></tr>
+            <!-- <tr>
+                <td style="text-align:center;" colspan="2">
+                    <label for="Tpl1" data-img="tpl1.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl1" id="Tpl1"> 科普详情页
+                    </label>
+                </td>
+            </tr> -->
+            <div class="tplBottom">
+                <p class="title"></p>
+                <img src="./images/pagedetails/tpl1.png" alt="模板图像">
+            </div>
+            <tr>
+                <th colspan="2">
+                    <span>跳转目标</span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="orgFurl" id="orgfUrl">
+                        <option value="0">---请输入网址-</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        // var clearImg;
+        // $('.menuLabel').hover(function(e) {
+        //     $('.tplBottom .title').html($(e.currentTarget).text());
+        //     $('.tplBottom img').prop('src', './images/pagedetails/' + $(e.currentTarget).data('img'));
+        //     $('.tplBottom').fadeIn();
+        //     clearTimeout(clearImg);
+        // }, function() {
+        //     clearImg = setTimeout(function() {
+        //         $('.tplBottom').fadeOut();
+        //     }, 5000);
+        // })
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            gdataSource = null,
+            thePlugins = 'kepudetail';
+        window.onload = function() {
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $('#nodeParentId', window.parent.document).val();
+            var nodeId = $("#node_id", window.parent.document).val();
+            $.ajax({
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function(res) {
+                    $.each(res.msg, function(index, value) {
+                        $("#orgfUrl").append('<option value=' + value.id + '>' + value.value + '</option>');
+                    })
+                },
+                error: function(res) {
+                    alert('抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！')
+                }
+            });
+        }
+
+        dialog.onok = function() {
+            if ($('#orgfUrl').val() == 0) {
+                orgfUrl = "";
+            } else {
+                orgfUrl = $('#orgfUrl').val();
+                orgUrlId = $('#orgfUrl').val();
+                orgUrlName = $('#orgfUrl option[value=' + orgfUrl + ']').text();
+            }
+            if (!oNode) {
+                var val = $('[name=tpl]:checked').val();
+                var html;
+                    html = `
+                        <div class='wifiblockBoxs' style='border: 1px solid #ddd;'>
+                            <div class='header_top' style='position: relative;'><span onclick='history.go(-1)' style='position: absolute;left: 20px;'>&lt;</span>书籍详情</div>
+                            <div class='contains'>
+                                <div class='contains_img'>
+                                    <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='图片上传' style='display: block;width: 100%;height: 100%;' value='图片上传 - 控件' datasource='' leipiplugins='addimage'>
+                                </div>
+                                <div class='contains_detail'>
+                                    <div class='contains_title'>
+                                        <input groupCon='' name="leipiNewField" type="text" title="文本框" value="书名" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        作者：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="作者" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        出版社：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="出版社" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        IBSN：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="IBSN" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        推荐对象：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="推荐对象" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        推荐理由：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="推荐理由" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='spacing'>
+                                <div class='contains_title' style='font-size: 14px;'>
+                                    <input groupCon='' name="leipiNewField" type="text" title="文本框" value="简介" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                </div>
+                                <div class='contains_content'>
+                                    <input groupCon='' name="leipiNewField" type="text" title="文本框" value="简介内容" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                </div>
+                            </div>
+                            <div class='nav_container'>
+                                <div id='books' class='nav_btn nav_btnActive'>图书</div>
+                                <div id='audio' class='nav_btn'>音频</div>
+                                <div id='video' class='nav_btn'>视频</div>
+                                <div id='question' class='nav_btn'>题库</div>
+                            </div>
+                            <div data-allowjump='false' class='wifiblock books_con' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                <div class='nav_top nav_books'>
+                                    <input groupCon='' name='leipiNewField' type='text' identity='文件上传' title='文件上传' style='display: block;width: 100%;height: 100%;' value='文件上传 - 控件' datasource='' leipiplugins='addimage'>
+                                </div>
+                            </div>
+                            <div data-allowjump='false' class='wifiblock audio_con' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                <div class='nav_top nav_audio'>
+                                    <div style='flex: 2;'>
+                                        <input class='audioInput' groupCon='' name='leipiNewField' type='text' identity='文件上传' title='文件上传' style='display: block;width: 100%;height: 100%;' value='文件上传 - 控件' datasource='' leipiplugins='addimage'>
+                                    </div>
+                                    <audio src='' controls loop='false' class='audio'></audio>
+                                </div>
+                                <div class='nav_bottom'>
+                                    <div class='iconfont icon-bofangsanjiaoxing'><i></i>23384次播放</div>
+                                    <div class='iconfont icon-shijian'><i></i>00分00秒</div>
+                                </div>
+                            </div>
+                            <div data-allowjump='false' class='wifiblock video_con' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                <div class='nav_top nav_video'>
+                                    <input groupCon='' name='leipiNewField'  type='text' identity='视频上传' title='视频上传' style='display: block;width: 100%;height: 100%;' value='视频上传 - 控件' datasource='' leipiplugins='addimage'>
+                                    <div class='video' style='margin-left: 100px;'></div>
+                                </div>
+                            </div>
+                            <div class='question_con'></div>
+                            <div style='padding: 8px;display: flex;'>
+                                <div style='margin-right: 16px;'><input groupCon='' name="leipiNewField" type="text" title="文本框" value="评论" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;padding: 4px 6px !important;"/></div>
+                                <div class='iconfont icon-fenxiang' style='margin-right: 16px;'><i></i></div>
+                                <div class='iconfont icon-guanzhu'><i></i></div>
+                            </div>
+                        </div>
+                    `;
+            
+                editor.execCommand('insertHtml', html);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

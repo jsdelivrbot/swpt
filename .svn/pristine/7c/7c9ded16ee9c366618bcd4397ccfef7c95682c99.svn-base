@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<div>
+    <div class="my_header">
+        <ul class="my_h_ul">
+            <li class="my_h_li" ng-click="myfunindex = 0" ng-class="{my_fun_active:myfunindex == 0}">全部数据</li>
+            <li class="my_h_li" ng-click="myfunindex = 1" ng-class="{my_fun_active:myfunindex == 1}">公文包</li>
+            <li class="my_h_li" ng-click="myfunindex = 2" ng-class="{my_fun_active:myfunindex == 2}">教师类</li>
+            <li class="my_h_li" ng-click="myfunindex = 3" ng-class="{my_fun_active:myfunindex == 3}">学生类</li>
+            <li class="my_h_li" ng-click="myfunindex = 4" ng-class="{my_fun_active:myfunindex == 4}">家长</li>
+        </ul>
+    </div>
+    <div class="my_content">
+        <div class="my_title">
+            <table class="my_table">
+                <tbody>
+                <th width="40%">功能</th>
+                <th width="20%">购买时间</th>
+                <th width="20%">到期时间</th>
+                <th width="20%">购买</th>
+                </tbody>
+            </table>
+        </div>
+        <table class="my_item" ng-repeat="item in myfundata" ng-if="myfunbol" >
+            <tbody>
+            <th width="40%"><img src="{{item.pic}}" alt="">{{item.name}}</th>
+            <th width="20%"></th>
+            <th width="20%"></th>
+            <th width="20%"><span>再次购买</span></th>
+            </tbody>
+        </table>
+        <div class="my_item" ng-if="!myfunbol" style="text-align: center">
+            您暂未开通服务
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省科学院</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="./public/part/jquery/jquery-3.1.1.min.js"></script>
+    <script src="./js/index.js"></script>
+    <!--<meta http-equiv="refresh" content="0;url=/home"/>-->
+</head>
+<body>
+<!--左浮动菜单开始-->
+<div id="sidebar">
+    <div id="icolist">
+        <a href="./home" target="maincontent" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/bzbg.png" alt=""></dt>
+                <dd>本职办公</dd>
+            </dl>
+        </a>
+        <a href="./account" target="maincontent" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/Personal-Center.png" alt=""></dt>
+                <dd>个人中心</dd>
+            </dl>
+        </a>
+        <a href="./message" target="maincontent" id="icolist_one" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/news.png" alt=""></dt>
+                <dd class="logintitle">消息</dd>
+            </dl>
+        </a>
+        <a href="./workbenchs/workbench.html" target="maincontent" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/xietong.png" alt=""></dt>
+                <dd>单位协同</dd>
+            </dl>
+        </a>
+        <a href="./workbench/workbench.html" target="maincontent" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/zzsz.png" alt=""></dt>
+                <dd>单位组织</dd>
+            </dl>
+        </a>
+        <a href="./homepage" target="maincontent" class="icoA">
+            <dl class="curr_module">
+                <dt><img src="./img/sidebar/Home-hover.png" alt=""></dt>
+                <dd>网站首页</dd>
+            </dl>
+        </a>
+        <a href="./zizhanManagement/workbench.html" target="maincontent" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/zzsz.png" alt=""></dt>
+                <dd>内容管理</dd>
+            </dl>
+        </a>
+        <!--<a href="http://192.168.0.193?pid=16" target="maincontent">-->
+        <a href="./webManagement/workbench.html" target="maincontent" class="icoA">
+            <dl>
+                <dt><img src="./img/sidebar/wqgl.png" alt=""></dt>
+                <dd>网群系统</dd>
+            </dl>
+        </a>
+
+       <!-- <a ui-sref=".out" target="maincontent">
+            <dl>
+                <dt><img src="./img/sidebar/u88.png" alt=""></dt>
+                <dd>更多</dd>
+            </dl>
+        </a>-->
+    </div>
+</div>
+<!--<div class="lt"></div>-->
+<div id="contentId">
+    <iframe id="maincontent" name="maincontent" src="./homepage" width="100%" height="100%" frameborder="0" scrolling="on"></iframe>
+</div>
+<script type="text/javascript">
+    var win_w=$("html").width();
+     $("#contentId").width(win_w-60);
+     /* if(localStorage["user"]){
+       var dom=$(".logintitle");
+       dom.html("退出");
+       dom.closest('a').attr("href","./login/out.html");
+   }*/
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../../../resource/js/jQuery/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div class="contentBox" style="width: 1000px;">
+			
+		</div>
+		<script type="text/javascript">
+			var id = window.location.href.split('?')[1].split("=")[1];
+			console.log(window.location.href)
+			console.log(id)
+			$.ajax({
+				type:"get",
+				url:formMenuFacade_root_url + '/formMenuFacade/getContentFormMenuById?id='+id,
+				async:true,
+				success:function(data){
+					var content = data.msg.content;
+					$(".contentBox").html(content);
+				}
+			});
+			
+		</script>
+	</body>
+</html>

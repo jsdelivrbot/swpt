@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>成员审批</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../../../../public/swiper/swiper-4.2.2.min.css">
+    <link rel="stylesheet" href="../../static/css/reviewUser/rU_main.min.css">
+    <script src="../../../../public/flexible/flexible.js"></script>
+    <script src="../../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="back left" onclick="historyUtils.back();">
+                <i class="iconfont">&#xe7a4;</i>
+            </div>
+            <h2 class="centerTitle">成员审批</h2>
+        </header>
+        <section id="body">
+            <div class="swiper-container" id="swiperNav">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide actived" data-target="noReview">未审核人</div>
+                    <div class="swiper-slide" data-target="hadReview">已审核人</div>
+                </div>
+            </div>
+            <div class="swiper-container" id="swiperBody">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-no-swiping dataShow" id="noReview">
+                        <div class="body">
+                            <div class="bodyMain">
+                                <div class="project clear">
+                                    <table>
+                                        <thead>
+                                            <th>姓名</th>
+                                            <th>手机号</th>
+                                            <th>报名时间</th>
+                                            <th>地址</th>
+                                            <th>审核状态</th>
+                                            <th>操作</th>
+                                        </thead>
+                                        <tbody class="projectBody">
+                                            <tr class="projectMain" data-id="">
+                                                <td class="name"></td>
+                                                <td class="phone"></td>
+                                                <td class="time"></td>
+                                                <td class="address"></td>
+                                                <td class="status">未审核</td>                                                
+                                                <td class="control">
+                                                    <span class="pass">通过</span>
+                                                    <span class="noPass">拒绝</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="noData" id="noData">
+                                <p class="iconfont"></p>
+                                <h2>抱歉！没有搜索到相关数据！</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide swiper-no-swiping dataShow" id="hadReview">
+                        <div class="body">
+                            <div class="bodyMain">
+                                <div class="project clear">
+                                    <table>
+                                        <thead>
+                                            <th>姓名</th>
+                                            <th>手机号</th>
+                                            <th>报名时间</th>
+                                            <th>地址</th>
+                                            <th>审核状态</th>
+                                            <th>操作</th>
+                                        </thead>
+                                        <tbody class="projectBody">
+                                            <tr class="projectMain" data-id="">
+                                                <td class="name"></td>
+                                                <td class="phone"></td>
+                                                <td class="time"></td>
+                                                <td class="address"></td>
+                                                <td class="status"></td>
+                                                <td class="control">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="noData" id="noData">
+                                <p class="iconfont"></p>
+                                <h2>抱歉！没有搜索到相关数据！</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+<script src="../../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../../public/js/method.js"></script>
+<script src="../../../../public/layer/layer.js"></script>
+<script src="../../../../public/swiper/swiper-4.2.2.min.js"></script>
+<script src="../../static/js/rU_main.js"></script>

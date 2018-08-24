@@ -1,0 +1,318 @@
+    <title>数字社区-家长端作业</title>
+    <link href="Public/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="Public/Css/jscss.css" rel="stylesheet" type="text/css">
+    <link href="Public/Css/lin.css" rel="stylesheet" type="text/css">
+    <link href="Public/Css/repository.css" rel="stylesheet" type="text/css">
+    <link href="Public/Css/jz_homework.css" rel="stylesheet" type="text/css">
+    <link href="/Public/Css/Parent.css" rel="stylesheet" type="text/css"></head>
+<body>
+<!---内容区开始---->
+<div class="container repository" style="padding: 0px;">
+    <div class="row topbg">
+        <div class="col-xs-12">
+            <span onclick="javascript:history.back(-1);" class="glyphicon glyphicon-chevron-left topReturn"></span><h3>作业本</h3>
+        </div>
+    </div>
+    <div class="form-group">
+        <form action="/index.php?m=Parent&c=Homework&a=listHomework" method="post" id="select_form">
+            <label for="select_child">选择子女:</label>
+            <select id="select_child" name="select_child"  class="form-control select">
+                <!--<option value="all">全部科目</option>-->
+                <option value="76;40;33" selected >戴志颖</option>            </select>
+        </form>
+    </div>
+    <div class="row nav">
+        <div class="col-xs-12">
+            <ul>
+                <li data-subject_id="47" data-type="subject_id" class="li_line_style" ><a>计算机应用与网络</a></li>                <li class="hide" ><a>其他</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 nav_bottom_line"></div>
+    </div>
+    <div class="content">
+        <!-- 左侧知识点列表 S -->
+        <div class="contentLeft">
+            <ul class="left_tree">
+                <li class="is_click_li"><a class="is_click_li_a" data-section_id="741" data-type="section" href="javascript:void(0);" data-date="741" ><span class="">网络基本概念</span></a></li>            </ul>
+            <ul id="files" class="ml-20 hide">
+                <li class="tree_li" data-sid="741">
+                    <a class="tree_li_a" href="javascript:void(0);" ><span class="a_color">网络基本概念</span></a>
+                    <ul class="node_ul ">
+                        <li>
+                            <a href="javascript:void(0);" class=" children_btn is_click_li_a font_over" data-section_id="741" data-type="knowledge_point" data-knowledge_point="3100">第1章  计算机网络基本概念</a>
+                        </li><li>
+                        <a href="javascript:void(0);" class=" children_btn is_click_li_a font_over" data-section_id="741" data-type="knowledge_point" data-knowledge_point="3101">第2章   数据通信基础</a>
+                    </li><li>
+                        <a href="javascript:void(0);" class=" children_btn is_click_li_a font_over" data-section_id="741" data-type="knowledge_point" data-knowledge_point="3102">第3章  网络体系结构和网络协议</a>
+                    </li><li>
+                        <a href="javascript:void(0);" class=" children_btn is_click_li_a font_over" data-section_id="741" data-type="knowledge_point" data-knowledge_point="3103">第4章  网络操作系统</a>
+                    </li><li>
+                        <a href="javascript:void(0);" class=" children_btn is_click_li_a font_over" data-section_id="741" data-type="knowledge_point" data-knowledge_point="3104">第5章   局域网基本工作原理</a>
+                    </li><li>
+                        <a href="javascript:void(0);" class=" children_btn is_click_li_a font_over" data-section_id="741" data-type="knowledge_point" data-knowledge_point="3105">第6章   Internet 基础知识</a>
+                    </li>                        </ul>
+                </li>            </ul>
+        </div>
+        <!-- 左侧知识点列表 E -->
+        <!-- 右侧错题 S -->
+        <div class="contentRight">
+            <div class="col-xs-12 tp5 contentBox">
+                <div class="contentBox_top">第1章  计算机网络基本概念</div>
+                <div class="contentBox_title">11月08日星期二作业</div>
+                <div class="contentBox_content top_line_style">
+                    <div class="col-xs-12 tp10 no_padding">
+                        <div class="col-xs-8 padding_7 no_padding">
+                            <span class="span_num">1</span>
+                            网络基本概念
+                        </div>
+                        <div class="col-xs-4 text-cen no_padding">
+                            <div>
+                                <a target="_blank" href="/index.php?m=Teacher&c=Repository&a=ShowMicroFile&file_id=4241" class="btn-success btn-sm btn">查看</a>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>                                                                    </div>
+            </div>        </div>
+        <!-- 右侧错题 E -->
+    </div>
+
+</div>
+<!--底部开始-->
+<div class="hide btn-group btn-group-justified navbar-fixed-bottom type_t" role="group" aria-label="主页-后退">
+    <a href="/index.php?m=Teacher&c=Index&a=index" class="btn btn-lg t_button" role="button"><span id="GoIndex" class="glyphicon glyphicon-home"></span> 主页</a>
+    <a href="/index.php?m=Teacher&c=Index&a=index" class="btn btn-lg t_button" role="button"><span class="glyphicon glyphicon-share-alt"></span> 后退</a>
+</div>
+<style>
+    @font-face {font-family: "iconfont";
+        src: url('Public/fonts/study/iconfont.eot?t=1472263935'); /* IE9*/
+        src: url('Public/fonts/study/iconfont.eot?t=1472263935#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('Public/fonts/study/iconfont.woff?t=1472263935') format('woff'), /* chrome, firefox */
+        url('Public/fonts/study/iconfont.ttf?t=1472263935') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+        url('Public/fonts/study/iconfont.svg?t=1472263935#iconfont') format('svg'); /* iOS 4.1- */
+    }
+    .iconfont {
+        font-family:"iconfont" !important;
+        font-size:2rem;
+        font-style:normal;
+    }
+    dl,dt,dd,div{
+        margin: 0;
+        padding: 0;
+    }
+    .study-bottom{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        padding: 3px 0;
+        border-top:1px solid #d2d2d2;
+        background-color: #ffffff;
+        z-index: 999;
+    }
+    .study-bottom dl{
+        float:left;
+        width: 25%;
+        height: auto;
+        overflow: hidden;
+        padding-bottom: 3px;
+        color: #999999;
+        margin: 0;
+    }
+    .study-bottom dl:hover{
+        color: #1b7dde;
+    }
+    .study-bottom dl.act{
+        color: #1b7dde;
+    }
+    .study-bottom dt,.study-bottom dd{
+        text-align: center;
+    }
+    .study-bottom dd{
+        font-weight: bold;
+        font-size:0.8rem;
+        margin: 0;
+    }
+</style>
+<div style="height: 55px;"></div>
+
+<div class="container-fluid study-bottom">
+    <a href="/index.php?m=Parent&c=Study&a=index">
+        <dl >
+            <dt>
+                <i class="icon iconfont">&#xe675;</i>
+            </dt>
+            <dd>
+                子女学习        </dd>
+        </dl>
+    </a>
+    <a href="/index.php?m=Parent&c=MyChildrenClass&a=index">
+        <dl >
+            <dt>
+                <i class="icon iconfont">&#xe66d;</i>
+            </dt>
+            <dd>
+                班级
+            </dd>
+        </dl>
+    </a>
+    <a href="/index.php?m=Parent&c=SchoolCulture&a=index">
+        <dl >
+            <dt>
+                <i class="icon iconfont">&#xe66f;</i>
+            </dt>
+            <dd>
+                校园文化
+            </dd>
+        </dl>
+    </a>
+    <a href="/index.php?m=Parent&c=AccountCenter&a=index">
+        <dl >
+            <dt>
+                <i class="icon iconfont">&#xe60d;</i>
+            </dt>
+            <dd>
+                我
+            </dd>
+        </dl>
+    </a>
+</div>
+<!--底部开始结束-->
+<!--模态框 年级及学期-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal_top_bg Student-style">
+                <h4 class="modal-title text-cen" id="myModalLabel">年级及学期</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <ul class="tp10 grade_class">
+                        <li class="is_click" data-semester_id="16" data-type="semester_id"><a>16计用班(上册)</a></li>                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none">
+                <div class="col-xs-12 text-cen">
+                    <a class="btn tt_button save_btn Student-style">保存</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框 end-->
+<!--模态框 学科-->
+<div class="modal fade" id="otherModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal_top_bg">
+                <h4 class="modal-title text-cen">其他</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <ul class="tp10 grade_class">
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none">
+                <div class="col-xs-12 text-cen">
+                    <a class="btn tt_button save_btn_other">关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框-->
+<!--
+
+<script type="text/javascript" src="Public/jQuery/jquery.min.js"></script>
+<script src="Public/bootstrap/js/bootstrap.min.js"></script>
+<script src="Public/Js/repository_jquery.tree.js"></script>-->
+<script type="text/javascript">
+    var frontData = JSON.parse('{"semester_id":"16","subject_id":"47","subject_name":"\u8ba1\u7b97\u673a\u5e94\u7528\u4e0e\u7f51\u7edc","semester_name":"16\u8ba1\u7528\u73ed(\u4e0a\u518c)","section_id":"741","student_id":"33"}');
+    $(function() {
+        $('#select_child').change(function(){
+            $('#select_form').submit();
+        })
+        /* 展开对应的章节列表 */
+        $('#files').tree({
+            expanded: 'li[data-sid="741"]'
+        });
+
+        /*学科导航菜单*/
+        $('.nav ul>li a').click(function(){
+            $('.nav ul li').removeClass('li_line_style');
+            $(this).parent().addClass('li_line_style');
+            var id = $(this).attr('data-date');
+            var text = $('.nav').find('.li_line_style').text();
+            if (text == '其他'){
+                $('#otherModal').modal('show');
+            }
+        });
+
+        /*左侧菜单按钮*/
+        $('body').delegate('a.children_btn','click',function(){
+            var parent=$(this).parents('.node_ul');
+            parent.find('.children_btn').removeClass('a_hover');
+            $(this).addClass('a_hover');
+
+        });
+        $('body').delegate('a.is_click_li_a','click',function() {
+            $('.is_click_li').removeClass('is_click_li');
+            $(this).parents('li').addClass('is_click_li');
+            $('.see_more_paper,.see_more_micro,.see_more_question,.micro,.question,.paper').removeClass('hide');
+        })
+
+        /*年级选择*/
+        $('body').delegate('ul.grade_class li','click',function(){
+            $('.is_click').removeClass('is_click');
+            $(this).children('a').addClass('is_click');
+        });
+
+        /*关闭年级选择*/
+        $('.save_btn').click(function(){
+            $('#myModal').modal('hide');
+        });
+
+        /*选择其他*/
+        $('.save_btn_other').click(function(){
+            $('#otherModal').modal('hide');
+        });
+
+        /* 点击切换错题集内容 */
+        $(document).on('click', '[data-type]', function(event) {
+            var s = $(this);
+            var type = s.data('type');
+            var val = s.data(type);
+            frontData[type] = val;
+            if (type == 'section') {
+                var section_id = s.data('section_id');
+                frontData['section_id'] = section_id;
+            }
+
+            var url = '/index.php?m=Parent&c=Homework&a=listHomework';
+            var param = objToParam(frontData);
+            location.href = url + '&' + param;
+        });
+    });
+
+    /* 对象转url参数 */
+    function objToParam(obj) {
+        if (typeof obj != 'object') {
+            return false;
+        }
+        var paramArr = [], _str;
+        for (var i in obj) {
+            _str = i + '=' + encodeURIComponent(obj[i]);
+            paramArr.push(_str);
+        }
+        var paramStr = paramArr.join('&');
+        return paramStr;
+    }
+</script>

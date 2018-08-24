@@ -1,0 +1,13 @@
+<div class="container" style="height: 100%;">
+  <!-- 标题 -->
+  <div class="row" style="height: 6%;">
+      <div class="col-xs-12 title"> <span style="float: left;" *ngIf="title!=='一卡通充值平台'" (click)="title='一卡通充值平台'">《</span>{{title}}</div>
+  </div>
+  <!-- 内容 -->
+  <div class="row" style="height: 94%;">
+    <app-top-up-index *ngIf="title==='一卡通充值平台'"  (titleReceive)="title_dispose($event)" ></app-top-up-index>
+    <app-top-up-iwant *ngIf="title==='我要充值'"></app-top-up-iwant>
+    <app-topup-topuplog *ngIf="title==='充值记录'"></app-topup-topuplog>
+    <app-topup-consumlog *ngIf="title==='消费记录'"></app-topup-consumlog>
+  </div>
+</div>

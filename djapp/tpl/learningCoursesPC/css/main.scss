@@ -1,0 +1,226 @@
+html,
+body,
+mian {
+    width: 100%;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    user-select: initial;
+}
+
+select {
+    background: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+*:focus {
+    outline: none;
+}
+
+$mainHeaderHeight:70px; //头部高度
+video {
+    width: 100%;
+    height: 100%;
+}
+
+.dot {
+    display: inline-block;
+    background: #cc0033;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $mainHeaderHeight;
+    display: none;
+    z-index: 2;
+    img {
+        width: 50px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    div {
+        width: 100%;
+        height: 100%;
+        background: black;
+        opacity: .5;
+        position: absolute;
+        top: 0;
+        z-index: -1;
+    }
+}
+
+$nextHeadHeight:100px; //比头部低
+#menu {
+    position: fixed;
+    right: -25%;
+    top: $nextHeadHeight;
+    display: none;
+    li {
+        color: white;
+        font-size: 18px;
+        position: relative;
+        width: 56px;
+        height: 84px;
+        line-height: 84px;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 1px solid white;
+        cursor: pointer;
+        div {
+            width: 100%;
+            height: 100%;
+            background: black;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            opacity: .5;
+        }
+    }
+    .active {
+        div {
+            background: #f2f2f2;
+        }
+    }
+}
+
+$tabHeaderHeight:45px; //侧边选项卡头部高度
+$titleFontSize:16px;
+#tab-container {
+    position: fixed;
+    top: $nextHeadHeight;
+    right: -25%;
+    width: 25%;
+    height: 80%;
+    display: none;
+    >.active {
+        display: block !important;
+    }
+    .curtain {
+        opacity: .9;
+        background: white;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    .tab {
+        display: none;
+        height: 100%;
+        overflow: auto;
+        header {
+            background: #f2f2f2;
+            width: 100%;
+            height: $tabHeaderHeight;
+            span {
+                line-height: $tabHeaderHeight;
+                display: inline-block;
+                height: $tabHeaderHeight;
+                padding: 0 20px;
+                cursor: pointer;
+            }
+        }
+        article {
+            margin-bottom: 30px;
+            text-align: center;
+            dl {
+                margin-top: 10px;
+                dt {
+                    text-align: center;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                    * {
+                        vertical-align: middle;
+                        margin-right: 5px;
+                    }
+                    span {
+                        font-size: 14px;
+                    }
+                    .userName {
+                        float: left;
+                        margin-left: 10px;
+                    }
+                    .userContent {
+                        float: left;
+                        margin-left: 20px;
+                        display: inline-block;
+                        width: 70%;
+                        text-align: left;
+                    }
+                    .content {
+                        display: inline-block;
+                        width: 70%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
+            hr {
+                border: .5px solid #ccc;
+            }
+            textarea {
+                width: 90%;
+                height: 150px;
+                margin: 10px;
+                resize: none;
+            }
+            button {
+                background: #cc0033;
+                width: 90%;
+                border: none;
+                color: white;
+                font-size: 15px;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            p {
+                font-size: 16px;
+                text-align: left;
+                padding-left: 10px;
+                margin-bottom: 10px;
+            }
+            #discussQuantity {
+                color: #cc0033;
+            }
+            .title {
+                padding: 10px 20px;
+            }
+        }
+        .title {
+            font-size: $titleFontSize;
+        }
+        .active {
+            border-bottom: 2px solid #cc0033;
+            box-sizing: border-box;
+        }
+    }
+    img {
+        width: 15px;
+    }
+}

@@ -1,0 +1,314 @@
+.l-layout-left .l-tab-links li img {
+    padding-top: 4px;
+    padding-right: 3px;
+    width: 22px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#juese {
+    float: left;
+}
+
+.chengyuan {
+    height: 500px;
+    width: 255px;
+    float: left;
+    /*overflow-y: auto;
+    overflow-x: hidden;*/
+    border: 1px solid #ccc;
+}
+
+.chengyuan h4 {
+    text-align: center;
+    margin: 0;
+    line-height: 40px;
+    height: 40px;
+    /* background-color: rgba(52, 52, 52, .5); */
+    background-color: #dedede;
+}
+
+.table_font a {
+    font-size: 12px;
+}
+
+.table_font th {
+    font-size: 15px;
+}
+/* 职位字体 */
+
+.position_font a {
+    font-size: 12px;
+}
+
+.position_font th {
+    font-size: 15px;
+}
+
+.biaoge {
+    width: 250px;
+    float: left;
+    border: 1px solid #ccc;
+}
+
+.biaoge h4 {
+    text-align: center;
+    margin: 0;
+    line-height: 40px;
+    height: 40px;
+    /* background-color: rgba(52, 52, 52, .5); */
+    background-color: #dedede;
+}
+
+.shenhe {
+    float: left;
+    width: 260px;
+    height: 500px;
+    /*overflow-y: auto;
+    overflow-x: hidden;*/
+}
+
+.shenhe h4 {
+    text-align: center;
+    margin: 0;
+    line-height: 40px;
+    height: 40px;
+    /* background-color: rgba(52, 52, 52, .5); */
+    background-color: #dedede;
+}
+
+.table-responsive_top {
+    height: 40px;
+    /* text-align: center; */
+    /* background-color: #dedede; */
+}
+
+.table-responsive_top a {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 30px;
+    color: black;
+}
+
+.tree_box {
+    height: 94%;
+    width: 260px;
+    overflow-y: auto;
+}
+
+#treedata {
+    width: 100%;
+}
+/* 用户审核/用户管理 */
+
+.show_in {
+    width: 1200px;
+    /*height: 400px;*/
+    height: auto;
+    position: relative;
+    top: 70px;
+    left: 30px;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(52, 52, 52, .8);
+    z-index: 999;
+}
+
+.colsout {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.colsout:hover {
+    text-decoration: none;
+}
+
+.colsout_txt {
+    color: #fff;
+    height: 35px;
+    line-height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.l-tree-icon-folder-open .treeimg {
+    background-image: url("../public/part/ligerlib/ligerUI/skins/icons/modify.gif") !important;
+}
+
+.treeimg {
+    background-image: url("../public/part/ligerlib/ligerUI/skins/icons/modify.gif")!important;
+}
+#treedata_save{
+    display: inline-block;
+    padding: 1px 8px;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    background-color: #00a0e9;
+    font-size: 14px;
+    color: #ffffff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius:4px;
+    cursor: pointer;
+}
+#treedata_save:hover{
+    background-color: #6861e0;
+}
+.power_tree_role,power_tree_disk{
+    width: 16px;
+    height: 16px;
+    position: relative;
+    margin-left: 3px;
+}
+/*弹出部门角色窗*/
+.role_block{
+    display: none;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+.role_name{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: auto;
+}
+.role_name li{
+    height: 23px;
+    width: 80px;
+    line-height: 20px;
+    border-bottom: 1px solid #cccccc;
+    font-size: 14px;
+    cursor: pointer;
+    color: #666666;
+    padding: 2px;
+    box-sizing: border-box;
+}
+.role_name li:hover{
+    background-color: #efefef;
+}
+.role_lower{
+    display: inline-block;
+    float: right;
+    width:0;
+    height:0;
+    border-width:4px;
+    border-style:solid;
+    border-color:transparent transparent transparent #7d7979;
+    margin-top: 7px;
+}
+.role_user{
+    display: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    left:80px;
+    margin-top: -23px;
+    list-style: none;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+
+/* companyModal */
+.companyContainer {
+    position: relative;
+    z-index: 6666;
+    width: 100%;
+    height: 100%;
+    background: rgba(51, 51, 51, 0.6);
+    display: none;
+}
+/*#companyModal {
+    min-width: 500px;
+    min-height: 675px;
+    width: 42%;
+    height: 75%;
+    position: relative;
+    z-index: 6666;
+    margin: 0 auto;
+    top: 10%;
+}*/
+#companyModal iframe {
+     width: 100%;
+     height: 100%;
+     border-radius: 6px;
+}
+.biaodan {
+    height: 550px;
+}
+#biaodan iframe {
+    width: 100%;
+    height: 100%;
+}
+#tab1 .l-tab-links li a {
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 10px;
+}
+.indexs {
+    /*position: relative;*/
+    width: 100%;
+    position: fixed;
+    z-index: 6666;
+    background-image: url("../images/index_top.png");
+}
+.caidan {
+    width: 100%;
+    height: 54px;
+    box-sizing: border-box;
+    background-color: #fff;
+    /*box-shadow: 4px 4px 10px #ccc;*/
+    line-height: 54px;
+}
+.daohanSpan {
+    margin-left: 20px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    line-height: 54px;
+}
+.daohanA {
+    width: 150px;
+    height: 54px;
+    /*margin-right: -3px;*/
+    color: #525252;
+    font-size: 16px;
+    text-align: center;
+    /*background-color: #44a5ff;*/
+    display: inline-block;
+}
+.daohanA:hover {
+    text-decoration: none;
+    color: #fff;
+    background-color: #44a5ff;
+}
+.activeA {
+    color: #fff;
+    background-color: #44a5ff;
+}
+#bgc {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#bgc img {
+    width: 100%;
+}
+@media screen and  (max-width: 960px) {
+    .daohanA {
+        width: 100px;
+    }
+}

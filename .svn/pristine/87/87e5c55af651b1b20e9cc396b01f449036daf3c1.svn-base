@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!--电话更改-->
+
+<div class="change_div change_phone" ng-if="change == 4">
+    <div class="um_header">
+        <div class="um_btn iconfont ic-fanhui" ng-click="goUmBtn()" >
+
+        </div>
+        <div class="ch_mes">更改电话</div>
+        <div class="ch_save" ng-click="chSave()">
+            保存
+        </div>
+    </div>
+    <div class="change ch_bodies">
+        <input type="text" ng-model="userjob.phone">
+    </div>
+</div>

@@ -1,0 +1,1 @@
+.body{padding:0}.body .bodyMain{display:none}.project{display:block !important}.project table th{font-weight:bold;text-align:center;white-space:nowrap}.project table td{text-align:center;white-space:nowrap;padding:0.26667rem}.project table .control{cursor:pointer;color:#DF3F29}#swiperBody .swiper-slide{overflow-x:auto}

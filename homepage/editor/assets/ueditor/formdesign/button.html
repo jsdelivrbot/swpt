@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>按钮控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!-- jQuery - 3.2.1 -->
+    <script src="./self/js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!-- <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script> -->
+    <!-- Leipi -->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <!-- Self -->
+    <script src="./self/js/publicMethod.js"></script>
+    <script src="../httpData.config.js"></script>
+    <style>
+        .fileLabel {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            background: #74cbe4;
+            border: 1px solid #b4e4f3;
+            width: 60px;
+            padding: 3px 5px;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .fileLabel input {
+            display: none;
+        }
+
+        .fileLabel+img {
+            width: 20%;
+            left: 30%;
+            margin-left: 20%;
+        }
+
+    </style>
+    <script type="text/javascript">
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+        function getLinks() {
+            /*
+             * 后台获取 数据链接
+             *
+             */
+            var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            var nodeId = $( '#node_id', window.parent.document ).val();
+            $.ajax( {
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( '.dataSelect' ).append( '<option value=' + value.id + '>' + value.value + '</option>' );
+                    } )
+                    if ( UE.plugins[ thePlugins ].editdom ) {
+                        /* for ( var i = 0; i < count.length; i++ ) {
+                            $( '.dataSelect option[value=' + gTarget + ']' ).attr( 'selected' );
+                        } */
+                    }
+                },
+                error: function ( res ) {
+                    alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                }
+            } );
+        }
+
+        var isUpload; // 判断是否已经上传了图片
+        $( function () {
+            /*
+             * 点击上传图片，先不上传，先预览
+             *  
+             */
+            $( '.fileLabel > input' ).on( 'click', function ( e ) {
+                if ( FileReader === undefined ) {
+                    if ( confirm( '抱歉, 您的浏览器并不支持预览功能, 如想显示预览图片, 请点确定, 我们为您跳转下载最新的Chrome浏览器！ ' ) ) window.open( 'https://www.baidu.com/link?url=W8-UUy0Mr_nSpYmg0iMxyMEzKDWBWcqcxnidV5Dqg0TccQFepC5Ew6vuRT5w-MelxeEEc5272AEwqm6e2bJsm9NMB_U811t1vI2vZvxhjRK&wd=&eqid=8910596e00010137000000065a684a73' )
+                } else {
+                    e.target.addEventListener( 'change', readFile );
+                }
+            } );
+
+            function readFile() {
+                var file = this.files[ 0 ];
+                if ( !/image\/\w+/.test( file.type ) ) {
+                    alert( '文件必须为图片！' );
+                    return false;
+                }
+                var render = new FileReader();
+                render.readAsDataURL( file );
+                render.onload = function ( e ) {
+                    $( '.previewImg' ).attr( 'src', this.result )
+                }
+            }
+
+        } )
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <input id="hidname" type="hidden" />
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>图片位置</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="orgname" onclick="javascript:this.select()" placeholder="必填项" type="text" value="按钮" /> </td>
+                <td>
+                    <label class="radio" title="最上">
+                        <input id="orderby1" name="orderby" value="1" type="radio"> 上 </label>
+                    <label class="radio" title="最下">
+                        <input id="orderby0" value="0" name="orderby" type="radio" checked="checked"> 下 </label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>模式</span>
+                </th>
+                <th>
+                    <span>标题</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label class="radio" title="图标+文字">
+                        <input id="mode0" name="mode" value="0" type="radio" checked="checked"> 图标 + 文字 </label>
+                    <label class="radio" title="纯文字">
+                        <input id="mode1" value="1" name="mode" type="radio"> 纯文字 </label>
+                </td>
+                <td>
+                    <input type="text" name="orgtitle" id="orgtitle" name="leipiNewField" placeholder="选项值">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>宽</span>
+                </th>
+                <th>
+                    <span>高</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="orgwidth" value="25%" name="orgwidth" type="text" name="leipiNewField">
+                </td>
+                <td>
+                    <input type="text" name="orgheight" id="orgheight" name="leipiNewField" placeholder="auto">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>图标</span>
+                </th>
+                <th>
+                    <span>跳转目标</span>
+                </th>
+            </tr>
+            <tr>
+                <td style="position: relative;">
+                    <label class="fileLabel">上传图片
+                        <input type="file" class="fileUpload upload" />
+                    </label>
+                    <img src="" class="previewImg" name="orgsrc" alt="">
+                </td>
+                <td>
+                    <select class="dataSelect"></select>
+                    <br/>
+                    <br/>
+                    <input type="text" name="dataSelectInput" id="dataSelectInput">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>背景颜色</span>
+                </th>
+                <th>
+                    <span>文字颜色</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="color" name="leipiNewField" id="orgBgColor">
+                </td>
+                <td>
+                    <input type="color" name="leipiNewField" id="orgFontColor">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="alert alert-danger">提示：选择了
+        <strong>“图标 + 文字”</strong> 模式 ，则
+        <strong>“背景颜色”</strong> 选项不会生效</div>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'button';
+        window.onload = function () {
+            $G( 'orgname' ).select();
+            getLinks();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var orderby = oNode.getAttribute( 'orderby' );
+                orderby == '0' ? $G( 'orderby0' ).orderby = true : $G( 'orderby1' ).orderby = true;
+                var mode = oNode.getAttribute( 'mode' );
+                mode == '0' ? $G( 'mode0' ).checked = true : $G( 'mode1' ).checked = true;
+                // 获取oNode的值赋予变量
+                var valArr = [ 'Title', 'Name', 'Height', 'Width' ];
+                var gTitle = oNode.getAttribute( 'orgtitle' ),
+                    gSrc = oNode.getAttribute( 'orgsrc' ),
+                    gBgColor = oNode.getAttribute( 'orgbgcolor' ),
+                    gName = oNode.getAttribute( 'orgname' ),
+                    gHeight = oNode.getAttribute( 'orgheight' ),
+                    gWidth = oNode.getAttribute( 'orgwidth' ),
+                    gFontColor = oNode.getAttribute( 'orgfontcolor' ),
+                    gUrl = oNode.getAttribute( 'orgurl' );
+
+                $( '#orgname' ).val( gName );
+                $( '#orgtitle' ).val( gTitle );
+                $( '#orgheight' ).val( gHeight );
+                $( '#orgwidth' ).val( gWidth );
+                $( '.previewImg' ).prop( 'src', gSrc );
+                $( '#orgBgColor' ).val( gBgColor );
+                $( '#orgFontColor' ).val( gFontColor );
+                $( '#dataSelectInput' ).val( gUrl );
+            }
+
+            $( function () {
+                $( '.dataSelect' ).on( 'change', function () {
+                    var selectVal = $( '.dataSelect option:checked' ).val();
+                    $( '#dataSelectInput' ).prop( 'value', prevent_Url + 'editor/assets/ueditor/formdesign/preview.html?link=' + selectVal );
+                } )
+            } )
+        }
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+        dialog.onok = function () {
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '控件名称不能为空' );
+                return false;
+            }
+
+            var orgName = $G( 'orgname' ).value.replace( /\"/g, "&quot;" );
+
+            var orderby = '1';
+            var flexDirection;
+            if ( $G( 'orderby0' ).checked ) orderby = '0';
+            orderby === '1' ? flexDirection = 'column-reverse' : flexDirection = 'column';
+            var mode = '0';
+            if ( $G( 'mode1' ).checked ) mode = '1';
+            var orgTitle = $( '#orgtitle' ).val(),
+                orgWidth = $( '#orgwidth' ).val(),
+                orgHeight = $( '#orgheight' ).val(),
+                orgSrc = $( '.previewImg' ).prop( 'src' ),
+                orgUrl = $( '#dataSelectInput' ).val(),
+                orgBgColor = $( '#orgBgColor' ).val(),
+                orgFontColor = $( '#orgFontColor' ).val();
+            if ( !oNode ) {
+
+                /* if ( mode === '0' ) html = "<div style='color:" + orgFontColor + ";";
+                else html = "<div style='color:" + orgFontColor + ";background:" + orgBgColor + ";";
+                html += "float:left;padding:5px;width:" + orgWidth + "; height:" + orgHeight + "; display:inline-block;' name='leipiNewField' leipiplugins='button' orgname='" + orgName + "' orderby='" + orderby + "' mode='" + mode + "' orgtitle='" + orgTitle + "'";
+                html += "orgwidth='" + orgWidth + "' orgheight='" + orgHeight + "' orgsrc='" + orgSrc + "' orgurl='" + orgUrl + "'";
+                html += "orgbgcolor='" + orgBgColor + "' orgFontColor='" + orgFontColor + "'>";
+                html += "<div style='display:flex;flex-direction:" + flexDirection + "'>";
+                if ( mode === '0' ) html += "<div style='width:100%;height:100%;'><img src='" + orgSrc + "' style='width:100%;height:100%;'></div>";
+                html += "<div style='display:inline-block;width:100%;height:100%;text-align:center;'><p style='font-size:1.4rem'>" + orgTitle + "</p></div>"
+                html += "</div></div>"; */
+
+                oNode = createElement( 'input', 'leipiNewField' );
+                oNode.setAttribute( 'name', 'leipiNewField' );
+                oNode.setAttribute( 'leipiPlugins', thePlugins );
+                oNode.setAttribute( 'mode', mode );
+                oNode.setAttribute( 'orderby', orderby );
+                oNode.setAttribute( 'orgtitle', orgTitle );
+                if ( mode === '0' ) {
+                    oNode.setAttribute( 'orgsrc', orgSrc );
+                    oNode.setAttribute( 'orgbgcolor', '' );
+                } else {
+                    oNode.setAttribute( 'orgbgcolor', orgBgColor );
+                    oNode.setAttribute( 'orgsrc', '' );
+                }
+                oNode.setAttribute( 'orgname', orgName );
+                oNode.setAttribute( 'orgheight', orgHeight );
+                oNode.setAttribute( 'orgwidth', orgWidth );
+                oNode.setAttribute( 'orgfontcolor', orgFontColor );
+                oNode.setAttribute( 'orgurl', orgUrl );
+
+                editor.execCommand( 'insertHtml', oNode.outerHTML );
+                return true;
+
+            } else {
+                oNode.setAttribute( 'name', 'leipiNewField' );
+                oNode.setAttribute( 'leipiPlugins', thePlugins );
+                oNode.setAttribute( 'mode', mode );
+                oNode.setAttribute( 'orderby', orderby );
+                oNode.setAttribute( 'orgtitle', orgTitle );
+                if ( mode === '0' ) {
+                    oNode.setAttribute( 'orgsrc', orgSrc );
+                    oNode.setAttribute( 'orgbgcolor', '' );
+                } else {
+                    oNode.setAttribute( 'orgbgcolor', orgBgColor );
+                    oNode.setAttribute( 'orgsrc', '' );
+                }
+                oNode.setAttribute( 'orgname', orgName );
+                oNode.setAttribute( 'orgheight', orgHeight );
+                oNode.setAttribute( 'orgwidth', orgWidth );
+                oNode.setAttribute( 'orgfontcolor', orgFontColor );
+                oNode.setAttribute( 'orgurl', orgUrl );
+
+                delete UE.plugins[ thePlugins ].editdom;
+                return true;
+            }
+        };
+
+    </script>
+</body>
+
+</html>

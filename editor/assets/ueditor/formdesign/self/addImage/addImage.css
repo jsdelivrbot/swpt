@@ -1,0 +1,31 @@
+/* addImage modal */
+
+#avatar-modal,
+#video-modal {
+    height: 610px;
+    width: 100%;
+    overflow: hidden;
+    margin-left: -50%;
+}
+
+#avatar-modal .modal-dialog,
+#video-modal .modal-dialog {
+    height: 100%;
+}
+
+#avatar-modal .modal-dialog .modal-content,
+#video-modal .modal-dialog .modal-content {
+    height: 100%;
+}
+
+#avatar-modal .modal-dialog .modal-content .modal-body,
+#video-modal .modal-dialog .modal-content .modal-body {
+    max-height: 520px;
+    height: 520px;
+    overflow: hidden;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}

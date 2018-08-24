@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+    <link rel="stylesheet" type="text/css" href="./css/base.css" />
+    <script src="./js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/base.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        ( function ( doc, win ) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if ( !clientWidth ) return;
+                    docEl.style.fontSize = 50 * ( clientWidth / 375 ) + 'px';
+                };
+            if ( !doc.addEventListener ) return;
+            win.addEventListener( resizeEvt, function () {
+                clearTimeout( tid );
+                tid = setTimeout( recalc, 300 );
+            }, false );
+            win.addEventListener( 'pageshow', function ( e ) {
+                if ( e.persisted ) {
+                    clearTimeout( tid );
+                    tid = setTimeout( recalc, 300 );
+                }
+            }, false );
+            doc.addEventListener( 'DOMContentLoaded', function () {
+                tid = setTimeout( recalc, 0 );
+            }, false );
+            recalc();
+        } )( document, window );
+
+    </script>
+</head>
+
+<body>
+    <header class="cole-head head-bar posi-fi">
+        <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+        <p class="color-white">试卷标题</p>
+        <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+    </header>
+    <main class="noli-main">
+        <form organization>
+            <input type="hidden" name="topic" value="1">
+            <input type="hidden" name="userId" value="1">
+            <input type="hidden" name="sort" value="1">
+            <input type="hidden" name="status" value="0">
+        </form>
+        <form>
+            <input type="hidden" name="id" value="1">
+            <input type="hidden" name="userId" value="1">
+        </form>
+        <article>
+            <section type="0">
+                <b>一、单选题</b>
+                <ul>
+                </ul>
+            </section>
+            <section type="1">
+                <b>二、多选题</b>
+                <ul>
+                </ul>
+            </section>
+            <section type="2">
+                <b>三、简答题</b>
+                <ul>
+                </ul>
+            </section>
+        </article>
+    </main>
+</body>
+<script>
+    $( '.cole-head p' ).html( dj.getStorage( 'noteTitle' ) );
+    $( '.noli-main' ).hide();
+
+    $.ajax( {
+        url: ajaxUrl + '/papersQuestion/searchQuestionUserNote',
+        type: 'get',
+        dataType: 'json',
+        contentType: 'application/json;charset=UTF-8',
+        cache: false,
+        data: { 'id': dj.getStorage( 'openTestId' ), 'userId': dj.getStorage( 'userId' ) }
+    } ).done( function ( m, n ) {
+        var result = m.msg;
+        for ( var i in result ) {
+            var text = '<li uerid="' + result[ i ].userId + '" pid="' + result[ i ].pId + '" type="' + result[ i ].type + '" topic="' + result[ i ].topic + '">' +
+                '<span  class="noli-topic"><span serial="serial"></span>丶' + result[ i ].title + '</span>' +
+                '<span>&nbsp;</span>' +
+                '<span class="noli-time">' + dj.getDate( result[ i ].createTime, 'Y-M-D' ) + '</span>' +
+                '</li>';
+            if ( JSON.stringify( result[ i ].type ) == '0' ) {
+                $( '.noli-main section[type="0"] ul' ).append( text );
+            } else if ( JSON.stringify( result[ i ].type ) == '1' ) {
+                $( '.noli-main section[type="1"] ul' ).append( text );
+            }
+            //  else if ( JSON.stringify( result[ i ].type ) == '2' ) {
+            //     $( '.noli-main section[type="2"] ul' ).append( text );
+            // }
+        }
+        $( '.noli-main section[type="0"] ul li' ).each( function ( i, e ) {
+            $( e ).find( '[serial="serial"]' ).html( i + 1 );
+        } );
+        $( '.noli-main section[type="1"] ul li' ).each( function ( i, e ) {
+            $( e ).find( '[serial="serial"]' ).html( i + 1 );
+        } );
+        // $( '.noli-main section[type="2"] ul li' ).each( function ( i, e ) {
+        //     $( e ).find( '[serial="serial"]' ).html( i + 1 );
+        // } );
+        $( '.noli-main section' ).each( function ( i, e ) {
+            if ( $( e ).find( 'ul li' ).length == 0 ) {
+                $( e ).hide();
+            }
+        } );
+        $( '.noli-main' ).fadeIn( 'fast' );
+    } ).fail( function ( m, n ) {
+        $( '.noli-main' ).html( '<p class="font-40 text-center">对不起，获取笔记失败！</p>' );
+        $( '.noli-main' ).fadeIn( 'fast' );
+    } );
+    $( '.noli-main' ).off().on( 'click', 'ul>li', function () { //点击笔记列表触发
+        dj.setStorage( { 'noteUserId': $( this ).attr( 'userId' ), 'noteTopic': $( this ).attr( 'topic' ), 'notePid': $( this ).attr( 'pid' ), 'noteType': $( this ).attr( 'type' ) } );
+        $( 'body' ).nextPage( './note-detail.html' );
+    } );
+
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+
+</script>
+
+</html>

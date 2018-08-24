@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="/re_dangjian/css/re_public.css">
+<link rel="stylesheet" href="/re_dangjian/css/re_index.css">
+
+<style>
+    .modal{
+        background-color: rgba(33,33,33,0.6);
+    }
+    .modal_body{
+        width:90%;
+        margin: 20px auto;
+    }
+    .modal_body p {
+        font-size: 16px;
+    font-weight: bold;
+    }
+    .modal_body label{
+        display: block;
+        font-weight: normal;
+        height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
+    }
+    .modal_body label input{
+        margin:0 5px;
+        vertical-align: middle;
+    }
+    .modal_body  .selTab{
+        margin-bottom: 4rem;
+    }
+    .modal_body .handle  textarea{
+        width: 90%;
+        height: 100px;
+    }
+    .modal-footer{
+       text-align: center;
+    }
+    .page-list{
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+</style>
+<div class="top">
+        <span class="top-return" onclick="javascript:history.go(-1);"></span>
+         <h1>审核资源</h1>
+         <span class="top-add" ng-click="addCourse()"></span>
+</div>
+<div class="examine_type">
+    <ul>
+        <li ng-repeat="r in examData" ng-class="{active:pass==r.id}" ng-click="expass(r.id)" >{{r.name}}</li>
+    </ul>
+</div>
+
+<div class="examineItem" ng-if="examinePass == 'examPass'">
+        <div class="examineType">
+                <div class="mk_type examine_item">
+                    <span>模块类型:</span>
+                    <ul>
+                            <li ng-repeat="s in  sourceType" ng-click="modelExam(s.id,s.uploadTypeName,$event)" ng-class="{active:bookShow==s.id}">{{s.uploadTypeName}}</li>
+                    </ul>
+                </div>
+                <div class="tj_type examine_item">
+                    <span>推荐对象(岁):</span>
+                    <ul>
+                        <li ng-repeat="s in objectType" ng-click="objectExam(s.id,s.recommendedObjectName,$event)" ng-class="{active:objectShow==s.id}">{{s.recommendedObjectName}}</li>
+                    </ul>
+                </div>
+                <div class="zy_type examine_item">
+                    <span>书籍类型:</span>
+                   
+                    <ul>
+                            <li ng-repeat="s in bookType"  ng-click="sourceExam(s.id,s.bookTypeName,$event)" ng-class="{active:sourceShow==s.id}">{{s.bookTypeName}}</li>
+                        </ul>
+                </div>
+            </div>
+
+    <div class="examinezjType">
+           <ul class="video_title clearfix">
+               <li>编号</li>
+             
+               <li>资源名称</li> 
+                <li>作者</li>
+               <li>时间</li>
+               <li>价格</li>
+               <li>章节名称</li>
+               <li>视频</li>
+               <li>音频</li>
+               <li>图书</li>
+               <li>操作</li>
+           </ul>
+          <ul class="video_data clearfix" ng-repeat="s in sourceData"  id="{{s.id}}" >
+              <li>{{s.id}}</li>
+             
+              <li>{{s.bookName}}</li> 
+              <li>{{s.bookAuthor}}</li>
+              <li>{{s.createTime |  date : 'yyyy-MM-dd'}}</li>
+              <li>123</li>
+              <li style="width:56% ;height:100%">
+                  <ul  class="chapter_data clearfix" id="{{s.id}}">
+                    <li>第一章节</li>
+                        <li>山海经.mp4</li>
+                        <li>faded.mp3</li>
+                        <li>山海经</li>
+                        <li><a class="check" ng-click="sourceDetail($event)">查看</a><a ng-click="sourceDel($event)" class="del">删除</a><a ng-click="sourceExamine($event)" class="fail">取消通过</a></li>
+                  </ul>  
+                  <ul  class="chapter_data clearfix" id="{{s.id}}">
+                        <li>第二章节</li>
+                            <li>马可波罗.mp4</li>
+                            <li>faded.mp3</li>
+                            <li>马可波罗</li>
+                            <li><a class="check" ng-click="sourceDetail($event)">查看</a><a ng-click="sourceDel($event)" class="del">删除</a><a ng-click="sourceExamine($event)" class="fail">取消通过</a></li>
+                      </ul>
+                  <ul class="chapter_data clearfix" id="{{s.id}}">
+                        <li>第三章节</li>
+                            <li>大悲咒.mp4</li>
+                            <li>faded.mp3</li>
+                            <li>大悲咒</li>
+                            <li><a class="check" ng-click="sourceDetail($event)">查看</a><a ng-click="sourceDel($event)" class="del">删除</a><a ng-click="sourceExamine($event)" class="fail">取消通过</a></li>
+                      </ul>  
+                    </li>
+              
+             
+                   </ul> 
+    </div>
+       <!-- 分页 --> 
+       <tm-pagination conf="paginationConf"></tm-pagination>   
+</div>
+     <!--审核通过 -->
+     <div class="modal"  id="zjModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal_body">
+                             <div class="book_detail clearfix">
+                                 <div class="book_infor clearfix">
+                                     <div class="infor_img">
+                                         <img src="img/re_list.png">
+                                     </div>
+                                     <div class="infor_de">
+                                         <div class="infor_tittle">{{allData.bookName}}</div>
+                                         <div class="infor_autor">{{allData.bookAuthor}}</div>
+                                         <div class="infor_pu">{{allData.bookPress}}</div>
+                                         <div class="infor_ibsn">1154989</div>
+                                         <div class="infor_object">{{allData.bookIBSN}}</div>
+                                         <div class="infor_reason">{{allData.recommendedReasons}}</div>
+                                        
+                                     </div>
+                                 </div>
+                                 <div class="jianjie">
+                                     <div class="jianjie_title">简介内容</div>
+                                     <div class="jianjie_ly">{{allData.briefIntroduction}}</div>
+                                 </div>
+                             
+                             </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="cancelSource()" class="btn btn-primary" data-dismiss="modal">
+                                    取消通过
+                             </button>
+                        <!-- <button type="button" ng-click="confirmSource()" class="btn btn-primary" data-dismiss="modal">
+                            通过
+                        </button> -->
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+
+       <!--审核不通过 -->
+       <div class="modal"  id="mdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header btn-success">
+                        <h4 class="modal-title text-center" id="myModalLabel">
+                            审核不通过原因
+                        </h4>
+                    </div>
+                    <div class="modal_body">
+                      <div class="selTab">  
+                        <p>选择标签</p>
+                        <label ng-repeat="item in contentText track by $index">
+                            <input type="checkbox"  ng-checked="chkItem[$index]" ng-click="content(chkItem[$index]==undefind?false:chkItem[$index], item, $index)">{{ item.context }} 
+                        </label> 
+                      </div>
+                      <div class="handle">
+                          <p>手动输入</p>
+                          <textarea row="3" id="textCont"></textarea>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="cancelExam()" class="btn btn-primary" data-dismiss="modal">
+                                    取消
+                             </button>
+                        <button type="button" ng-click="confirmInsert()" class="btn btn-primary" data-dismiss="modal">
+                            确定发送
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>

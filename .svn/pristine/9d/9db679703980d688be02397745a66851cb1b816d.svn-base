@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>党员申请状态</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet/less" type="text/css" href="css/ApplyState.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="js/ApplyState.js"></script>
+</head>
+<body>
+<div class="header">
+    <span class="iconfont icon-zuo quit"></span>
+    党员申请状态
+</div>
+<div class="bodies">
+    <div class="b_status">
+        <div class="activist pass">
+            <div class="step"><i class="iconfont icon-1"></i></div>
+            <div class="call">积极分子</div>
+            <div class="state">已通过</div>
+        </div>
+        <div class="progress audit">
+            <div class="step"><i class="iconfont icon-2"></i></div>
+            <div class="call">发展对象</div>
+            <div class="state">审核中</div>
+        </div>
+        <div class="reserves wait">
+            <div class="step"><i class="iconfont icon-3"></i></div>
+            <div class="call">预备党员</div>
+            <div class="state">待审核</div>
+        </div>
+        <div class="official wait">
+            <div class="step"><i class="iconfont icon-4"></i></div>
+            <div class="call">正式党员</div>
+            <div class="state">待审核</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

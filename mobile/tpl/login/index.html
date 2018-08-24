@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录中心</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="登录中心">
+    <link rel="stylesheet" href="../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../public/css/public.min.css">
+    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="static/css/reguser.css">
+    <script src="../../public/flexible/flexible.js"></script>
+    <script src="../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="close" id="close">
+            <i class="iconfont" onclick="historyUtils.back();">&#xe602;</i>
+        </div>
+        <form method="POST" name="loginForm" class="loginForm" id="loginForm">
+            <label for="account" class="formLabel">
+                <i class="iconfont">&#xe6d9;</i>
+                <input type="text" name="username" id="account" class="account">
+            </label>
+            <label for="password" class="formLabel">
+                <i class="iconfont">&#xe61c;</i>
+                <input type="password" name="password" id="pwd" class="pwd">
+            </label>
+            <h2 class="wrongMsg">*
+                <span id="wrongMsg"></span>
+            </h2>
+            <button type="submit" class="submit" id="submit">点击登入</button>
+            <div class="bBtn">
+                <!--<input type="checkbox" id="explain" class="explain" checked="">
+                <label class="explainC" for="explain">登录就代表着您已经同意
+                    <span class="explainDesc">《汇天教育服务条款》</span>
+                </label>-->
+                <span id="getAcc" class="getAcc">获取账号</span>
+            </div>
+            <!--<div class="bBtn">
+                <input type="checkbox" id="explain" class="explain" checked="">
+                <label class="explainC" for="explain">自动登录
+                </label>
+                <span id="getAcc" class="getAcc">获取账号</span>
+            </div>-->
+        </form>
+        <div class="getAccBody" id="getAccBody" style="display: none;">
+            <div class="weChatCode">
+                <img src="./static/image/qrcode.png" alt="">
+            </div>
+            <div class="content">
+                <p>微信扫描二维码或关注 “广东坤智科技有限公司” </p>
+                <p>并回复“<span class="important">党建</span>”二字免费获取体验登陆账号</p>
+            </div>
+        </div>
+        <div id="regUser" style="display: none;">
+            <form method="POST" name="regUserForm" class="regUserForm" id="regUserForm">
+                <div class="userinput">
+                      <input type="text" name="reg_account" id="reg_account" class="account" placeholder="输入注册手机号码">
+                </div>
+                <div class="userinput">
+                      <input type="password" name="reg_pwd" id="reg_pwd" class="pwd" placeholder="输入密码">
+                </div>
+                <div class="userinput">
+                      <input type="password" name="reg_rpwd" id="reg_rpwd" class="pwd" placeholder="输入确认密码">
+                </div>
+                <div class="userinput">
+                    <input type="text" name="reg_code" id="reg_code" class="pwd" placeholder="输入右边验证码"> <input type="button" id="getRegCode" value="点击获取验证码">
+                </div>
+                <h2 class="wrongMsg">*
+                    <span id="regWrongMsg"></span>
+                </h2>
+                <div class="userinputbtn">
+                    <button type="submit" class="regSubmit" id="regSubmit">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../public/layer/layer.js"></script>
+<script src="../../public/js/method.js"></script>
+<script src="./static/js/main.js"></script>

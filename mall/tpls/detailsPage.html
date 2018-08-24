@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<div>
+    <div class="det_header">
+        <div class="det_h_img">
+            <img src="{{detailsData.pic}}" alt="">
+        </div>
+        <div class="det_h_box">
+             <div class="det_h_name" ng-bind="detailsData.name">
+
+             </div>
+             <ul class="det_h_ul">
+                 <li class="det_h_li" ng-repeat="sel in selectdata" ng-click="selfn($index)" ng-class="{det_active:$index === detnum}">{{sel}}天</li>
+             </ul>
+            <div class="det_h_money mt" ng-bind="money"></div>
+            <div class="det_h_shop" ui-sref="shopfunction({id:{{detid}}})">
+                立即购买
+            </div>
+        </div>
+    </div>
+    <div class="det_content">
+        
+    </div>
+</div>

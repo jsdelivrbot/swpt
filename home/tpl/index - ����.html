@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="./css/home.css">
+<div class="h-content">
+    <a href="{{dm.url}}" ng-repeat="dm in vip_module|filter:{isChoice:true}">
+        <dl>
+            <dt><img src="{{dm.pic}}"></dt>
+            <dd>{{dm.name}}</dd>
+        </dl>
+    </a>
+    <dl ng-click="showMoreModule()">
+        <dt><img src="./img/u72.png"></dt>
+        <dd>更多</dd>
+    </dl>
+    <!--<ul>
+        <li>
+            <a href="../upload/filemg.html" class="h-content_img">
+                <img src="./img/u68.png">
+                <span>网络硬盘</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="h-content_img">
+                <img src="./img/u72.png" >
+                <span>更多</span>
+            </a>
+        </li>
+    </ul>-->
+</div>
+<div class="open-dig" ng-show="show_more_module">
+    <div class="open-content">
+        <div class="open-head">设置快捷菜单<span class="open-top-cls" ng-click="showMoreModule()">x</span></div>
+        <div class="open-con">
+            <div class="vip_module">
+                <h2>开通服务</h2>
+                <dl class="functional_module" ng-repeat="m in vip_module">
+                    <dt><img src="{{m.pic}}" /></dt>
+                    <dd><input type="checkbox" ng-checked="m.isChoice" ng-click="setVipModule(m.id)">{{m.name}}</dd>
+                </dl>
+                <!--<dl class="functional_module">
+                    <dt><img src="./img/more/582044cc2c036.png" /></dt>
+                    <dd><input type="checkbox">备课</dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/582044fc4c2c6.png" /></dt>
+                    <dd><input type="checkbox">讲堂</dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/582045a4b127a.png" /></dt>
+                    <dd><input type="checkbox">教学计划</dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/582045c6e1c44.png" /></dt>
+                    <dd><input type="checkbox">教案分享</dd>
+                </dl>-->
+            </div>
+            <div class="open-bot">
+                <span class="open-bot-sub" ng-click="saveVipSet()">保存设置</span>
+            </div>
+            <div class="other_module">
+                <h2>应用模块</h2>
+                <dl class="functional_module" ng-repeat="mo in other_module">
+                    <dt><img src="{{mo.pic}}" /></dt>
+                    <dd>{{mo.name}}</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <!--<dl class="functional_module">
+                    <dt><img src="./img/more/582045e9415b2.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/5820449fe1122.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/5820452c228d4.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/5820452c228d4.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/5820455c445d1.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/5820458f5b7b4.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/582045428eca0.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>
+                <dl class="functional_module">
+                    <dt><img src="./img/more/58204570916dc.png" /></dt>
+                    <dd>课堂回看</dd>
+                    <dd><a href="">演示</a><a href="">购买</a></dd>
+                </dl>-->
+            </div>
+        </div>
+        <!--<div class="open-bot">
+            <span class="open-bot-sub">确定</span>
+            <span class="open-bot-cls">取消</span>
+        </div>-->
+    </div>
+</div>

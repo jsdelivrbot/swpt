@@ -1,0 +1,120 @@
+.correlation{
+  .bodies {
+    .c_approver {
+      padding: 1.066666rem 0.72rem;
+      border-bottom:1px solid #eee; ;
+      .add_approver{
+        width: 5.48rem;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        text-align: center;
+        font-size: 16px;
+        color:#fefefe;
+        background-color:#e13f2a;
+        cursor: pointer;
+        margin: 0 auto;
+      }
+      .main {
+        padding: 0 1.7rem;
+        .lastgroup div:nth-child(2){
+          top:0.866665rem;
+        }
+        .nextgroup div:nth-child(2){
+          top:0;
+        }
+        .lastgroup, .nextgroup {
+          position: relative;
+          height: 1.73333rem;
+          display: flex;
+          align-items: center;
+          .num, .vessel {
+            background-color: #fff;
+            height: 0.666666667rem;
+            line-height: 0.666rem;
+          }
+          .border {
+            height: 0.866665rem;
+            left: 0.3333333335rem;
+            width: 1px;
+            position: absolute;
+            z-index: 0;
+            background-color: #999;
+          }
+          .num {
+            z-index: 100;
+            width: 0.666666667rem;
+            border: 1px solid #999;
+            color: #555;
+            text-align: center;
+            border-radius: 50%;
+          }
+          .vessel {
+            margin-left: 0.8rem;
+            width: 3.3333rem;
+            border: 1px solid #aaa;
+          }
+        }
+      }
+    }
+    .c_copyto{
+      padding: 1.066666rem 0.72rem;
+      .main{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        .person{
+          margin-top:.3rem ;
+          width: 0.8266666rem;
+          height: 0.8266666rem;
+          border-radius: 50%;
+          background-color: #66afe9;
+          margin-left: 0.453333rem;
+        }
+        .add_copyto{
+          margin-top:.3rem ;
+          width: 0.8266666rem;
+          height: 0.8266666rem;
+          border-radius: 50%;
+          line-height:0.8266666rem;
+          text-align: center;
+          border: 1px solid #555;
+          margin-left: 0.453333rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .send{
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+    width: 8.14rem;
+    height: 1.066666rem;
+    line-height:1.066666rem;
+    text-align: center;
+    font-size: 16px;
+    color:#fefefe;
+    background-color:#e13f2a;
+  }
+}
+body{
+  width: 100%;
+  overflow-x: hidden;
+}
+#box{
+  display: flex;
+  width: 200%;
+  margin-left: 0;
+  transition: all .3s;
+  >div{
+    width: 100%;
+  }
+  #jump{
+    position: relative;
+    .approver,.copyto{
+      width: 100%;
+      position: absolute;
+      z-index: 0;
+    }
+  }
+}

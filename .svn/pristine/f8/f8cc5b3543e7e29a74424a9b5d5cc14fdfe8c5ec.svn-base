@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学习记录</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="党建活动页">
+    <link rel="stylesheet" href="../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../public/css/public.min.css">
+    <link rel="stylesheet" href="./static/css/main.min.css">
+    <script src="../../public/flexible/flexible.js"></script>
+    <script src="../../public/flexible/flexible_css.js"></script>
+</head>
+<body>
+    <header>
+        <div class="back" onclick="window.history.go(-1);">
+            <i class="iconfont">&#xe7a4;</i>
+        </div>
+        <h2 class="centerTitle">学习记录</h2>
+        <div class="right" id="subNav"><i class="iconfont">&#xe613;</i></div>
+        <ul id="subNavMenu" class="subNavMenu">
+            <a href="./tpl/createActivity.html"><li><i class="iconfont">&#xe681;</i>新增活动</li></a>
+            <a href="./tpl/uploadRecord.html"><li><i class="iconfont">&#xe63d;</i>上传记录</li></a>
+        </ul>
+    </header>
+    <section class="activityC" id="activityC">
+        <div class="activity clear" data-id="">
+            <div class="aImg left">
+                <img class="aImgTarget" src="">
+            </div>
+            <div class="aMain">
+                <h2 class="title titleTarget"></h2>
+                <p class="source">来源：<span class="sourceTarget">我家中央大院</span></p>
+                <p class="time">时间：<span class="timeTarget"></span><i class="iconfont share right" id="share">&#xe63e;</i></p>
+            </div>
+        </div>
+        <div class="noData" id="noData">
+            <p class="iconfont"></p>
+            <h2>抱歉！没有搜索到相关数据！</h2>
+        </div>
+    </section>
+</body>
+</html>
+<script src="../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../public/layer/layer.js"></script>
+<script src="../../public/js/method.js"></script>
+<script src="./static/js/main.js"></script>

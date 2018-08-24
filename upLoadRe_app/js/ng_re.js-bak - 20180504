@@ -1,0 +1,739 @@
+var r=angular.module('upLoadRe_app',["tm.pagination"]);
+r.filter("myjoin",function(){
+    return function(obj){
+        return obj.join(',');
+    }
+});
+ //首页控制器
+r.controller('rectr',["$scope","$state","getData","$stateParams",function($scope,$state,getData,$stateParams){
+    
+    $scope.examine = 1; //默认审核 -- 显示全部
+    $scope.stateList = [];  //审核状态       
+    $scope.gId = null ; //资源内容  id
+    $scope.sourceConent  = null;  //获取资源内容 
+     //分页默认参数  
+     $scope.paginationConf = {
+        currentPage:1,
+        itemsPerPage :10
+    }
+    $scope.file_type = 'list' ; // 切换显示 
+    $scope.tab = 1;  //默认导航栏 - 全部  - 显示
+    $scope.musicTab =1 ;  //默认导航栏   音频  -- 显示
+   //上传资源分类
+   $scope.release = [{"id":1,"title":"全部"},{"id":2,"title":"已发布"},{"id":3,"title":"待审核"},{"id":4,"title":"未通过"}];
+    //导航内容
+   $scope.navTab = function(id){
+       $scope.tab = id;
+   }
+   $scope.success = function(){
+    location.href=source_url+"/upLoadRe_pc/#!/main/re_detail";
+   }
+    //选择音频类型
+    $scope.musicType = function(index){
+        $scope.musicTab = index;
+    }
+   //选择审核
+   $scope.fileType = function(index){
+       $scope.tab = index;
+       $scope.file_type ='list';
+       if($scope.tab == 3){
+           $scope.file_type = "fileChk" ;
+       }
+   }
+   //页面点击创建
+    $scope.addCourse = function(){
+        $scope.modalSource =! $scope.modalSource;
+    }
+    $scope.bookId = null;
+    $scope.moreFile = function(ev){
+        ev.stopPropagation();
+        $scope.morethatFile =! $scope.morethatFile;
+        //获取每条数据的ID
+        $scope.bookId = angular.element(ev.target).parent().parent().parent().parent().attr("id");
+    }
+    //点击每条数据
+    $scope.listDetail = function(e){
+        e.stopPropagation();
+        $state.go("bookdetail");
+    }
+    //首页 -- 删除 
+    $scope.sourceDele = function(){
+
+        $("#"+$scope.bookId).remove();
+        $scope.morethatFile =! $scope.morethatFile;
+    }
+
+    $scope.shareSource = function(){
+        $scope.shareModal =! $scope.shareModal;
+    }
+    $scope.moreClose = function(){
+     $scope.morethatFile =! $scope.morethatFile;
+    }
+    $scope.modalClose = function(){
+        $scope.modalSource =! $scope.modalSource;
+    }
+    $scope.shareClose = function(){
+      $scope.shareModal =! $scope.shareModal;
+      $scope.morethatFile =! $scope.morethatFile;
+    }
+
+ //获取审核状态
+    $scope.getState = function(data){
+        for(var i=0; i<data.length;i++){
+        for(var j=0;j<data[i].stateList.length;j++){
+            $scope.stateList.push(data[i].stateList[j].bookStateName);
+        }
+    }
+    }
+    var pageUrl = "/science/getAllSciencePaging?start="+$scope.paginationConf.currentPage+
+       "&limit="+$scope.paginationConf.itemsPerPage,
+        totoalUrl=  courseware_root_url+'/science/getAllScienceCount';           
+        //资源内容数据显示   
+        $scope.getAllData = function(pUrl){  
+        //默认请求全部数据
+        getData.getUrlData(pUrl).then(function(d){
+                $scope.sourceConent = d.data.msg;  
+                $scope.getState($scope.sourceConent);
+        }) 
+        }   
+
+        //设置分页基本参数
+        $scope.page = function(){  
+
+        $scope.paginationConf={
+        　　　　　　currentPage:1,//访问第几页数据，从1开始
+        　　　　　　totalItems:$scope.paginationConf.totalItems,//数据库中总共有多少条数据
+        　　　　　　itemsPerPage:10,//默认每页展示多少条数据，可更改
+        　　　　　　perPageOptions: [10, 20, 30, 40, 50],//可选择的每页展示多少条数据
+                onChange:function(){
+                    $scope.getAllData(pageUrl);
+                }  
+        　   }
+
+        }
+
+        //获取分页总页数
+        $.ajax({
+        url:totoalUrl,
+        type: "get",
+        dataType:"JSON",
+        async:false,
+        success: function(res){  
+            $scope.paginationConf.totalItems = res.msg;  
+            $scope.page();
+            $scope.getAllData(pageUrl);
+        }
+        }); 
+
+      
+        //获取审核数据显示
+        $scope.examineFun = function(id){
+            $scope.stateList = [] ;   //清空审核状态
+            pageUrl =  "/science/getScienceConditional?start="+$scope.paginationConf.currentPage+
+            "&limit="+$scope.paginationConf.itemsPerPage+"&completionStateId="+ id;
+            $.ajax({
+                url:courseware_root_url+"/science/getScienceConditionalCount?completionStateId="+id,
+                type: "get",
+                dataType:"JSON",
+                async:false,
+                success: function(res){  
+                $scope.paginationConf.totalItems = res.msg; 
+                $scope.getAllData(pageUrl);
+                }
+            });
+        }
+
+        //资源内容 -- 切换审核状态
+    $scope.examineType = function(id,name){
+        $scope.examine = id;
+        $scope.file_type ='list';
+        if($scope.examine  == 1){
+        $scope.stateList = [] ;
+        pageUrl = "/science/getAllSciencePaging?start="+$scope.paginationConf.currentPage+
+            "&limit="+$scope.paginationConf.itemsPerPage,
+        $.ajax({
+        url:totoalUrl,
+        type: "get",
+        dataType:"JSON",
+        async:false,
+        success: function(res){  
+            $scope.paginationConf.totalItems = res.msg;  
+            $scope.getAllData(pageUrl);                    
+        }
+        }); 
+        }else if($scope.examine  == 2){
+        $scope.examine = 2 || 3;
+        $scope.examineFun($scope.examine)
+        } else if($scope.examine  == 3){
+        $scope.file_type ='fileChk';
+        $scope.examineFun(1);
+        }else if($scope.examine  == 4){
+        $scope.examineFun(4);
+        }
+    }
+    
+   
+     
+
+}])
+  //资源类型页面控制器
+.controller('reUpfileDesctr',["$scope","$routeParams","$compile","getData","$state","$stateParams",function($scope,$routeParams,$compile,getData,$stateParams){
+    $scope.mySource = null // 获取我的资源 内容
+    // var getuid=window.localStorage['user']?JSON.parse(window.localStorage['user']):null;
+    // if(getuid==null){
+    //     window.location.href="../login2/index.html";
+    // }  
+    // 上传信息
+    $scope.teaching_material_type=1;
+    $scope.succId = 1;
+    //点击上传信息
+    $scope.setTeachingMaterialType=function(type){
+        $scope.teaching_material_type=type;
+    }
+    $scope.isread=false; // 确定服务条款
+    $scope.gcss=['one','two','three',"four"];
+      //上传数据
+    $scope.des = getData.des;
+
+    $scope.cmp = null ; 
+    $scope.cur_var={
+        "fileAudioName":null,  //获取上传音频的名称
+        "fileVideoName":null,  //获取上传视频的名称
+        "fileSourceName":null, //获取上传题库的名称
+        "fileCoverName":null,   //获取上传图片的名称
+        "source_type_id":null, //资源类型 ID
+        "source_type_name":null, //资源类型 名称
+        "rec_object_id":null,   //推荐对象 ID
+        "rec_object_name":null,  //推荐对象  名称
+        "book_type_id":null,    //书籍类型  ID
+        "book_type_name":null,   //书籍类型  名称
+        "free_type_id":null,     //收费  ID
+        "free_tye_name":null,     //收费  名称
+        "file_name":null,        //上传名称
+        "file_author":null,      //上传作者
+        "file_press":null,       //上传出版社
+        "file_ibsn":null,        //上传 IBSN
+        "file_introduce":null,    //上传 推荐理由
+        "file_explain":null,      //上传简介内容
+        "file_price":null,       //按节收费价格
+        "comState":false,        //允许评论
+        "free":true,             // 允许分享 
+        "chapterName":null     //章节名称
+    }
+
+    $scope.showlist = function(){
+        //上传资源类型
+        getData.getUrlData("/uploadType/getAllUploadType").then(function (res){
+            $scope.sourceType = res.data.msg;
+        })
+        //书籍类型
+        getData.getUrlData("/bookType/getAllBookType").then(function (res){
+            $scope.bookType = res.data.msg;
+        })
+    
+        //收费类型
+        getData.getUrlData("/chargeType/getAllChargeType").then(function (res){
+            $scope.sourceFree = res.data.msg;
+        })
+
+        //推荐对象
+        getData.getUrlData("/recommendedObject/getAllRecommendedObject").then(function (res){
+            $scope.recObject = res.data.msg;
+        })
+        
+     }
+     $scope.showlist();
+    $scope.cmp = angular.copy($scope.cur_var);//复制模板
+    $scope.cur_var = TOOL.getObject("cur_var"); //获取缓存中是数据
+    //点击书籍类型
+    $scope.setSourceType = function(id,name){
+        $scope.cmp.source_type_id = id;
+        $scope.cmp.source_type_name  = name ;
+
+    }
+    //点击推荐对象
+    $scope.setRecObject =function(id,name){
+        $scope.cmp.rec_object_id = id;
+        $scope.cmp.rec_object_name = name;
+    }
+    //点击书籍类型
+    $scope.setBookType = function(id,name){
+        $scope.cmp.book_type_id = id;
+        $scope.cmp.book_type_name = name;
+    }
+    //点击发布模式
+    $scope.show_free =1 ;
+    $scope.setFree =function(id,name){
+        $scope.cmp.free_type_id = id;
+        $scope.cmp.free_type_name = name; 
+        $scope.cur_var.free_type_name =  name; 
+       
+        $scope.showFree();
+    }
+
+    $scope.sw_teaching = function(){
+        $scope.cmp = angular.copy($scope.cur_var);//复制模板
+        $("#p_sw_material").show();
+    }
+
+    //收费价格只能输入数字并且只能是小数点两位
+    $scope.clearNoNum = function(obj,attr){
+        //先把非数字的都替换掉，除了数字和"."
+        obj.file_price = obj.file_price.replace(/[^\d.]/g, ""); 
+      //必须保证第一个为数字而不是"."
+        obj.file_price = obj.file_price.replace(/^\./g, "");
+      //保证只有出现一个.而没有多个"."
+        obj.file_price = obj.file_price.replace(/\.{2,}/g, ".");
+      //保证"."只出现一次，而不能出现两次以上
+        obj.file_price = obj.file_price.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+       //保证"."只后面只能出现两位有效数字
+         obj.file_price = obj.file_price.replace(/([0-9]+\.[0-9]{2})[0-9]*/, "$1");
+    }
+    //上传信息确定
+    $scope.uploadlSubmit = function(){
+        $scope.cur_var = angular.copy($scope.cmp);
+        $("#p_sw_material").hide();
+    }
+    //判断发布模式 显示
+    $scope.showFree = function(){
+        if($scope.cur_var.free_type_name == "按节收费"){
+            $(".chapter_t").css("display","block");
+        }else{
+            $(".chapter_t").css("display","none");
+        } 
+        if($scope.cur_var.free_type_name == "整套收费"){
+            $(".chapter_free").css("display","block");
+        }else{    
+            $(".chapter_free").css("display","none");
+        }
+    }
+    $scope.showFree();
+    $scope.nextFile = function(){
+
+        function p(s){
+            return s < 10 ? '0' + s: s;
+        }
+        var myDate = new Date();
+        //获取当前年
+        var year=myDate.getFullYear();
+        //获取当前月
+        var month=myDate.getMonth()+1;
+        //获取当前日
+        var date=myDate.getDate(); 
+        var h=myDate.getHours();       //获取当前小时数(0-23)
+        var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+        var s=myDate.getSeconds();  
+        $scope.now = year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
+         var url = "/science/addScienceOne?uploadTypeId="+$scope.cur_var.source_type_id+
+               "&recommendedObjectId="+ $scope.cur_var.source_type_id+
+               "&bookTypeId="+$scope.cur_var.book_type_id+
+               "&chargeTypeId=" + $scope.cur_var.free_type_id+
+               "&chargePrice="+$scope.cur_var.file_price+
+                "&bookName="+$scope.cur_var.file_name+
+                "&bookAuthor=" +$scope.cur_var.file_author+
+                "&bookPress="+$scope.cur_var.file_press+
+                "&bookIBSN="+$scope.cur_var.file_ibsn+
+                "&recommendedReasons="+$scope.cur_var.file_introduce+
+                "&briefIntroduction="+$scope.cur_var.file_explain+
+                "&bookComment=0"+
+                "&bookShare=0"+
+                "&bookExamine=0"+
+                "&bookDelete=1"+
+                "&completionStateId=1"+
+                "&uploadTime="+$scope.now
+         getData.getUrlData(url).then(function (res){
+            
+         })
+
+    }
+ 
+    $scope.uploadCancel = function(){
+        $("#p_sw_material").hide();
+    }
+    //资源类型取消返回上一级页面
+    $scope.editorCancel = function(){
+        javascript:history.go(-1);
+    }
+    //阅读条款
+    $scope.setRead=function(){
+        $scope.isread=!$scope.isread;
+    }
+    //文件上传
+    $scope.uploadvideo=function(){
+        $("#uploadvideo").click();
+    };
+    $scope.uploadenclosure=function(){
+        $("#uploadenclosure").click();
+    };
+    $scope.uploadcover=function(){
+        $("#uploadcover").click();
+    };
+   $scope.uploadaudio = function(){
+       $("#uploadaudio").click();
+   }
+   //上传文件类型前端显示 
+   $scope.upFile = function(mb,file,file_length,reader,upfile_type,up,uname,fname){
+    var file_def_pic_size=1024*1024*20;
+    var cur_file_size=0;
+    var sizeMK='M';
+    for(var i=0;i<file_length;i++){
+        var max=file[i].size;
+        if(max>file_def_pic_size){  
+            layer.alert("文件过大，限制上传");
+            document.getElementById(type).value=null;
+            fname.html("文件过大，限制上传");
+            return false;
+        }
+        if(mb>max){
+            sizeMK="KB";
+            cur_file_size=parseInt(max/1024);
+            if(cur_file_size<1){
+                sizeMK="B";
+                cur_file_size=max;
+            }
+        }else{
+            cur_file_size=(max/mb).toFixed(2);
+        }
+        reader.readAsBinaryString(file[i]);
+        var file_ext=$scope.isExt(file[i].name,true);
+        upfile_type.html(file_ext+"/"+cur_file_size+sizeMK);
+        var up_num="1%";
+        up.css({"width":up_num});
+        reader.onprogress=function(evt){
+            up_num=(evt.loaded/max)*100+"%";
+            up.css({"width":up_num});
+            fname.html(up_num);
+            uname.val($scope.fileVideoName)
+        }
+        reader.onloadend = function(){
+            fname.html( "上传完成");
+        }
+    }
+  }   
+  //上传文件出错页面显示
+   $scope.fileTest = function(file,file_max,type){
+        if($scope.isExt(file[0].name,false)){
+            layer.alert("文件类型不正确");
+            document.getElementById(type).value=null;
+            return false;
+        }
+        var max=file[0].size;
+        if(max>file_max){
+            layer.alert("文件过大，限制上传");
+            document.getElementById(type).value=null;
+            return false;
+        }
+        if(mb>max){
+            sizeMK="KB";
+            cur_file_size=parseInt(max/1024);
+        }else{
+            cur_file_size=(max/mb).toFixed(2);
+        }
+        reader.readAsBinaryString(file[0]);
+        var file_ext=$scope.isExt(file[0].name,true);
+        upfile_type.html(file_ext+"/"+cur_file_size+sizeMK);
+        var up_num="1%";
+        reader.onprogress=function(evt){
+            up_num=(evt.loaded/max)*100+"%";
+            up.css({"width":up_num});
+            fname.html(up_num);
+        }
+        reader.onloadend=function(){
+            fname.html("上传完成");
+        }
+   }
+    $scope.fileSelected=function(type){
+        var file = document.getElementById(type).files;
+        var fileType = file[0].name.split(".")[1];
+        var filename='';
+        var reader=new FileReader();
+        var mb=1024*1024;
+        var file_def_pic_size=1024*1024*20;
+        var sizeMK='M';
+        var file_max=$scope.des.upfile_video_size*mb;
+        var cur_file_size=0;
+        var upfile_type=$("."+type+"content .upfile_type"); 
+        var up=$('.'+type+'content .upfile_progress');
+        var fname=$('.'+type+'content .file_name');
+        var uname = $(".re_uf_bldes ."+type+"Name");
+        $("."+type+"content").show();
+
+        var file_length=file.length;  
+        if(file[0].name!=''){
+            if(type=='uploadvideo'){
+            
+                 $scope.fileVideoName = file[0].name.split(".")[0];
+                if($scope.des.video.upfile_video_ext.indexOf(fileType) !== -1){ 
+                    $scope.upFile(mb,file,file_length,reader,upfile_type,up,uname,fname);
+                }else{
+                  $scope.fileTest(file,file_max,type);
+                }
+            }else if(type =='uploadaudio'){
+          
+                $scope.fileAudioName = file[0].name.split(".")[0];
+                if($scope.des.audio.upfile_video_ext.indexOf(fileType) !== -1){ 
+                    $scope.upFile(mb,file,file_length,reader,upfile_type,up,uname,fname);
+                }else{
+                    $scope.fileTest(file,file_max,type);
+                }
+
+            }else if(type=='uploadenclosure'){
+                $scope.fileSourceName = file[0].name.split(".")[0];
+                if($scope.des.question.upfile_video_ext.indexOf(fileType) !== -1){ 
+                    $scope.upFile(mb,file,file_length,reader,upfile_type,up,uname,fname);
+                }else{
+                   $scope.fileTest(file,file_max,type);
+                }
+            }else if(type=='uploadcover'){
+       
+                var uploadName = $scope.cur_var.fileAudioName,
+                    uploadPath = file;
+                var ext=$scope.isExt(file[0].name,true);
+                $scope.fileCoverName = file[0].name.split(".")[0];
+               
+                if($.inArray(ext,['jpg','png','bmp','gif','jpeg'])==-1){
+                    layer.alert("文件类型不正确");
+                    document.getElementById(type).value=null;
+                    fname.html("文件类型不正确");
+                    return false;
+                }
+                var max=file[0].size;
+                if(max>file_def_pic_size){
+                    alyer.alert("上传图片过大，限制1M内");
+                    document.getElementById(type).value=null;
+                    fname.html("上传图片过大，限制1M内");
+                    return false;
+                }
+                if(mb>max){
+                    sizeMK="KB";
+                    cur_file_size=parseInt(max/1024);
+                    if(cur_file_size<1){
+                        sizeMK="B";
+                        cur_file_size=max;
+                    }
+                }else{
+                    cur_file_size=(max/mb).toFixed(2);
+                }
+                reader.readAsBinaryString(file[0]);
+                $(".uploadcovercontent .upfile_type").html(ext+"/"+cur_file_size+sizeMK);
+                var up_num="1%";
+                var fname_pr='封面图';
+                reader.onprogress=function(evt){
+                    up_num=(evt.loaded/max)*100+"%";
+                    up.css({"width":up_num});
+                    fname.html(fname_pr+up_num);
+                    uname.val($scope.fileCoverName);
+                }
+                reader.onloadend=function(){
+                    fname.html(fname_pr+"上传完成");
+                }
+            }
+        }
+    };
+    $scope.isExt=function(name,sw){
+        var dot = name.lastIndexOf(".");
+        var ext = name.substring(dot + 1);
+        if(sw){
+            return ext;
+        }
+        if($.inArray(ext,$scope.des.upfile_video_ext)==-1){
+  
+
+            return true;
+        }
+        return false;
+    }
+    $scope.upfileSumbt=function(isValid){
+        if(!$scope.isread){
+            alert('提交前选阅读《资源上传服务条款》');
+            return false;
+        }
+        if(!isValid){
+            alert("表单内容填写不正确");
+            return false;
+        }
+    
+        var form = document.getElementById('uploadForm');
+        var formdata = new FormData(form);
+        var video_files = document.getElementById('uploadvideo').files;
+        var video_filenum=video_files.length;
+        var localId = JSON.parse(localStorage["user"]).id;
+         formdata.append('user_id',localId);
+        formdata.append('fileType', $routeParams.type);
+        if(video_filenum<1){
+            alert('请选择上传资源');
+            return false;
+        }
+            if(video_filenum>0){
+                if(video_filenum>20){
+                    alert('最多只能上传20张图片!');
+                    document.getElementById('uploadvideo').value=null;
+                    return false;
+                }
+                for(var i = 0; i < video_filenum; i++) {
+                    var file = video_files[i];
+                    if(!$scope.isExt(file.name,false)){
+                        formdata.append('video[]', file, file.name);
+                    }
+                }
+            }
+        if($scope.des.isEnclosure){
+            var files = document.getElementById('uploadenclosure').files;
+            var filenum=files.length;
+            console.log(files)
+            if(filenum>0){
+                if(filenum>5){
+                    alert('最多只能上传5个附件!');
+                    document.getElementById('uploadenclosure').value=null;
+                    return false;
+                }
+                for(var i = 0; i < filenum; i++) {
+                    var file = files[i];
+                    formdata.append('enclosure[]', file, file.name);
+                }
+            }
+        }
+        location.href = source_url+"/upLoadRe_pc/#!/index";
+        $.ajax({
+            /*url: 'http://test.com/test.php',*/
+            //url:root_url+'/uploadFile/resource/file.do',gaiguo 
+             url:root_url+'/uploadFile/resource/file.do ',
+            //url:_upGetData_root_url + '/up/data',20171204改过
+            /* url:upGetData_root_url + '/up/data',*/
+            type: 'POST',
+            data: formdata,
+            dataType:'json',
+            contentType: false,
+            processData: false,
+            success: function (d) {
+                //window.location.href="../courseware/#!/beiKe";
+                alert(d.statusMsg);
+                console.log(d.statusMsg);
+            },
+            error: function (XMLHttpRequest,textStatus,errorThrown) {
+                alert('error');
+                console.log('error');
+                alert("请重新上传");
+               // window.location.href="http://localhost/re/#!/re_upfile_des/11";
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
+            }
+        });
+    };  
+    $scope.paginationConf = {
+    	currentPage:1,
+    	itemsPerPage :10
+    }
+
+    $scope.allUrl = courseware_root_url+"/bookChapter/getUnionAllBookChapterCount";
+    $scope.examineUrl = "/bookChapter/getUnionAllBookChapter?start="+$scope.paginationConf.currentPage+
+                         "&limit="+$scope.paginationConf.itemsPerPage;
+    //获取资源显示
+    $scope.showData = function(){
+        getData.getUrlData($scope.examineUrl).then(function(d){
+            $scope.mySource =  d.data.msg;
+        }) 
+    }
+    $scope.showData();
+        //获取分页总页数
+   $scope.allData = function(){
+        //设置分页基本参数
+        $scope.page = function(){  
+            $scope.paginationConf={
+        　　　　　　currentPage:1,//访问第几页数据，从1开始
+        　　　　　　totalItems:$scope.paginationConf.totalItems,//数据库中总共有多少条数据
+        　　　　　　itemsPerPage:10,//默认每页展示多少条数据，可更改
+        　　　　　　perPageOptions: [10, 20, 30, 40, 50],//可选择的每页展示多少条数据
+                   onChange:function(){
+                    $scope.showData();
+                   }  
+        　   }
+       
+    }
+        $.ajax({
+                url: $scope.allUrl,
+                type: "get",
+                dataType:"JSON",
+                async:false,
+                success: function(res){  
+                    $scope.paginationConf.totalItems = res.msg;  
+                    $scope.page();
+                }
+            });  
+   }         
+   $scope.allData(); 
+
+     //切换审核状态
+    $scope.chaperTab = 1 //默认选中全部
+    $scope.chapterType = function(id){
+        $scope.chaperTab = id;
+        $scope.chapterItem = null;
+        $scope.getUrlData = function(id){
+            $scope.examineUrl= "/bookChapter/getAllBookChapterFormExamine?start="+$scope.paginationConf.currentPage
+            +"&limit="+$scope.paginationConf.itemsPerPage+"&bookChapterExamine="+id;
+             $scope.allUrl = courseware_root_url+"/bookChapter/getAllBookChapterFormExamineCount?bookChapterExamine="+id
+            $scope.showData();
+            $scope.allData();
+        }
+
+      if($scope.chaperTab == 1){
+        $scope.examineUrl = "/bookChapter/getUnionAllBookChapter?start="+$scope.paginationConf.currentPage+
+        "&limit="+$scope.paginationConf.itemsPerPage;
+            $.ajax({
+                url:courseware_root_url+"/bookChapter/getUnionAllBookChapterCount",
+                type: "get",
+                dataType:"JSON",
+                async:false,
+                success: function(res){  
+                    $scope.paginationConf.totalItems = res.msg;  
+                    $scope.showData();                    
+                }
+            }); 
+        }else if($scope.chaperTab == 2 ){
+            $scope.chaper = 2 || 3 ;
+            $scope.getUrlData($scope.chaper)
+        }else if($scope.chaperTab == 3){
+            $scope.chaper = 1 ;
+            $scope.getUrlData($scope.chaper)
+        }else{
+            $scope.chaper = 4 ;
+            $scope.getUrlData($scope.chaper)
+        }
+    }
+
+         //删除我的资源 章节
+    $scope.removeChapter = function(e){
+            //删除视图
+           angular.element(e.target).parent().parent().remove();
+             //获取章节Id
+           $scope.chapId = angular.element(e.target).parent().parent().attr("id");
+           getData.getUrlData("/bookChapter/delBookChapter?id="+$scope.chapId).then(function(d){
+           }) 
+       }
+    //获取上传资源 名称
+    getData.getUrlData("/science/getAllScience").then(function(d){
+        $scope.SourceName = d.data.msg;
+    }) 
+   
+}]).controller('detail',["$scope","$state",'getData',function($scope,$state,getData){
+
+    //点击继续上传   
+    $scope.gid = 2 
+    $scope.ContinueUpload = function(e){
+        //$state.go('main.source',{gid:$scope.gid});
+      getData.getUrlData("/science/getAllScience").then(function(d){
+           
+      }) 
+    }
+    //删除资源内容
+    $scope.delSource = function(e){
+      //获取点击资源的id
+      $scope.gId  = angular.element(e.target).parent().parent().parent().parent().parent().attr("id"); 
+      //删除资源内容
+      getData.getUrlData("/science/deleteScience?bookDelete="+ $scope.gId ).then(function(d){
+       // angular.element(e.target).parent().parent().parent().parent().parent().remove();
+     }) 
+    }
+  
+}])

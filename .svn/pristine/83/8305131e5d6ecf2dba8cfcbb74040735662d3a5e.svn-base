@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="./css/start.css">
+<div id="lists"></div>
+<div class="modal fade bs-example-modal-lg" id="addroolclass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">组织</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" ng-model="curJobId" ng-options="jb.id as jb.name for jb in jobList"></select>
+                            <!--<option ng-repeat="p in alldata" value="{{p.id}}">{{p.name}}</option>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">职位</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" ng-model="curRoleId" ng-options="rl.pos_id as rl.posName for rl in roleList"></select>
+                            <!--<option ng-repeat="p in alldata" value="{{p.id}}">{{p.name}}</option>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">父节点</label>
+                        <div class="col-sm-10">
+                            <select class="form-control classfypid" ng-model="classPid" ng-options="p.id as p.name for p in alldata"></select>
+                            <!--<option ng-repeat="p in alldata" value="{{p.id}}">{{p.name}}</option>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">分类名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nodeinfo" ng-model="nodeinfo" placeholder="">
+                        </div>
+                    </div>
+                    <!--<div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">分类树</label>
+                        <div class="col-sm-10">
+                            <ul id="classtree"></ul>
+                        </div>
+                    </div>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="btnSaveClass();" ng-if="editId==null">添加</button>
+                <button type="button" class="btn btn-warning" ng-click="btnSaveEditClass();" ng-if="editId!=null">保存编辑</button>
+            </div>
+        </div>
+    </div>
+</div>

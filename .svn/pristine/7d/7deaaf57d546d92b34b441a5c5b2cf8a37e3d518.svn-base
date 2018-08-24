@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        if(confirm("确定退出？")){
+            localStorage.removeItem("user");
+            window.location.href="/mobile/tpl/login";
+        }else{
+            window.history.go(-1);
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

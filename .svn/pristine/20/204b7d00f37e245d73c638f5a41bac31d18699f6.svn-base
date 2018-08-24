@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>申请加入组织</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet" href="./css/partyApply.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="../../pluy-in/config.js"></script>
+    <script src="../../pluy-in/base.js"></script>
+    <script src="./js/partyApply.js"></script>
+</head>
+<body>
+    <div class="header">
+        <a  class="iconfont icon-zuo quit"></a>
+        申请加入组织
+    </div>
+    <div class="bodies">
+        <div class="search">
+            <div class="search_group">
+                <input type="text" class="f14 search_group_input">
+                <div class="f18">确定</div>
+            </div>
+            <ul class="search_main">
+
+            </ul>
+        </div>
+        <div class="cotain">
+            <div class="title f16">
+                <span>申请中</span>
+            </div>
+            <ul class="member">
+
+            </ul>
+            <p class="none f16 m_t_40">暂无申请</p>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal_box">
+            <span class="a">
+                申请递交成功
+            </span>
+            <span class="b">
+                申请失败,请重新申请
+            </span>
+            <span class="e">
+               已提交过申请了
+            </span>
+            <span class="c">
+                查询失败
+            </span>
+            <span class="d">
+                组织码错误
+            </span>
+            <span class="f">
+                撤销成功
+            </span>
+            <span class="g">
+                撤销失败,请再次点击
+            </span>
+            <span class="h">
+                 该职位已对您进行邀请,
+                 请转至我的组织,进行接收
+            </span>
+        </div>
+    </div>
+</body>
+</html>

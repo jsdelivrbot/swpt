@@ -1,0 +1,22 @@
+#swiperNav {
+    .swiper-wrapper {
+        // background: #ccc;
+        .swiper-slide {
+            text-align: center;
+            font-size: .426667rem /* 32/75 */;
+            padding: .4rem /* 30/75 */;
+            box-sizing: border-box;
+        }
+        .swiper-slide.actived {
+            color: #E13F2A;
+            border-bottom: 1px solid #E13F2A;
+        }
+    }
+}
+#swiperBody{
+    .swiper-wrapper {
+        .swiper-slide {
+            font-size: .426667rem /* 32/75 */;
+        }
+    }
+}

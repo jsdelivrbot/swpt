@@ -1,0 +1,281 @@
+[
+    {
+        "m_class": 1,
+        "m_name": "公文包",
+        "child": [
+            {
+                "id": 1,
+                "url": "/upload?type=public",
+                "name": "网络硬盘",
+                "pic": "./img/u68.png",
+                "isChoice": true
+            },
+            {
+                "id": 2,
+                "url": "/upload",
+                "name": "工作文档",
+                "pic": "./img/more/582044cc2c036.png",
+                "isChoice": true
+            },
+            {
+                "id": 3,
+                "url": "../form/index.html",
+                "name": "工作表单",
+                "pic": "./img/more/582044fc4c2c6.png",
+                "isChoice": true
+            },
+            {
+                "id": 4,
+                "url": "/upload",
+                "name": "工作报表",
+                "pic": "./img/u68.png",
+                "isChoice": true
+            },
+            {
+                "id": 5,
+                "url": repid_dev_root_url + "/rapid_dev/",
+                "name": "工作流程",
+                "pic": "./img/more/582044cc2c036.png",
+                "isChoice": true
+            } ,
+            {
+                "id": 6,
+                "url": "../schedule",
+                "name": "日程安排",
+                "pic": "./img/more/5820455c445d1.png",
+                "isChoice": true
+            },
+            {
+                "id": 7,
+                "url": "./schedule",
+                "name": "任务安排",
+                "pic": "./img/more/582044cc2c036.png",
+                "isChoice": true
+            }
+        ]
+    },
+    {
+        "m_class": 2,
+        "m_name": "教师类",
+        "child": [
+            {
+                "id": 8,
+                "url": "/courseware",
+                "name": "备课",
+                "pic": "./img/more/5820449fe1122.png",
+                "isChoice": true
+            },
+            {
+                "id": 9,
+                "url": "/re",
+                "name": "资源库",
+                "pic": "./img/more/58212f4c2ce83.png",
+                "isChoice": true
+            },
+            {
+                "id": 10,
+                "url": "/teach-scheme",
+                "name": "教学计划",
+                "pic": "./img/more/582045d7d68f1.png",
+                "isChoice": true
+            },
+            {
+                "id": 11,
+                "url": "/ZMT/classMeanage/classMeanage.html",
+                "name": "班级",
+                "pic": "./img/more/class.png",
+                "isChoice": true
+            },
+            {
+                "id": 12,
+                "url": "/curriculum",
+                "name": "课程表",
+                "pic": "./img/more/58204570916dc.png",
+                "isChoice": true
+            },
+            {
+                "id": 13,
+                "url": "/lecture",
+                "name": "讲堂",
+                "pic": "./img/more/582044fc4c2c6.png",
+                "isChoice": true
+            }
+        ]
+    },
+    {
+        "m_class": 3,
+        "m_name": "学生类",
+        "child": [
+            {
+                "id": 14,
+                "url": "/upload",
+                "name": "预习",
+                "pic": "./img/more/预习.png",
+                "isChoice": true
+            },
+            {
+                "id": 15,
+                "name": "在线考试",
+                "pic": "./img/more/课堂回看.png",
+                "isChoice": true
+            },
+            {
+                "id": 16,
+                "name": "互动课堂",
+                "pic": "./img/more/学情跟踪.png",
+                "isChoice": true
+            },
+            {
+                "id": 17,
+                "name": "课外培训",
+                "pic": "./img/more/课外培训.png",
+                "isChoice": true
+            },
+            {
+                "id": 18,
+                "name": "仿真实验",
+                "pic": "./img/more/仿真实验.png",
+                "isChoice": true
+            },
+            {
+                "id": 19,
+                "name": "口语考试",
+                "pic": "./img/more/口语考试.png",
+                "isChoice": true
+            },
+            {
+                "id": 20,
+                "name": "作业训练",
+                "pic": "./img/more/作业训练.png",
+                "isChoice": true
+            },
+            {
+                "id": 21,
+                "name": "练习计划",
+                "pic": "./img/more/练习计划.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "难点反馈",
+                "pic": "./img/more/难点反馈.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "模拟试题",
+                "pic": "./img/more/模拟试题.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "资源库",
+                "pic": "./img/more/资源库.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "图书馆",
+                "pic": "./img/more/图书馆.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "总结反思",
+                "pic": "./img/more/总结反思.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "错题集",
+                "pic": "./img/more/错题集.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "作业",
+                "pic": "./img/more/作业.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "学情跟踪",
+                "pic": "./img/more/学情跟踪2.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "评价系统",
+                "pic": "./img/more/评价系统.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "考勤",
+                "pic": "./img/more/考勤.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "我的学院",
+                "pic": "./img/more/我的学院.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "创意",
+                "pic": "./img/more/创意.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "班级论坛",
+                "pic": "./img/more/班级论坛.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "我的班级",
+                "pic": "./img/more/我的班级.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "商城",
+                "pic": "./img/more/商城.png",
+                "isChoice": true
+            },
+            {
+                "id": 22,
+                "name": "游戏练习",
+                "pic": "./img/more/游戏练习.png",
+                "isChoice": true
+            }
+        ]
+    },
+    {
+        "m_class": 4,
+        "m_name": "家长",
+        "child": [
+            {
+                "id": 23,
+                "url": "/upload",
+                "name": "作业检查",
+                "pic": "./img/more/查看作业.png",
+                "isChoice": true
+            },
+            {
+                "id": 24,
+                "name": "试卷查看",
+                "pic": "./img/more/查看试题.png",
+                "isChoice": true
+            },
+            {
+                "id": 25,
+                "name": "学情跟踪",
+                "pic": "./img/more/学情跟踪.png",
+                "isChoice": true
+            }
+        ]
+    }
+]

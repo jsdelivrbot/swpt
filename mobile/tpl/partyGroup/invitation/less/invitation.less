@@ -1,0 +1,122 @@
+.header{
+  .quit{
+    left: 2%;
+  }
+}
+.bodies{
+  background-color: #fefefe;
+   .search_group{
+     display: flex;
+     width: 8.2666666rem;
+     height: 1.06666rem;
+     margin: 1.06666rem auto 0;
+     input{
+       text-indent: 15px;
+       width: 70%;
+       box-sizing: border-box;
+       height: 1.06666rem;
+     }
+     div{
+       width: 30%;
+       height: 1.06666rem;
+       line-height: 1.06666rem;
+       text-align: center;
+       background-color: #fe5656;
+       color:#fff;
+       margin-left: -2px;
+     }
+     div:active{
+       background-color: #c15656;
+     }
+   }
+  .search_main{
+    width: 94%;
+    margin: 0.4rem auto 1.5rem;
+  }
+  .cotain{
+    width: 94%;
+    margin: 0 auto;
+    .title{
+      letter-spacing: 1px;
+      margin-left: -0.2rem;
+      span{
+        border-bottom: 2px solid #777;
+        padding-bottom: 0.1rem;
+      }
+    }
+    .member{
+      margin-top: 0.4rem;
+    }
+    .none{
+      text-align: center;
+      color:#444;
+      display: none;
+    }
+  }
+   .everyone{
+     font-size: 14px;
+     display: flex;
+     line-height:1.166667rem;
+     align-items: center;
+     text-align: center;
+     border-bottom: 1px solid #eee;
+     .photo{
+       width: 0.8rem;
+       height: 0.8rem;
+       border-radius: 50%;
+       background-color: #66afe9;
+     }
+     .job{
+       padding: 0 0.2rem;
+
+     }
+     .message{
+       padding: 0 0.2rem;
+       width: 40%;
+       color:#454545;
+       display: flex;
+       vertical-align: middle;
+       .phone{
+         margin-left: 15%
+       }
+     }
+     .state{
+       height:1.166667rem;
+       width: 15%;
+       vertical-align: middle;
+     }
+     .repeal{
+       width: 15%;
+       height:1.166667rem;
+       vertical-align: middle;
+     }
+     .invitation{
+       width: 25%;
+       height:1.166667rem;
+       vertical-align: middle;
+     }
+   }
+}
+#modal {
+  transition: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(33, 33, 33, 0) !important;
+  .modal_box {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 999999;
+    transition: all .05s linear;
+    line-height:2rem;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(33, 33, 33, 0.6);
+    .a, .b,.c,.d,.e{
+      display: none;
+      background-color:#828282;
+    }
+  }
+}

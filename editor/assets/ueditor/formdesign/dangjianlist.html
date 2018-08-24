@@ -1,0 +1,173 @@
+<html>
+
+<head>
+    <title>党建列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="./images/font_icon/iconfont.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <link rel="stylesheet" href="./self/css/pagedetails.css">
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+    
+    <script type="text/javascript">
+        function createElement(type, name) {
+            var element = null;
+            try {
+                element = document.createElement('<' + type + ' name="' + name + '">');
+            } catch (e) {}
+            if (element == null) {
+                element = document.createElement(type);
+                element.name = name;
+            }
+            return element;
+        }
+    </script>
+    <style>
+        input {
+            padding: 4px 6px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr></tr>
+            <!-- <tr>
+                <td style="text-align:center;" colspan="2">
+                    <label for="Tpl3" data-img="tpl3.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl3" id="Tpl3">党建列表
+                    </label>
+               
+                </td>
+            </tr> -->
+            <div class="tplBottom">
+                <p class="title"></p>
+                <img src="./images/pagedetails/tpl3.png" alt="模板图像">
+            </div>
+            <tr>
+                <th colspan="2">
+                    <span>跳转目标</span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="orgFurl" id="orgfUrl">
+                        <option value="0">---请输入网址-</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+      /*   var clearImg;
+        $('.menuLabel').hover(function(e) {
+            $('.tplBottom .title').html($(e.currentTarget).text());
+            $('.tplBottom img').prop('src', './images/pagedetails/' + $(e.currentTarget).data('img'));
+            $('.tplBottom').fadeIn();
+            clearTimeout(clearImg);
+        }, function() {
+            clearImg = setTimeout(function() {
+                $('.tplBottom').fadeOut();
+            }, 4000);
+        }) */
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            gdataSource = null,
+            thePlugins = 'dangjianlist';
+        window.onload = function() {
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $('#nodeParentId', window.parent.document).val();
+            var nodeId = $("#node_id", window.parent.document).val();
+            console.log(nodeParentId,nodeId);
+            $.ajax({
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function(res) {
+                    $.each(res.msg, function(index, value) {
+                        $("#orgfUrl").append('<option value=' + value.id + '>' + value.value + '</option>');
+                    })
+                },
+                error: function(res) {
+                    alert('抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！')
+                }
+            });
+        }
+
+        dialog.onok = function() {
+            if ($('#orgfUrl').val() == 0) {
+                orgfUrl = "";
+            } else {
+                orgfUrl = $('#orgfUrl').val();
+                orgUrlId = $('#orgfUrl').val();
+                orgUrlName = $('#orgfUrl option[value=' + orgfUrl + ']').text();
+            }
+            if (!oNode) {
+                var val = $('[name=tpl]:checked').val();
+                var html;
+                    html = `
+                        <div class="tpl3">
+                            <div class="banner">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class='wifiblock swiper-slide' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="" orgUrlId="" orgvalue="" orgTitle="" orgurl="http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link="
+                                            style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                            <div class="bannerCon">
+                                                <div class="leftPic">
+                                                    <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='推荐专题图片' style='display: block;width: 100%;' value='推荐专题图片' datasource='' leipiplugins='addimage'>
+                                                </div>
+                                                <div class="rightMain">
+                                                    <h4 class="title"><input groupCon='' name="leipiNewField" type="text" title="推荐专题标题" value="推荐专题标题" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></h4>
+                                                    <div class="studyTime">
+                                                        <span class="studyTime timeText"><input groupCon='' name="leipiNewField" type="text" title="推荐专题学习时间" value="推荐专题学习时间" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></span>学时</div>
+                                                    <button class="startStudy">开始学习</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination swiper-pagination-bullets">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="topics">
+                                <div class='wifiblock' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="" orgUrlId="" orgvalue="" orgTitle="" orgurl="http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link="
+                                    style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                    <div class="topic clear">
+                                        <div class="topicImg">
+                                            <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='专题图片' style='display: block;width: 100%;' value='专题图片' datasource='' leipiplugins='addimage'>
+                                        </div>
+                                        <div class="topicMain">
+                                             <h4 class="title"><input groupCon='' name="leipiNewField" type="text" title="专题标题" value="专题标题" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></h4>
+                                            <div class="process">
+                                                <div class="processLoading"></div>
+                                                <p>
+                                                    <span class="processText">0</span>%</p>
+                                            </div>
+                                            <div class="learnTime"><input groupCon='' name="leipiNewField" type="text" title="课程类型" value="课程类型" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%;"/>课  / <span class="learnTimeText"><input groupCon='' name="leipiNewField" type="text" title="专题学时" value="专题学时" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%;"/></span> 学时</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+              editor.execCommand('insertHtml', html);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

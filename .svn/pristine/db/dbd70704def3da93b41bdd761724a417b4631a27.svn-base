@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>视频</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-latest.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="../httpData.config.js"></script>
+    <style>
+        html {
+            width: 800px;
+            height: 650px;
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /* .picLeft {
+            width: 70%;
+            float: left;
+        }
+
+        .picRight {
+            float: left;
+        } */
+
+        .upload {
+            margin: 20px 0;
+        }
+
+        .avatar-wrapper {
+            height: 364px;
+            width: 100%;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, .25);
+            background-color: #fcfcfc;
+            overflow: hidden;
+        }
+
+        .avatar-wrapper img {
+            display: block;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .avatar-preview {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #fff;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .avatar-preview:hover {
+            border-color: #ccf;
+            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+        }
+
+        .avatar-preview img {
+            width: 100%;
+        }
+
+        .avatar-btns {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .avatar-btns .btn-group {
+            margin-right: 5px;
+        }
+
+        .preview-lg {
+            height: 184px;
+            width: 184px;
+            margin: 0;
+        }
+
+        .preview-md {
+            height: 100px;
+            width: 100px;
+        }
+
+        .preview-sm {
+            height: 50px;
+            width: 50px;
+        }
+
+        .uploadContainer label {
+            position: relative;
+        }
+
+        .uploadContainer #uploadVideo {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 0;
+        }
+
+        .btn-group-set:not(:last-of-type) {
+            margin-bottom: 10px;
+        }
+
+        .docs-tooltip {
+            display: block;
+            margin: -6px -12px;
+            padding: 6px 12px;
+        }
+
+        #video {
+            width: 95%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form id="insertVideo" name="insertVideo" enctype="multipart/form-data" method="post" action="">
+        <div class="container-fluid">
+            <div class="upload">
+                <div class="uploadContainer">
+                    <label class="btn btn-primary" for="uploadVideo" title="请上传您的视频">上传视频
+                        <input type="file" id="uploadVideo" name="fileVideo" accept="video/*" onchange="play()">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="avatar-wrapper">
+                        <video id="video" controls></video>
+                    </div>
+                </div>
+            </div>
+            <div class="row avatar-btns">
+                <div class="col-sm-3 pull-right">
+                    <button type="button" class="btn btn-success btn-block avatar-save" id="complete">完成</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+<script>
+    var file, video_url;
+
+    function play() {
+        file = document.getElementById( 'uploadVideo' ).files[ 0 ];
+        video_url = URL.createObjectURL( file );
+        document.getElementById( "video" ).src = video_url;
+    }
+
+    $( function () {
+        $( 'body' ).on( 'click', '#complete', function ( e ) {
+            if ( window.location.search.split( '?' )[ 1 ] === 'show' ) { // 编辑器界面进来的
+                // $( '#previewImg', window.parent.document ).html( result ); // 预览图像
+                /* var formdata = new FormData( $( '#insertForm', window.parent.document )[ 0 ] );
+                $.ajax( {
+                    url: '',
+                    type: 'POST',
+                    data: formdata,
+                    cache: false,
+                    processData: false, // 不处理发送的数据，因为data值是FormData对象，不需要对数据做处理
+                    contentType: false, // 不设置Content-type请求头
+                    success: function ( res ) {
+                        // window.parent.showImage = res.msg;
+                        console.log( res )
+
+                        $( '.in', window.parent.document ).removeClass();
+                        $( '#video-modal', window.parent.document ).fadeOut(); // 关闭父页面模态框
+                    }
+                } ); */
+            } else { // 预览界面进来的
+                // 1寸 71 x 99
+                // 2寸
+
+                var item = document.getElementById( 'uploadVideo' ).files[ 0 ],
+                    formData = new FormData(),
+                    data;
+                formData.append( 'fileVideo', item );
+
+                $.ajax( {
+                    url: prevent_HOST + 'ueditor/uoloadFile',
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    processData: false, // 不处理发送的数据，因为data值是FormData对象，不需要对数据做处理
+                    contentType: false, // 不设置Content-type请求头
+                    success: function ( res ) {
+                        data = res.msg;
+                        var imageTarget = window.parent.document.getElementsByClassName( 'uploadVideo' )[ 0 ],
+                            video = document.createElement( 'video' );
+                        video.setAttribute( 'style', 'width: 142px;height: 198px;border: 1px solid #ccc;' );
+                        video.setAttribute( 'controls', 'controls' );
+                        video.setAttribute( 'src', video_url );
+
+                        $( imageTarget ).parent().find( 'input' ).attr( 'value', data ) // 设置input的属性
+                        $( imageTarget ).before( video );
+                        $( imageTarget ).remove(); // 把 上传按钮 删掉
+
+                    }
+                } )
+                /* $( '.in', window.parent.document ).removeClass( 'in' );
+                $( '#video-modal', window.parent.document ).fadeOut(); // 关闭父页面模态框 */
+                window.parent.shutdown(); // 关闭父页面模态框
+            }
+        } )
+    } )
+
+</script>

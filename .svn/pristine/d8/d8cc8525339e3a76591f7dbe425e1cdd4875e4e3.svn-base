@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>成员详情</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet" href="./css/myGroup.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="../../pluy-in/config.js"></script>
+    <script src="../../pluy-in/base.js"></script>
+    <script src="./js/myGroup.js"></script>
+</head>
+<body>
+<div class="header">
+    <a class="iconfont icon-zuo quit"></a>
+    我的组织
+</div>
+<div class="bodies">
+    <ul class="nav f16">
+        <li class="nav_already red">已加入组织</li>
+        <li class="nav_invite">邀请我加入</li>
+    </ul>
+    <div class="main">
+        <div class="box">
+            <div class="already">
+                <div class="already_box">
+
+                </div>
+                <div class="none f16 m_t_10">
+                    <p>暂无组织加入,点击加入组织进行申请加入</p>
+                    <div class="m_t_10">
+                        <a href="../partyApply/index.html" class="btn_active f14"><span class="iconfont icon-jiahao f16"></span>加入组织</a>
+                    </div>
+                </div>
+            </div>
+            <div class="invite">
+                <div class="invite_box">
+
+                </div>
+                <p class="none f16 m_t_10">暂无邀请..</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal">
+    <div class="modal_box">
+          <span class="a">
+              确定加入成功
+          </span>
+        <span class="c">
+            确定加入失败
+        </span>
+        <span class="b">
+                                请求错误
+                        </span>
+        <span class="f">
+                               拒绝成功
+                        </span>
+        <span class="g">
+                            拒绝失败
+                        </span>
+    </div>
+</div>
+</body>
+</html>

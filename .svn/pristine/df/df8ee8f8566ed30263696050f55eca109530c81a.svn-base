@@ -1,0 +1,30 @@
+<script src="../js/thirdJS/jquery.js"></script>
+<link rel="stylesheet" href="../css/thirdCSS/bootstrap.css">
+
+<link rel="stylesheet" href="../css/Common.css">
+
+
+<div id="project">
+
+    <div class="projectinfo" style="border:0.5px solid #999999; height: 80px; width: 100%;margin: 0 !important;padding: 0 !important;"
+        class="container">
+        <div class="col-xs-2" style="height: 100%;padding: 0 !important;">
+            <img src="../images/u16.png" alt="图片" style="width: 50px;height: 50px;position: relative; left: 50%;margin-left: -25px;top:50%;margin-top:-25px; ">
+        </div>
+        <div class="col-xs-10 " style="height: 100%;;">
+            <div style="height: 50%;line-height: 40px;">
+                <span style="color: darkseagreen;">标题</span>
+            </div>
+            <div style="height: 50%;line-height: 40px;">
+                <div style="color: darkseagreen;float: left;">负责人</div>
+                <div style="color: darkseagreen;float:right;margin-right: 30px;">状态</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .projectinfo:hover {
+        background-color: rgba(153, 255, 0, 0.247058823529412);
+    }
+</style>

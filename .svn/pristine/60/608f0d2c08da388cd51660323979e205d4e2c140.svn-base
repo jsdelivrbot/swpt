@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link href="../public/part/ligerlib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../public/css/base.css">
+    <link rel="stylesheet" href="./css/enterprise.css">
+    
+    <script src="./jquery.min.js"></script>
+    <script src="../public/part/ligerlib/ligerUI/js/ligerui.all.js" type="text/javascript"></script>
+    <script src="../public/part/ligerlib/ligerUI/js/plugins/ligerTree.js"></script>
+    <script src="../public/part/angular/angular.min.js"></script>
+    <script src="../public/part/angular/angular-ui-router.min.js"></script>
+    <script src="../public/config.js"></script>
+    <script src="./pubic/config.js"></script>
+    <script src="./pubic/app.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="enterprise">
+    <div class="theme" activeTree>
+        <!--tab切换-->
+        <div class="header">
+            <ul>
+                <li class="g_item addgroup" ng-click="current=1" ng-class="{true:'active'}[current===1]">
+                    加入组织</li>
+                <li class="g_item creatgroup" ng-click="current=2" ng-class="{true:'active'}[current===2]">创建组织</li>
+            </ul>
+        </div>
+        <!--申请加入组织-->
+        <div class="details" ng-show="current == 1">
+            <div class="addgroup" ng-controller="addgroup">
+                <div class="form-group">
+                    <label for="name">当前用户账号</label>
+                    <div>
+                        <input type="email" class="form-control" id="name" placeholder="" disabled>
+                    </div>
+                </div>
+                <div class="selectnode">
+                        <div  class="selectdiv"  ng-click="selected(0)">
+                            <input type="radio" name="selectnode" ><span>个人加入</span>
+                        </div>
+                        <div  class="selectdiv"  ng-click="selected(1)">
+                            <input type="radio" name="selectnode" 2><span>组织加入</span>
+                        </div>
+                </div>
+                <div class="detailsbody"  active-tree>
+                    <div class="detailsbox">
+                        <!--个人加入组织页面-->
+                        <div class="personal">
+                            <div class="form-group" id="grouptext">
+                                <label for="treenode">组织</label>
+                                <div>
+                                    <input type="text" class="form-control" name="personalName" ng-model="personalName" id="treenode" placeholder="输入组织CODE码">
+                                    <!--<input type="email" class="form-control" ng-model="personalName" id="treenode" placeholder="" activenode>-->
+                                </div>
+                                <div class="groupbox" >
+                                    <div>
+                                        <ul id="dirtree">
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--组织加入组织页面-->
+                        <div class="group">
+                            <div class="form-group" id="presenttext">
+                                <label for="presenttreenode">当前组织</label>
+                                <div>
+                                    <input type="email" class="form-control" ng-model="groupName" id="presenttreenode" placeholder="" activegroup>
+                                </div>
+                                <div class="groupbox" >
+                                    <div>
+                                        <ul id="grouptree">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="addtext">
+                                <label for="addtreenode">加入组织</label>
+                                <div>
+                                    <input type="email" class="form-control" ng-model="addName" id="addtreenode" placeholder="" activeadd>
+                                </div>
+                                <div class="groupbox" >
+                                    <div>
+                                        <ul id="addtree">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="det_footer"  ng-click="send()">
+                    <a href="javascript:;">加入</a>
+                </div>
+            </div>
+        </div>
+        <!--创建组织-->
+        <div class="details" ng-show="current == 2" >
+            <div class="creatgroup" ng-controller="creatgroup">
+                <div class="form-group">
+                    <label for="groupName">组织名称</label>
+                    <input type="email" class="form-control" id="groupName" placeholder="请输入汉字">
+                </div>
+                <div class="form-group">
+                    <label for="groupDescribe">描述</label>
+                    <input type="email" class="form-control" id="groupDescribe" placeholder="请输入汉字">
+                </div>
+                <div class="form-group">
+                    <label for="groupAccount">当前账户信息</label>
+                    <input type="email" class="form-control" id="groupAccount" placeholder="" disabled>
+                </div>
+                <div class="det_footer"  ng-click="creat()">
+                    <a href="javascript:;">创建</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="success">
+        <li class="success_box">
+            <img src="./img/chenggong.png" alt="">
+            <p>创建组织成功</p>
+            <p>是否跳转到权限页面,进行权限配置</p>
+            <div class="success_ul det_footer">
+                <a class="success_li" ng-click="Stay()">留在当前</a>
+                <a class="success_li" href="../home">跳转权限</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

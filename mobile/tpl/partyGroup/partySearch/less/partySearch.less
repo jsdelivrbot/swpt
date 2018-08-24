@@ -1,0 +1,91 @@
+.header {
+  .quit {
+    left: 3%;
+  }
+  .search_group {
+    position: relative;
+    width: 80%;
+    text-align: left;
+    margin-left: 15%;
+    padding-left: 0.12rem;
+    font-size: 16px;
+    .search_btn {
+      position: absolute;
+      padding-left: 0.1666666rem;
+      z-index: 999;
+      font-size: 17px;
+      top: 2px;
+      color: #999999;
+    }
+    .search_text {
+      transition: all .3s;
+      width: 75%;
+      text-indent: .7rem;
+      font-size: 14px;
+      padding: 0.11rem 0.12rem;
+      border-radius: 0.606666rem;
+    }
+    .search_cancel {
+      width: 20%;
+      padding: .11rem .12rem;
+      font-size: 18px;
+    }
+  }
+}
+
+.nav_box {
+  width: 100%;
+  overflow: hidden;
+  .nav {
+    display: flex;
+    position: relative;
+    left: 0;
+    transition: all .3s;
+    flex-wrap: nowrap;
+    li:first-child {
+      width: 15%;
+    }
+    .nav_list {
+      padding: 0.16rem 0;
+      width: 22.5%;
+      text-align: center;
+    }
+  }
+}
+
+.bodies {
+  .everyone {
+    display: flex;
+    align-items: center;
+    height: 1.1733333rem;
+    line-height: 1.1733333rem;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+    .photo {
+      width: 0.88rem;
+      margin-left: 0.2rem;
+      height: 0.88rem;
+      border-radius: 50%;
+      background-color: #66afe9;
+    }
+    .message {
+      display: flex;
+      width: 62%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      .name {
+        margin-left: 0.2666rem;
+        color: #494949;
+      }
+      .phone {
+        margin-right: 0.1666rem;
+        color: #595959
+      }
+    }
+    .belong {
+      color: #787878;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+}

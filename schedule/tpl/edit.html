@@ -1,0 +1,134 @@
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .curriculum_form{
+        width: 80%;
+        margin: 90px auto;
+        color: #666666;
+    }
+    .curriculum_form h1{
+        font-size: 16px;
+        background-color: #cccccc;
+        padding: 2px 5px;
+        color: #0c0c0c;
+    }
+    table{
+        border-spacing:0;
+        border: 1px solid #cccccc;
+        width: 100%;
+    }
+    tr{
+        height: 30px;
+        line-height: 30px;
+    }
+    tr:nth-child(even){
+        background-color: #f5efef;
+    }
+    td{
+        border-bottom: 1px solid #cccccc;
+    }
+    td:nth-child(1){
+        width: 86px;
+        text-align: right;
+        font-size: 12px;
+    }
+    td:nth-child(2){
+        font-size: 12px;
+    }
+    .w60{
+        width: 60px;
+    }
+</style>
+<div class="curriculum_form">
+    <h1>编辑 [语文] 课程</h1>
+    <form id="add_curriculum">
+        <input type="hidden" value="20" name="class_id">
+        <input type="hidden" value="{{id}}" name="id">
+        <table>
+            <tr>
+                <td>星期：</td>
+                <td>
+                    <select name="week">
+                        <option value="{{kc.weekDay}}">{{week_name}}</option>
+                        <option value="1">周一</option>
+                        <option value="2">周二</option>
+                        <option value="3">周三</option>
+                        <option value="4">周四</option>
+                        <option value="5">周五</option>
+                        <option value="6">周六</option>
+                        <option value="0">周日</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>课程名：</td>
+                <td>
+                    <select name="course_name" ng-model="subject_id" ng-change="getTeacher(subject_id)">
+                        <option ng-repeat="s in subject" value="{{s.id}}">{{s.value}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>上课时间：</td>
+                <td><select name="start_hour">
+                    <option value="{{le_time_h}}">{{le_time_h}}</option>
+                    <option value="0">00</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option ng-repeat="h in hour" value="{{h}}">{{h}}</option>
+                </select>
+                    :
+                    <select name="start_minute">
+                        <option value="{{le_time_m}}">{{le_time_m}}</option>
+                        <option value="0">00</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option ng-repeat="m in minute" value="{{m}}">{{m}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>上课时长：</td>
+                <td><input type="text" class="w60" value="{{kc.timeLength}}" name="class_time" placeholder="45">分</td>
+            </tr>
+            <tr>
+                <td>上课地点：</td>
+                <td>教室&nbsp;<input type="text" class="w60" name="short_addr" value="{{kc.addressNumber}}" placeholder="A905">&nbsp;&nbsp;&nbsp;&nbsp;详细地址&nbsp;<input type="text" value="{{kc.address}}"  name="long_addr"></td>
+            </tr>
+            <tr>
+                <td>教师：</td>
+                <td>
+                    <select name="teacher_id">
+                        <option ng-repeat="t in teacher" value="{{t.id}}">{{t.nick_name}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">课程描述：</td>
+                <td><textarea name="describe" rows="5" style="width: 100%;">{{kc.lessonExplain}}</textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button ng-click="doSubmit()">提交</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div>
+</div>

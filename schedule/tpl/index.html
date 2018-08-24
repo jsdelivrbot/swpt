@@ -1,0 +1,150 @@
+<div class="curriculum">
+    <div class="cl_head_top">
+        <span class="cl_d_decrease" ng-click="goUpWeek()">&lt;</span>
+        <div class="cl_cur_date">
+            <input type="text" ng-model="curr_data" value="" id="datepicker" readonly="readonly">
+        </div>
+        <!--<span>{{curr_data}}<img class="cl_open_icon" src="css/images/calendar.gif" height="12" width="13"/>&lt;!&ndash;<em class="cl_open_date"></em>&ndash;&gt;</span>-->
+        <!--<div id="datepicker"></div>-->
+        <span class="cl_d_increase" ng-click="goNextWeek()">&gt;</span>
+    </div>
+    <div class="cl_cur_dtae">
+        <div class="cl_cur_dtae_h">
+            <ul>
+                <li ng-repeat="w in week_data track by $index">
+                    <span>{{w.day}}</span>
+                    <span ng-class="{'cl_cur_dtae_week':w.today}">{{w.weekday}}</span>
+                </li>
+                <!--<li>
+                    <span>29</span>
+                    <span>TUE|周二</span>
+                </li>
+                <li>
+                    <span>30</span>
+                    <span class="cl_cur_dtae_week">WED|周三</span>
+                </li>
+                <li>
+                    <span>31</span>
+                    <span>THU|周四</span>
+                </li>
+                <li>
+                    <span>1</span>
+                    <span>FRI|周五</span>
+                </li>
+                <li>
+                    <span>2</span>
+                    <span>SAT|周六</span>
+                </li>
+                <li>
+                    <span>3</span>
+                    <span>SUN|周日</span>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+    <div class="cl_main_content">
+        <div class="cl_main_time">
+            <ul>
+                <li><span>7:00</span> AM</li>
+                <li><span>7:30</span> AM</li>
+                <li><span>8:00</span> AM</li>
+                <li><span>8:30</span> AM</li>
+                <li><span>9:00</span> AM</li>
+                <li><span>9:30</span> AM</li>
+                <li><span>10:00</span> AM</li>
+                <li><span>10:30</span> AM</li>
+                <li><span>11:00</span> AM</li>
+                <li><span>11:30</span> AM</li>
+                <li><span>12:00</span> AM</li>
+                <li><span>12:30</span> PM</li>
+                <li><span>13:00</span> PM</li>
+                <li><span>13:30</span> PM</li>
+                <li><span>14:00</span> PM</li>
+                <li><span>14:30</span> PM</li>
+                <li><span>15:00</span> PM</li>
+                <li><span>15:30</span> PM</li>
+                <li><span>16:00</span> PM</li>
+                <li><span>16:30</span> PM</li>
+                <li><span>17:00</span> PM</li>
+                <li><span>17:30</span> PM</li>
+                <li><span>18:00</span> PM</li>
+                <li><span>18:30</span> PM</li>
+                <li><span>19:00</span> PM</li>
+                <li><span>19:30</span> PM</li>
+                <li><span>20:00</span> PM</li>
+                <li><span>20:30</span> PM</li>
+                <li><span>21:00</span> PM</li>
+                <li><span>21:30</span> PM</li>
+                <li><span>22:00</span> PM</li>
+                <li><span>22:30</span> PM</li>
+                <li><span>23:00</span> PM</li>
+                <li><span>23:30</span> PM</li>
+            </ul>
+        </div>
+        <div class="cl_main_lesson">
+            <div class="cl_main_partition"></div>
+            <div class="cl_main_partition partition_bg"></div>
+            <div class="cl_main_partition"></div>
+            <div class="cl_main_partition partition_bg"></div>
+            <div class="cl_main_partition"></div>
+            <div class="cl_main_partition partition_bg"></div>
+            <div class="cl_main_partition"></div>
+
+            <!--<div class="lesson lesson_st1" style="height: 40px;left: 180px;top: 0;" title="7:00陈明教授在A306室上计算机网络课" ng-click="showClassDetails(2)">
+                <h2>计算机网络</h2>
+                <h3>A306室</h3>
+            </div>
+            <div class="lesson lesson_st2" style="height: 30px;left: 0;top: 60px;" title="8:30陈明教授在B602室上离散数学" ng-click="showClassDetails(2)">
+                <h2>离散数学</h2>
+                <h3>B602室</h3>
+            </div>
+            <div class="lesson lesson_st2" style="height: 30px;left: 0;top: 100px;" title="8:30陈明教授在B602室上离散数学" ng-click="showClassDetails(2)">
+                <h2>离散数学</h2>
+                <h3>B602室</h3>
+            </div>
+            <div class="lesson lesson_st3" style="height: 40px;left: 270px;top: 90px;" title="8:30陈明教授在C925室上模拟电路" ng-click="showClassDetails(2)">
+                <h2>模拟电路</h2>
+                <h3>C925室</h3>
+            </div>
+            <div class="lesson lesson_st4 lesson_del" style="height: 70px;left: 450px;top: 180px;" title="8:30陈明教授在C925室上模拟电路" ng-click="showClassDetails(2)">
+                <h2>模拟电路2</h2>
+                <h3>C925室</h3>
+            </div>
+            <div class="lesson lesson_st4" style="height: 70px;left: 90px;top: 270px;">
+                <h2>模拟电路2</h2>
+                <div class="lesson_change" ng-click="showClassDetails(2)">
+                    <span>离散数学</span>
+                </div>
+                <h3>C925室</h3>
+            </div>-->
+        </div>
+    </div>
+</div>
+<div class="open_dig" ng-if="show_class_details">
+    <div class="op_area">
+        <div class="op_head">日程内容详细<span class="open_colse" ng-click="openColse()">x</span></div>
+        <div class="op_content">
+            <div class="op_class_details">
+                <h2>时间地点</h2>
+                <p>时长：{{curr_lesson.timeLength}}</p>
+                <p>{{curr_lesson.startTime}} - {{curr_lesson.endTime}}</p>
+                <p>{{curr_lesson.address}} {{curr_lesson.addressNumber}}</p>
+            </div>
+            <!--<div class="op_class_details">
+                <h2>科目</h2>
+                <p>{{curr_lesson.subject_name}}</p>
+            </div>
+
+            <div class="op_class_details">
+                <h2>老师</h2>
+                <p>{{curr_lesson.teacher_name}}</p>
+            </div>-->
+            <div class="op_class_details">
+                <h2>行程1</h2>
+                <p>{{curr_lesson.lessonExplain}}</p>
+            </div>
+        </div>
+        <div class="op_bottom"></div>
+    </div>
+</div>
+<img src="../../public/img/loading.gif" id="loading">

@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>图表控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script src="./self/echarts/echarts.common.min.js"></script>
+    <script src="./self/echarts/echarts.min.js"></script>
+    <script type="text/javascript">
+        /*
+         * chart 图表控件
+         *
+         * orgname(string/number) -- 图表名称 ,
+         * legend(string/number) -- 图表说明,
+         * shopname(array) -- 商品名称,
+         * shopval(array) -- 商品数值
+         *
+         * */
+
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+
+        //checkboxs
+        function isIE() {
+            if ( window.attachEvent ) {
+                return true;
+            }
+            return false;
+        }
+        //moveRow在IE支持而在火狐里不支持！以下是扩展火狐下的moveRow
+        if ( !isIE() ) {
+            function getTRNode( nowTR, sibling ) {
+                while ( nowTR = nowTR[ sibling ] )
+                    if ( nowTR.tagName == 'TR' ) break;
+                return nowTR;
+            }
+            if ( typeof Element != 'undefined' ) {
+                Element.prototype.moveRow = function ( sourceRowIndex, targetRowIndex ) //执行扩展操作
+                {
+                    if ( !/^(table|tbody|tfoot|thead)$/i.test( this.tagName ) || sourceRowIndex === targetRowIndex ) return false;
+                    var pNode = this;
+                    if ( this.tagName == 'TABLE' ) pNode = this.getElementsByTagName( 'tbody' )[ 0 ]; //firefox会自动加上tbody标签，所以需要取tbody，直接table.insertBefore会error
+                    var sourceRow = pNode.rows[ sourceRowIndex ],
+                        targetRow = pNode.rows[ targetRowIndex ];
+                    if ( sourceRow == null || targetRow == null ) return false;
+                    var targetRowNextRow = sourceRowIndex > targetRowIndex ? false : getTRNode( targetRow, 'nextSibling' );
+                    if ( targetRowNextRow === false ) pNode.insertBefore( sourceRow, targetRow ); //后面行移动到前面，直接insertBefore即可
+                    else { //移动到当前行的后面位置，则需要判断要移动到的行的后面是否还有行，有则insertBefore，否则appendChild
+                        if ( targetRowNextRow == null ) pNode.appendChild( sourceRow );
+                        else pNode.insertBefore( sourceRow, targetRowNextRow );
+                    }
+                }
+            }
+        }
+
+        /*删除tr*/
+        function fnDeleteRow( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            oTable.deleteRow( obj.rowIndex );
+        }
+        /*上移*/
+        function fnMoveUp( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            var minRowIndex = 1;
+            var curRowIndex = obj.rowIndex;
+            if ( curRowIndex - 1 >= minRowIndex ) {
+                oTable.moveRow( curRowIndex, curRowIndex - 1 );
+            }
+
+        }
+        /*下移*/
+        function fnMoveDown( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            var maxRowIndex = oTable.rows.length;
+            var curRowIndex = obj.rowIndex;
+            if ( curRowIndex + 1 < maxRowIndex ) {
+                oTable.moveRow( curRowIndex, curRowIndex + 1 );
+            }
+        }
+
+
+        /*生成tr*/
+        var num = 0;
+
+        function fnAddComboTr( obj ) {
+            num++;
+            var oTable = document.getElementById( 'options_table' );
+            var new_tr_node = oTable.insertRow( oTable.rows.length );
+            var new_td_node0 = new_tr_node.insertCell( 0 ),
+                new_td_node1 = new_tr_node.insertCell( 1 ),
+                new_td_node2 = new_tr_node.insertCell( 2 );
+
+            if ( !obj.name ) obj.name = '';
+            if ( !obj.value ) obj.value = '';
+            new_td_node0.innerHTML = '<td><input type="text" id="' + obj.name + num + '" value="' + obj.value + '" name="' +
+                obj.name + '" placeholder="商品名称"></td>';
+            new_td_node1.innerHTML = '<td><input type="number" id="' + obj.name1 + num + '" value="' + obj.value + '" name="' +
+                obj.name1 + '" placeholder="商品数值"></td>';
+            new_td_node2.innerHTML =
+                '<td><div class="btn-group"><a title="上移" class="btn btn-small btn-info" href="javascript:void(0);" onclick="fnMoveUp(this)"><i class="icon-white icon-arrow-up"></i></a><a title="下移" class="btn btn-small btn-info" href="javascript:void(0);" onclick="fnMoveDown(this)"><i class="icon-white icon-arrow-down"></i></a><a title="删除" class="btn btn-small btn-default" href="javascript:void(0);" onclick="fnDeleteRow(this)"><i class="icon-ban-circle"></i></a></div></td>';
+            return true;
+        }
+
+        function fnAdd() {
+            fnAddComboTr( {
+                "name": 'shopname',
+                "name1": 'shopval',
+                "value": ''
+            } );
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    <span>图表名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>图表说明</span>
+                    <span class="label label-important">*</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="orgname" name="orgname" onclick="javascript:this.select()" placeholder="必填 - 图标的标题" type="text" />
+                </td>
+                <td>
+                    <input id="legend" name="legend" onclick="javascript:this.select()" placeholder="图表的描述" type="text" />
+                </td>
+            </tr>
+            <!-- <tr colspan="2">
+        <th colspan="2"><span>图表说明</span><span class="label label-important">*</span></th>
+    </tr>-->
+
+            <!--<tr>
+        <td colspan="2"><input id="orgtype" name="orgtype" placeholder="必填项" type="text"/></td>
+    </tr>-->
+            <tr>
+                <td colspan="2">
+                    <table class="table table-hover table-condensed" id="options_table">
+                        <tr>
+                            <th>商品名称</th>
+                            <th>商品数值</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
+                    <a title="添加选项" class="btn btn-primary" onclick="fnAdd();">添加选项</a>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'chart';
+        window.onload = function () {
+            $G('reportname').select();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+
+                oNode = UE.plugins[ thePlugins ].editdom;
+                // 点击修改后，获取现有属性
+                var gName = oNode.getAttribute( "orgname" ),
+                    // gType = oNode.getAttribute("orgtype"),
+                    gLegend = oNode.getAttribute( "legend" ),
+                    gShopName = oNode.getAttribute( "shopname" ),
+                    gShopVal = oNode.getAttribute( "shopval" );
+
+                // 拆除拼接
+                var aName = gName,
+                    //            aType = gType,
+                    aLegend = gLegend,
+                    aShopName = gShopName ? gShopName.split( "`" ) : null,
+                    aShopVal = gShopVal ? gShopVal.split( "`" ) : null;
+
+                $G( "orgname" ).value = aName,
+                    //        $G("orgtype").value = aType;
+                    $G( "legend" ).value = aLegend;
+
+                for ( var i = 1; i < aShopName.length; i++ ) {
+                    fnAdd();
+                    $G( "shopname" + i ).value = aShopName[ i - 1 ];
+                    $G( "shopval" + i ).value = aShopVal[ i - 1 ];
+                }
+            }
+        }
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+        dialog.onok = function () {
+
+            var gName = '',
+                gShopName = '',
+                gShopVal = '',
+                gLegend = '';
+
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '图表名称不能为空' );
+                $G( 'orgname' ).focus();
+                return false;
+            } else if ( $G( 'legend' ).value == '' ) {
+                alert( '图表说明不能为空' );
+                $G( 'legend' ).focus();
+                return false;
+            }
+
+            // 遍历添加数据
+            var inputname = document.getElementsByName( "shopname" );
+            var inputval = document.getElementsByName( "shopval" );
+            var inputlen = inputname.length;
+            var shopname = [],
+                shopval = [];
+
+            for ( var i = 0; i < inputlen; i++ ) {
+                shopname += inputname[ i ].value + "`";
+                shopval += inputval[ i ].value + "`";
+            }
+
+            gShopName = shopname,
+                gShopVal = shopval,
+                gName = $G( "orgname" ).value,
+                //    gType = $G("orgtype").value,
+                gLegend = $G( "legend" ).value;
+
+
+            if ( !oNode ) {
+                try {
+                    oNode = createElement( 'input', 'leipiNewField' );
+                    oNode.setAttribute( 'leipiPlugins', thePlugins );
+                    oNode.setAttribute( 'type', 'text' );
+                    oNode.setAttribute( 'value', '{图表控件}' );
+                    oNode.setAttribute( 'readonly', 'readonly' );
+                    oNode.setAttribute( 'orgname', gName );
+                    //            oNode.setAttribute('orgtype',gType);
+                    oNode.setAttribute( 'legend', gLegend );
+                    oNode.setAttribute( 'shopname', gShopName );
+                    oNode.setAttribute( 'shopval', gShopVal );
+
+                    oNode.style.width = "100%";
+                    console.dir( this )
+                    // editor.execCommand('insertHtml', oNode.outerHTML);
+                    this.editor.execCommand( 'insertHtml', oNode.outerHTML )
+                    return true;
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                //修改
+                oNode.setAttribute( 'leipiPlugins', thePlugins );
+                oNode.setAttribute( 'orgname', gName );
+                //        oNode.setAttribute('orgtype',gType);
+                oNode.setAttribute( 'legend', gLegend );
+                oNode.setAttribute( 'shopname', gShopName );
+                oNode.setAttribute( 'shopval', gShopVal );
+
+                delete UE.plugins[ thePlugins ].editdom; //使用后清空这个对象，变回新增模式
+            }
+
+            /* lastest */
+
+            /*var inputname = document.getElementsByName("shopname");
+            var inputval = document.getElementsByName("shopval");
+            var inputlen = inputname.length;
+            var shopname = [],shopval = [];
+
+            for(var i = 0; i < inputlen; i++){
+                shopname.push(inputname[i].value);
+                shopval.push(inputval[i].value);
+            }
+            createchart(name,legend,shopname,shopval);*/
+        };
+
+        function createchart( name, legend, shopname, shopval ) {
+            num++;
+            var div = createElement( "div" );
+            div.id = 'main' + num;
+            div.style.width = "400px";
+            div.style.height = "400px";
+            var iframe = window.parent.document.getElementById( "ueditor_0" ).contentWindow.document.body;
+            var mainurl = window.parent.document.getElementById( "ueditor_0" ).contentWindow.document;
+            iframe.appendChild( div );
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init( mainurl.getElementById( 'main' + num ) );
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: name
+                },
+                tooltip: {},
+                legend: {
+                    data: [ lengend ]
+                },
+                xAxis: {
+                    data: shopname
+                },
+                yAxis: {},
+                series: [ {
+                    name: legend,
+                    type: 'bar',
+                    data: shopval
+        } ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption( option );
+        }
+
+    </script>
+</body>
+
+</html>

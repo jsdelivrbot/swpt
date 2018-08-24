@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>管理条控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <link rel="stylesheet" href="./cropper/cropper.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <script type="text/javascript" src="./cropper/cropper.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+    <script src="../httpData.config.js"></script>
+
+</head>
+<body>
+<form name="classFrm" id="classFrm" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="orgname">控件名称</label>
+    <input type="text" class="form-control"  id="orgname" placeholder="控件名称">
+  </div>
+</form>
+</body>
+<script type="text/javascript">
+  var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+  var nodeId =$("#node_id",window.parent.document).val();
+  var nodeName =$("#node_name",window.parent.document).val();
+    function createElement( type, name ) {
+        var element = null;
+        try {
+            element = document.createElement( '<' + type + ' name="' + name + '">' );
+        } catch ( e ) {}
+        if ( element == null ) {
+            element = document.createElement( type );
+            element.name = name;
+        }
+        return element;
+    }
+    var oNode = null,thePlugins = 'glc';
+    window.onload = function() {
+      if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+        var gTitle=oNode.getAttribute('title').replace(/"/g,"\"");
+        $G('orgname').value = gTitle;
+      }
+    }
+
+    dialog.oncancel = function () {
+      if ( UE.plugins[ thePlugins ].editdom ) {
+        delete UE.plugins[ thePlugins ].editdom;
+      }
+    };
+    dialog.onok = function () {
+      var identity, gdataSource, gTitle, gdatazId;
+      if( $G('orgname').value == '') {
+        alert('控件名称不能为空');
+        return false;
+      }
+      if(!nodeId){
+        alert('没有选择节点');
+        return false;
+      }
+      //隐藏类型
+      if ( !oNode ) {
+        try {
+          oNode = createElement( 'input', 'leipiNewField' );
+          oNode.setAttribute( 'type', 'text' );
+          oNode.setAttribute( 'title', "管理条控件" );
+          oNode.setAttribute( 'value', '管理 - 控件' );
+          oNode.setAttribute( 'name', 'leipiNewField' );
+          oNode.setAttribute( 'leipiPlugins', thePlugins );
+          oNode.setAttribute( 'nodeid', nodeId );
+          oNode.setAttribute( 'classname', nodeName );
+          oNode.setAttribute( 'style',"width: 80px;height: 30px;");
+          editor.execCommand( 'insertHtml', oNode.outerHTML );
+        } catch ( e ) {
+          try {
+            editor.execCommand( 'error' );
+          } catch ( e ) {
+            alert( '控件异常，反馈或寻求帮助！' );
+          }
+          return false;
+        }
+      } else {
+        oNode.setAttribute( 'title', "管理条控件" );
+        oNode.setAttribute( 'value', '管理 - 控件' );
+        delete UE.plugins[ thePlugins ].editdom;
+      }
+    };
+</script>

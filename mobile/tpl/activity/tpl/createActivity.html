@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>创建活动</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">    
+    <link rel="stylesheet" href="../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../static/css/createActivity/cA_main.min.css">
+    <script src="../../../public/flexible/flexible.js"></script>
+    <script src="../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="confirmApply" id="createActivity">
+            <header>
+                <div class="back" onclick="window.history.go(-1)">
+                    <i class="iconfont">&#xe7a4;</i>
+                </div>
+                <h2 class="centerTitle">活动发布页面</h2>                
+            </header>
+            <!-- <section class="banner">
+                <h2>活动发布页面</h2>
+            </section> -->
+            <section class="formContainer">
+                <form id="confirmForm" name="confirmForm" class="confirmForm" enctype="multipart/form-data">
+                    <input type="hidden" name="userId" id="userId" value="">
+                    <label for="pName">
+                        <span class="important">*</span>活动名称</label>
+                    <input type="text" id="pName" class="pName" name="name" placeholder="活动名称" required="">
+                    <label for="pTheme">
+                        <span class="important">*</span>活动主题</label>
+                    <input type="text" id="pTheme" class="pTheme" name="theme" placeholder="活动主题" required="">
+                    <label for="pLocation">
+                        <span class="important">*</span>活动地址</label>
+                    <input type="text" id="pLocation" class="pLocation" name="address" placeholder="活动地址" required="">
+                    <label for="pTime">
+                        <span class="important">*</span>报名截止</label>
+                    <input type="date" id="pTime" class="pTime" name="ActivityTime" required="">
+                    <label for="pEndTime">
+                        <span class="important">*</span>活动时间</label>
+                    <input type="date" id="pStartTime" name="startTime" class="pEndTime" required=""> ~
+                    <input type="date" id="pEndTime" name="endTime" class="pEndTime" required="">
+                    <label for="pNote">
+                        <span class="important">*</span>详细说明</label>
+                    <textarea cols="30" rows="6" id="pNote" class="pNote" name="explain" placeholder="活动主题" required=""></textarea>
+                    <label for="pBanner">
+                        <span class="important">*</span>活动封面</label>
+                    <input type="file" id="pBanner" class="pBanner" name="image" accept="image/*" required="">
+                    <label for="pType">
+                        <span class="important">*</span>发布类型</label>
+                    <select name="type" id="pType" class="pType">
+                        <option value="outside">室外活动</option>
+                        <option value="inside">室内活动</option>
+                    </select>
+                    <label for="pPhoneNum">
+                        <span class="important">*</span>手机号</label>
+                    <input type="tel" id="pPhoneNum" class="pPhoneNum" name="phone" placeholder="用于报名人员联系" required="" pattern="^(1[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{9}$">
+                    <label>
+                        <span class="important">*</span>是否需要签到</label>
+                    <label for="pQrcodeT" class="radioContainer">
+                        <input type="radio" name="isMark" id="pQrcodeT" class="pQrcode" value="0"> 是 </label>
+                    <label for="pQrcodeF" class="radioContainer">
+                        <input type="radio" name="isMark" id="pQrcodeF" class="pQrcode" value="1"> 否 </label>
+                    <label for="pLimitNum">报名上限</label>
+                    <input type="number" id="pLimitNum" class="pLimitNum" name="upNumber" value="" placeholder="不填则表示不限制">
+                    <button type="submit" id="submit" class="submit">确认发布</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../public/js/method.js"></script>
+<script src="../../../public/layer/layer.js"></script>
+<script src="../static/js/cA_main.js"></script>

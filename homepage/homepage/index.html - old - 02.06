@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="gzsw">
+<head>
+    <meta charset="UTF-8">
+    <title>省科学院</title>
+    <link rel="stylesheet" type="text/css" href="css/comm.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body>
+<div class="outer">
+    <!--<div class="l_top">
+        <div class="l_logo"><img src="../login2/img/logo.png"/></div>
+        <div class="l_t_nav">
+            <a href="index.html">首页</a>
+            <a href="down_client.html">下载客户端</a>
+            <a href="price.html">价格</a>
+            <a href="customer_service.html">售后服务</a>
+            <a href="../login2?register" class="login_a login_r {{main_flag!='reg'?'nav_cur':''}}">注册</a>
+            <a href="../login2/#" class="login_a">登录</a>
+        </div>
+    </div>-->
+    <div class="l_top">
+        <div class="l_logo">
+            <span>教　育　云</span>
+            <div>Education Cloud</div>
+        </div>
+        <div class="l_t_nav">
+            <a href="index.html" class="navActive">首页</a>
+            <a href="down_client.html">下载客户端</a>
+            <a href="price.html">价格</a>
+            <a href="customer_service.html">售后服务</a>
+            <a href="../login2?register" class="{{main_flag!='reg'?'':'activeBtns'}}">注册</a>
+            <a href="../login2/#" class="{{main_flag=='login'?'activeBtns':''}}">登录</a>
+        </div>
+    </div>
+    <div class="banner">
+        <a href="">
+            <img src="img/yingpans.png"/>
+        </a>
+    </div>
+    <!--<div class="banner">
+        <a href="">
+            <img src="img/banner.png"/>
+        </a>
+    </div>
+    <div class="banner-xia">
+        <a href="">
+            <img src="img/banner-xia.png"/>
+        </a>
+    </div>
+    <div class="content">
+        <a href="">
+            <img src="img/content.png"/>
+        </a>
+    </div>
+    <div class="content-box-qy">
+        <a href="">
+            <img src="img/qyfygl.png"/>
+        </a>
+    </div>
+    <div class="content-box-rl">
+        <a href="">
+            <img src="img/rlfygl.png"/>
+        </a>
+    </div>
+    <div class="footer">
+        <div class="footer-wrap">
+            <dl>
+                <dt>产品</dt>
+                <dd><a href="">产品中心</a></dd>
+                <dd><a href="">在线试用</a></dd>
+                <dd><a href="">下载试用</a></dd>
+                <dd><a href="">版本介绍</a></dd>
+            </dl>
+            <dl>
+                <dt>公司</dt>
+                <dd><a href="">联系我们</a></dd>
+                <dd><a href="">帮助中心</a></dd>
+                <dd><a href="">用户协议</a></dd>
+                <dd><a href="">在线客服</a></dd>
+            </dl>
+            <dl>
+                <dt>社区</dt>
+                <dd><a href="">官方论坛</a></dd>
+                <dd><a href="">官方博客</a></dd>
+            </dl>
+            <dl>
+                <dt>热门推荐</dt>
+                <dd><a href="">供应商入口</a></dd>
+                <dd><a href="">招聘信息</a></dd>
+                <dd><a href="">合作咨询</a></dd>
+                <dd><a href="">后台管理</a></dd>
+            </dl>
+        </div>
+        <div class="footer-right">
+            <div>
+                <span>教　育　云</span>
+                <div>Education Cloud</div>
+            </div>
+            <div>&copy; 2017　教育云科技有限公司</div>
+        </div>
+    </div>-->
+</div>
+</body>
+</html>
+<script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script src="../public/part/angular/angular.min.js"></script>
+<script src="../public/part/angular/angular-route.js"></script>
+<script src="../js/getdata.js"></script>
+<script src="../public/config.js"></script>
+<script src="../login2/js/app.js"></script>

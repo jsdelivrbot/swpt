@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>备课</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <link rel="stylesheet" href="bootstrap-3/css/bootstrap.min.css">
+  <!--[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+  <![endif]-->
+  <!--[if lte IE 7]>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+  <![endif]-->
+  <script src="jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="leipi.style.css">
+  <script type="text/javascript" src="../dialogs/internal.js"></script>
+  <link rel="stylesheet" href="./cropper/cropper.css">
+  <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+  <script type="text/javascript" src="./cropper/cropper.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+
+  <script src="../httpData.config.js"></script>
+  <link rel="stylesheet" href="self/tpl/tpl.css">
+</head>
+<body>
+    <table class="table-c table table-bordered table-striped table-hover">
+        <tr>
+            <th>
+                <span>控件名称</span>
+                <span class="label label-important">*</span>
+            </th>
+            <th>
+                <span>字体大小</span>
+            </th>
+        </tr>
+        <tr>
+          <td>
+              <input style="padding:0" id="orgname" class="form-control"type="text" onclick="javascript:this.select()" placeholder="必填项" value="备课">
+          </td>
+          <td>
+              <input style="padding:0" id="orgfontsize" class="form-control" type="text"  class="input-small span1" value="16">
+          </td>
+        </tr>
+        <tr>
+            <th>
+                <span>宽度</span>
+            </th>
+            <th>
+                <span>高度</span>
+            </th>
+        </tr>
+        <tr>
+         <td>
+           <input style="padding:0" class="form-control" type="text" id="orgwidth" value="25%">
+         </td>
+         <td>
+           <input style="padding:0" class="form-control" type="text" id="orgheight" value="25%" >
+         </td>
+        </tr>
+        <tr><th colspan="2"><span style="font-size: 16px">此链接只适于PC端</span></th></tr>  
+      </table>    
+<form class="form">
+  <input type="file" name="fileVideo" id="filepic" class="tpl-pic-upfile" onchange="imgpreview()">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" checked disabled> 备课</div>
+        <input type="text" name="home-title" class="form-control my-input" value="备课" disabled>
+        <input type="text" name="home-url" class="form-control my-input" value="/courseware" disabled>
+      <div class="input-group-addon my-input-addon myupfilehome"><img style="width: 45px;height: 38px;" src="self/tpl/img/sidebar/beike.png"></div>
+    </div>
+  </div>
+</form>
+</body>
+<script type="text/javascript">
+  var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+  var nodeId =$("#node_id",window.parent.document).val();
+  var upfile=$(".tpl-pic-upfile");
+  var pic={"myupfilehome":"http://www.1388w.cn/editor/assets/ueditor/formdesign/self/tpl/img/sidebar/beike.png"};
+  var curpicbtn='';
+
+  function imgpreview(){
+    var file = document.getElementById("filepic").files[0];
+    var formData = new FormData();
+    formData.append('fileVideo', file);
+    $.ajax({
+      url: prevent_HOST+"ueditor/uoloadFile",
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false, 
+      mimeType: "multipart/form-data",
+      dataType:"json",
+      success: function (data) {
+
+        if(data.status=='0'){
+          pic[curpicbtn]=data.msg;
+          $("."+curpicbtn+" img").attr("src",data.msg);
+        }else{
+          alert("上传失败");
+        }
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+    //$(".class-img-show img").attr("src",URL.createObjectURL(files));
+  }
+
+  function createElement( type, name ) {
+    var element = null;
+    try {
+      element = document.createElement( '<' + type + ' name="' + name + '">' );
+    } catch ( e ) {}
+    if ( element == null ) {
+      element = document.createElement( type );
+      element.name = name;
+    }
+    return element;
+  }
+  $(document).on("click",".myupfilehome",function () {
+    curpicbtn='myupfilehome';
+    upfile.click();
+  });
+  var oNode = null,thePlugins = 'beike';
+  window.onload = function() {
+    $G('orgname').select();
+    if( UE.plugins[thePlugins].editdom ){
+      oNode = UE.plugins[thePlugins].editdom;
+      //var gTitle=oNode.getAttribute('title').replace(/"/g,"\"");
+      //$G('orgname').value = gTitle;
+      var gHome=oNode.getAttribute('home').replace(/"/g,"\""),
+          gName = oNode.getAttribute( 'orgname' ),
+          gfontsize = oNode.getAttribute( 'orgfontsize' ),
+          gWidth = oNode.getAttribute( 'orgwidth' ),
+          gHeight = oNode.getAttribute( 'orgheight' );
+          $G( 'orgname' ).value = gName; 
+          $G( 'orgwidth' ).value = gWidth;
+          $G( 'orgheight' ).value = gHeight;
+          $G( 'orgfontsize' ).value = gfontsize;
+      if(gHome&&gHome!='null'){
+        gHomeVal=gHome.split(',');
+        $("input[name=home-url]").val(gHomeVal[2]);
+        $('.myupfilehome img').attr('src',gHomeVal[1]);
+        $(".chome").attr("checked",true);
+      }
+    }
+  }
+
+  dialog.oncancel = function () {
+    if ( UE.plugins[ thePlugins ].editdom ) {
+      delete UE.plugins[ thePlugins ].editdom;
+    }
+  };
+  
+  dialog.onok = function () {
+    /*if(!nodeId){
+      alert('没有选择节点');
+      return false;
+    }*/
+    if ( $G( 'orgname' ).value == '' ) {
+        alert( '请输入控件名称' );
+        return false;
+    }
+   var gTitle = $G( 'orgname' ).value.replace( /\"/g, "&quot;" ),
+       orgfontsize = $G( 'orgfontsize' ).value,
+       orgwidth = $G( 'orgwidth' ).value,
+       orgheight = $G( 'orgheight' ).value;
+       var link='',
+          title='',
+          curpic='',
+          linkhtml='';
+    $("input:checked").each(function(){
+        var title = $("input[name=home-title]").val(),
+          curpic = pic.myupfilehome,
+          link = $("input[name=home-url]").val();
+         var leipiplugins=`<input orgwidth="${orgwidth}" orgheight="${orgheight}" orgfontsize="${orgfontsize}" name="leipiNewField" type="text" title="workform" value="workform" leipiplugins="workform" style="height: 20px;width: 20px;border-radius: 8px;"`;
+          leipiplugins += ` home="${title},${curpic},${link}"`;
+          if(title!='') 
+          linkhtml+='<a href="'+link+'" target="maincontent" class="icoA" ><dl style="display:inline-block"><dt><img style="width:'+orgwidth+';height:'+orgheight+'" src="'+curpic+'" alt=""></dt><dd style="font-size:'+orgfontsize+'px">'+title+'</dd></dl></a>';
+          var bhtml=`<script type="text/javascript" src="self/tpl/tpl1/tpl1.js"><\/script>`+
+            `<link rel="stylesheet" href="self/tpl/tpl1/tpl1.css">`+
+            `<div id="sidebar">`+leipiplugins+
+            `/><div id="icolist" >`+linkhtml+
+            `</div></div>`;
+        editor.setContent('');
+        editor.execCommand('insertHtml', bhtml);
+  })
+}
+
+</script>

@@ -1,0 +1,64 @@
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .curriculum_form{
+        width: 80%;
+        margin: 90px auto;
+        color: #666666;
+    }
+    .curriculum_form h1{
+        font-size: 16px;
+        background-color: #cccccc;
+        padding: 2px 5px;
+        color: #0c0c0c;
+    }
+    table{
+        border-spacing:0;
+        border: 1px solid #cccccc;
+        width: 100%;
+    }
+    tr{
+        height: 30px;
+        line-height: 30px;
+    }
+    tr:nth-child(even){
+        background-color: #f5efef;
+    }
+    td{
+        border-bottom: 1px solid #cccccc;
+        text-align: center;
+    }
+    .w60{
+        width: 60px;
+    }
+</style>
+<div class="curriculum_form">
+    <h1>课程列表 [<a href="#!/add">添加</a>]</h1>
+    <form id="add_curriculum">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>课程</th>
+                <th>星期</th>
+                <th>时间</th>
+                <th>地点</th>
+                <th>教师</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="c in lists">
+                <td>{{c.id}}</td>
+                <td>{{c.subject_name}}</td>
+                <td>{{c.week_name}}</td>
+                <td>{{c.timehtml}}</td>
+                <td>{{c.address}} {{c.addressNumber}}</td>
+                <td>{{c.teacher_name}}</td>
+                <td><a href="javascript:void();" ng-click="del(c.id)">删除</a>　<a href="#!/edit/{{c.id}}">修改</a></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div>
+
+</div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<div>
+    <div ng-repeat="dm in vip_moudle">
+        <div class="c_group">
+            <div class="c_title">
+                <div class="c_div" ng-bind="dm.m_name" id="dm.id">
+
+                </div>
+            </div>
+            <ul class="c_ul">
+                <li ng-repeat="list in dm.child" class="c_li" moveli>
+                    <div class="cli_box">
+                        <div class="cli_img">
+                            <img src="{{list.pic}}" alt="" class="c_img">
+                        </div>
+                        <div ng-bind="list.name" class="cli_name">
+                        </div>
+                        <div class="cli_fee">试用</div>
+                    </div>
+                    <a class="cli_link">开通该服务</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

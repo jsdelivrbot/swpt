@@ -1,0 +1,57 @@
+body{
+    padding-top: 20px;
+}
+li{
+    list-style: none;
+}
+.page{
+    padding-bottom: 15px;
+}
+.page a{
+    margin: 0px 5px;
+}
+.no-file{
+    color: #ff0000;
+}
+.file_name{
+    cursor: pointer;
+    color: #666;
+    margin-left: 3px;
+}
+.file_icon{
+    width: 20px;
+}
+.sharfile_user{
+    height: auto;
+    overflow: hidden;
+}
+.sharfile_user h2{
+    font-size: 14px;
+    border-bottom: 2px solid #cccccc;
+    padding-left: 3px;
+    padding-bottom: 5px;
+}
+.sharfile_user_list{
+    padding: 0;
+    margin: 0;
+}
+.sharfile_user_list li{
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    float: left;
+}
+#loading_dig{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background:rgba(255,255,255,0.8);
+    text-align: center;
+    z-index: 9999;
+    box-sizing: border-box;
+    padding-top: 100px;
+}

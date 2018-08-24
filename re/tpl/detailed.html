@@ -1,0 +1,59 @@
+    <link rel="stylesheet" href="/re/css/re_public.css">
+    <link rel="stylesheet" href="/re/css/re_index.css">
+    <link rel="stylesheet" href="/re/css/re_detailed.css">
+<div class="top">
+    <h1>资源详情页</h1>
+    <span class="top-return" onclick="javascript:window.history.back();"></span>
+</div>
+    <div class="detailed-content clearfix">
+        <h2>{{des.repositoryName}}</h2>
+	        文件类型：{{des.repositorySuffix}}<br>
+	        上传时间：{{des.uploadTime|date:'yyyy-MM-dd HH:mm:ss'}}<br>
+	        文件大小：{{des.repositorySize}}<br>
+	        文件下载：<a class="fileDown" ng-click="reDownload()"  href="{{des.repositoryDownUrl}}">点我下载</a><br/><br/>
+           <!--<button ng-click="reDownload(des.repositoryDownUrl)">点击下载</button>--> 
+   
+		   <div class="desPrev">
+                <object id="flash" style="width:100%;height: 100%;display: block;" data="{{des.repositorySWFPath}}" type="application/x-shockwave-flash">
+				    <param name="movie" value="video.swf"/>
+				</object>
+				 <object id="video" style="object-fit: fill;width:100%;height: 100%;display: block;" data="{{des.repositorySWFPath}}">
+				    <param name="movie" value="video.{{des.repositorySuffix}}"/>
+				 </object>
+          </div>
+    </div>
+    
+   
+<!--<script type="text/javascript">  
+    function getContentPath() {  
+        var pathName = document.location.pathname;  
+        var index = pathName.substr(1).indexOf("/");  
+        var path = pathName.substr(0, index + 1);  
+        return path;  
+    }  
+    var fp = $('#documentViewer').FlexPaperViewer(  
+            {config: {  
+            	src: $(".fileDown").attr("orgUrl"),
+                SwfFile: getContentPath() + '/readme.swf',  
+                Scale: 0.6,  
+                ZoomTransition: 'easeOut',  
+                ZoomTime: 0.5,  
+                ZoomInterval: 0.2,  
+                FitPageOnLoad: true,  
+                FitWidthOnLoad: true,  
+                FullScreenAsMaxWindow: true,  
+                ProgressiveLoading: true,  
+                MinZoomSize: 0.2,  
+                MaxZoomSize: 5,  
+                SearchMatchAll: false,  
+                InitViewMode: 'Portrait',  
+                ViewModeToolsVisible: true,  
+                ZoomToolsVisible: true,  
+                NavToolsVisible: true,  
+                CursorToolsVisible: true,  
+                SearchToolsVisible: true,  
+                localeChain: 'zh_CN',  
+                jsDirectory: getContentPath() + "/FlexPaper/js/", /*设置FlexPaper的js文件目录，包含FlexPaperVier.swf文件，否则默认在flex目录下.*/  
+                cssDirectory: getContentPath() + "/FlexPaper/css/"  
+            }}  
+    );  </script>  -->

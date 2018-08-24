@@ -1,0 +1,865 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>试卷详情</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/试卷详情/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/试卷详情/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (图片) -->
+      <div id="u1338" class="ax_default _图片">
+        <img id="u1338_img" class="img " src="images/试卷详情/u1338.png"/>
+        <!-- Unnamed () -->
+        <div id="u1339" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1340" class="ax_default box_1">
+        <img id="u1340_img" class="img " src="images/试卷详情/u1340.png"/>
+        <!-- Unnamed () -->
+        <div id="u1341" class="text" style="visibility: visible;">
+          <p><span>考试信息</span></p>
+        </div>
+      </div>
+
+      <!-- 1 (水平线) -->
+      <div id="u1342" class="ax_default line ax_default_hidden" data-label="1" style="display: none; visibility: hidden">
+        <img id="u1342_img" class="img " src="images/试卷详情/1_u1342.png"/>
+        <!-- Unnamed () -->
+        <div id="u1343" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1344" class="ax_default box_1">
+        <img id="u1344_img" class="img " src="images/试卷详情/u1340.png"/>
+        <!-- Unnamed () -->
+        <div id="u1345" class="text" style="visibility: visible;">
+          <p><span>试卷详情</span></p>
+        </div>
+      </div>
+
+      <!-- 2 (水平线) -->
+      <div id="u1346" class="ax_default line ax_default_hidden" data-label="2" style="display: none; visibility: hidden">
+        <img id="u1346_img" class="img " src="images/试卷详情/1_u1342.png"/>
+        <!-- Unnamed () -->
+        <div id="u1347" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u1348" class="ax_default box_1">
+        <img id="u1348_img" class="img " src="images/试卷详情/u1340.png"/>
+        <!-- Unnamed () -->
+        <div id="u1349" class="text" style="visibility: visible;">
+          <p><span>答题卡详情</span></p>
+        </div>
+      </div>
+
+      <!-- 3 (水平线) -->
+      <div id="u1350" class="ax_default line ax_default_hidden" data-label="3" style="display: none; visibility: hidden">
+        <img id="u1350_img" class="img " src="images/试卷详情/1_u1342.png"/>
+        <!-- Unnamed () -->
+        <div id="u1351" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- 考试信息 (动态面板) -->
+      <div id="u1352" class="ax_default" data-label="考试信息">
+        <div id="u1352_state0" class="panel_state" data-label="考试信息">
+          <div id="u1352_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (图片) -->
+            <div id="u1353" class="ax_default _图片">
+              <img id="u1353_img" class="img " src="images/试卷详情/u1353.png"/>
+              <!-- Unnamed () -->
+              <div id="u1354" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (表格) -->
+            <div id="u1355" class="ax_default">
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1356" class="ax_default table_cell">
+                <img id="u1356_img" class="img " src="images/试卷详情/u1356.png"/>
+                <!-- Unnamed () -->
+                <div id="u1357" class="text" style="visibility: visible;">
+                  <p><span>学科</span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1358" class="ax_default table_cell">
+                <img id="u1358_img" class="img " src="images/试卷详情/u1356.png"/>
+                <!-- Unnamed () -->
+                <div id="u1359" class="text" style="visibility: visible;">
+                  <p><span>分科</span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1360" class="ax_default table_cell">
+                <img id="u1360_img" class="img " src="images/试卷详情/u1356.png"/>
+                <!-- Unnamed () -->
+                <div id="u1361" class="text" style="visibility: visible;">
+                  <p><span>试卷</span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1362" class="ax_default table_cell">
+                <img id="u1362_img" class="img " src="images/试卷详情/u1362.png"/>
+                <!-- Unnamed () -->
+                <div id="u1363" class="text" style="visibility: visible;">
+                  <p><span>考生</span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1364" class="ax_default table_cell">
+                <img id="u1364_img" class="img " src="images/试卷详情/u1364.png"/>
+                <!-- Unnamed () -->
+                <div id="u1365" class="text" style="visibility: visible;">
+                  <p><span>数学</span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1366" class="ax_default table_cell">
+                <img id="u1366_img" class="img " src="images/试卷详情/u1364.png"/>
+                <!-- Unnamed () -->
+                <div id="u1367" class="text" style="display: none; visibility: hidden">
+                  <p><span></span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1368" class="ax_default table_cell">
+                <img id="u1368_img" class="img " src="images/试卷详情/u1364.png"/>
+                <!-- Unnamed () -->
+                <div id="u1369" class="text" style="visibility: visible;">
+                  <p><span>单元考试（共20题）</span></p>
+                </div>
+              </div>
+
+              <!-- Unnamed (单元格) -->
+              <div id="u1370" class="ax_default table_cell">
+                <img id="u1370_img" class="img " src="images/试卷详情/u1370.png"/>
+                <!-- Unnamed () -->
+                <div id="u1371" class="text" style="display: none; visibility: hidden">
+                  <p><span></span></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Unnamed (下拉列表框) -->
+            <div id="u1372" class="ax_default droplist">
+              <select id="u1372_input">
+                <option selected value="不分文理">不分文理</option>
+                <option value="理科">理科</option>
+                <option value="文科">文科</option>
+              </select>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1373" class="ax_default box_1">
+              <div id="u1373_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1374" class="text" style="visibility: visible;">
+                <p><span>一班</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1375" class="ax_default box_1">
+              <div id="u1375_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1376" class="text" style="visibility: visible;">
+                <p><span>二班</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1377" class="ax_default primary_button">
+              <div id="u1377_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1378" class="text" style="visibility: visible;">
+                <p><span>设置</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1379" class="ax_default primary_button">
+              <div id="u1379_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1380" class="text" style="visibility: visible;">
+                <p><span>发布考试</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (热区) -->
+            <div id="u1381" class="ax_default">
+            </div>
+
+            <!-- Unnamed (热区) -->
+            <div id="u1382" class="ax_default">
+            </div>
+          </div>
+        </div>
+        <div id="u1352_state1" class="panel_state" data-label="试卷详情1">
+          <div id="u1352_state1_content" class="panel_state_content">
+
+            <!-- Unnamed (内联框架) -->
+            <div id="u1383" class="ax_default">
+              <iframe id="u1383_input" scrolling="auto" frameborder="1"></iframe>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1384" class="ax_default button">
+              <img id="u1384_img" class="img " src="images/试卷详情/u1384.png"/>
+              <!-- Unnamed () -->
+              <div id="u1385" class="text" style="visibility: visible;">
+                <p><span>下载试卷</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1386" class="ax_default primary_button">
+              <img id="u1386_img" class="img " src="images/试卷详情/u1386.png"/>
+              <!-- Unnamed () -->
+              <div id="u1387" class="text" style="visibility: visible;">
+                <p><span>编辑试卷</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1388" class="ax_default button">
+              <img id="u1388_img" class="img " src="images/试卷详情/u1388.png"/>
+              <!-- Unnamed () -->
+              <div id="u1389" class="text" style="visibility: visible;">
+                <p><span>排版试卷</span></p>
+              </div>
+            </div>
+
+            <!-- 下载试卷面板2 (动态面板) -->
+            <div id="u1390" class="ax_default ax_default_hidden" data-label="下载试卷面板2" style="display: none; visibility: hidden">
+              <div id="u1390_state0" class="panel_state" data-label="State1">
+                <div id="u1390_state0_content" class="panel_state_content">
+
+                  <!-- Unnamed (图片) -->
+                  <div id="u1391" class="ax_default _图片">
+                    <img id="u1391_img" class="img " src="images/试卷详情/u1391.png"/>
+                    <!-- Unnamed () -->
+                    <div id="u1392" class="text" style="display: none; visibility: hidden">
+                      <p><span></span></p>
+                    </div>
+                  </div>
+
+                  <!-- Unnamed (热区) -->
+                  <div id="u1393" class="ax_default">
+                  </div>
+
+                  <!-- Unnamed (热区) -->
+                  <div id="u1394" class="ax_default">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="u1352_state2" class="panel_state" data-label="答题卡详情">
+          <div id="u1352_state2_content" class="panel_state_content">
+
+            <!-- Unnamed (图片) -->
+            <div id="u1395" class="ax_default _图片">
+              <img id="u1395_img" class="img " src="images/答题卡/u1292.png"/>
+              <!-- Unnamed () -->
+              <div id="u1396" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u1397" class="ax_default line">
+              <img id="u1397_img" class="img " src="images/试卷详情/u1397.png"/>
+              <!-- Unnamed () -->
+              <div id="u1398" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1399" class="ax_default box_1">
+              <img id="u1399_img" class="img " src="images/智能组卷详情页/u680.png"/>
+              <!-- Unnamed () -->
+              <div id="u1400" class="text" style="visibility: visible;">
+                <p><span>学生考号</span></p>
+              </div>
+            </div>
+
+            <!-- 1 (单选按钮) -->
+            <div id="u1401" class="ax_default radio_button" data-label="1">
+              <label for="u1401_input">
+                <!-- Unnamed () -->
+                <div id="u1402" class="text" style="visibility: visible;">
+                  <p><span>3位</span></p>
+                </div>
+              </label>
+              <input id="u1401_input" type="radio" value="radio" name="u1401"/>
+            </div>
+
+            <!-- 2 (单选按钮) -->
+            <div id="u1403" class="ax_default radio_button" data-label="2">
+              <label for="u1403_input">
+                <!-- Unnamed () -->
+                <div id="u1404" class="text" style="visibility: visible;">
+                  <p><span>6位</span></p>
+                </div>
+              </label>
+              <input id="u1403_input" type="radio" value="radio" name="u1403"/>
+            </div>
+
+            <!-- 3 (单选按钮) -->
+            <div id="u1405" class="ax_default radio_button" data-label="3">
+              <label for="u1405_input">
+                <!-- Unnamed () -->
+                <div id="u1406" class="text" style="visibility: visible;">
+                  <p><span>9位</span></p>
+                </div>
+              </label>
+              <input id="u1405_input" type="radio" value="radio" name="u1405"/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1407" class="ax_default box_1">
+              <img id="u1407_img" class="img " src="images/智能组卷详情页/u680.png"/>
+              <!-- Unnamed () -->
+              <div id="u1408" class="text" style="visibility: visible;">
+                <p><span>答题卡尺寸</span></p>
+              </div>
+            </div>
+
+            <!-- 11 (单选按钮) -->
+            <div id="u1409" class="ax_default radio_button" data-label="11">
+              <label for="u1409_input">
+                <!-- Unnamed () -->
+                <div id="u1410" class="text" style="visibility: visible;">
+                  <p><span>8开</span></p>
+                </div>
+              </label>
+              <input id="u1409_input" type="radio" value="radio" name="u1409"/>
+            </div>
+
+            <!-- 22 (单选按钮) -->
+            <div id="u1411" class="ax_default radio_button" data-label="22">
+              <label for="u1411_input">
+                <!-- Unnamed () -->
+                <div id="u1412" class="text" style="visibility: visible;">
+                  <p><span>16开</span></p>
+                </div>
+              </label>
+              <input id="u1411_input" type="radio" value="radio" name="u1411"/>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u1413" class="ax_default line">
+              <img id="u1413_img" class="img " src="images/试卷详情/u1413.png"/>
+              <!-- Unnamed () -->
+              <div id="u1414" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1415" class="ax_default primary_button">
+              <div id="u1415_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1416" class="text" style="visibility: visible;">
+                <p><span>重置答题卡</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1417" class="ax_default box_1">
+              <img id="u1417_img" class="img " src="images/答题卡/u1318.png"/>
+              <!-- Unnamed () -->
+              <div id="u1418" class="text" style="visibility: visible;">
+                <p><span>编辑答题卡</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (水平线) -->
+            <div id="u1419" class="ax_default line">
+              <img id="u1419_img" class="img " src="images/试卷详情/u1419.png"/>
+              <!-- Unnamed () -->
+              <div id="u1420" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1421" class="ax_default button">
+              <div id="u1421_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1422" class="text" style="visibility: visible;">
+                <p><span>下载答题卡</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1423" class="ax_default primary_button">
+              <div id="u1423_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1424" class="text" style="visibility: visible;">
+                <p><span>打印答题卡</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1425" class="ax_default primary_button">
+              <div id="u1425_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1426" class="text" style="visibility: visible;">
+                <p><span>排版答题卡</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 考生设置面板 (动态面板) -->
+      <div id="u1427" class="ax_default ax_default_hidden" data-label="考生设置面板" style="display: none; visibility: hidden">
+        <div id="u1427_state0" class="panel_state" data-label="State1">
+          <div id="u1427_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1428" class="ax_default box_1">
+              <div id="u1428_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1429" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1430" class="ax_default box_1">
+              <img id="u1430_img" class="img " src="images/试卷详情/u1430.png"/>
+              <!-- Unnamed () -->
+              <div id="u1431" class="text" style="visibility: visible;">
+                <p><span>考生设置</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (单选按钮) -->
+            <div id="u1432" class="ax_default radio_button">
+              <label for="u1432_input">
+                <!-- Unnamed () -->
+                <div id="u1433" class="text" style="visibility: visible;">
+                  <p><span>一班</span></p>
+                </div>
+              </label>
+              <input id="u1432_input" type="radio" value="radio" name="u1432"/>
+            </div>
+
+            <!-- Unnamed (单选按钮) -->
+            <div id="u1434" class="ax_default radio_button">
+              <label for="u1434_input">
+                <!-- Unnamed () -->
+                <div id="u1435" class="text" style="visibility: visible;">
+                  <p><span>二班</span></p>
+                </div>
+              </label>
+              <input id="u1434_input" type="radio" value="radio" name="u1434"/>
+            </div>
+
+            <!-- Unnamed (单选按钮) -->
+            <div id="u1436" class="ax_default radio_button">
+              <label for="u1436_input">
+                <!-- Unnamed () -->
+                <div id="u1437" class="text" style="visibility: visible;">
+                  <p><span>三班</span></p>
+                </div>
+              </label>
+              <input id="u1436_input" type="radio" value="radio" name="u1436"/>
+            </div>
+
+            <!-- Unnamed (单选按钮) -->
+            <div id="u1438" class="ax_default radio_button">
+              <label for="u1438_input">
+                <!-- Unnamed () -->
+                <div id="u1439" class="text" style="visibility: visible;">
+                  <p><span>四班</span></p>
+                </div>
+              </label>
+              <input id="u1438_input" type="radio" value="radio" name="u1438"/>
+            </div>
+
+            <!-- Unnamed (单选按钮) -->
+            <div id="u1440" class="ax_default radio_button">
+              <label for="u1440_input">
+                <!-- Unnamed () -->
+                <div id="u1441" class="text" style="visibility: visible;">
+                  <p><span>全部班级</span></p>
+                </div>
+              </label>
+              <input id="u1440_input" type="radio" value="radio" name="u1440"/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1442" class="ax_default button">
+              <img id="u1442_img" class="img " src="images/试卷详情/u1442.png"/>
+              <!-- Unnamed () -->
+              <div id="u1443" class="text" style="visibility: visible;">
+                <p><span>确定</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (椭圆形) -->
+            <div id="u1444" class="ax_default ellipse">
+              <img id="u1444_img" class="img " src="images/智能组卷详情页/u912.png"/>
+              <!-- Unnamed () -->
+              <div id="u1445" class="text" style="visibility: visible;">
+                <p><span>X</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 取消考试面板 (动态面板) -->
+      <div id="u1446" class="ax_default ax_default_hidden" data-label="取消考试面板" style="display: none; visibility: hidden">
+        <div id="u1446_state0" class="panel_state" data-label="State1">
+          <div id="u1446_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1447" class="ax_default box_1">
+              <div id="u1447_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1448" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1449" class="ax_default button">
+              <img id="u1449_img" class="img " src="images/试卷详情/u1449.png"/>
+              <!-- Unnamed () -->
+              <div id="u1450" class="text" style="visibility: visible;">
+                <p><span>确认</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (椭圆形) -->
+            <div id="u1451" class="ax_default ellipse">
+              <img id="u1451_img" class="img " src="images/智能组卷详情页/u912.png"/>
+              <!-- Unnamed () -->
+              <div id="u1452" class="text" style="visibility: visible;">
+                <p><span>X</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1453" class="ax_default button">
+              <div id="u1453_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1454" class="text" style="visibility: visible;">
+                <p><span>取消</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1455" class="ax_default box_1">
+              <img id="u1455_img" class="img " src="images/试卷详情/u1455.png"/>
+              <!-- Unnamed () -->
+              <div id="u1456" class="text" style="visibility: visible;">
+                <p><span>确定取消考试？</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已取消考试 (动态面板) -->
+      <div id="u1457" class="ax_default ax_default_hidden" data-label="已取消考试" style="display: none; visibility: hidden">
+        <div id="u1457_state0" class="panel_state" data-label="State1">
+          <div id="u1457_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1458" class="ax_default box_1">
+              <div id="u1458_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1459" class="text" style="visibility: visible;">
+                <p><span>已取消考试</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (热区) -->
+      <div id="u1460" class="ax_default">
+      </div>
+
+      <!-- 编辑试卷面板 (动态面板) -->
+      <div id="u1461" class="ax_default ax_default_hidden" data-label="编辑试卷面板" style="display: none; visibility: hidden">
+        <div id="u1461_state0" class="panel_state" data-label="State1">
+          <div id="u1461_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1462" class="ax_default box_1">
+              <div id="u1462_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1463" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1464" class="ax_default box_1">
+              <div id="u1464_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1465" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1466" class="ax_default box_1">
+              <img id="u1466_img" class="img " src="images/新建考试筛选页面/u44.png"/>
+              <!-- Unnamed () -->
+              <div id="u1467" class="text" style="visibility: visible;">
+                <p><span>所属学期</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1468" class="ax_default box_1">
+              <img id="u1468_img" class="img " src="images/新建考试筛选页面/u46.png"/>
+              <!-- Unnamed () -->
+              <div id="u1469" class="text" style="visibility: visible;">
+                <p><span>2016-2017学年上学期</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1470" class="ax_default box_1">
+              <img id="u1470_img" class="img " src="images/新建考试筛选页面/u44.png"/>
+              <!-- Unnamed () -->
+              <div id="u1471" class="text" style="visibility: visible;">
+                <p><span>考试名称</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u1472" class="ax_default text_field">
+              <input id="u1472_input" type="text" value=""/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1473" class="ax_default box_1">
+              <img id="u1473_img" class="img " src="images/新建考试筛选页面/u51.png"/>
+              <!-- Unnamed () -->
+              <div id="u1474" class="text" style="visibility: visible;">
+                <p><span>考试类型</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (下拉列表框) -->
+            <div id="u1475" class="ax_default droplist">
+              <select id="u1475_input">
+                <option value="单元考">单元考</option>
+                <option value="期中考">期中考</option>
+                <option value="期末考">期末考</option>
+              </select>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1476" class="ax_default box_1">
+              <img id="u1476_img" class="img " src="images/新建考试筛选页面/u57.png"/>
+              <!-- Unnamed () -->
+              <div id="u1477" class="text" style="visibility: visible;">
+                <p><span>考试年级</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (下拉列表框) -->
+            <div id="u1478" class="ax_default droplist">
+              <select id="u1478_input">
+                <option selected value="七年级">七年级</option>
+                <option value="八年级">八年级</option>
+                <option value="九年级">九年级</option>
+              </select>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1479" class="ax_default box_1">
+              <img id="u1479_img" class="img " src="images/新建考试筛选页面/u44.png"/>
+              <!-- Unnamed () -->
+              <div id="u1480" class="text" style="visibility: visible;">
+                <p><span>考试日期</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u1481" class="ax_default text_field">
+              <input id="u1481_input" type="date" value=""/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1482" class="ax_default box_1">
+              <img id="u1482_img" class="img " src="images/新建考试筛选页面/u72.png"/>
+              <!-- Unnamed () -->
+              <div id="u1483" class="text" style="visibility: visible;">
+                <p><span>至</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u1484" class="ax_default text_field">
+              <input id="u1484_input" type="date" value=""/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1485" class="ax_default box_1">
+              <img id="u1485_img" class="img " src="images/新建考试筛选页面/u44.png"/>
+              <!-- Unnamed () -->
+              <div id="u1486" class="text" style="visibility: visible;">
+                <p><span>考试时长</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u1487" class="ax_default text_field">
+              <input id="u1487_input" type="text" value=""/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1488" class="ax_default box_1">
+              <img id="u1488_img" class="img " src="images/新建考试筛选页面/u78.png"/>
+              <!-- Unnamed () -->
+              <div id="u1489" class="text" style="visibility: visible;">
+                <p><span>分钟</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1490" class="ax_default box_1">
+              <img id="u1490_img" class="img " src="images/新建考试筛选页面/u80.png"/>
+              <!-- Unnamed () -->
+              <div id="u1491" class="text" style="visibility: visible;">
+                <p><span>考务安排</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1492" class="ax_default primary_button">
+              <div id="u1492_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1493" class="text" style="visibility: visible;">
+                <p><span>上传文件</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1494" class="ax_default box_1">
+              <img id="u1494_img" class="img " src="images/新建考试筛选页面/u84.png"/>
+              <!-- Unnamed () -->
+              <div id="u1495" class="text" style="visibility: visible;">
+                <p><span>（各科考试时间，试卷印刷，监考安排）</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u1496" class="ax_default text_field">
+              <input id="u1496_input" type="time" value=""/>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u1497" class="ax_default text_field">
+              <input id="u1497_input" type="time" value=""/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1498" class="ax_default box_1">
+              <div id="u1498_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1499" class="text" style="visibility: visible;">
+                <p><span>考试信息</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u1500" class="ax_default primary_button">
+              <div id="u1500_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u1501" class="text" style="visibility: visible;">
+                <p><span>确认修改</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (椭圆形) -->
+            <div id="u1502" class="ax_default ellipse">
+              <img id="u1502_img" class="img " src="images/试卷详情/u1502.png"/>
+              <!-- Unnamed () -->
+              <div id="u1503" class="text" style="visibility: visible;">
+                <p><span>X</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

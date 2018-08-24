@@ -1,0 +1,656 @@
+/* 公用CSS */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+input {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 14px 6px;
+}
+
+body.phone {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+body.mnPhone {
+    width: 414px;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tableT {
+    text-align: center;
+    border: 0;
+}
+
+.tableT td {
+    padding: 10px 30px;
+    border: 1px solid rgb(164, 218, 234);
+    font-family: Microsoft YaHei UI;
+    font-size: 14px;
+}
+
+.titleT {
+    border: none !important;
+    border-bottom: 3px solid rgb(149, 211, 244) !important;
+    background-color: rgb(235, 247, 252) !important;
+    color: rgb(42, 135, 198);
+    font-size: 25px !important;
+    text-align: left;
+    padding: 10px 20px !important;
+}
+
+.menuT td,
+.menuT th {
+    font-weight: 100;
+    background-color: rgb(108, 202, 205) !important;
+    color: rgb(255, 255, 255);
+    padding: 5px 35px;
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 报表控件 -- 数据钻取 -- 订单详细 */
+
+.order-list-menu {
+    position: absolute;
+    background-color: #6ccacd;
+    width: 108px;
+    height: 50px;
+    border-radius: 6px;
+    padding: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    left: 55px;
+    display: none;
+    color: #fff;
+}
+
+.order-menu {
+    text-align: center;
+    height: 50%;
+}
+
+.order-menu span {
+    font-size: 14px;
+}
+
+.order-menu:hover {
+    background-color: #91ecef;
+    color: #1eaaaf;
+}
+
+/* 预览界面的CSS */
+
+table {
+    width: 100%;
+}
+
+p {
+    margin: 0;
+}
+
+table tr td {
+    padding: 8px;
+    border: 1px solid #DDD;
+}
+
+.header {
+    padding-top: 10px
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /* margin-top: 10px; */
+}
+
+.container.pc {
+    padding: 0 50px;
+}
+
+.container.phone {
+    padding: 0 0;
+    margin: 0;
+}
+
+.header h1 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 17px;
+}
+
+#insertForm {
+    margin: 0;
+}
+
+.wifiblock * {
+    cursor: pointer;
+}
+
+/*组合控件样式*/
+
+input.search-query {
+    padding-right: 14px;
+    padding-right: 4px \9;
+    padding-left: 14px;
+    padding-left: 4px \9;
+    margin-bottom: 0;
+    border-radius: 15px;
+    border: 0;
+}
+
+.search_row {
+    background: #16bbdf;
+}
+
+tr.search_row td {
+    text-align: center;
+}
+
+.search_btn {
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 0;
+    background: 0;
+}
+
+.table .navWf {
+    padding: 0;
+    margin: 0;
+}
+
+.navWf a {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    color: #333;
+    border-right: 1px solid #d1d1d2;
+    height: 30px;
+    line-height: 30px;
+}
+
+.navWf a:hover,
+.navWf .navActive {
+    background: #68c1db;
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.wfImg {
+    width: 160px;
+    height: 100%;
+}
+
+.wfImg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wfDetail {
+    margin-left: 8px;
+    width: 100%;
+    white-space: normal;
+    flex: 1;
+    position: relative;
+}
+
+.wfDetail div {
+    font-size: 14px;
+    color: #D1D1D2;
+    margin: 0;
+}
+
+.wfDetail .title {
+    font-size: 16px;
+    color: #333;
+}
+
+.wfDetail textarea {
+    border: 0;
+}
+
+.wfDetail .detail {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.wfDetail .orgCollect {
+    text-align: right;
+    cursor: pointer;
+    margin-right: 1rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.wifiblock .wfDetail .Colactive {
+    color: red;
+}
+
+.wifiblockBox img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wifiblockBox .wifiblock:not(:first-of-type) {
+    margin-top: 10px;
+}
+
+/* iframeRouter */
+
+.routerClick {
+    color: #1f77d6;
+    font-weight: bold;
+}
+
+/* 详情页样式 */
+
+.header_top {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: #548DD4;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.contains {
+    padding: 8px;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.contains_img {
+    width: 160px;
+    height: 100%;
+}
+
+.contains_img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.contains_detail {
+    flex: 1;
+    height: 150px;
+    margin-left: 8px;
+}
+
+.contains_title {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.contains_content {
+    color: #929292;
+    font-size: 12px;
+}
+
+.contains_detail input,
+.contains_title input {
+    padding: 4px 6px !important;
+}
+
+.contains_detail input {
+    width: 150px;
+}
+
+.contains_detail .contains_title input {
+    padding-left: 0 !important;
+    font-size: 18px;
+}
+
+/* .contains_detail p {
+    width: 150px;
+} */
+
+.contains_detail p {
+    display: inline-block;
+}
+
+.spacing {
+    margin-top: 20px;
+    padding: 8px;
+}
+
+.nav_container {
+    width: 100%;
+    height: 36px;
+    display: flex;
+    display: -webkit-flex;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.nav_btn {
+    flex: 1;
+    padding: 8px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+
+.nav_btn:hover,
+.nav_btnActive {
+    color: #fff;
+    background-color: #548DD4;
+}
+
+.nav_top {
+    display: flex;
+    color: #333;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.nav_bottom {
+    display: flex;
+    color: #929292;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav_bottom div {
+    flex: 1;
+    font-size: 12px;
+}
+
+.nav_books a,
+.nav_audio div,
+.nav_video .video {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* ===================  Tpl2  =================== */
+
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 62.5%;
+}
+
+.clear::after {
+    content: '';
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+
+.fz16 {
+    font-size: 1.6rem !important;
+}
+
+.tpl2 .header {
+    height: 55px;
+    background: -webkit-gradient(linear, left top, right top, color-stop(22%, #ff5454), color-stop(82%, #f1e478));
+    background: linear-gradient(to right, #ff5454 22%, #f1e478 82%);
+    overflow: hidden;
+    padding: 10px;
+    line-height: 35px;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+}
+
+.tpl2 .header div {
+    display: inline-block;
+    height: 100%;
+    line-height: 35px;
+}
+
+.tpl2 .header .artTitle .title p {
+    line-height: 2.5rem;
+}
+
+.tpl2 .header .sw_collect {
+    float: right;
+}
+
+.tpl2 .header .title {
+    margin-left: 3rem;
+}
+
+.tpl2 .header .sw_collect i {
+    font-size: 3.4rem;
+}
+
+.tpl2 .header .back i {
+    font-size: 2.5rem;
+}
+
+.tpl2 .title p {
+    font-size: 2rem;
+}
+
+.tpl2 .contentCon {
+    padding: 5.5rem 1rem 4.5rem 1rem;
+}
+
+.tpl2 .contentCon .artTitle {
+    border-bottom: 1px solid #eae7e7;
+}
+
+.tpl2 .contentCon .title p {
+    font-weight: bold;
+}
+
+.tpl2 .contentCon .time p {
+    padding: 10px 0;
+    color: #949494;
+}
+
+.tpl2 .contentCon .content .contentImg {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.tpl2 .contentCon .content .contentImg img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.tpl2 .content .contentText p {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    text-align: justify;
+    text-indent: 2rem;
+    line-height: 2.8rem;
+    color: #313131;
+}
+
+.tpl2 .bottomTool {
+    height: 3rem;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #efefef;
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.bottomTool div {
+    display: inline-block;
+    width: 32%;
+    text-align: center;
+    height: 100%;
+    line-height: 3rem;
+    position: relative;
+}
+
+.bottomTool div i {
+    font-size: 3.5rem;
+}
+
+.bottomTool div span {
+    position: absolute;
+    font-size: 2rem;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    top: 45%;
+}
+
+/* COMMENT */
+
+.comment {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.comment .bottomTool {
+    height: 5rem;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    text-align: center;
+}
+
+.comment .bottomTool #commentText {
+    width: 80%;
+    height: 100%;
+    border: none;
+    text-indent: 1rem;
+}
+
+.comment .bottomTool #commentSend {
+    border: none;
+    padding: 1.2rem;
+    color: #fff;
+    background: #c1c1c1;
+    border-radius: 3px;
+    margin-left: 0.3rem;
+}
+
+.tpl2 .comment .commentCenter {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+    overflow: hidden;
+}
+
+.commentCenter .noComment {
+    text-align: center;
+    margin-top: 9rem;
+    display: block;
+}
+
+.commentCenter .noComment i {
+    font-size: 5rem;
+}
+
+.commentCenter .noComment p {
+    font-size: 2rem;
+}
+
+.commentCenter .hasComment {
+    overflow: hidden;
+    overflow-y: scroll;
+    display: none;
+    padding: 0 10px;
+    height: -webkit-fill-available;
+    height: fill-available;
+}
+
+.commentCenter .hasComment .title {
+    width: 100vw;
+    font-size: 2rem;
+    padding: 0;
+    font-weight: bold;
+    color: #636363;
+    position: relative;
+    margin: 10px 10px 0 12px;
+}
+
+.commentCenter .hasComment .title p::before {
+    content: '';
+    width: 6px;
+    height: 28px;
+    background: #636363;
+    display: inline-block;
+    position: absolute;
+    left: -12px;
+}
+
+.commentCenter .commentContent {
+    margin-top: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed black;
+}
+
+.commentCenter .commentContent .left {
+    float: left;
+}
+
+.commentCenter .commentContent .right {
+    padding-left: 70px;
+}
+
+.commentCenter .commentContent .userIcon {
+    width: 60px;
+    height: 60px;
+}
+
+.commentCenter .commentContent .userIcon img {
+    width: 100%;
+    height: 100%;
+}
+
+.commentCenter .commentContent .userName {
+    color: #2bb9ff;
+    display: inline-block;
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.commentCenter .commentContent .commentTime {
+    float: right;
+}
+
+.commentCenter .commentContent .content {
+    word-break: break-word;
+}
+
+.commentCenter .commentContent .commentTool {
+    text-align: right;
+}
+
+.commentCenter .commentContent .commentTool span:first-of-type {
+    margin-right: 15px;
+}

@@ -1,0 +1,215 @@
+<html>
+
+<head>
+    <title>组合控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="./images/font_icon/iconfont.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <link rel="stylesheet" href="./self/css/pagedetails.css">
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+    
+    <script type="text/javascript">
+        function createElement(type, name) {
+            var element = null;
+            try {
+                element = document.createElement('<' + type + ' name="' + name + '">');
+            } catch (e) {}
+            if (element == null) {
+                element = document.createElement(type);
+                element.name = name;
+            }
+            return element;
+        }
+    </script>
+    <style>
+        input {
+            padding: 4px 6px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr></tr>
+            <!-- <tr>
+                <td style="text-align:center;" colspan="2">
+                   
+                    <label for="Tpl2" data-img="tpl2.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl2" id="Tpl2"> 党建详情
+                    </label>
+               
+                </td>
+            </tr> -->
+            <div class="tplBottom">
+                <p class="title"></p>
+                <img src="./images/pagedetails/tpl2.png" alt="模板图像">
+            </div>
+            <tr>
+                <th colspan="2">
+                    <span>跳转目标</span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="orgFurl" id="orgfUrl">
+                        <option value="0">---请输入网址-</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        // var clearImg;
+        // $('.menuLabel').hover(function(e) {
+        //     $('.tplBottom .title').html($(e.currentTarget).text());
+        //     $('.tplBottom img').prop('src', './images/pagedetails/' + $(e.currentTarget).data('img'));
+        //     $('.tplBottom').fadeIn();
+        //     clearTimeout(clearImg);
+        // }, function() {
+        //     clearImg = setTimeout(function() {
+        //         $('.tplBottom').fadeOut();
+        //     }, 5000);
+        // })
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            gdataSource = null,
+            thePlugins = 'dangjiandetail';
+        window.onload = function() {
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $('#nodeParentId', window.parent.document).val();
+            var nodeId = $("#node_id", window.parent.document).val();
+            $.ajax({
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function(res) {
+                    $.each(res.msg, function(index, value) {
+                        $("#orgfUrl").append('<option value=' + value.id + '>' + value.value + '</option>');
+                    })
+                },
+                error: function(res) {
+                    alert('抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！')
+                }
+            });
+        }
+
+        dialog.onok = function() {
+            if ($('#orgfUrl').val() == 0) {
+                orgfUrl = "";
+            } else {
+                orgfUrl = $('#orgfUrl').val();
+                orgUrlId = $('#orgfUrl').val();
+                orgUrlName = $('#orgfUrl option[value=' + orgfUrl + ']').text();
+            }
+            if (!oNode) {
+                var val = $('[name=tpl]:checked').val();
+                var html;
+           
+                    html = `
+                        <div class="tpl2">
+                            <div class="header">
+                                <div class="back" onclick="javascript:history.go(-1);"><i class="iconfont-tpl2 icon-fanhui"></i></div>
+                                <div class="title">
+                                    <p>内容详情</p>
+                                </div>
+                                <div class="sw_collect"><i class="iconfont-tpl2 icon-shoucang"></i></div>
+                            </div>
+                            <div class="contentCon">
+                                <div class="artTitle">
+                                    <div class="title">
+                                        <input groupCon='' name="leipiNewField" type="text" title="文本框" value="文章标题" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/>
+                                    </div>
+                                    <div class="time">
+                                        <input name="leipiNewField" type="text" value="文章发布时间" title="文章发布时间" leipiplugins="macros" orgtype="sys_datetime" orghide="0" orgwidth="100%" style="width: 100%;"/>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="contentImg">
+                                        <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='文章正文图片' style='display: block;width: 100%;' value='文章正文图片' datasource='' leipiplugins='addimage'>
+                                    </div>
+                                    <div class="contentText">
+                                        <input groupCon='' name="leipiNewField" type="text" title="文本框" value="文章正文文字" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottomTool">
+                                <div class="sw_comments"><i class="iconfont-tpl2 icon-pinglun"></i><span class="sw_commentsCount">0</span></div>
+                                <div class="-mob-share-open"><i class="iconfont-tpl2 icon-fenxiang"></i><span class="justPlaceholder"></span></div>
+                                <div class="sw_likes"><i class="iconfont-tpl2 icon-like"></i><span class="sw_likesCount">0</span></div>
+                            </div>
+                        </div>
+                        <div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-bottom" style="display: none">
+                            <ul class="-mob-share-list">
+                                <li class="-mob-share-qq">
+                                    <p>QQ好友</p>
+                                </li>
+                                <li class="-mob-share-weixin">
+                                    <p>微信</p>
+                                </li>
+                                <li class="-mob-share-weibo">
+                                    <p>新浪微博</p>
+                                </li>
+                                <li class="-mob-share-qzone">
+                                    <p>QQ空间</p>
+                                </li>
+                                <li class="-mob-share-douban">
+                                    <p>豆瓣</p>
+                                </li>
+                            </ul>
+                            <div class="-mob-share-close">取消</div>
+                        </div>
+                        <div class="-mob-share-ui-bg"></div>
+                        <div id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=24c26877d4cdf" cdata_tag="script" _ue_custom_node_="true"></div>
+                        <div class="tpl2 sw_comments_container" style="display:none;">
+                            <div class="comment">
+                                <div class="header">
+                                    <div class="sw_comments_back back"><i class="iconfont-tpl2 icon-fanhui"></i></div>
+                                    <div class="title"><p>评论中心</p></div>
+                                </div>
+                                <div class="commentCenter">
+                                    <div class="noComment"><i class="iconfont-tpl2 icon-wushuju"></i><p>暂时没有评论哦</p></div>
+                                    <div class="hasComment">
+                                        <div class="commentContent clear">
+                                            <div class="left userIcon">
+                                                <img class="userIconImg" src="" alt="用户头像">
+                                            </div>
+                                            <div class="right">
+                                                <p class="userName fz16">用户昵称</p>
+                                                <p class="commentTime fz16">03-24 11:13</p>
+                                                <p class="content fz16">评论正文</p>
+                                                <div class="commentTool"><span class="fz16 sw_deleteComments">删除</span><span class="fz16">举报</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bottomTool">
+                                        <input class="fz16" type="text" placeholder="说点什么吧..." id="commentText">
+                                        <button id="commentSend">发送</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                
+                editor.execCommand('insertHtml', html);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>入口控件</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <link rel="stylesheet" href="bootstrap-3/css/bootstrap.min.css">
+  <!--[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+  <![endif]-->
+  <!--[if lte IE 7]>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+  <![endif]-->
+  <script src="jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="leipi.style.css">
+  <script type="text/javascript" src="../dialogs/internal.js"></script>
+  <link rel="stylesheet" href="./cropper/cropper.css">
+  <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+  <script type="text/javascript" src="./cropper/cropper.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+
+  <script src="../httpData.config.js"></script>
+  <link rel="stylesheet" href="self/toolbar/tpl.css">
+</head>
+<body>
+  <div class="tplmaidiv">
+    <dl class="curr-tpl">
+      <dt><img src="self/toolbar/img/tpl.png" /></dt>
+      <dd><input name="tpltype" type="radio" value="1" checked>上 <input name="tpltype" type="radio" value="2">下 <input name="tpltype" type="radio" value="3">左 <input name="tpltype" type="radio" value="4">右 <input name="isShow" type="checkbox" value="1">收缩</dd>
+      <dd><input name="choicetpl" type="radio" class="choicetoolbar" value="toolbar" checked>浮动条</dd>
+    </dl>
+    <dl class="curr-tpl">
+      <dt><img src="self/toolbar/img/tpl.png" /></dt>
+      <dd>固定左边菜单</dd>
+      <dd><input name="choicetpl" type="radio" class="choicepctpl" value="pctpl">首页模板</dd>
+    </dl>
+    <dl class="curr-tpl">
+      <dt><img src="self/toolbar/img/tpl.png" /></dt>
+      <dd><input name="tpltype" type="radio" value="5">上 <input name="tpltype" type="radio" value="6">下 </dd>
+      <dd><input name="choicetpl" type="radio" class="choicetoolbar" value="mobiletpl">手机默认模板</dd>
+    </dl>
+    <dl class="curr-tpl">
+      <dt><img src="self/toolbar/img/tpl2.png" /></dt>
+      <dd>展示页面</dd>
+      <dd><input name="choicetpl" type="radio" class="choicepctpl" value="iframetpl">简洁模板</dd>
+    </dl>
+  </div>
+<form class="form">
+  <input type="file" name="fileVideo" id="filepic" class="tpl-pic-upfile" onchange="imgpreview()">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" value="home" class="chome"> 网站首页</div>
+      <input type="text" name="home-title" class="form-control my-input" value="网站首页">
+      <input type="text" name="home-url" class="form-control my-input" placeholder="Amount" value="/homepage">
+      <div class="input-group-addon my-input-addon myupfilehome"><img src="self/toolbar/img/sidebar/Home.png"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" value="site" class="csite"> 网站管理</div>
+      <input type="text" name="site-title" class="form-control my-input" value="网站管理">
+      <input type="text" name="site-url" class="form-control my-input" placeholder="Amount" value="/website/index.html">
+      <div class="input-group-addon my-input-addon myupfilesite"><img src="self/toolbar/img/sidebar/Home.png"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" value="work" class="cwork"> 工作</div>
+      <input type="text" name="work-title" class="form-control my-input" value="工作">
+      <input type="text" name="work-url" class="form-control my-input" placeholder="Amount" value="/home">
+      <div class="input-group-addon my-input-addon myupfilework"><img src="self/toolbar/img/sidebar/bzbg.png"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" value="msg" class="cmsg"> 消息</div>
+      <input type="text" name="msg-title" class="form-control my-input"  value="消息">
+      <input type="text" name="msg-url" class="form-control my-input"  placeholder="Amount" value="/message">
+      <div class="input-group-addon my-input-addon myupfilemsg"><img src="self/toolbar/img/sidebar/news.png"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" value="workbench" class="cworkbench"> 管理</div>
+      <input type="text" name="workbench-title" class="form-control my-input"  value="管理">
+      <input type="text" name="workbench-url" class="form-control my-input"  placeholder="Amount" value="/workbenchs/workbench.html">
+      <div class="input-group-addon my-input-addon myupfileworkbench"><img src="self/toolbar/img/sidebar/xietong.png"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" value="personal" class="cpersonal"> 我的</div>
+      <input type="text" name="personal-title" class="form-control my-input"  value="我的">
+      <input type="text" name="personal-url" class="form-control my-input"  placeholder="Amount" value="/account">
+      <div class="input-group-addon my-input-addon myupfilepersonal"><img src="self/toolbar/img/sidebar/Personal-Center.png"></div>
+    </div>
+  </div>
+  <!--<div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" checked disabled> 管理</div>
+      <input type="text" class="form-control my-input" placeholder="/workbenchs/workbench.html" disabled>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon my-input-addon"><input type="checkbox" checked disabled> 我的</div>
+      <input type="text" class="form-control my-input" placeholder="/account" disabled>
+    </div>
+  </div>-->
+</form>
+</body>
+<script type="text/javascript">
+  var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+  var nodeId =$("#node_id",window.parent.document).val();
+  var upfile=$(".tpl-pic-upfile");
+  var pic={"myupfilehome":"self/toolbar/img/sidebar/Home.png","myupfilesite":"self/toolbar/img/sidebar/Home.png","myupfilework":"self/toolbar/img/sidebar/bzbg.png","myupfilemsg":"self/tpl/img/sidebar/news.png","myupfileworkbench":"self/toolbar/img/sidebar/xietong.png","myupfilepersonal":"self/toolbar/img/sidebar/Personal-Center.png"};
+  var curpicbtn='';
+  function imgpreview(){
+    var file = document.getElementById("filepic").files[0];
+    var formData = new FormData();
+    formData.append('fileVideo', file);
+    $.ajax({
+      url: prevent_HOST+"ueditor/uoloadFile",
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      mimeType: "multipart/form-data",
+      dataType:"json",
+      success: function (data) {
+        if(data.status=='0'){
+          pic[curpicbtn]=data.msg;
+          $("."+curpicbtn+" img").attr("src",data.msg);
+        }else{
+          alert("上传失败");
+        }
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+    //$(".class-img-show img").attr("src",URL.createObjectURL(files));
+  }
+  function createElement( type, name ) {
+    var element = null;
+    try {
+      element = document.createElement( '<' + type + ' name="' + name + '">' );
+    } catch ( e ) {}
+    if ( element == null ) {
+      element = document.createElement( type );
+      element.name = name;
+    }
+    return element;
+  }
+  $(document).on("click",".myupfilehome",function () {
+    curpicbtn='myupfilehome';
+    upfile.click();
+  });
+  $(document).on("click",".myupfilesite",function () {
+    curpicbtn='myupfilesite';
+    upfile.click();
+  });
+  $(document).on("click",".myupfilework",function () {
+    curpicbtn='myupfilework';
+    upfile.click();
+  });
+  $(document).on("click",".myupfilemsg",function () {
+    curpicbtn='myupfilemsg';
+    upfile.click();
+  });
+  $(document).on("click",".myupfileworkbench",function () {
+    curpicbtn='myupfileworkbench';
+    upfile.click();
+  });
+  $(document).on("click",".myupfilepersonal",function () {
+    curpicbtn='myupfilepersonal';
+    upfile.click();
+  });
+  var oNode = null,thePlugins = 'tpl';
+  window.onload = function() {
+    if( UE.plugins[thePlugins].editdom ){
+      oNode = UE.plugins[thePlugins].editdom;
+      var choicetype=oNode.getAttribute('choicetpl').replace(/"/g,"\"");
+      $(":radio[name='choicetpl'][value='" + choicetype + "']").prop("checked","checked");
+      //$(".choice"+choicetype).attr("checked",true);
+      var tpltype=oNode.getAttribute('tpltype').replace(/"/g,"\"");
+      if(tpltype!='null'){
+        $(":radio[name='tpltype'][value='" + tpltype + "']").prop("checked","checked");
+      }
+      var isShow=oNode.getAttribute('isShow').replace(/"/g,"\"");
+      if(isShow!='0'){
+        $("input[name='isShow']").prop("checked","checked");
+      }
+      //var gTitle=oNode.getAttribute('title').replace(/"/g,"\"");
+      //$G('orgname').value = gTitle;
+      var gHome=oNode.getAttribute('home').replace(/"/g,"\"");
+      if(gHome&&gHome!='null'){
+        gHomeVal=gHome.split(',');
+        $("input[name=home-title]").val(gHomeVal[0]);
+        $("input[name=home-url]").val(gHomeVal[2]);
+        $('.myupfilehome img').attr('src',gHomeVal[1]);
+        $(".chome").attr("checked",true);
+      }
+      var gSite=oNode.getAttribute('site').replace(/"/g,"\"");
+      if(gSite&&gSite!='null'){
+        var gSiteVal=gSite.split(',');
+        $("input[name=site-title]").val(gSiteVal[0]);
+        $("input[name=site-url]").val(gSiteVal[2]);
+        $('.myupfilesite img').attr('src',gSiteVal[1]);
+        $(".csite").attr("checked",true);
+      }
+      var gWork=oNode.getAttribute('work').replace(/"/g,"\"");
+      if(gWork&&gWork!='null'){
+        var gWorkVal=gWork.split(',');
+        $("input[name=work-title]").val(gWorkVal[0]);
+        $("input[name=work-url]").val(gWorkVal[2]);
+        $('.myupfilework img').attr('src',gWorkVal[1]);
+        $(".cwork").attr("checked",true);
+      }
+      var gMsg=oNode.getAttribute('msg').replace(/"/g,"\"");
+      if(gMsg&&gMsg!='null'){
+        var gMsgVal=gMsg.split(',');
+        $("input[name=msg-title]").val(gMsgVal[0]);
+        $("input[name=msg-url]").val(gMsgVal[2]);
+        $('.myupfilemsg img').attr('src',gMsgVal[1]);
+        $(".cmsg").attr("checked",true);
+      }
+      var gWorkbench=oNode.getAttribute('workbench').replace(/"/g,"\"");
+      if(gWorkbench&&gWorkbench!='null'){
+        var gWorkbenchVal=gWorkbench.split(',');
+        $("input[name=workbench-title]").val(gWorkbenchVal[0]);
+        $("input[name=workbench-url]").val(gWorkbenchVal[2]);
+        $('.myupfileworkbench img').attr('src',gWorkbenchVal[1]);
+        $(".cworkbench").attr("checked",true);
+      }
+      var gPersonal=oNode.getAttribute('personal').replace(/"/g,"\"");
+      if(gPersonal&&gPersonal!='null'){
+        var gPersonalVal=gPersonal.split(',');
+        $("input[name=personal-title]").val(gPersonalVal[0]);
+        $("input[name=personal-url]").val(gPersonalVal[2]);
+        $('.myupfilepersonal img').attr('src',gPersonalVal[1]);
+        $(".cpersonal").attr("checked",true);
+      }
+    }
+  }
+
+  dialog.oncancel = function () {
+    if ( UE.plugins[ thePlugins ].editdom ) {
+      delete UE.plugins[ thePlugins ].editdom;
+    }
+  };
+
+  dialog.onok = function () {
+    var linkhtml='';
+    var firstUrl='';
+    var leipiplugins=`<input name="leipiNewField" type="text" title="tpl" value="tpl" leipiplugins="tpl" style="height: 20px;width: 20px;border-radius: 8px;"`;
+    var count=0;
+
+    var home="";
+    var site="";
+    var work="";
+    var msg="";
+    var workbench="";
+    var personal="";
+    var choicetype="";
+    var tpltype="";
+    var isShow="";
+
+    $(".my-input-addon input:checked").each(function(){
+      var ival=$(this).val();
+      var link='';
+      var title='';
+      var curpic='';
+      count++;
+      switch (ival){
+        case "home":
+          title=$("input[name=home-title]").val();
+          curpic=pic.myupfilehome;
+          link=$("input[name=home-url]").val();
+          home=title+","+curpic+","+link;
+          break;
+        case "site":
+          title=$("input[name=site-title]").val();
+          curpic=pic.myupfilesite;
+          link=$("input[name=site-url]").val();
+          site=title+","+curpic+","+link;
+          break;
+        case "work":
+          title=$("input[name=work-title]").val();
+          curpic=pic.myupfilework;
+          link=$("input[name=work-url]").val();
+          work+=title+","+curpic+","+link;
+          break;
+        case "msg":
+          title=$("input[name=msg-title]").val();
+          curpic=pic.myupfilemsg;
+          link=$("input[name=msg-url]").val();
+          msg=title+","+curpic+","+link;
+          break;
+        case "workbench":
+          title=$("input[name=workbench-title]").val();
+          curpic=pic.myupfileworkbench;
+          link=$("input[name=workbench-url]").val();
+          workbench+=title+","+curpic+","+link;
+          break;
+        case "personal":
+          title=$("input[name=personal-title]").val();
+          curpic=pic.myupfilepersonal;
+          link=$("input[name=personal-url]").val();
+          personal=title+","+curpic+","+link;
+          break;
+        default:
+          link='';
+          title='';
+          curpic='';
+      }
+      if(firstUrl==''){
+        firstUrl=link;
+      }
+      if(title!='')
+        linkhtml+='<a href="'+link+'" target="maincontent" class="icoA"><dl><dt><img src="'+curpic+'" alt=""></dt><dd>'+title+'</dd></dl></a>';
+    });
+    if(firstUrl==''){
+      firstUrl="/account";
+    }
+    var tchoicetype=$("input[name=choicetpl]:checked").val();
+    choicetype+=tchoicetype;
+    var html='';
+    leipiplugins+=" home='"+home+"' site='"+site+"' work='"+work+"' msg='"+msg+"' workbench='"+workbench+"' personal='"+personal+"' choicetpl='"+choicetype+"'";
+    if(tchoicetype=='toolbar'){
+      var type=$("input[name=tpltype]:checked").val();
+      var w=(100/count);
+      var style=`<style type="text/css">#sidebar a{width: `+w+`%;}</style>`;
+      var tisShow=$("input[name='isShow']").is(':checked')?1:0;
+      tpltype+=type;
+      isShow+=tisShow;
+      leipiplugins+=" tpltype='"+tpltype+"' isShow='"+isShow+"'";
+      if(type=='1'){
+        html=`<div id="sidebar" class="toolbarTop">`+style+`<link rel="stylesheet" href="self/toolbar/tpl1/tplTB.css">`+leipiplugins+` />`+linkhtml+`</div>`;
+      }else if(type=='2'){
+        html=`<div id="sidebar" class="toolbarBottom">`+style+`<link rel="stylesheet" href="self/toolbar/tpl1/tplTB.css">`+leipiplugins+` />`+linkhtml+`</div>`;
+      }else if(type=='3'){
+        html=`<div id="sidebar" class="toolbarLeft"><link rel="stylesheet" href="self/toolbar/tpl1/tplLR.css">`+leipiplugins+` /><div id="icolist">`+linkhtml+`</div></div>`;
+      }else if(type=='4'){
+        html=`<div id="sidebar" class="toolbarRight"><link rel="stylesheet" href="self/toolbar/tpl1/tplLR.css">`+leipiplugins+` /><div id="icolist">`+linkhtml+`</div></div>`;
+      }
+      //tpltype isShow
+
+    }else if(choicetype=='pctpl'){
+      editor.setContent('');
+      leipiplugins+=" tpltype='"+tpltype+"' isShow='"+isShow+"'";
+      var html=`<script type="text/javascript" src="self/toolbar/tpl1/tpl1.js"><\/script><link rel="stylesheet" href="self/toolbar/tpl1/tpl1.css"><div class="main_tpl"><div id="sidebar">`+leipiplugins+` /><div id="icolist">`+linkhtml+`</div></div><div id="contentId"><iframe id="maincontent" name="maincontent" src="`+firstUrl+`" width="100%" height="100%" frameborder="0" scrolling="on"></iframe></div></div>`;
+    }else if(choicetype=='mobiletpl'){
+      var type=$("input[name=tpltype]:checked").val();
+      var w=(100/count);
+      var style=`<style type="text/css">`;
+      tpltype+=type;
+      leipiplugins+=" tpltype='"+tpltype+"' isShow='"+isShow+"'";
+      if(type=='5'){
+        style+=`#sidebar{top: 0;border-bottom: 1px solid #cccccc;}#sidebar a{width: `+w+`%;}`;
+        style+=`#contentId{bottom: 0;}`;
+      }else if(type=='6'){
+        style+=`#sidebar{bottom: 0;border-top: 1px solid #cccccc;}#sidebar a{width: `+w+`%;}`;
+        style+=`#contentId{top: 0;}`;
+      }
+      style+=`</style>`;
+      html=`<div class="main_tpl"><script type="text/javascript" src="self/toolbar/mtpl/tpl1.js"><\/script><link rel="stylesheet" href="self/toolbar/mtpl/tpl1.css">`+style+`<div id="sidebar">`+leipiplugins+` />`+linkhtml+`</div><div id="contentId"><iframe id="maincontent" name="maincontent" src="`+firstUrl+`" width="100%" height="100%" frameborder="0" scrolling="on"></iframe></div></div>`;
+      editor.setContent('');
+    }else if(choicetype=='iframetpl'){
+      var qdom=$("input[name=home-url]");
+      var link=qdom.val();
+      if(link==''){
+        alert("首页链接地址不能为空");
+        qdom.focus();
+        return false;
+      }
+      editor.setContent('');
+      var html=`<iframe name="" src="`+link+`" scrolling="no" frameborder="0" align="" style="position:fixed;top: 0;left:0;width: 100%;height: 100%;"></iframe>`;
+    }
+    editor.execCommand('insertHtml',html);
+    /*if(type=='1'){
+        var bhtml=`<link rel="stylesheet" href="self/toolbar/tpl1/tpl1.css">
+          <div class="main_tpl"><div id="sidebar">`+leipiplugins+` /><div id="icolist">`+linkhtml+`<a href="/workbenchs/workbench.html" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/xietong.png" alt=""></dt><dd>管理</dd></dl></a><a href="/account" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/Personal-Center.png" alt=""></dt><dd>我的</dd></dl></a></div></div><div id="contentId"><iframe id="maincontent" name="maincontent" src="`+firstUrl+`" width="100%" height="100%" frameborder="0" scrolling="on"></iframe></div></div>`;
+        editor.setContent('');
+        editor.execCommand('insertHtml', bhtml);
+    }else if(type=='2'){
+      var qdom=$("input[name=home-url]");
+      var link=qdom.val();
+      if(link==''){
+        alert("首页链接地址不能为空");
+        qdom.focus();
+        return false;
+       }
+      var html=`<iframe name="" src="`+link+`" scrolling="no" frameborder="0" align="" style="position:fixed;top: 0;left:0;width: 100%;height: 100%;"></iframe>`;
+      editor.setContent('');
+      editor.execCommand('insertHtml', html);
+    }*/
+
+    /*var bhtml=`<script type="text/javascript" src="self/tpl/tpl1/tpl1.js"><\/script><link rel="stylesheet" href="self/tpl/tpl1/tpl1.css">
+      <div class="main_tpl"><div id="sidebar"><div id="icolist">`+linkhtml+`<a href="/workbenchs/workbench.html" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/xietong.png" alt=""></dt><dd>管理</dd></dl></a><a href="/account" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/Personal-Center.png" alt=""></dt><dd>我的</dd></dl></a></div></div><div id="contentId"><iframe id="maincontent" name="maincontent" src="`+$("input[name=home-url]").val()+`" width="100%" height="100%" frameborder="0" scrolling="on"></iframe></div></div>`;
+    //editor.setContent(html);
+      `<div class="main_tpl"><div id="sidebar"><div id="icolist">`+linkhtml+`<a href="/workbenchs/workbench.html" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/xietong.png" alt=""></dt><dd>管理</dd></dl></a><a href="/account" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/Personal-Center.png" alt=""></dt><dd>我的</dd></dl></a></div></div><div id="contentId"><iframe id="maincontent" name="maincontent" src="/homepage/view.html" width="100%" height="100%" frameborder="0" scrolling="on"></iframe></div></div>`;
+    //editor.setContent(html);
+      `<div class="main_tpl"><div id="sidebar">`+leipiplugins+` /><div id="icolist">`+linkhtml+`<a href="/workbenchs/workbench.html" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/xietong.png" alt=""></dt><dd>管理</dd></dl></a><a href="/account" target="maincontent" class="icoA iconitem"><dl><dt><img src="self/tpl/img/sidebar/Personal-Center.png" alt=""></dt><dd>我的</dd></dl></a></div></div><div id="contentId"><iframe id="maincontent" name="maincontent" src="`+firstUrl+`" width="100%" height="100%" frameborder="0" scrolling="on"></iframe></div></div>`;
+    editor.setContent('');
+    editor.execCommand('insertHtml', bhtml);*/
+  }
+</script>

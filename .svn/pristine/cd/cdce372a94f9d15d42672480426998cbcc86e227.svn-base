@@ -1,0 +1,52 @@
+body{
+  padding: 10px 20px;
+}
+.tplmaidiv{
+  width: 100%;
+  height: auto;
+  padding-bottom: 15px;
+  overflow: hidden;
+}
+.tplmaidiv dl{
+  display: inline-block;
+  padding: 3px;
+  width: 121px;
+  height: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.tplmaidiv dl dt{
+  width: 100%;
+  height:auto;
+  overflow: hidden;
+  text-align: center;
+}
+.tplmaidiv dl dd{
+
+}
+.curr-tpl{
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  -moz-box-shadow: 1px 1px 8px #ccc;
+  box-shadow: 1px 1px 1px #ccc;
+}
+.tplmaidiv dl dt img{
+  width: 80%;
+  height: 40px;
+}
+.my-input-addon{
+  //width: 100px;
+  text-align: left;
+}
+input.my-input{
+  width: 300px;
+}
+.input-group-addon .myupfilemsg img{
+  width: 30px;
+  height: auto;
+}
+input[type=file],.tpl-pic-upfile{
+  display: none;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="./css/index.css">
+<div class="ms_content">
+    <!--<div class="ms_head">
+    </div>-->
+    <div class="ms_main">
+        <div class="msm_type">
+            <ul>
+                <li><img src="./img/qq.jpg"/> <span>有消息(<em>20</em>)</span></li>
+                <li><img src="./img/wx.jpg"/> <span>有消息(<em>20</em>)</span></li>
+            </ul>
+        </div>
+        <div class="msm_user">
+            <h2>好友列表</h2>
+            <div class="msm_user_list">
+                <div class="msm_user_listcon">
+                    <dl>
+                        <dt><img src="./img/user/logo.png"/></dt>
+                        <dd class="msm_user_name">爱过那张脸</dd>
+                        <dd class="msm_user_tall">将详细要求与我商谈</dd>
+                    </dl>
+                    <dl>
+                        <dt><img src="./img/user/u68.png"/></dt>
+                        <dd class="msm_user_name">人善被人欺i</dd>
+                        <dd class="msm_user_tall">将详细要求与我商谈</dd>
+                    </dl>
+                    <dl>
+                        <dt><img src="./img/user/user.jpg"/></dt>
+                        <dd class="msm_user_name">左手倒影</dd>
+                        <dd class="msm_user_tall">将详细要求与我商谈</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="msm_msg_content">
+            <div class="msg_tall_con">
+                <div class="msg_tall_list">
+                    <div class="msg_tall_user mfl">
+                        <img src="./img/user/user.jpg"/></div>
+                    <div class="msg_user_tallcon mfl">
+                        <span class="left_triangle"></span>
+                        Iconfont-国内功能很强大且图标内容很丰富
+                    </div>
+                </div>
+                <div class="msg_tall_list">
+                    <div class="msg_tall_user mfl">
+                        <img src="./img/user/user.jpg"/></div>
+                    <div class="msg_user_tallcon mfl">
+                        <span class="left_triangle"></span>
+                        Iconfont-国内功能很强大且图标内容很丰富
+                    </div>
+                </div>
+                <div class="msg_tall_list">
+                    <div class="msg_tall_user mfr">
+                        <img src="./img/user/logo.png"/>
+                    </div>
+                    <div class="msg_user_tallcon mfr">
+                        <span class="r_triangle"></span>
+                        Iconfont-国内功能很强大且图标内容很丰富
+                    </div>
+                </div>
+            </div>
+            <div class="msg_tall_send">
+                <div class="msg_tall_tool">
+                    <img src="./img/tall_tool/1.png"/>
+                    <img src="./img/tall_tool/2.png"/>
+                    <img src="./img/tall_tool/3.png"/>
+                    <img src="./img/tall_tool/4.png"/>
+                </div>
+                <div class="msg_tall_content" contenteditable="true"></div>
+                <div class="msg_tall_sendbtn">
+                    <button>发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

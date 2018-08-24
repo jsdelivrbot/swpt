@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+		<title></title>
+	
+	</head>
+	<style>
+		html{
+			font-size: 62.5%;
+		}
+		body{
+		    background-position: center center;
+		    background: url("../courseware/img/01.jpg") no-repeat;
+		    background-attachment: fixed;
+		    background-size: cover;
+		    background-size: 100% 100%;
+		    padding: 0;
+			margin: 0;
+		    height: 100vh;
+		}
+		.intell{
+			width: 100%;
+			text-align: center;
+			position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    -webkit-transform: translate(-50%,-50%);
+		    -moz-transform: translate(-50%,-50%);
+		    transform: translate(-50%,-50%);
+		}
+		.intell a{
+			display: inline-block;
+			width: 8rem;
+			height: 8rem;
+		    font-size: 1.8rem;
+			color: #fff;
+			cursor: pointer;
+			margin-left: 2rem;
+		}
+		.intell a:first-child{
+			margin-left: 0;
+		}
+		.intell a:hover {
+			color: #07754e;
+		}
+		.intell img{
+			width: 100%;
+			height: 100%;
+			display: block;
+			border-radius: 50%;
+		}
+		.intell span{
+			display: block;
+			margin-top: 1rem;
+		}
+	</style>
+	<body>
+		<div class="intell">
+			<a class="class_intell" href="../re/"><img src="../home/img/more/58212f4c2ce83.png"><span>资源库</span></a>
+			<a class="teach_intell" href="../re_kepu/#!/re_examinezj"><img src="img/kepu.png"><span>科普资源库</span></a>
+			<a class="teach_intell" href="../dangjian_upExamine/"><img src="img/dangjian.jpg"><span>党建资源库</span></a>
+		</div>
+	</body>
+</html>

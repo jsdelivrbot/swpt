@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>组织中心</title>
+    <link rel="stylesheet" href="../public/part/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <link rel="stylesheet" href="css/Personal.css">
+    <script src="../public/js/sCheckIn.js"></script>
+</head>
+<body  ng-app="Personal"  ng-controller="myController">
+
+<!-- 模态框（Modal） -->
+<div class="move ng-cloak" ng-if="!isPhone">
+    <div class="move_box">
+        <!--移动端个人详细数据-->
+        <div class="router" >
+            <div ng-click="isone()" class="r_left h_title">
+                <span><a href="index.html">个人中心</a></span>
+            </div>
+            <div class="r_left h_title">
+                <!--<span ng-class="{true:'active'}[router===2]">组织中心</span>-->
+                <span class="active">组织中心</span>
+            </div>
+            <div class="r_right h_title">
+                <!--<span ng-class="{true:'active'}[router===2]">组织中心</span>-->
+                <span ng-class="{true:'active'}"><a href="../workbench/workbench_blank.html?linkName=2">程序中心</a></span>
+            </div>
+        </div>
+        <div class="show">
+            <div ng-show="router == 1">
+                <div class="gren">
+                    <div class="user">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-4" style="background-color:#fbfbfb">
+                                    <div class="left">
+                                        <div class="l_head">
+                                            <div class="l_img">
+
+                                            </div>
+                                            <!--修改按钮-->
+                                            <div class="l_btn">
+                                                <img src="./images/xiugai.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="l_body">
+                                            <div class="lists">
+                                                <!--公司-->
+                                                <div class="list" style="border-bottom: none;overflow: hidden">
+                                                    <span style="float: left;padding-right: 5px;">公司: </span>
+                                                    <ul class="l_ul" style="float: left">
+                                                        <li class="l_manage"><span>广东胜网科技有限公司</span>(管理员)</li>
+                                                        <li class="l_user"><span>广东坤智科技有限公司</span>(用户)</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="l_foot">
+                                            <div class="products">
+                                                <div class="f_title">
+                                                    功能区
+                                                </div>
+                                                <div class="l_p_items">
+                                                    <ul>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                        <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        <li><a href="###" style="background-position: 0 0"></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="right">
+                                        <ul>
+                                            <li >
+                                                <a href="/cardmg">
+                                                <div style="background-position:-228px -374px;"></div>
+                                                <p>发卡</p>
+                                                </a>
+                                            </li>
+                                            <li >
+                                                <a href="../enterprise">
+                                                    <div style="background-position:0 -187px;"></div>
+                                                    <p>加入/创建新平台</p>
+                                                </a>
+                                            </li>
+                                            <li >
+                                                <a href="../mall">
+                                                    <div style="background-position:-115px -187px;"></div>
+                                                    <p>1388w总站模板/资源库</p>
+                                                </a>
+                                            </li>
+                                            <li >
+                                                <a href="../workbench/workbenchs.html">
+                                                    <div style="background-position:-228px -374px;"></div>
+                                                    <p>本组织机构</p>
+                                                </a>
+                                            </li>
+                                            <li >
+                                                <a href="../bigdata">
+                                                    <div style="background-position:-115px -187px;"></div>
+                                                    <p>本平台大数据</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../public/part/bootstrap/bootstrap.min.js"></script>

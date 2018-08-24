@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>审批关联</title>
+    <link rel="stylesheet" href="../../pluy-in/base.css">
+    <link rel="stylesheet" href="../../pluy-in/font/iconfont.css">
+    <link rel="stylesheet" href="../../pluy-in/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/correlation.css">
+    <script src="../../pluy-in/index.min.js"></script>
+    <script src="../../pluy-in/less.min.js"></script>
+    <script src="../../pluy-in/jquery-3.1.1.min.js"></script>
+    <script src="./js/correlation.js"></script>
+</head>
+<body>
+<div id="box">
+    <div class="correlation">
+        <div class="header">
+            <a href="../template" class="iconfont icon-zuo quit"></a>
+            审批关联
+        </div>
+        <div class="bodies f15">
+            <div class="c_approver">
+                <div class="title f16">
+                    添加审批人:
+                </div>
+                <div class="main">
+                    <!--<div class="group">-->
+                    <!--<div class="lastgroup">-->
+                    <!--<div class="num">-->
+                    <!--1-->
+                    <!--</div>-->
+                    <!--<div class="border"></div>-->
+                    <!--<div class="vessel"></div>-->
+                    <!--</div>-->
+                    <!--<div class="nextgroup">-->
+                    <!--<div class="num">-->
+                    <!--2-->
+                    <!--</div>-->
+                    <!--<div class="border"></div>-->
+                    <!--<div class="vessel"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="add_approver btn_active">
+                    <span class="iconfont icon-jiahao"></span>
+                </div>
+            </div>
+            <div class="c_copyto">
+                <div class="title f16">
+                    添加抄送人:
+                </div>
+                <div class="main">
+                    <!--<div class="person">-->
+                    <!--<img src="" alt="">-->
+                    <!--</div>-->
+                    <div class="add_copyto">
+                        <span class="iconfont icon-jiahao"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="send btn_active">
+            发送
+        </a>
+    </div>
+    <div id="jump">
+        <div class="approver">
+            <div class="header">
+                <div class="iconfont icon-zuo quit approver_quit"></div>
+                选择联系人
+            </div>
+            <div class="bodies"></div>
+        </div>
+        <div class="copyto">
+            <div class="header">
+                <div  class="iconfont icon-zuo quit copyto_quit"></div>
+                请选择抄送人
+            </div>
+            <div class="bodies"></div>
+        </div>
+    </div>
+</div>
+<div id="modal">
+    <div id="modal_box_approver">
+        <div class="moadl_title">
+            审批人
+        </div>
+        <div class="modal_body">
+
+        </div>
+        <div class="modal_select">
+            <div class="replacement">重置</div>
+            <div class="delete">删除</div>
+            <div class="goback">取消</div>
+        </div>
+    </div>
+    <div id="modal_box_capyto">
+        <div class="moadl_title">
+            抄送人
+        </div>
+        <div class="modal_body">
+
+        </div>
+        <div class="modal_select">
+            <div class="replacement">重置</div>
+            <div class="delete">删除</div>
+            <div class="goback">取消</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

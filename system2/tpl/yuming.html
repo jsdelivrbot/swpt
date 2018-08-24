@@ -1,0 +1,104 @@
+<div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加域名</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">域名</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="domain" ng-model="domain" class="form-control" id="inputEmail3" placeholder="domain name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">端口</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="port" ng-model="port" class="form-control" id="inputPassword3" placeholder="port">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="btnSave();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="GroupManage">
+        <div class="yu_header">
+             域名分组管理 <span class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">添加</span>
+        </div>
+        <div class="title">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>域名</th>
+                    <th>端口</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="n in lists">
+                    <td>{{n.domain}}</td>
+                    <th>{{n.port}}</th>
+                    <th><span class="delDomain" ng-click="delDomain($index)">删除</span> <span class="editDomain" ng-click="editDomain($index)">修改</span></th>
+                </tr>
+                  <tr ng-if="show">
+                      <th>
+                          <div class="none">没有查询到符合条件的记录</div>
+                      </th>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    .GroupManage{
+        padding: 10px;
+    }
+    .editDomain,.delDomain{
+        cursor: pointer;
+    }
+    .yu_header:before{
+        content: "";
+        width: 2px;
+        height: 15px;
+        margin-right: 10px;
+        vertical-align: middle;
+        display: inline-block;
+        background-color: #88b7e0;
+    }
+    .yu_header{
+        height:36px;
+        vertical-align: middle;
+        padding-bottom:10px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .title{
+        width: 100%;
+    }
+    /*table{
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #eee;
+    }*/
+    thead{
+        width: 100%;
+        background-color: #f5f5f6;
+    }
+   /* th{
+       padding: 8px 0;
+        color:#666;
+    }*/
+    .none{
+        font-size: 15px;
+    }
+</style>

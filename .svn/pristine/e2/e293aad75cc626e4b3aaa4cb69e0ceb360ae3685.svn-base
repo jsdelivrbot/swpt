@@ -1,0 +1,14 @@
+.confirmApply {
+    display: block;
+    position: initial;
+    .banner {
+        font-size: .453333rem /* 34/75 */;
+    }
+    .formContainer {
+        padding-top: .4rem /* 30/75 */;
+        .pEndTime {
+            width: 47.5%;
+            display: inline-block;
+        }
+    }
+}

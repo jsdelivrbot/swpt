@@ -1,0 +1,252 @@
+<link rel="stylesheet" href="./css/login.css">
+<link rel="stylesheet" type="text/css" href="../homepage/css/comm.css" />
+
+<div class="l_content">
+    <div class="l_main_con">
+        <div class="l_main_login">
+            <div class="l_main_login_con">
+                <div class="main_flag_login" ng-show="main_flag=='login'">
+                    <div class="l_main_login_con_block">
+                        <ul>
+                            <li class="{{deng_lu_flag=='deng_lu'?'cur':''}}" ng-click="setDengLu('deng_lu')">账号密码登录</li>
+                            <li class="{{deng_lu_flag=='code_deng_lu'?'cur':''}}" ng-click="setDengLu('code_deng_lu')">手机验证码登录</li>
+                        </ul>
+                    </div>
+                    <div class="l_main_login_con_frm" ng-show="deng_lu_flag=='deng_lu'">
+                        <form name="denglu" ng-keyup="enterEvent($event)">
+                            <dl class="frm_dl_row">
+                                <dt class="phone"></dt>
+                                <dd>
+                                    <input type="text" class="log" ng-focus="iponeFocus()" ng-blur="loginBlur()" placeholder="请输入手机号" ng-model="user.ipone" name="login_ipone">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li>{{err_ipone}}</li>
+                            </ul>
+                            <dl class="frm_dl_row">
+                                <dt class="pwd"></dt>
+                                <dd>
+                                    <input type="password" class="log" ng-focus="pwd2Focus()" ng-blur="loginPwd2Blur()" ng-model="user.pwd" name="login_pwd" placeholder="请输入密码">
+                                </dd>
+                            </dl>
+                            <ul class="h20 err_msg">
+                                <li>{{err_pwd}}</li>
+                            </ul>
+                            <div class="l_login_h">
+                                <input type="checkbox" value="1" ng-checked="login_check" ng-model="login_check"> 记住我
+                                <span class="pwd_forget" ng-click="setMainFlag('repwd')">忘记密码？</span>
+                            </div>
+                            <span class="btn" ng-click="tjDengLu(denglu.$valid)">登 录</span>
+                            <div class="go_reg">还没有胜网账号？马上
+                                <span ng-click="setMainFlag('reg')">点击注册</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="l_main_login_con_frm" ng-show="deng_lu_flag=='code_deng_lu'">
+                        <form name="codedenglu">
+                            <dl class="frm_dl_row">
+                                <dt class="phone"></dt>
+                                <dd>
+                                    <input type="text" class="log" ng-focus="iponeFocus()" ng-blur="cloginBlur()" placeholder="请输入手机号" ng-model="user.ipone" name="c_login_ipone">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <!--<li>*该手机号尚未注册，请点击注册，完成登录</li>-->
+                                <li>{{err_ipone}}</li>
+                            </ul>
+                            <div class="ipone_code_block">
+                                <div class="ipone_code_input">
+                                    <dl class="frm_dl_row">
+                                        <dt class="ipone_code_img"></dt>
+                                        <dd>
+                                            <input ng-focus="codeFocus()" type="text" ng-blur="codeBlur()" placeholder="请输入验证码" ng-model="user.code" name="c_login_code">
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <span class="btn btn_code {{login_code_msg_css}}" ng-click="getLogInCode()">{{login_code_msg}}</span>
+                            </div>
+                            <ul class="h20 err_msg">
+                                <!--<li>*该手机号尚未注册，请点击注册，完成登录</li>-->
+                                <li>{{err_code}}</li>
+                            </ul>
+                            <div class="l_login_h" style="height: 20px;padding-bottom: 17px;">
+                                <span class="pwd_forget" ng-click="setMainFlag('repwd')">忘记密码？</span>
+                            </div>
+                            <span class="btn" ng-click="tjDengLu2(codedenglu.$valid)">登 录</span>
+                            <div class="go_reg">提示：未注册胜网平台的手机号，登录时将自动注册，且代表您已同意
+                                <span>《胜网平台用户手册》</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--注册-->
+                <div class="l_main_regorpwd_con" ng-show="main_flag=='reg'">
+                    <div class="l_main_login_con_block">
+                        <ul>
+                            <li ng-click="setMainFlag('login')">返回登录</li>
+                            <li>欢迎注册胜网系统</li>
+                        </ul>
+                    </div>
+                    <div class="l_main_login_con_frm">
+                        <form name="regfrm">
+                            <dl class="frm_dl_row">
+                                <dt class="phone"></dt>
+                                <dd>
+                                    <input type="text" class="log" ng-focus="iponeFocus()" ng-blur="rIphoeBlur()" placeholder="请输入手机号" ng-model="user.ipone" name="r_ipone">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li>{{err_ipone}}</li>
+                            </ul>
+                            <dl class="frm_dl_row">
+                                <dt class="pwd"></dt>
+                                <dd>
+                                    <input type="password" class="log" ng-focus="pwdFocus()" ng-blur="loginPwdBlur()" ng-model="user.pwd" name="r_pwd" placeholder="请输入密码">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li class="pwd_msg" ng-show="ispwd">仅允许输入字母、数字、符号的组合9-24位字符</li>
+                                <li ng-show="!ispwd">{{err_pwd}}</li>
+                            </ul>
+                            <dl class="frm_dl_row">
+                                <dt class="pwd"></dt>
+                                <dd>
+                                    <input type="password" ng-focus="rePwdFocus()" ng-blur="loginrePwdBlur()" class="log" ng-model="user.repwd" name="r_repwd" placeholder="再次确认密码">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li class="pwd_msg" ng-show="isrepwd">请保持两个密码内容一致</li>
+                                <li ng-show="!isrepwd">{{err_repwd}}</li>
+                            </ul>
+                            <div class="ipone_code_block">
+                                <div class="ipone_code_input">
+                                    <dl class="frm_dl_row">
+                                        <dt class="ipone_code_img"></dt>
+                                        <dd>
+                                            <input type="text" ng-focus="codeFocus()" ng-blur="codeBlur()" ng-model="user.code" name="r_code" placeholder="请输入验证码">
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <span class="btn btn_code {{login_code_msg_css}}" ng-click="getLogInCode()">{{login_code_msg}}</span>
+                            </div>
+                            <ul class="h28 err_msg">
+                                <li>{{err_code}}</li>
+                            </ul>
+                            <span class="btn" ng-click="tjZhuCe()">注 册</span>
+                            <div class="go_reg">点击注册按钮表示你已同意
+                                <span>《胜网平台用户手册》</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--找回密码-->
+                <div class="l_main_regorpwd_con" ng-show="main_flag=='repwd'">
+                    <div class="l_main_login_con_block">
+                        <ul>
+                            <li ng-click="setMainFlag('login')">返回登录</li>
+                            <li>找回我的密码</li>
+                        </ul>
+                    </div>
+                    <div class="l_main_login_con_frm">
+                        <form name="pwdfrm">
+                            <dl class="frm_dl_row">
+                                <dt class="phone"></dt>
+                                <dd>
+                                    <input type="text" class="log" ng-focus="iponeFocus()" ng-blur="loginBlur()" placeholder="请输入手机号" ng-model="user.ipone" name="p_ipone">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li>{{err_ipone}}</li>
+                            </ul>
+                            <dl class="frm_dl_row">
+                                <dt class="pwd"></dt>
+                                <dd>
+                                    <input type="password" class="log" ng-focus="pwdFocus()" ng-blur="loginPwdBlur()" ng-model="user.pwd" name="p_pwd" placeholder="请输入新密码">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li class="pwd_msg" ng-show="ispwd">仅允许输入字母、数字、符号的组合9-24位字符</li>
+                                <li ng-show="!ispwd">{{err_pwd}}</li>
+                            </ul>
+                            <dl class="frm_dl_row">
+                                <dt class="pwd"></dt>
+                                <dd>
+                                    <input type="password" class="log" ng-focus="rePwdFocus()" ng-blur="loginrePwdBlur()" ng-model="user.repwd" name="p_repwd" placeholder="再次确认密码">
+                                </dd>
+                            </dl>
+                            <ul class="h28 err_msg">
+                                <li class="pwd_msg" ng-show="isrepwd">请保持两个密码内容一致</li>
+                                <li ng-show="!isrepwd">{{err_repwd}}</li>
+                            </ul>
+                            <div class="ipone_code_block">
+                                <div class="ipone_code_input">
+                                    <dl class="frm_dl_row">
+                                        <dt class="ipone_code_img"></dt>
+                                        <dd>
+                                            <input type="text" ng-focus="codeFocus()" ng-blur="codeBlur()" ng-model="user.code" name="p_code" placeholder="请输入验证码">
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <span class="btn btn_code {{login_code_msg_css}}" ng-click="getLogInCode()">{{login_code_msg}}</span>
+                            </div>
+                            <ul class="h28 err_msg">
+                                <li>{{err_code}}</li>
+                            </ul>
+                            <span class="btn" ng-click="tjZhaoHuiMiMa()">确 定</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 150px;"></div>
+        </div>
+    </div>
+    <div class="alert">
+        <div class="al_box">
+              <div class="al_img">
+                  <!--<img src="../img/chenggong.png" alt="">-->
+              </div>
+              <p>您已成功注册胜网账号!</p>
+              <p>为了您的正常使用,请购买工作组件</p>
+              <div class="al_btn">
+                  <!--跳转回首页-->
+                <div class="a" ng-click="gohome()">回到首页</div>
+                  <!--跳转到购物中心-->
+                <div class="a" ng-click="goshop()">现在就去</div>
+              </div>
+        </div>
+    </div>
+</div>
+<!--<div class="add_company" ng-show="show_company">-->
+    <!--&lt;!&ndash;<div class="add_c_block">&ndash;&gt;-->
+        <!--&lt;!&ndash;<img src="img/img2.png" class="add_company_img2">&ndash;&gt;-->
+        <!--&lt;!&ndash;<p>是否现在立即&ndash;&gt;-->
+            <!--&lt;!&ndash;<span>加入/创建企业？</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</p>&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="addc_lbtn" ng-click="goCompanySw(false)">以后再说</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;<span class="addc_rbtn" ng-click="goCompanySw(true)">立即加入</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+<script>
+    $( function () {
+        // 展开手机导航栏
+        $( '#phoneNav' ).on( 'click', function ( e ) {
+            if ( e.target.className.indexOf( 'isClick' ) === -1 ) {
+                $( e.target ).addClass( 'isClick' );
+                $( '.l_container' ).addClass( 'phone' );
+                $( 'body' ).css( 'overflow', 'hidden' );
+            } else {
+                $( e.target ).removeClass( 'isClick' );
+                $( '.l_container' ).removeClass( 'phone' );
+                $( 'body' ).css( 'overflow', 'auto' );
+            }
+        } )
+        $( window ).resize( function ( e ) {
+            if ( ( window.innerWidth + 60 ) > 960 ) {
+                if ( $( '.l_container' ) )
+                    $( '.l_container' ).removeClass( 'phone' );
+            }
+        } )
+    } )
+
+</script>

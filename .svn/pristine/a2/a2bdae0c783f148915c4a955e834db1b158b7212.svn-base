@@ -1,0 +1,343 @@
+@font-face {
+    font-family: 'iconfont';
+    src: url('../iconFont/iconfont.eot');
+    src: url('../iconFont/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../iconFont/iconfont.woff') format('woff'),
+    url('../iconFont/iconfont.ttf') format('truetype'),
+    url('../iconFont/iconfont.svg#iconfont') format('svg');
+}
+
+*{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-overflow-scrolling: touch;
+    -webkit-user-select: snone;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: .426667rem /* 32/75 */;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.share-edit {
+    background-color: transparent !important;
+    background-image: url('../images/edit.png') !important;    
+}
+
+.share-delete {
+    background-image: url(../images/delete.png) !important;
+    background-color: transparent !important;
+}
+
+a[href] {
+    color: #000;
+}
+
+a:visited,a:hover,a:active,a:visited {
+    text-decoration: none !important;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.clear::after {
+    content: '';
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+}
+
+.wrapper.hidden {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.borderTop {
+    height: 0.34667rem;
+    width: 100%;
+    background: #f1f1f1;
+    display: inline-block;
+}
+
+header {
+    height: 1.066667rem /* 80/75 */;
+    background: #E13F2A;
+    color: #fff;
+    line-height: 1.066667rem /* 80/75 */;
+    font-size: .48rem /* 36/75 */;
+    padding: 0 .4rem /* 30/75 */ !important;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    .back {
+        display: inline-block;
+    }
+    .title {
+        text-indent: .266667rem /* 20/75 */;
+    }
+    .centerTitle {
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .centerTitle2 {
+        width: auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 0 .4rem /* 30/75 */;
+    }
+}
+header.lcr {
+    text-align: center;
+}
+
+.noData {
+    font-size: .48rem /* 36/75 */;
+    text-align: center;
+    margin-top: 1.333333rem /* 100/75 */;
+    display: none;
+    .iconfont {
+        font-size: 1.333333rem /* 100/75 */;
+        margin-bottom: .533333rem /* 40/75 */;
+    }
+}
+
+/**
+ * 共用样式
+ * ACTIVITY - index.html
+ * ACTIVITY - searchResult
+ */
+
+.body {
+    padding: .133333rem /* 10/75 */ .533333rem /* 40/75 */;
+    .bodyTop {
+        .title {
+            font-size: .426667rem /* 32/75 */;
+        }
+    }
+    .bodyMain {
+        padding-top: .4rem /* 30/75 */;
+        .project {
+            margin-bottom: .533333rem /* 40/75 */;
+            display: none;
+            .pImg {
+                width: 2rem/* 150/75 */;
+                height: 2rem/* 150/75 */;
+                float: left;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .pDesc {
+                line-height: 0.66667rem;
+                padding-left: 2.3rem;
+                h3, p, span {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                h3 {
+                    font-size: .4rem/* 30/75 */;
+                    font-weight: bold;
+                }
+                p {
+                    font-size: .373333rem/* 28/75 */;
+                    .pStatus {
+                        float: right;
+                        color: #e57b34;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * 共用样式
+ * ACTIVITY - activityDeatail
+ * ACTIVITY - createActivity
+ * LINELEARN - createActivity
+ */
+.confirmApply {
+    background: #fff;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    .banner {
+        color: #FE5C34;
+        font-size: .373333rem /* 28/75 */;
+        background: #F2F2F2;
+        padding: .266667rem /* 20/75 */ .533333rem /* 40/75 */;
+    }
+}
+.important {
+    font-size: .4rem /* 30/75 */;
+    color: red;
+}
+.formContainer {
+    padding: 0 .533333rem /* 40/75 */;
+    .tip {
+        font-size: .346667rem /* 26/75 */;
+        margin-top: .533333rem /* 40/75 */;
+        margin-bottom: .533333rem /* 40/75 */;
+    }
+    label {
+        font-size: .426667rem /* 32/75 */;
+        display: block;
+    }
+    input,textarea,select {
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: .266667rem /* 20/75 */ .133333rem /* 10/75 */;
+        margin-top: .266667rem /* 20/75 */;
+        margin-bottom: .266667rem /* 20/75 */;
+        width: 100%;
+        background: #fff;
+    }
+    input[type=radio] {
+        width: auto;
+        margin: 0;
+        padding: .133333rem /* 10/75 */;
+    }
+    .uploadContainer {
+        margin-top: .266667rem /* 20/75 */;
+        margin-bottom: .266667rem /* 20/75 */;
+        .uploadTarget {
+            position: relative;
+        }
+        .closed {
+            position: absolute;
+            right: -2px;
+            top: -2px;
+            transform: scale(.8);
+        }
+    }
+    .radioContainer {
+        margin-top: .266667rem /* 20/75 */;
+        margin-bottom: .266667rem /* 20/75 */;
+        display: inline-block;
+    }
+    .radioContainer:not(:last-of-type) {
+        margin-right: .266667rem /* 20/75 */;
+    }
+    .submit {
+        width: 100%;
+        background: #E13F2A;
+        border: none;
+        outline: none;
+        height: 1rem /* 75/75 */;
+        display: inline-block;
+        color: #fff;
+        font-size: .373333rem /* 28/75 */;
+        margin-bottom: .266667rem /* 20/75 */;
+    }
+}
+
+/**
+ * 共用样式
+ * LINELEARN - createActivity
+ * LINELEARN - uploadRecord
+ * 
+ */
+.uploadContainer {
+    display: inline-block;
+    div {
+        border: 1px solid #ccc;
+        display: inline-block;
+        float: left;
+    }
+    div:not(:last-of-type) {
+        margin-right: .2rem /* 15/75 */;
+    }
+    .uploadImg,
+    .uploadVideo {
+        width: 1.866667rem /* 140/75 */;
+        height: 1.866667rem /* 140/75 */;
+        margin-bottom: .266667rem /* 20/75 */;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .uploadVideo {
+        text-align: center;
+        background: #b3b3b3;
+        i {
+            color: #fff;
+            line-height: 1.866667rem /* 140/75 */;
+            font-size: .933333rem /* 70/75 */;
+        }
+    }
+    .uploadAdd {
+        padding: .533333rem /* 40/75 */;
+        .add {
+            width: .8rem /* 60/75 */;
+            height: .8rem /* 60/75 */;
+            background: url('../../../../../public/images/add.png') no-repeat;
+            background-size: 100%;
+        }
+    }
+    input {
+        height: 0;
+        width: 0;
+        display: none;
+    }
+}
+
+/**
+ * 共用样式
+ * ACTIVITY - myactivity
+ * ACTIVITY - activityManage
+ * ACTIVITY - reviewUser
+ * 
+ */
+
+#swiperNav {
+    .swiper-wrapper {
+        // background: #ccc;
+        .swiper-slide {
+            text-align: center;
+            font-size: .426667rem/* 32/75 */
+            ;
+            padding: .4rem/* 30/75 */
+            ;
+            box-sizing: border-box;
+        }
+        .swiper-slide.actived {
+            color: #E13F2A;
+            border-bottom: 1px solid #E13F2A;
+        }
+    }
+}
+
+#swiperBody {
+    .swiper-wrapper {
+        .swiper-slide {
+            font-size: .426667rem/* 32/75 */
+            ;
+        }
+    }
+}

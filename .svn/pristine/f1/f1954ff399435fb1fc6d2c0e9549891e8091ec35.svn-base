@@ -1,0 +1,91 @@
+// var root_url='http://1388w.cn:20896';
+var root_url = 'http://192.168.0.192:20896'
+
+var lei_url = 'http://192.168.0.121:20896'
+var office_root_url='http://192.168.0.192:21000';
+var incise_root_url='http://192.168.0.192:21001';
+var prepare_root_url='http://192.168.0.192:21002';
+var upGetData_root_url='http://192.168.0.192:21003';
+
+var repid_dev_root_url='http://192.168.0.192:8080';
+
+var test_root_url = 'http://192.168.0.192:20896'
+
+var company_root_url='http://1388w.cn:20905';
+
+var _data_root_url='http://192.168.0.21:8000';
+var _datamsg_root_url='http://192.168.0.21:8888';
+var orderFacade_root_url='http://192.168.0.21:20880';
+var alipayFacade_root_url='http://192.168.0.21:20881';
+var addClassOperation_root_url='http://192.168.0.21:20882';
+var classAlbumService_root_url='http://192.168.0.21:20883';
+var accountQuery_root_url='http://192.168.0.21:20884';
+var teachingPlanService_root_url='http://192.168.0.21:20885';
+var accountIntegralManagementFacade_root_url='http://192.168.0.21:20889';
+var prepareLesson_root_url='http://192.168.0.21:20891';
+var _root_url='http://192.168.0.21:20894';
+
+var bumenTree_root_url='http://192.168.0.21:20896';
+var formMenuFacade_root_url='http://192.168.0.21:20898';
+
+var _tmp_url='http://192.168.0.21:20899';
+
+var userService_root_url='http://192.168.0.21:20902';
+
+var buyerCartFacade_root_url='http://192.168.0.206:20884';
+
+var _orderFacade_root_url='http://1388w.cn:20880';
+var _alipayFacade_root_url='http://1388w.cn:20881';
+var _userManage_root_url='http://1388w.cn:20882';
+var _accountQuery_root_url='http://1388w.cn:20884';
+
+var luckilyListFacade_root_url='http://1388w.cn:20889';
+
+var pageDesignOperatorFacade_root_url='http://1388w.cn:20890';
+var re_root_url='http://1388w.cn:20891';
+
+var courseware_root_url='http://1388w.cn:20894';
+
+
+var search_root_url='http://1388w.cn:20897';
+
+var formMenuFacades_root_url='http://1388w.cn:20898';
+
+var _tmps_root_url='http://1388w.cn:20899';
+
+var user_root_url='http://1388w.cn:20909';
+
+// 工作流程
+var liuCheng_root_url = 'http://1388w.cn:8081';
+
+var _office_root_url='http://1388w.cn:21000';
+var _incise_root_url='http://1388w.cn:21001';
+var _prepare_root_url='http://1388w.cn:21002';
+var _upGetData_root_url = 'http://1388w.cn:21003';
+var beike_root_url = 'http://1388w.cn:21005';
+//网群系统--工作表单
+var web_gnUrl = 'http://1388w.cn/editor?workbench';
+
+//网群系统--工作流程
+//var web_lcUrl = 'http://1388w.cn:8081/rapid_dev/toActivitiIndex2.do?';
+var web_lcUrl = 'http://1388w.cn:8088/rapid_dev/activiti.html';
+
+var beike_video_url ="http://1388w.cn:8888/";
+var iframe_url = "http://192.168.0.96:9980";
+var beike_url = "http://1388w.cn";
+var office_url = "http://1388w.cn:21007";
+//单位组织--工作表单
+var work_gnUrl = 'http://1388w.cn/editor';
+
+//单位组织--工作流程
+//var work_lcUrl = 'http://1388w.cn:8081/rapid_dev/toActivitiIndex2.do?';
+var work_lcUrl = 'http://1388w.cn:8081/rapid_dev/activiti.html';
+
+//单位协同--工作表单
+var works_gnUrl = 'http://1388w.cn/form/index.html';
+//单位协同--工作流程
+var works_lcUrl = 'http://1388w.cn:8081/rapid_dev/toActivitiIndex.do?id="+id+"&name="+name';
+//内容管理--工作表单
+var zizhanguanli_gnUrl = 'http://1388w.cn/form/#/home?source=zizhan';
+//内容管理--工作流程
+var zizhanguanli_lcUrl = 'http://1388w.cn:8081/rapid_dev/toActivitiIndex.do?id="+id+"&name="+name';

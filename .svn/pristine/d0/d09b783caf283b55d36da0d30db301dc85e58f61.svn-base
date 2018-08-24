@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>搜索</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+  
+    <script type="text/javascript">
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+        function isIE() {
+            if ( window.attachEvent ) {
+                return true;
+            }
+            return false;
+        }
+
+        //moveRow在IE支持而在火狐里不支持！以下是扩展火狐下的moveRow
+          if ( !isIE() ) {
+            function getTRNode( nowTR, sibling ) {
+                while ( nowTR = nowTR[ sibling ] )
+                    if ( nowTR.tagName == 'TR' ) break;
+                return nowTR;
+            }
+            if ( typeof Element != 'undefined' ) {
+                Element.prototype.moveRow = function ( sourceRowIndex, targetRowIndex ) //执行扩展操作
+                {
+                    if ( !/^(table|tbody|tfoot|thead)$/i.test( this.tagName ) || sourceRowIndex === targetRowIndex ) return false;
+                    var pNode = this;
+                    if ( this.tagName == 'TABLE' ) pNode = this.getElementsByTagName( 'tbody' )[ 0 ]; //firefox会自动加上tbody标签，所以需要取tbody，直接table.insertBefore会error
+                    var sourceRow = pNode.rows[ sourceRowIndex ],
+                        targetRow = pNode.rows[ targetRowIndex ];
+                    if ( sourceRow == null || targetRow == null ) return false;
+                    var targetRowNextRow = sourceRowIndex > targetRowIndex ? false : getTRNode( targetRow, 'nextSibling' );
+                    if ( targetRowNextRow === false ) pNode.insertBefore( sourceRow, targetRow ); //后面行移动到前面，直接insertBefore即可
+                    else { //移动到当前行的后面位置，则需要判断要移动到的行的后面是否还有行，有则insertBefore，否则appendChild
+                        if ( targetRowNextRow == null ) pNode.appendChild( sourceRow );
+                        else pNode.insertBefore( sourceRow, targetRowNextRow );
+                    }
+                }
+            }
+        }
+          /*删除tr*/
+          function fnDeleteRow( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            oTable.deleteRow( obj.rowIndex );
+        }
+        /*上移*/
+        function fnMoveUp( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            var minRowIndex = 1;
+            var curRowIndex = obj.rowIndex;
+            if ( curRowIndex - 1 >= minRowIndex ) {
+                oTable.moveRow( curRowIndex, curRowIndex - 1 );
+            }
+
+        }
+        /*下移*/
+        function fnMoveDown( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            var maxRowIndex = oTable.rows.length;
+            var curRowIndex = obj.rowIndex;
+            if ( curRowIndex + 1 < maxRowIndex ) {
+                oTable.moveRow( curRowIndex, curRowIndex + 1 );
+            }
+        }
+
+        /*生成tr*/
+        var count = 0;
+
+        function fnAddComboTr( gName, obj ) {
+
+            var oTable = document.getElementById( 'options_table' );
+            var new_tr_node = oTable.insertRow( oTable.rows.length );
+            var new_td_node0 = new_tr_node.insertCell( 0 ),
+                new_td_node1 = new_tr_node.insertCell( 1 ),
+                new_td_node2 = new_tr_node.insertCell( 2 ); 
+            // new_td_node5 = new_tr_node.insertCell( 5 );
+
+            var sChecked = '';
+            if ( obj.checked ) sChecked = 'checked="checked"';
+            if ( !obj.name ) obj.name = '';
+            if ( !obj.value ) obj.value = '';
+            new_td_node0.innerHTML = '<td><input class="orgChecked' + count + '" type="radio" ' + sChecked + ' name="' + gName + '"></td>';
+            new_td_node1.innerHTML = '<td><input class="input-small span1 orgTitle' + count + '" type="text" value="' + obj.value + '" name="' + gName +
+                '" placeholder="选项值"></td>';
+            new_td_node2.innerHTML = `
+                 <td>
+                 宽：<input type="text" class="input-small span1" value="25%" name="orgwidth" id="orgwidth${count}" name="leipiNewField">
+                 
+                 高：<input type="text" class="input-small span1" value="30px" name="orgheight" id="orgheight${count}" name="leipiNewField">
+                </td>`
+            return true;
+        }
+
+        function fnAdd() {
+            var dName = $G( 'hidname' ).value;
+            if ( !dName ) dName = 'leipiNewField';
+            fnAddComboTr( dName, {
+                "checked": false,
+                "name": 'leipiNewField',
+                "value": ''
+            } );
+            $( '.fileLabel' ).parent().addClass( 'fileContainer' ).siblings().addClass( 'td' );
+            count++;
+            isUpload = false;
+            $( function () {
+                $( 'body' ).on( 'change', '.dataSelect', function ( e ) {
+                    var selectId = $( e.currentTarget ).data( 'id' ),
+                        selectVal = $( e.currentTarget ).val();
+                    $( '#dataSelectInput' + selectId ).prop( 'value', prevent_Url + 'editor/assets/ueditor/formdesign/preview.html?link=' + selectVal );
+                } )
+            } )
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+            <input id="hidname" type="hidden" />
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>提示内容</span>
+                    <span class="label label-important">*</span>
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <input id="orgname" type="text" onclick="javascript:this.select()" placeholder="必填项" value="请输入内容" />
+                </td>
+                <td>
+                    <input type="text" id="orgvalue">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>跳转目标</span>
+                </th>
+                <th>
+                    <span>页面跳转</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="orgFurl" id="orgfUrl">
+                        <option value="0">---请输入网址-</option>
+                    </select>
+                </td>
+                <td>
+                    <label class="radio inline">
+                        <input name="orgJump" class="orgJump" type="radio" value="son" checked="" /> 子窗口 </label>
+                    <label class="radio inline">
+                        <input name="orgJump" class="orgJump" type="radio" value="parent" /> 父窗口 </label>
+                    <label class="radio inline">
+                        <input name="orgJump" class="orgJump" type="radio" value="top" /> 顶窗口 </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table class="table table-hover table-condensed" id="options_table">
+                        <tr>
+                            <th><span>默认显示搜索</span></th>
+                            <th><span>标题</span></th>
+                            <th><span>搜索样式</span></th>
+                        </tr>
+                    </table>
+                    <a title="添加选项" class="btn btn-primary" onclick="fnAdd()">添加选项</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'search1';
+        window.onload = function () {
+            $G( 'orgname' ).select();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var gTitle = oNode.getAttribute( 'title' ),
+                    gTitle = gTitle == null ? '' : gTitle;
+            var gJump = oNode.getAttribute('orgjump');
+            $( '.orgJump[value=' + gJump + ']').prop('checked', '');
+
+            }
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            var nodeId = $( "#node_id", window.parent.document ).val();
+            $.ajax( {
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( "#orgfUrl" ).append( '<option value=' + value.id + '>' + value.value + '</option>' );
+                    } )
+                },
+                error: function ( res ) {
+                    alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                }
+            } );
+        }
+        dialog.onok = function () {
+
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '请输入控件名称' );
+                return false;
+            }
+            if ( $( '#orgfUrl' ).val() == 0 ) {
+               var orgfUrl = "";
+            } else {
+          var  orgfUrl = $( '#orgfUrl' ).val(),
+                orgUrlId = $( '#orgfUrl' ).val(),
+                orgUrlName = $( '#orgfUrl option[value=' + orgfUrl + ']' ).text();
+            }
+            var nodeId = $( "#node_id", window.parent.document ).val();
+            var orgChecked = '', // 选中
+                orgTitle = '', // 标题
+                orgwidth = '',   //宽度
+                orgheight = '',  //高度
+                orgTD = "";   //创建TD
+          if ( count < 1 ) {
+             alert( '请添加选项' );
+                return false;
+            } else {
+                for ( var i = 0; i < count; i++ ) {
+                    orgTitle = $( '.orgTitle' + i ).val();
+                    orgChecked += $( '.orgChecked' + i )[ 0 ].checked;
+                    orgChecked += "`";
+                    orgwidth = $( '#orgwidth' +i ).val();
+                    orgheight = $('#orgheight' + i).val();
+                    orgTD += `<span style="display:inline-block;cursor:pointer; text-align:center;width:${orgwidth};height:${orgheight}" id="btnSearch${count}">${orgTitle}</span>`; 
+                } 
+            }
+            var gTitle = $G( 'orgname' ).value.replace( /\"/g, "&quot;" );
+            var orgJump = $( ':radio[name="orgJump"]:checked' ).val();
+            var pid = getpluId();
+            var leipiplugins =`<input name="leipiNewField" type="text" leipiplugins="${thePlugins}" style="height: 20px;width: 20px;border-radius: 8px;"`;
+                leipiplugins += `prdid="${pid}" nodeid="${nodeId}" orgwidth="${orgwidth}" orgheight="${orgheight}"`;
+               
+        var html = 
+            `<div>${leipiplugins}</div>` 
+            //  `<table class="table">` +
+            //     `<tr class="search_row"><td>` +
+            //     `<input name="leipiNewField" class="search-pro" type="text"  title="文本框" value="输入内容" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" orgtype="text" style="border: 1px solid ; text-align: left; width: 150px;"/>` +
+            //     `<button type="button" class="search_btn">搜索</span></td></tr>` +
+            //        `<tr id="productSort"><td>${orgTD}</td></tr>`+
+            //     `<tr><td>` +
+            //     `<div class="wifiblockBox"><div class="wifiblock" orgJump="${orgJump}"  groupCon="${pid}" orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="`+prevent_Url+`editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style="display: flex;display: -webkit-flex;color: #333;">` +
+            //     `<div class="wfImg" ><input prdid ="${pid}" name="leipiNewField"  type="text" title="图片上传" identity="图片上传" style="display: block;width: 100%;height: 100%;" value="图片上传 - 控件" datasource="" leipiplugins="addimage"></div>` +
+            //     `<div class="wfDetail">` +
+            //     `<div class="title"><input prdid ="${pid}" name="leipiNewField" type="text" title="" value="" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/></div>` +
+            //     `<div class="detail"><input prdid ="${pid}" class="title" name="leipiNewField" type="text" title="文本框" value="" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" orgtype="text" style="border: 1px solid; text-align: left; width: 150px;"/></div>` +
+            //     `<div class="autor"><input prdid ="${pid}" class="title" name="leipiNewField" type="text" title="文本框" value="" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" orgtype="text" style="border: 1px solid; text-align: left; width: 150px;"/></div>` +
+            //     `<div class="confscource"><input prdid ="${pid}" class="title" name="leipiNewField" type="text" title="文本框" value="" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" orgtype="text" style="border: 1px solid; text-align: left; width: 150px;"/></div>` +
+            //     `<div class="orgCollect"><i class="i_font ic-shoucang"></i>0</div></div></div></div></td></tr></table>`;
+          
+           if ( !oNode ) {
+                try {
+                    editor.execCommand( 'insertHtml', html );
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                 oNode.outerHTML = html;
+                 delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+
+        function getpluId() { //时间戳生成唯一id
+            var timestamp = Date.parse( new Date() );
+            timestamp = 'plu' + timestamp / 1000;
+            return timestamp;
+        }
+
+    </script>
+</body>
+
+</html>

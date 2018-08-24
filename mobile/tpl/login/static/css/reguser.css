@@ -1,0 +1,23 @@
+#regUser{
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 50px;
+}
+.userinput{
+    height: 40px;
+}
+.userinput input{
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    padding: 3px;
+}
+.regSubmit{
+    padding: 3px 10px;
+}
+#getRegCode{
+    height: 28px;
+    line-height: 20px;
+}

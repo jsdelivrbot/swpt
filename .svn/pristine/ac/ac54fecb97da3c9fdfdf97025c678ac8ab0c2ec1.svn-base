@@ -1,0 +1,136 @@
+<link rel="stylesheet" href="/upLoadRe_pc/css/re_public.css">
+<link rel="stylesheet" href="/upLoadRe_pc/css/re_index.css">
+
+<style>
+        @media (min-width: 768px){
+            .modal-dialog{
+                width:90%;
+            }
+        }
+        .table{
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .table tr td:nth-child(oven){
+            background: #dddd;
+        }
+        .modal-footer{
+            text-align: center;
+        }
+        .modal-dialog{
+            margin: 55px auto;
+        }
+        .tabNav li :after{
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 5px;
+            right: -16px;
+            border: solid 8px;
+            border-color: transparent transparent transparent #f8ac09;
+            font-size: 0;
+        }
+    </style>
+
+     
+<div class="pulish_nav">
+        <ul class="tabNav">
+            <li ng-repeat=" s in release" ng-class="{active:examine==s.id}" ng-click="examineType(s.id)">{{s.title}}</li>
+        </ul>
+        <div class="tabCon" ng-if="file_type == 'list'"> 
+             
+                <div class="row tabItem" ng-click="sourceDetail($event)"  ng-repeat="s in sourceConent" id="{{s.id}}" data-exam="{{s.bookExamine}}">
+                       
+                        <div class="col-xs-3 col-lg-2 iuessImg">
+                            <img src="{{imgSrc}}{{s.coverPhoto}}">
+                        </div>
+                        <div class="col-xs-9 col-lg-10 clearfix iuess">
+                            <div class="tab_title">
+                                <span class="tabTitle">{{s.bookName}}</span>
+                                
+                            </div>
+                            <div class="timeState">
+                                <span class="tab_state">{{stateList[$index]}}</span>
+                                <span class="item_time">{{s.uploadTime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>  
+                            </div>
+                            <div class="tab_name">{{s.briefIntroduction}}</div> 
+                            <div class="tab_time">
+                            作者：<span>{{s.bookAuthor}}</span>
+                        
+                            </div>
+                            <div class="tab_item">
+                                <p> 
+                                    <a id="continue" ng-click="ContinueUpload($event)">继续上传</a><a ng-click="editorSource($event)">编辑</a>
+                                 </p>
+                                 <p>
+                                     <a  ng-click="chapterManage($event)" data-toggle="modal" data-target="#myModal">章节管理</a><a ng-click="delSource($event)">删除</a>
+                                 </p>
+
+                             </div>
+                        </div>
+                    </div> 
+              
+        </div>
+        <div class="tabCon" ng-if="file_type =='fileChk'">
+                <div class="row tabItem"  ng-repeat="s in sourceConent" id="{{s.id}}" data-exam="{{s.bookExamine}}" ng-click="sourceDetail($event)">
+                        <div class="col-xs-3 col-lg-2 iuessImg">
+                            <img src="{{imgSrc}}{{s.coverPhoto}}">
+                        </div>
+                        <div class="col-xs-9 col-lg-10 clearfix iuess">
+                                <div class="tab_title">
+                                    <span class="tabTitle">{{s.bookName}}</span>
+                                </div>
+                                <div class="timeState">
+                                    <span class="tab_state">{{stateList[$index]}}</span>
+                                    <span class="item_time">{{s.uploadTime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>  
+                                </div>
+                                <div class="tab_name">{{s.briefIntroduction}}</div> 
+                                <div class="tab_time">
+                                作者：<span>{{s.bookAuthor}}</span>
+                                </div>
+                            </div>
+                    </div> 
+            </div> 
+                <!-- 分页 --> 
+               <tm-pagination conf="paginationConf"></tm-pagination>    
+    </div>
+<!-- 章节管理 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+           
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    章节管理
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                <tr>
+                    <th>章节</th>
+                    <th>视频</th>
+                    <th>音频</th>
+                    <th>图书</th>
+                    <th>题库</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="s in chapterData" id="{{s.id}}">
+                    <td>{{s.bookChapterName}}</td>
+                    <td ng-repeat="v in s.videoList">{{v.videoName}}</td>
+                    <td ng-repeat="v in s.musicList">{{v.musicName}}</td>
+                    <td></td>
+                    <td></td>
+                    <td><a ng-click="removeChapter($event)">删除</a><a ng-click="insertChapter($event)">修改</a></td>
+                </tr> 
+            </table>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-primary" ng-click="closeDialog()">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

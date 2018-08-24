@@ -1,0 +1,115 @@
+header .search {
+  flex: 7;
+  text-indent: 0.26667rem;
+  border: none;
+}
+
+header .searchBtn {
+  flex: 3;
+  background: #E13F2A;
+  outline: none;
+  border-color: #E13F2A;
+  color: #fff;
+  border-style: none;
+  border: none;
+}
+
+header #searchNav {
+  text-align: right;
+}
+
+.promo {
+  width: 100%;
+  max-height: 40vh;
+  height: 4rem;
+}
+
+.promo .swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.promo .swiper-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.searchPage {
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: 100;
+  display: none;
+}
+
+.searchPage header {
+  background: #E13F2A;
+  height: 1.33333rem;
+  line-height: 1.33333rem;
+  padding: 0 0.4rem !important;
+  display: block;
+  position: relative;
+}
+
+.searchPage header .back {
+  display: inline-block;
+}
+
+.searchPage header .search {
+  height: 0.66667rem;
+  border-radius: 4px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.83);
+  text-indent: 0.2rem;
+  margin-left: 0.8rem;
+  width: 60%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.searchPage header .searchBtn {
+  background: #fff;
+  width: 1.33333rem;
+  color: #666;
+  height: 0.66667rem;
+  margin-top: 0.33333rem;
+  border-radius: 15px;
+  line-height: 0.66667rem;
+  float: right;
+}
+
+.searchPage .searchTj {
+  padding: 0 0.26667rem;
+}
+
+.searchPage .searchTj div {
+  margin-top: 1.06667rem;
+}
+
+.searchPage .searchTj div h2 {
+  font-weight: bold;
+  font-size: 0.50667rem;
+  text-indent: 0.13333rem;
+}
+
+.searchPage .searchTj div ul li {
+  float: left;
+  margin-top: 0.26667rem;
+  font-size: 0.45333rem;
+}
+
+.searchPage .searchTj div li:not(:first-of-type) {
+  margin-left: 0.4rem;
+}
+
+.searchPage .searchTj div .click {
+  color: #64BCE2;
+}
+
+.searchPage .searchTj div:not(:last-of-type) {
+  margin-bottom: 0.8rem;
+}

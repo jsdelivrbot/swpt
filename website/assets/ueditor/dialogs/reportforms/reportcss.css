@@ -1,0 +1,52 @@
+/* 公用CSS */
+.tableT{
+    text-align: center;
+    border: 0;
+}
+.tableT td{
+    padding: 10px 30px;
+    border: 1px solid  rgb(164,218,234);
+    font-family: Microsoft YaHei UI;
+    font-size: 14px;
+}
+.titleT{
+    border: none !important;
+    border-bottom: 3px solid rgb(149,211,244) !important;
+    background-color: rgb(235,247,252);
+    color: rgb(42,135,198);
+    font-size: 25px !important;
+    text-align: left;
+    padding: 10px 20px !important;            
+}
+.menuT td,.menuT th{
+    font-weight: 100;
+    background-color: rgb(108,202,205);
+    color: rgb(255,255,255);
+    padding: 5px 35px;
+    white-space: nowrap;
+}
+
+/* 报表控件 -- 数据钻取 -- 订单详细 */
+.order-list-menu{
+    position:absolute;
+    background-color:#6ccacd;
+    width:108px;
+    height:50px;
+    border-radius: 6px;
+    padding:4px;
+    box-sizing:border-box;
+    left: 55px;
+    display: none;
+    color:#fff;
+}
+.order-menu{
+    text-align:center;
+    height:50%;
+}
+.order-menu span{
+    font-size: 14px;
+}
+.order-menu:hover{
+    background-color: #91ecef;
+    color: #1eaaaf;
+}

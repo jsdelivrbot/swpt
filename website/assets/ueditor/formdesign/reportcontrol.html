@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>报表控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script src="./self/js/jquery-3.2.1.min.js"></script>
+    <script src="../httpData.config.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="self/echarts/echarts.min.js"></script>
+    <link rel="stylesheet" href="./self/css/style.css">
+    <script type="text/javascript">
+        /*
+         * reportcontrol 报表控件
+         *
+         *
+         * */
+
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content" id="content">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    <span>报表名称</span>
+                    <span class='label label-important'>*</span>
+                </th>
+                <th>
+                    <span>选择报表</span>
+                    <span class='label label-important'>*</span>
+                </th>
+                <th>
+                    <span>选择报表类型</span>
+                    <span class='label label-important'>*</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id='reportname' name='reportname' onclick='javascript:this.select()' placeholder='必填项' type='text' value='报表控件' />
+                </td>
+                <td>
+                    <select id='selectreport' name='selectreport'>
+                        <option value=''>请选择...</option>
+                    </select>
+                </td>
+                <td>
+                    <label class='radio' title='静态报表'>
+                        <input id='static' name='orderby' value='0' type='radio' checked> 静态报表 </label>
+                    <label class='radio' title='动态报表'>
+                        <input id='dynamic' value='1' name='orderby' type='radio'> 动态报表 </label>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>条件筛选</span>
+                </th>
+                <th>
+                    <a title='添加条件' class='btn btn-info' onclick='fnAdd()'>增加条件</a>
+                    <!--<a title='合并条件' class='btn btn-info' onclick='fnMerge()'>合并条件</a>-->
+                </th>
+                <th>
+                    <select id='visualReport'>
+                        <option value='tableCommones'>请选择可视化类型</option>
+                        <option value='tableCommon'>普通表格</option>
+                        <option value='line'>折线图</option>
+                        <option value='bar'>柱状图</option>
+                        <option value='pie'>饼状图</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <select id='selectField'>
+                        <!-- <option value=''>请选择条件...</option> -->
+                    </select>
+                    <span style='margin-left: 20px;'></span>
+                    <select id='comparison'>
+                        <!-- <option value=''>请选择...</option> -->
+                        <option value='<'>&lt;</option>
+                        <option value='<='>≤</option>
+                        <option value='='>=</option>
+                        <option value='>='>≥</option>
+                        <option value='>'>&gt;</option>
+                    </select>
+                    <span style='margin-left: 20px;'></span>
+                    <input id='fillFiled' placeholder='只能输入数字' type='text' onKeyUp="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')" />
+                    <!-- <a title="删除" class="btn btn-small btn-default" href="javascript:void(0);" onclick="fnDeleteRow(this)"><i class="icon-ban-circle"></i></a> -->
+                </td>
+            </tr>
+        </table>
+        <div class='alert alert-danger'>提示：报表控件表单请务必保存，方可预览内容</div>
+    </div>
+    <script>
+        /*
+         * JS-Public-Method
+         *
+         */
+        // 时间戳转回字符串
+        function unxiEcDate( oUnix, Exchange ) {
+            var dateStringArr = [],
+                Exchange = Exchange.toUpperCase();
+            if ( typeof oUnix == "object" && oUnix instanceof Array ) {
+                var unxi = oUnix;
+            } else {
+                var unxi = Object.keys( oUnix );
+            }
+            // 如果是 时间戳 转为 日期
+            if ( Exchange == "UTD" ) {
+                for ( var i = 0; i < unxi.length; i++ ) {
+                    var d = new Date( unxi[ i ] * 1000 ),
+                        date = d.getFullYear() + "-" +
+                        ( d.getMonth() + 1 ) + "-" +
+                        d.getDate();
+                    dateStringArr.push( date );
+                }
+            } else if ( Exchange == "DTU" ) {
+                for ( var i = 0; i < unxi.length; i++ ) {
+                    var d = new Date( unxi[ i ] ),
+                        date = d.getTime() / 1000;
+                    dateStringArr.push( date );
+                }
+            }
+            return dateStringArr;
+        }
+
+        function ajax( options ) {
+            options = options || {};
+            options.type = ( options.type || "GET" ).toUpperCase();
+            options.dataType = options.dataType || "json";
+            var params = formatParams( options.data );
+
+            if ( window.XMLHttpRequest ) {
+                var xml = new XMLHttpRequest();
+            } else {
+                var xml = new ActiveXObject( "Microsoft.XMLHTTP" )
+            }
+
+            xml.onreadystatechange = function () {
+                if ( xml.readyState == 4 ) {
+                    var status = xml.status;
+                    if ( status >= 200 && status < 300 ) {
+                        options.success && options.success( xml.responseText, xml.responseXML )
+                    } else {
+                        options.fail && options.fail( status );
+                    }
+                }
+            }
+
+            if ( options.type == "GET" ) {
+                xml.open( "GET", options.url, options.async );
+                xml.send( null );
+            } else if ( options.type == "POST" ) {
+                xml.open( "POST", options.url, options.async );
+                xml.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+                xml.send( params );
+            }
+        }
+
+        function formatParams( data ) {
+            var arr = [];
+            for ( var name in data ) {
+                arr.push( encodeURIComponent( name ) + "=" + encodeURIComponent( data[ name ] ) );
+            }
+            arr.push( ( "v=" + Math.random() ).replace( ".", "" ) );
+            return arr.join( "&" );
+        }
+        // 去重
+        Array.prototype.Toheavy = function () {
+            res = [ this[ 0 ] ];
+            for ( var i = 1; i < this.length; i++ ) {
+                var repeat = false;
+                for ( var j = 0; j < res.length; j++ ) {
+                    if ( this[ i ] == res[ j ] ) {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if ( !repeat ) {
+                    res.push( this[ i ] );
+                }
+            }
+            return res;
+        }
+
+        // 获取报表数据
+        var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+        var nodeId = $("#node_id" , window.parent.document).val();
+        ajax( {
+            url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+            // url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + nodeParentId,
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success: function ( response, xml ) {
+                result = JSON.parse( response ).msg;
+            },
+            error: function ( status ) {
+                console.log( status )
+                alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' );
+            }
+        } )
+        for ( var i = 0; i < result.length; i++ ) {
+            $( "#selectreport" ).append( "<option id=" + result[ i ].id + " value=" + result[ i ].value + ">" + result[ i ].value +
+                "</option>" );
+        }
+
+        // 获取报表中的字段数据
+        var dataStatusMsg, data;
+        $( "#selectreport" ).change( function () {
+            var selectReport = $( "#selectreport" ).val(),
+                selectReortId = $( '#selectreport option:selected' ).attr( 'id' );
+            //console.log($( "#selectreport" ).val() )
+            /* for ( var i = 0; i < result.length; i++ ) {
+            	if ( result[ i ].value === selectReport ) {
+            	//console.log(result[i].children.length)
+            	$( "#selectField" ).empty();
+            	$( ".addSelect" ).empty();
+            	for ( var j = 0; j < result[ i ].children.length; j++ ) {
+            		$( "#selectField" ).append("<option value=" + result[ i ].children[ j ].value + ">" + result[ i ].children[ j ].value +
+            		"</option>");
+            		$( ".addSelect" ).append("<option value=" + result[ i ].children[ j ].value + ">" + result[ i ].children[ j ].value +
+            		"</option>");
+            	}
+            	}
+            } */
+            $( "#selectField" ).empty();
+            $( ".addSelect" ).empty();
+            // $( "#select_" + j ).empty();
+            $.ajax( {
+                type: "get",
+                url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + selectReortId,
+                contentType: "application/json",
+                async: false,
+                success: function ( dataResult ) {
+                    dataStatusMsg = dataResult.statusMsg;
+                    if ( dataStatusMsg === '查询失败' ) return false;
+                    data = dataResult.msg;
+                    // $( "#selectField" ).empty();
+                    // $( ".addSelect" ).empty();
+                    for ( var i = 0; i < Object.keys( data ).length; i++ ) {
+                        $( "#selectField" ).append( "<option id=" + data[ Object.keys( data )[ i ] ].value + " value=" + data[ Object.keys( data )[ i ] ].text + ">" + data[ Object.keys( data )[ i ] ].text +
+                            "</option>" );
+                        $( ".addSelect" ).append( "<option id=" + data[ Object.keys( data )[ i ] ].value + " value=" + data[ Object.keys( data )[ i ] ].text + ">" + data[ Object.keys( data )[ i ] ].text +
+                            "</option>" );
+                        //console.log( data[ Object.keys(data)[i] ].text )
+                    }
+                }
+            } )
+        } )
+
+        //添加多个条件
+        var count = 0;
+
+        function fnAdd() {
+            count++;
+            var html =
+                `<tr>
+        		<th colspan='3'>
+					<select id='select_${count}' class='addSelect'>`
+            // <option value=''>请选择条件...</option>`
+            /* for ( var i = 0; i < result.length; i++ ) {
+            	if ( result[ i ].value === $( "#selectreport" ).val() ) {
+            		console.log(result[i].children.length)
+            		//$( ".addSelect" ).empty();
+            		for ( var j = 0; j < result[ i ].children.length; j++ ) {
+            			html += ("<option value=" + result[ i ].children[ j ].value + ">" + result[ i ].children[ j ].value +
+            			"</option>");
+            	}
+            	}
+            } */
+            if ( data === undefined ) return false;
+            for ( var i = 0; i < Object.keys( data ).length; i++ ) {
+                html += ( "<option id=" + data[ Object.keys( data )[ i ] ].value + " value=" + data[ Object.keys( data )[ i ] ].text + ">" + data[ Object.keys( data )[ i ] ].text +
+                    "</option>" );
+            }
+            html +=
+                `</select>
+					<span style='margin-left: 20px;'></span>
+					<select id='comparison_${count}' class='compareSelect'>
+						<option value='<'>&lt;</option>
+						<option value='<='>≤</option>
+						<option value='='>=</option>
+						<option value='>='>≥</option>
+						<option value='>'>&gt;</option>
+					</select>
+					<span style='margin-left: 20px;'></span>
+                    <input class='fillInput' id='fill_${count}' placeholder='只能输入数字' type='text' onKeyUp="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')" />
+                    <a title="删除" class="btn btn-small btn-default" href="javascript:void(0);" onclick="fnDeleteRow(this)"><i class="icon-ban-circle"></i></a>
+				</th>
+			</tr>`;
+            $( 'table.table' ).append( html );
+        }
+
+        /*删除tr*/
+        function fnDeleteRow( obj ) {
+            $( obj ).parent( 'th' ).parent( 'tr' ).remove();
+            count--;
+            // console.log( count )
+            for ( var i = 0; i < count; i++ ) {
+                var j = i + 1;
+                $( '.addSelect' ).eq( i ).attr( 'id', 'select_' + j );
+                $( '.compareSelect' ).eq( i ).attr( 'id', 'comparison_' + j );
+                $( '.fillInput' ).eq( i ).attr( 'id', 'fill_' + j );
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'reportcontrol';
+
+        function changeProduct() {
+            if ( $G( "product" ) ) {
+                $G( "product" ).checked = true;
+            }
+        }
+
+        /* $( ":radio" ).click( function () {
+            if ( $( this ).val() === '0' ) {
+                $( '#visualReport' ).attr( 'disabled', 'disabled' );
+            } else if ( $( this ).val() === '1' ) {
+                $( '#visualReport' ).removeAttr( 'disabled' );
+            }
+        } ); */
+
+        // 数据回填
+        window.onload = function () {
+            // $G( 'reportcontrol' ).select();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var arr = [],
+                    gTitle = oNode.getAttribute( 'title' ),
+                    gOrderby = oNode.getAttribute( 'orderby' ),
+                    gField = oNode.getAttribute( 'field' ).split( '`' ),
+                    gNode_name = oNode.getAttribute( 'node_name' ),
+                    selectReortId = oNode.getAttribute( 'pid' );
+                gVisualReport = oNode.getAttribute( 'visualreport' );
+                // console.log( oNode )
+                // console.log( gTitle, gOrderby, gField, gNode_name, gVisualReport )
+                $G( 'reportname' ).value = gTitle;
+                $G( 'selectreport' ).value = gNode_name;
+                gOrderby == '0' ? $G( 'static' ).checked = true : $G( 'dynamic' ).checked = true;
+                $G( 'visualReport' ).value = gVisualReport;
+                if ( $G( 'selectreport' ).value != '' ) {
+                    $( "#selectreport" ).change()
+                    /* $.fn.extend('change',function(){
+                    })
+                    $.change() */
+                }
+                // console.log( gField[ 0 ].split( ',' )[ 2 ] )
+                $G( 'selectField' ).value = gField[ 0 ].split( ',' )[ 3 ];
+                $G( 'comparison' ).value = gField[ 0 ].split( ',' )[ 1 ];
+                $G( 'fillFiled' ).value = gField[ 0 ].split( ',' )[ 2 ];
+                for ( var i = 0; i < gField.length - 1; i++ ) {
+                    fnAdd();
+                    var x = i + 1;
+                    var len = gField[ i ].split( ',' ).length;
+                    for ( var j = 0; j < len; j++ ) {
+                        $G( 'select_' + x ).value = gField[ x ].split( ',' )[ 3 ];
+                        $G( 'comparison_' + x ).value = gField[ x ].split( ',' )[ 1 ];
+                        $G( 'fill_' + x ).value = gField[ x ].split( ',' )[ 2 ];
+                    }
+                }
+            }
+        }
+
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+        dialog.onok = function () {
+            if ( $G( 'reportname' ).value == '' ) {
+                alert( '报表名称不能为空' );
+                $G( 'reportname' ).focus();
+                return false;
+            } else if ( $G( 'selectreport' ).value == '' ) {
+                //alert( '请选择一个报表' );
+                $G( 'selectreport' ).focus();
+                return false;
+            }
+            // console.log( $G( 'visualReport' ).value )
+            // 传入后台条件数据
+            var reportname = $G( 'reportname' ).value,
+                selectReort = $G( 'selectreport' ).value,
+                selectReortId = $( '#selectreport option:selected' ).attr( 'id' ),
+                selectFieldId = $( '#selectField option:selected' ).attr( 'id' ),
+                field,
+                checked = $( 'input[name="orderby"]:checked' ).val(),
+                visualReport = $G( 'visualReport' ).value;
+            field = ( selectFieldId + ',' +
+                $G( 'comparison' ).value + ',' +
+                $G( 'fillFiled' ).value + ',' +
+                $G( 'selectField' ).value );
+            for ( var i = 0; i < count; i++ ) {
+                var j = i + 1;
+                field += "`"
+                field += ( $( '#select_' + j + ' option:selected' ).attr( 'id' ) + ',' +
+                    $G( 'comparison_' + j ).value + ',' +
+                    $G( 'fill_' + j ).value + ',' +
+                    $G( 'select_' + j ).value );
+            }
+            var condition = JSON.stringify( {
+                "node_name": selectReort,
+                "node_id": selectReortId,
+                "field": field
+            } );
+            console.log( condition );
+            if ( !oNode ) {
+                try {
+                    // 判断选择的是哪种类型的报表
+                    if ( checked == 0 ) {
+                        var html, parseData, dataBody, fieldsHead, columnsLength;
+                        $.ajax( {
+                            type: "POST",
+                            url: prevent_HOST + "pageDesignOperatorFacade/getDataSource",
+                            data: condition,
+                            contentType: 'application/json;chartset=UTF-8',
+                            async: false,
+                            success: function ( res ) {
+                                parseData = res[ 'msg' ],
+                                    dataBody = parseData.data,
+                                    fieldsHead = parseData.fields,
+                                    columnsLength = Object.keys( fieldsHead ).length;
+                                // console.log( fieldsHead[ Object.keys( fieldsHead )[ 0 ] ].text )
+                                // console.log( Object.keys( fieldsHead )[ 0 ] )
+                            },
+                            error: function ( status ) {
+                                console.log( status )
+                            }
+                        } )
+                        // console.log(dataBody)
+
+                        // 判断选择可视化报表类型
+                        html =
+                            "<table class='tableT' style='text-align:center;'>" +
+                            // 表头
+                            "<td class='titleT' style='font-weight:bold' colspan=" + columnsLength + ">" + reportname + "</td>" +
+                            // 标题
+                            "<tr class='menuT'>";
+                        for ( var j = 0; j < columnsLength; j++ ) {
+                            html += "<th>" + fieldsHead[ Object.keys( fieldsHead )[ j ] ].text + "</th>";
+                        }
+                        html += "</tr>";
+                        for ( var j = 0; j < dataBody.length; j++ ) {
+                            var columns = Object.keys( dataBody[ j ] ).filter( function ( e ) {
+                                return e.indexOf( "data" ) === 0;
+                            } )
+                            html += "<tr>"
+                            for ( var x = 0; x < columns.length; x++ ) {
+                                var y = columns[ x ]
+                                html += "<td>" + dataBody[ j ][ y ] + "</td>"
+                            }
+                            html += "</tr>"
+                        }
+                        html += "</table>";
+
+                        /* if ( visualReport === 'tableCommon' ) { // 普通表格
+                        } else if ( visualReport === 'line' ) { //折线图
+                            html = "<div src='./assets/ueditor/formdesign/self/echarts/echarts.min.js' cdata_tag='script' _ue_custom_node_='true'></div>" +
+                                "<div style='width: 100%;height: 250px;' id='lineChart'></div>";
+                            elemId = 'lineChart'
+                            showCharts = function ( elem ) {
+                                console.log( window.editor.document.getElementById( elemId ) )
+                                var myChart = echarts.init( window.editor.document.getElementById( elemId ) );
+                                var lineOption = {
+                                    title: {
+                                        text: reportname
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    legend: {
+                                        // data: [ '1', '2' ]
+                                    },
+                                    grid: {
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '3%',
+                                        containLabel: true
+                                    },
+                                    toolbox: {
+                                        feature: {
+                                            saveAsImage: {}
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        // boundaryGap: false,
+                                        data: []
+                                    },
+                                    yAxis: {
+                                        type: 'value'
+                                    },
+                                    series: [
+                                        {
+                                            name: '1',
+                                            type: 'bar',
+                                            barWidth: '30%',
+                                            label: {
+                                                normal: {
+                                                    show: true,
+                                                }
+                                            },
+                                            data: [ 120, 132, 101, 134, 90, 230, 210 ]
+                                        },
+                                        {
+                                            name: '2',
+                                            type: 'bar',
+                                            barWidth: '30%',
+                                            label: {
+                                                normal: {
+                                                    show: true,
+                                                }
+                                            },
+                                            data: [ 220, 182, 191, 234, 290, 330, 310 ]
+                                        }
+                                    ]
+                                };
+                                myChart.setOption( lineOption );
+                            }
+
+                        } else if ( visualReport === 'bar' ) { //柱状图
+                            html = "<div style='width: 100%;height: 250px;background-color: red;' id='barChart'></div>";
+                            console.log( html )
+                        } else if ( visualReport === 'pie' ) { //饼状图
+                            html = "<div style='width: 100%;height: 250px;' id='pieChart'></div>";
+                        } */
+
+                        editor.execCommand( 'insertHtml', html );
+                        // if ( typeof showCharts !== 'undefined' ) showCharts( elemId );
+                        return true;
+                    } else if ( checked == 1 ) {
+                        // 保存表单属性
+                        oNode = createElement( 'input', 'reportcontrol' );
+                        oNode.setAttribute( 'placeholder', '报表控件' );
+                        oNode.setAttribute( 'readonly', 'readonly' );
+                        oNode.setAttribute( 'leipiPlugins', 'reportcontrol' );
+                        oNode.setAttribute( 'name', 'leipiNewField' );
+                        oNode.setAttribute( 'title', reportname );
+                        oNode.setAttribute( 'node_name', selectReort );
+                        // oNode.setAttribute( 'page_id', selectReortId );
+                        oNode.setAttribute( 'field', field );
+                        oNode.setAttribute( 'pid', selectReortId );
+                        oNode.setAttribute( 'orderby', checked );
+                        oNode.setAttribute( 'visualreport', visualReport );
+                        oNode.setAttribute( 'style', 'width: 150px;height: 30px;border: 1px solid #ccc;' );
+                        editor.execCommand( 'insertHtml', oNode.outerHTML );
+                        return true;
+                    }
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                oNode.setAttribute( 'title', reportname );
+                oNode.setAttribute( 'node_name', selectReort );
+                oNode.setAttribute( 'field', field );
+                oNode.setAttribute( 'pid', selectReortId );
+                oNode.setAttribute( 'orderby', checked );
+                oNode.setAttribute( 'visualReport', visualReport );
+                delete UE.plugins[ thePlugins ].editdom; //使用后清空这个对象，变回新增模式
+            }
+
+        };
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swclassifymg">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+	<link href="../public/part/ligerlib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+	<link href="../public/part/ligerlib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+	<link href="../public/part/ligerlib/ligerUI/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="../public/part/bootstrap/css/bootstrap3.min.css">
+</head>
+<body ng-cloak>
+<div id="index" ui-view="home"></div>
+</body>
+<script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/ligerui.min.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerTree.js"></script>
+<script src="../public/part/bootstrap/js/bootstrap3.min.js"></script>
+<script src="../public/part/angular/angular.min.js"></script>
+<script src="../public/part/angular/angular-ui-router.min.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+<script src="../public/config.js"></script>
+<script src="./js/app.js"></script>

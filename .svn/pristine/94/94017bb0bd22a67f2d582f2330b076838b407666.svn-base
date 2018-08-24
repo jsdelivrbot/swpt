@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>心得详情</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../static/css/recordDetail/rD_main.min.css">
+    <script src="../../../public/flexible/flexible.js"></script>
+    <script src="../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <header class="lcr">
+        <div class="back left" onclick="historyUtils.back();">
+            <i class="iconfont">&#xe7a4;</i>
+        </div>
+        <div class="more right -mob-share-open">
+            <i class="iconfont">&#xe66e;</i>
+        </div>
+        <h2 class="centerTitle2" id="pTitle"></h2>
+    </header>
+    <section class="recordMain">
+        <h2 class="rTitle" id="rTitle"></h2>
+        <div class="rImg">
+            <img id="rImg" src="" alt="">
+        </div>
+        <p class="rDesc" id="rDesc">
+        </p>
+        <div class="rVideo">
+            <video id="rVideo" src=""
+                controls="controls"></video>
+        </div>
+    </section>
+    <!--MOB SHARE BEGIN-->
+    <div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-bottom" style="display: none">
+        <ul class="-mob-share-list">
+            <li class="share-edit -mob-share-close" id="edit">
+                <p>编辑记录</p>
+            </li>
+            <li class="share-delete -mob-share-close" id="confirmDelete">
+                <p>删除记录</p>
+            </li>
+            <li class="-mob-share-weibo">
+                <p>新浪微博</p>
+            </li>
+            <li class="-mob-share-qzone">
+                <p>QQ空间</p>
+            </li>
+            <li class="-mob-share-qq">
+                <p>QQ好友</p>
+            </li>
+            <li class="-mob-share-douban">
+                <p>豆瓣</p>
+            </li>
+        </ul>
+        <div class="-mob-share-close">取消</div>
+    </div>
+    <div class="-mob-share-ui-bg"></div>
+    <script id="-mob-share" async="async" src="../../../public/js/mob-share/mob-share.js"></script>
+    <!--MOB SHARE END-->
+</body>
+
+</html>
+<script src="../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../public/layer/layer.js"></script>
+<script src="../../../public/js/method.js"></script>
+<script src="../static/js/rD_main.js"></script>

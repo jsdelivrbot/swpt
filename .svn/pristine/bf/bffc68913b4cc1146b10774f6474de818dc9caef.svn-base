@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row" style="z-index: 1; background-color: #fff; width: 100%; position: fixed;">
+    <div  class="col-xs-3 title">流水号</div>
+    <div  class="col-xs-6 title">交易时间</div>
+    <div  class="col-xs-3 title">充值金额</div>
+  </div>
+  <div class="row" style="height: 20px;"></div>
+  <div class="row" *ngFor="let obj of mydata">
+    <div class="col-xs-3">{{obj.id}}</div>
+    <div class="col-xs-6">{{obj.date}}</div>
+    <div class="col-xs-3">{{obj.money}}</div>
+  </div>
+</div>

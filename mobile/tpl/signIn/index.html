@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>签到页面</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="党建签到页">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+
+<body>
+    <div class="sign_wrap">
+        <div class="logo">
+            <img src="./static/images/logo.png" alt="">
+        </div>
+        <div class="sign_title"></div>
+        <div class="sign_line">
+            <img src="./static/images/line.png" alt="">
+        </div>
+        <div class="sign_text">
+            <p id="time"></p>
+            <p id="name"></p>
+        </div>
+        <form class="sign_form" action="" id="signForm">
+            <div class="sign_button">
+                <button>签到</button>
+            </div>
+        </form>
+        <div class="sign_welcome">
+            <i>/ </i>党
+            <i>/ </i>建
+            <i>/ </i>活
+            <i>/ </i>动
+            <i>/ </i>签
+            <i>/ </i>到
+            <i>/ </i>中
+            <i>/ </i>心
+            <i>/ </i>
+        </div>
+    </div>
+    <!-- 遮罩背景 -->
+    <div class="sign_bg"></div>
+    <!-- 签到成功弹框 -->
+    <div class="sign_tk" id="suc_tk">
+        <div class="sign_suc">
+            <div class="suc_title"></div>
+            <div class="sign_con">
+                <p>恭喜您</p>
+                <p id="success">签到成功</p>
+            </div>
+            <div class="sign_close" id="suc_close"></div>
+        </div>
+    </div>
+    <!-- 签到失败弹框 -->
+    <div class="sign_tk" id="unsuc_tk" style="display: none">
+        <div class="sign_suc">
+            <div class="unsuc_title">签到失败</div>
+            <div class="sign_con">
+                <p id="error">可能网络错误</p>
+            </div>
+            <div class="sign_close" id="unsuc_close"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../public/js/method.js"></script>
+<script src="./static/js/main.js"></script>

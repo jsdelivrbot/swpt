@@ -1,0 +1,118 @@
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: 15px;
+            font-family: '微软雅黑';
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .selectBox {
+            width: 220px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .selectBox .showBox {
+            border: 1px solid #999;
+            padding: 5px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            width: 220px;
+            height: 33px;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+            background: #fff;
+        }
+
+        .selectBox .showBox:hover {
+            border: 1px solid #73B8EE;
+            box-shadow: 0px 0px 5px #73B8EE;
+        }
+
+        .selectBox .showBox.click {
+            border: 1px solid #73B8EE;
+            box-shadow: 0px 0px 5px #73B8EE;
+        }
+
+        .selectBox .selectShow {
+            width: 20px;
+            height: 20px;
+            float: left;
+        }
+
+        .selectBox .selectShow img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .selectBox .showBox .title {
+            float: left;
+        }
+
+        .selectBox .title {
+            margin-left: 3px;
+        }
+
+        .selectBox .arrowBox {
+            width: 20px;
+            float: right;
+            height: 20px;
+            border-left: 1px solid #ccc;
+        }
+
+        .selectBox .arrow {
+            width: 0px;
+            height: 0px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 8px solid #6b6b6b;
+            margin: 6px 0 0 8px;
+        }
+
+        .selectBox .showBox:hover .arrow,
+        .selectBox .showBox.click .arrow {
+            border-top-color: #73B8EE;
+        }
+
+        .selectBox .listBox {
+            border: 1px solid #999;
+            border-top: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: none;
+            position: absolute;
+            width: 100%;
+            background: #fff;
+            overflow-y: auto;
+            max-height: 182px;
+            z-index: 9999;
+        }
+
+        .selectBox .listBox:hover {
+            border: 1px solid #73B8EE;
+            border-top: none;
+            box-shadow: 0px 0px 5px #73B8EE;
+        }
+
+        .selectBox .listBox li {
+            padding: 5px;
+            user-select: none;
+        }
+
+        .selectBox .listBox li:hover {
+            text-shadow: 0px 0px 20px #ffffff;
+            background: linear-gradient(190deg, rgba(78, 181, 249, 0.404), rgba(150, 112, 253, 0.342));
+            color: #fff;
+        }
+
+        .selectBox+.imgPost {
+            vertical-align: bottom;
+        }

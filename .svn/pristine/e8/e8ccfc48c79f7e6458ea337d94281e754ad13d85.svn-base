@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>分配任务</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/分配任务/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/分配任务/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (图片) -->
+      <div id="u2835" class="ax_default _图片">
+        <img id="u2835_img" class="img " src="images/班级阅卷/u0.png"/>
+        <!-- Unnamed () -->
+        <div id="u2836" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u2837" class="ax_default _图片">
+        <img id="u2837_img" class="img " src="images/班级阅卷/u2.png"/>
+        <!-- Unnamed () -->
+        <div id="u2838" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2839" class="ax_default box_1">
+        <img id="u2839_img" class="img " src="images/扫描完成/u80.png"/>
+        <!-- Unnamed () -->
+        <div id="u2840" class="text" style="visibility: visible;">
+          <p><span>智能阅卷</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2841" class="ax_default box_1">
+        <img id="u2841_img" class="img " src="images/班级阅卷/u32.png"/>
+        <!-- Unnamed () -->
+        <div id="u2842" class="text" style="visibility: visible;">
+          <p><span>智能阅卷</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (热区) -->
+      <div id="u2843" class="ax_default">
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2844" class="ax_default box_1">
+        <img id="u2844_img" class="img " src="images/扫描上传答题卡/u52.png"/>
+        <!-- Unnamed () -->
+        <div id="u2845" class="text" style="visibility: visible;">
+          <p><span>2016-2017学年下学期三年级月考</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2846" class="ax_default box_1">
+        <img id="u2846_img" class="img " src="images/分配题目/u102.png"/>
+        <!-- Unnamed () -->
+        <div id="u2847" class="text" style="visibility: visible;">
+          <p><span>数学</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2848" class="ax_default box_1">
+        <img id="u2848_img" class="img " src="images/分配题目/u102.png"/>
+        <!-- Unnamed () -->
+        <div id="u2849" class="text" style="visibility: visible;">
+          <p><span>全年级</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2850" class="ax_default box_1">
+        <img id="u2850_img" class="img " src="images/分配题目/u106.png"/>
+        <!-- Unnamed () -->
+        <div id="u2851" class="text" style="visibility: visible;">
+          <p><span>分配任务</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2852" class="ax_default line">
+        <img id="u2852_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u2853" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2854" class="ax_default box_1">
+        <img id="u2854_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2855" class="text" style="visibility: visible;">
+          <p><span>题号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2856" class="ax_default box_1">
+        <img id="u2856_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2857" class="text" style="visibility: visible;">
+          <p><span>阅卷老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u2856_ann" class="annotation"></div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2858" class="ax_default box_1">
+        <img id="u2858_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2859" class="text" style="visibility: visible;">
+          <p><span>操作</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u2858_ann" class="annotation"></div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2860" class="ax_default box_1">
+        <img id="u2860_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2861" class="text" style="visibility: visible;">
+          <p><span>第06题</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2862" class="ax_default box_1">
+        <img id="u2862_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2863" class="text" style="visibility: visible;">
+          <p><span>第07题</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2864" class="ax_default box_1">
+        <img id="u2864_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2865" class="text" style="visibility: visible;">
+          <p><span>第08题</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2866" class="ax_default box_1">
+        <img id="u2866_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2867" class="text" style="visibility: visible;">
+          <p><span>第09题</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2868" class="ax_default box_1">
+        <img id="u2868_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2869" class="text" style="visibility: visible;">
+          <p><span>第10题</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2870" class="ax_default box_1">
+        <img id="u2870_img" class="img " src="images/分配题目/u110.png"/>
+        <!-- Unnamed () -->
+        <div id="u2871" class="text" style="visibility: visible;">
+          <p><span>第11题</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2872" class="ax_default line">
+        <img id="u2872_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u2873" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2874" class="ax_default line">
+        <img id="u2874_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u2875" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2876" class="ax_default line">
+        <img id="u2876_img" class="img " src="images/分配题目/u144.png"/>
+        <!-- Unnamed () -->
+        <div id="u2877" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2878" class="ax_default line">
+        <img id="u2878_img" class="img " src="images/分配题目/u146.png"/>
+        <!-- Unnamed () -->
+        <div id="u2879" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2880" class="ax_default line">
+        <img id="u2880_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u2881" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2882" class="ax_default line">
+        <img id="u2882_img" class="img " src="images/扫描上传答题卡/u50.png"/>
+        <!-- Unnamed () -->
+        <div id="u2883" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u2884" class="ax_default line">
+        <img id="u2884_img" class="img " src="images/分配题目/u152.png"/>
+        <!-- Unnamed () -->
+        <div id="u2885" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u2886" class="ax_default line">
+        <img id="u2886_img" class="img " src="images/分配题目/u154.png"/>
+        <!-- Unnamed () -->
+        <div id="u2887" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u2888" class="ax_default _图片">
+        <img id="u2888_img" class="img " src="images/分配题目/u168.png"/>
+        <!-- Unnamed () -->
+        <div id="u2889" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u2890" class="ax_default line">
+        <img id="u2890_img" class="img " src="images/分配任务/u2890.png"/>
+        <!-- Unnamed () -->
+        <div id="u2891" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u2892" class="ax_default line">
+        <img id="u2892_img" class="img " src="images/分配任务/u2892.png"/>
+        <!-- Unnamed () -->
+        <div id="u2893" class="text" style="display: none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2894" class="ax_default primary_button">
+        <div id="u2894_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2895" class="text" style="visibility: visible;">
+          <p><span>添加老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2896" class="ax_default primary_button">
+        <div id="u2896_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2897" class="text" style="visibility: visible;">
+          <p><span>添加老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2898" class="ax_default primary_button">
+        <div id="u2898_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2899" class="text" style="visibility: visible;">
+          <p><span>添加老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2900" class="ax_default primary_button">
+        <div id="u2900_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2901" class="text" style="visibility: visible;">
+          <p><span>添加老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2902" class="ax_default primary_button">
+        <div id="u2902_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2903" class="text" style="visibility: visible;">
+          <p><span>添加老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2904" class="ax_default primary_button">
+        <div id="u2904_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2905" class="text" style="visibility: visible;">
+          <p><span>添加老师</span></p>
+        </div>
+      </div>
+
+      <!-- 3 (矩形) -->
+      <div id="u2906" class="ax_default box_1" data-label="3">
+        <div id="u2906_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2907" class="text" style="visibility: visible;">
+          <p><span>周杰伦&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- 2 (矩形) -->
+      <div id="u2908" class="ax_default box_1" data-label="2">
+        <div id="u2908_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2909" class="text" style="visibility: visible;">
+          <p><span>陈奕迅&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- 1 (矩形) -->
+      <div id="u2910" class="ax_default box_1" data-label="1">
+        <div id="u2910_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2911" class="text" style="visibility: visible;">
+          <p><span style="color:#000000;">小明</span><span style="color:#FFFFFF;">&nbsp;&nbsp; X</span></p>
+        </div>
+      </div>
+
+      <!-- 4 (矩形) -->
+      <div id="u2912" class="ax_default box_1" data-label="4">
+        <div id="u2912_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2913" class="text" style="visibility: visible;">
+          <p><span>章子怡&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2914" class="ax_default box_1">
+        <div id="u2914_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2915" class="text" style="visibility: visible;">
+          <p><span>汪峰&nbsp; &nbsp; &nbsp;&nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2916" class="ax_default box_1">
+        <div id="u2916_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2917" class="text" style="visibility: visible;">
+          <p><span>德华&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2918" class="ax_default box_1">
+        <div id="u2918_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2919" class="text" style="visibility: visible;">
+          <p><span>孙燕姿&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2920" class="ax_default box_1">
+        <div id="u2920_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2921" class="text" style="visibility: visible;">
+          <p><span>莫文蔚&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2922" class="ax_default box_1">
+        <div id="u2922_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2923" class="text" style="visibility: visible;">
+          <p><span>小莫&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2924" class="ax_default box_1">
+        <div id="u2924_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2925" class="text" style="visibility: visible;">
+          <p><span>小王&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2926" class="ax_default box_1">
+        <div id="u2926_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2927" class="text" style="visibility: visible;">
+          <p><span>小张&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2928" class="ax_default box_1">
+        <div id="u2928_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2929" class="text" style="visibility: visible;">
+          <p><span>小李&nbsp; &nbsp; </span><span style="color:#FFFFFF;">X</span></p>
+        </div>
+      </div>
+
+      <!-- 添加老师面板 (动态面板) -->
+      <div id="u2930" class="ax_default ax_default_hidden" data-label="添加老师面板" style="display: none; visibility: hidden">
+        <div id="u2930_state0" class="panel_state" data-label="State1">
+          <div id="u2930_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u2931" class="ax_default box_1">
+              <div id="u2931_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u2932" class="text" style="display: none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) [footnote] -->
+            <div id="u2931_ann" class="annotation"></div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u2933" class="ax_default box_1">
+              <img id="u2933_img" class="img " src="images/分配任务/u2933.png"/>
+              <!-- Unnamed () -->
+              <div id="u2934" class="text" style="visibility: visible;">
+                <p><span>题号：6</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u2935" class="ax_default box_1">
+              <img id="u2935_img" class="img " src="images/分配任务/u2935.png"/>
+              <!-- Unnamed () -->
+              <div id="u2936" class="text" style="visibility: visible;">
+                <p><span>选择阅卷老师：</span></p>
+              </div>
+            </div>
+
+            <!-- 1 (矩形) -->
+            <div id="u2937" class="ax_default box_1" data-label="1">
+              <div id="u2937_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u2938" class="text" style="visibility: visible;">
+                <p><span>周杰伦</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u2939" class="ax_default primary_button">
+              <div id="u2939_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u2940" class="text" style="visibility: visible;">
+                <p><span>提交</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u2941" class="ax_default box_1">
+              <img id="u2941_img" class="img " src="images/分配任务/u2941.png"/>
+              <!-- Unnamed () -->
+              <div id="u2942" class="text" style="visibility: visible;">
+                <p><span>X</span></p>
+              </div>
+            </div>
+
+            <!-- 2 (矩形) -->
+            <div id="u2943" class="ax_default box_1" data-label="2">
+              <div id="u2943_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u2944" class="text" style="visibility: visible;">
+                <p><span>陈奕迅</span></p>
+              </div>
+            </div>
+
+            <!-- 3 (矩形) -->
+            <div id="u2945" class="ax_default box_1" data-label="3">
+              <div id="u2945_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u2946" class="text" style="visibility: visible;">
+                <p><span>章子怡</span></p>
+              </div>
+            </div>
+
+            <!-- 4 (矩形) -->
+            <div id="u2947" class="ax_default box_1" data-label="4">
+              <div id="u2947_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u2948" class="text" style="visibility: visible;">
+                <p><span>小李</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u2949" class="ax_default button">
+        <div id="u2949_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2950" class="text" style="visibility: visible;">
+          <p><span>保存并发送给阅卷老师</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) [footnote] -->
+      <div id="u2949_ann" class="annotation"></div>
+
+      <!-- 已发送面板 (矩形) -->
+      <div id="u2951" class="ax_default box_1 ax_default_hidden" data-label="已发送面板" style="display: none; visibility: hidden">
+        <div id="u2951_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u2952" class="text" style="visibility: visible;">
+          <p><span>已发送</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

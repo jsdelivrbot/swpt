@@ -1,0 +1,243 @@
+body {
+    color: #333;
+}
+
+ul li {
+    padding: 0;
+}
+
+a {
+    border: 0;
+}
+
+.hide {
+    display: none !important;
+}
+
+.viewer_wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.viewer_wrap .viewerImg{
+	display: table-cell; 
+}
+.viewer_wrap .noviewer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #DDDDDD;
+    text-align: center;
+}
+
+.noviewer .noviewer_txt {
+    position: absolute;
+    width: 300px;
+    line-height: 40px;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -20px;
+    font-size: 28px;
+    color: #535353;
+
+}
+
+.viewer {
+    position: relative;
+    display: none;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.viewer.current {
+    width: 100%;
+    height: 100%;
+    display: block !important;
+    margin: 0 auto;
+}
+
+.box {
+    position: absolute;
+    z-index: 99;
+}
+
+.coor {
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+}
+
+.altCoor {
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    cursor: se-resize;
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+}
+
+#canvas {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 9;
+    border: 2px dashed #ccc;
+    background: #fff;
+    width: 500px;
+    height: 500px;
+}
+
+.boxImg {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+}
+
+.atlText {
+    width: 200px;
+    position: absolute;
+    z-index: 99;
+    font-size: 18px;
+}
+
+.atlText p {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.viewer .imgSite {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #fff;
+    z-index: 99;
+    background: rgba(0,0,0,0.5);
+}
+
+.removeItem {
+    position: absolute;
+    display: none;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    top: -20px;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.loadging_txt {
+    position: absolute;
+    display: block;
+    color: #fff;
+    width: 100px;
+    bottom: -29px;
+    left: -5px;
+}
+
+.openLoad_txt {
+    position: absolute;
+    display: block;
+    color: #fff;
+    width: 110px;
+    bottom: -29px;
+    left: -26px;
+}
+
+.viewer .slide .image {
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+}
+
+.viewer .slide.active .image {
+    opacity: 1;
+}
+
+.thumbnail {
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    position: relative;
+    border: 0;
+    outline: 0;
+}
+
+.thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ccc;
+}
+
+.jxFile_box {
+    position: relative;
+    width: 100%;
+    padding: 0 10px;
+    margin: 15px 0 0;
+    box-sizing: border-box;
+}
+
+.jxFile_box .jxFile_title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.jxFile_title .jxFile_tip {
+    color: #999;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.jxFile_list_wrap {
+    width: 100%;
+    overflow: hidden;
+}
+
+.jxFile_list {
+    min-height: 115px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.jxFile_list .jxFile_item {
+    display: inline-block;
+    width: 160px;
+    height: 90px;
+    border: solid 2px #c0c2cc;
+    margin-right: 5px;
+    cursor: pointer;
+    overflow: hidden;
+
+}
+
+.jxFile_list .jxFile_item:hover {
+    border: solid 2px #00A0E9;
+}
+
+.jxFile_item .jxFile_img {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+}
+
+.jxFile_item span {
+    display: block;
+}

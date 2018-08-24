@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>教研教学 软件</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/教研教学_软件/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/教研教学_软件/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (上端) -->
+
+      <!-- Unnamed (图片) -->
+      <div id="u104" class="ax_default _图片">
+        <img id="u104_img" class="img " src="images/广东坤智科技有限公司/u1.png"/>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u105" class="ax_default _图片">
+        <img id="u105_img" class="img " src="images/教研教学_软件/u105.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u106" class="ax_default box_1">
+        <div id="u106_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (动态面板) -->
+      <div id="u107" class="ax_default">
+        <div id="u107_state0" class="panel_state" data-label="State1" style="">
+          <div id="u107_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u108" class="ax_default _三级标题">
+              <div id="u108_div" class=""></div>
+              <div id="u108_text" class="text ">
+                <p><span>教研教学管理平台</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u109" class="ax_default _三级标题">
+              <div id="u109_div" class=""></div>
+              <div id="u109_text" class="text ">
+                <p><span>智慧校园管理平台</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u110" class="ax_default _三级标题">
+              <div id="u110_div" class=""></div>
+              <div id="u110_text" class="text ">
+                <p><span>校园安全管理平台</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u111" class="ax_default _三级标题">
+              <div id="u111_div" class=""></div>
+              <div id="u111_text" class="text ">
+                <p><span>关于产品</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u112" class="ax_default box_1">
+              <div id="u112_div" class=""></div>
+              <div id="u112_text" class="text ">
+                <p><span>教学硬件设备</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u113" class="ax_default box_1">
+              <div id="u113_div" class=""></div>
+              <div id="u113_text" class="text ">
+                <p><span>教研教学软件</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u114" class="ax_default box_1">
+              <div id="u114_div" class=""></div>
+              <div id="u114_text" class="text ">
+                <p><span>互动课堂设备</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u115" class="ax_default box_1">
+              <div id="u115_div" class=""></div>
+              <div id="u115_text" class="text ">
+                <p><span>现代化教学室</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u116" class="ax_default box_1">
+              <div id="u116_div" class=""></div>
+              <div id="u116_text" class="text ">
+                <p><span>学生学习平台</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u117" class="ax_default box_1">
+              <div id="u117_div" class=""></div>
+              <div id="u117_text" class="text ">
+                <p><span>校园电视台</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u118" class="ax_default box_1">
+              <div id="u118_div" class=""></div>
+              <div id="u118_text" class="text ">
+                <p><span>会议培训厅</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u119" class="ax_default box_1">
+              <div id="u119_div" class=""></div>
+              <div id="u119_text" class="text ">
+                <p><span>LED电子大屏</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u120" class="ax_default box_1">
+              <div id="u120_div" class=""></div>
+              <div id="u120_text" class="text ">
+                <p><span>数学图书馆平台</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u121" class="ax_default box_1">
+              <div id="u121_div" class=""></div>
+              <div id="u121_text" class="text ">
+                <p><span>电子预览室</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u122" class="ax_default box_1">
+              <div id="u122_div" class=""></div>
+              <div id="u122_text" class="text ">
+                <p><span>家长通</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u123" class="ax_default box_1">
+              <div id="u123_div" class=""></div>
+              <div id="u123_text" class="text ">
+                <p><span>人脸识别</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u124" class="ax_default box_1">
+              <div id="u124_div" class=""></div>
+              <div id="u124_text" class="text ">
+                <p><span>平安校园</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u125" class="ax_default box_1">
+              <div id="u125_div" class=""></div>
+              <div id="u125_text" class="text ">
+                <p><span>安全一卡通</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u126" class="ax_default box_1">
+              <div id="u126_div" class=""></div>
+              <div id="u126_text" class="text ">
+                <p><span>广东省科学院旗下研发机构</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (图片) -->
+            <div id="u127" class="ax_default _图片">
+              <img id="u127_img" class="img " src="images/广东坤智科技有限公司/u28.png"/>
+            </div>
+
+            <!-- Unnamed (垂直线) -->
+            <div id="u128" class="ax_default line">
+              <img id="u128_img" class="img " src="images/广东坤智科技有限公司/u29.png"/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u129" class="ax_default box_1">
+              <div id="u129_div" class=""></div>
+              <div id="u129_text" class="text ">
+                <p><span>缓存路由器</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u130" class="ax_default box_1">
+              <div id="u130_div" class=""></div>
+              <div id="u130_text" class="text ">
+                <p><span>课堂缓存路由器</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (热区) -->
+      <div id="u131" class="ax_default">
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u132" class="ax_default _图片">
+        <img id="u132_img" class="img " src="images/广东坤智科技有限公司/u4.png"/>
+      </div>
+
+      <!-- Unnamed (下方) -->
+
+      <!-- Unnamed (图片) -->
+      <div id="u134" class="ax_default _图片">
+        <img id="u134_img" class="img " src="images/广东坤智科技有限公司/u4.png"/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u135" class="ax_default box_1">
+        <div id="u135_div" class=""></div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u136" class="ax_default _三级标题">
+        <div id="u136_div" class=""></div>
+        <div id="u136_text" class="text ">
+          <p><span>Copyright 2014-2018.广东坤智科技有限公司 版权所有 粤ICP备17087298号-3</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

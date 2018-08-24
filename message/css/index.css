@@ -1,0 +1,200 @@
+html,body,#index{
+    width: 100%;
+    height: 100%;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #666666;
+}
+.ms_content,.ms_main{
+    width: 100%;
+    height: 100%;
+}
+.msm_type,.msm_user,.msm_msg_content{
+    height: 100%;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    float: left;
+}
+.msm_type{
+    width: 130px;
+}
+.msm_type li{
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    padding: 3px;
+    margin-top: 2px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.msm_type li:hover{
+    background-color: #cccccc;
+}
+.msm_type li img{
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin-top: 2px;
+}
+.msm_type li span{
+    display: inline-block;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    margin-left: 3px;
+}
+.msm_type li span em{
+    font-weight: 400;
+    font-style: normal;
+    color: #ff2222;
+}
+.msm_user{
+    width: 200px;
+    background-color: #fbf8f8;
+}
+.msm_user h2{
+    background-color: #666666;
+    color: #ffffff;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 5px;
+}
+.msm_user_list{
+    height: 90%;
+    overflow-y: auto;
+}
+.msm_user_listcon{
+    height: auto;
+    overflow: hidden;
+}
+.msm_user_listcon dl{
+    width: 100%;
+    clear: both;
+}
+.msm_user_listcon dt{
+    float: left;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.msm_user_listcon dt img{
+    width: 100%;
+}
+.msm_user_listcon dd{
+    width: 140px;
+    overflow: hidden;
+}
+.msm_user_name{
+    font-size: 14px;
+    padding-top: 5px;
+}
+.msm_user_tall{
+    font-size: 12px;
+    line-height: 16px;
+    color: #cccccc;
+}
+.msm_msg_content{
+    width: 600px;
+}
+.msg_tall_con{
+    height: 80%;
+    width: 100%;
+    border-bottom: 1px solid #666666;
+}
+.msg_tall_list{
+    padding: 5px;
+    height: auto;
+    overflow: hidden;
+}
+.msg_tall_user{
+    width: 32px;
+    height: auto;
+    overflow: hidden;
+}
+.msg_tall_user img{
+    width: 100%;
+}
+.msg_user_tallcon{
+    display: inline-block;
+    padding: 3px;
+    width: auto;
+    height: auto;
+    font-size: 14px;
+    color: #666666;
+    border: 1px solid #f3eded;
+    margin-left: 5px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius:4px;
+    position: relative;
+}
+ .mfl{
+    float: left;
+     margin-left: 5px;
+}
+.mfr{
+    float: right;
+    margin-right: 5px;
+}
+ .left_triangle{
+     display: inline-block;
+     position: absolute;
+     width:0;
+     height:0;
+     top:10px;
+     left: -10px;
+     border-width:5px;
+     border-style:solid;
+     border-color:transparent #f3eded transparent transparent;
+ }
+.r_triangle{
+    display: inline-block;
+    position: absolute;
+    width:0;
+    height:0;
+    top:10px;
+    right: -10px;
+    border-width:5px;
+    border-style:solid;
+    border-color:transparent transparent transparent #f3eded;
+}
+.msg_tall_tool{
+    height: 20px;
+    line-height: 20px;
+    background-color: #e0e0e0;
+    padding-top: 3px;
+}
+.msg_tall_tool img{
+    width: 16px;
+    height: 16px;
+    margin-left: 2px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+.msg_tall_content{
+    width: 98%;
+    margin: 3px auto;
+    border: 1px solid #cccccc;
+    height: 50px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius:4px;
+    padding: 3px;
+}
+.msg_tall_sendbtn{
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    padding: 5px;
+}

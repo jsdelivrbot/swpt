@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>文本框</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+
+    <script type="text/javascript">
+        /* Thank you by
+                                    http://www.alt-tag.com/blog/2006/02/ie-dom-bugs/ */
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>提示内容</span>
+                    <span class="label label-important">*</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="orgname" onclick="javascript:this.select()" placeholder="必填项" value="文本框">
+                </td>
+                <td>
+                    <input type="text" id="orgvalue">
+                </td>
+            </tr>
+                 <tr>
+            	<th>
+                    <span>数据源</span>
+                </th>
+                <th>
+                    <span>数据字段</span>
+                </th>
+            </tr>
+            <tr>
+            	 <td>
+                    <select id="datasource">
+                        <option value="0">请选择</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="datazid">
+                        <option value="0">请选择</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>数据类型</span>
+                </th>
+                <th>
+                    <span>对齐方式</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <select id="orgtype" onchange="checkType(event)">
+                        <option value="text">普通文本</option>
+                        <option value="email">邮箱地址</option>
+                        <option value="int">整数</option>
+                        <option value="float">小数</option>
+                        <option value="idcard">身份证号码</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="orgalign">
+                        <option value="left">左对齐</option>
+                        <option value="center">居中对齐</option>
+                        <option value="right">右对齐</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <span>输入框样式</span>
+                </th>
+            </tr>
+                <tr>
+                    <td colspan="2">
+                        宽:
+                        <input id="orgwidth" type="text"   class="input-small span1" placeholder="auto" value="" onclick="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                        <select id="orgvarfontwidth" style="width:65px;">
+                            <option>PX</option>
+                            <option selected>%</option>
+                        </select>
+                        &nbsp;&nbsp; 高:
+                        <input id="orgheight" type="text"  class="input-small span1" placeholder="auto" value="" onclick="this.value=this.value.replace(/\D/g,'')"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                        <select id="orgvarfontheight" style="width:65px;">
+                            <option>PX</option>
+                            <option>%</option>
+                        </select>
+                        &nbsp;&nbsp;字体大小
+                        <input id="orgfontsize" type="text" value="16" class="input-small span1" placeholder="auto" />
+                        <select id="orgvarfontwidth" style="width:75px;">
+                            <option>PX</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <span>限制在一个块元素显示的文本的行数</span>
+                    </th>
+                    <th>
+                        <span>输入限制文本的字数</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="number" id="lineClamp" value="1">
+                    </td>
+                    <td>
+                        <input type="number" id="maxLength" value="">
+                    </td>
+                </tr>
+            <tr>
+                <th colspan="2">
+                    <span>隐藏</span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label class="checkbox inline">
+                        <input id="orghide" type="checkbox" /> 可见性 </label>
+                    <label class="checkbox inline">
+                        <input id="orgthide" type="checkbox" /> 边框 </label>
+                    <label class="checkbox inline">
+                        <input id="orgbghide" type="checkbox" /> 底色 </label>
+                    <label class="checkbox inline">
+                        <input id="orgdisable" type="checkbox" /> 是否禁用   
+                    </label>    
+                </td>
+            </tr>
+        </table>
+    </div>
+        <script>
+            var gVarfontwidth = $("#orgvarfontwidth option:selected").val();
+            $("#orgvarfontwidth").click(function(){
+                gVarfontwidth = $("#orgvarfontwidth option:selected").val();         
+            }); 
+            var gVarfontheight = $("#orgvarfontheight option:selected").val();
+            $("#orgvarfontheight").click(function(){
+                gVarfontheight = $("#orgvarfontheight option:selected").val();
+            }); 
+        </script>
+        
+        <script type="text/javascript">
+            var oNode = null,
+                gdataSource=null,
+                thePlugins = 'text';
+            window.onload = function () {
+                $G('orgname').select();
+                if ( UE.plugins[ thePlugins ].editdom ) {
+                    oNode = UE.plugins[ thePlugins ].editdom;   //
+                    var gValue = '';
+                    if ( oNode.getAttribute( 'value' ) );
+                    
+                var  gValue = oNode.getAttribute( 'value' ).replace( /&quot;/g, "\"" ),
+                        gTitle = oNode.getAttribute( 'title' ).replace( /&quot;/g, "\"" ),
+                        gHidden = oNode.getAttribute( 'orghide' ),
+                        gFontSize = oNode.getAttribute( 'orgfontsize' ),
+                        gAlign = oNode.getAttribute( 'orgalign' ),
+                        gWidth = oNode.getAttribute( 'orgwidth' ),
+                        gHeight = oNode.getAttribute( 'orgheight' ),
+                        gType = oNode.getAttribute( 'orgtype' ),
+                        gThidden = oNode.getAttribute( 'orgthide' ),
+                        gdisable = oNode.getAttribute( 'orgdisabled' ),
+                        gBghidden = oNode.getAttribute( 'orgbghide' ),
+                        glineClamp = oNode.getAttribute( 'lineClamp' ),
+                        gmaxLength = oNode.getAttribute( 'maxLength' );
+                        gValue = gValue == null ? '' : gValue;
+                        gTitle = gTitle == null ? '' : gTitle;
+
+                        $G( 'orgvalue' ).setAttribute( 'value', gValue );
+                        $G( 'orgname' ).value = gTitle;
+                //  $("#datasource option[value="+1004+"]").prop('selected','selected');
+                        if ( gHidden == '1' ) $G( 'orghide' ).checked = true;
+                        if ( gThidden == '1' ) $G( 'orgthide' ).checked = true;
+                        if ( gBghidden == '1' ) $G( 'orgbghide' ).checked = true;
+                        if( gdisable == '1' ) $G( 'orgdisable' ).checked = true;
+                        $G( 'orgfontsize' ).value = gFontSize;
+                        $G ('orgvarfontheight' ).value = gVarfontheight;
+                        $G( 'orgwidth' ).value = parseInt( gWidth );    
+                        $G( 'orgheight' ).value = parseInt( gHeight );
+                        $G( 'orgalign' ).value = gAlign;
+                        $G( 'orgtype' ).value = gType;
+                        $G( 'orgthide' ).value = gThidden;
+                        $G( 'orgbghide' ).value = gBghidden;
+                        $G( 'orgdisable' ).value = gdisable;
+                        $G( 'lineClamp' ).value = glineClamp;
+                        $G( 'maxLength' ).value = gmaxLength;
+                        gdataSource = oNode.getAttribute('datasource');
+                }
+
+                /*
+                * 链接后台获取 数据链接
+                *
+                */
+                var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+                var nodeId = $('#node_id',window.parent.document).val();
+                $.ajax( {
+                    url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId='+nodeId,
+                    method: 'GET',
+                    success: function ( res ) {
+                        $.each( res.msg, function ( index, value ) {
+                            $( "#datasource" ).append( '<option value=' + value.id +'>' + value.value + '</option>' );
+                        } )
+                    $("#datasource option[value="+1004+"]").prop('selected','selected');
+                    },
+                    error: function ( res ) {
+                        alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                    }
+                } );
+            $(document).on("change","#datasource",function(e){
+                var nodeParentId = $(this).val();
+                $("#datazid").empty();
+                $.ajax({
+                    url: prevent_HOST + 'pageDesignQueryFacade/getPageEditorData?id=' + nodeParentId,
+                    method:"GET",
+                    success:function(res){
+                        // console.log('get')
+                        $.each( res.msg, function ( index, value ) {
+                            $( "#datazid").append( '<option value=' + value.value +'>' + value.text + '</option>' );
+                        })
+                    }
+                })
+            });
+            }
+
+            dialog.oncancel = function () {
+                if ( UE.plugins[ thePlugins ].editdom ) {
+                    delete UE.plugins[ thePlugins ].editdom;
+                }
+            };
+            dialog.onok = function () {
+                if ( $G( 'orgname' ).value == '' ) {
+                    alert( '请输入控件名称' );
+                    return false;
+                }
+                var gValue = $G( 'orgvalue' ).value.replace( /\"/g, "&quot;" ),
+                    gTitle = $G( 'orgname' ).value.replace( /\"/g, "&quot;" ),
+                    gFontSize = $G( 'orgfontsize' ).value,
+                    gAlign = $G( 'orgalign' ).value,
+                    gWidth = $G( 'orgwidth' ).value,
+                    gHeight = $G( 'orgheight' ).value,
+                    gType = $G( 'orgtype' ).value,
+                    gds = $G('datasource').value,
+                    glineClamp = $G('lineClamp').value,
+                    gmaxLength = $G( 'maxLength' ).value,
+                    datasource;
+                    /* if($G('datasource').value == 0 && $G('datazid').value == 0){
+                        // var gdataS = "";
+                        datasource = '';
+                    }else{
+                        gdataS =  $("#datasource option:selected").text();
+                        gdataId =  $G('datazid').value;
+                        datasource ='{\"data\":\"'+gdataS+'\",\"field\":\"'+gdataId+'\"}';
+
+                    } */
+
+                if ($G('datasource').value == 0) {
+                    gdataS = "";
+                } else {
+                    gdataS = $("#datasource option:selected").text();
+                }
+                if ($G('datazid').value == 0) {
+                    gdataId = "";
+                } else {
+                    gdataId = $G('datazid').value;
+                }
+                datasource = '{\"data\":\"' + gdataS + '\",\"field\":\"' + gdataId + '\"}';
+                if ( !oNode ) {
+                    try {
+                        oNode = createElement( 'input', 'leipiNewField' );
+                        oNode.setAttribute( 'type', 'text' );
+                        oNode.setAttribute( 'title', gTitle );
+                        oNode.setAttribute( 'value', gValue );
+                        oNode.setAttribute( 'name', 'leipiNewField' );
+                        oNode.setAttribute( "datasource" , datasource);
+                        oNode.setAttribute( 'leipiPlugins', thePlugins );
+                        oNode.setAttribute( 'maxlength',gmaxLength );
+                        
+                        $G( 'orghide' ).checked ? oNode.setAttribute( 'orghide', 1 ) : oNode.setAttribute( 'orghide', 0 );
+                        if ( $G( 'orgthide' ).checked ) {
+                            oNode.style.border = 'none';
+                            oNode.setAttribute( 'orgthide', 1 );
+                           
+                        } else {
+                            
+                            oNode.setAttribute( 'orgthide', 0 );
+                            oNode.style.border = '';
+                        }
+                        if( $G('orgdisable').checked ){
+                            oNode.setAttribute( 'orgdisabled' , 1 );
+                            oNode.setAttribute( 'disabled',"disabled" );
+                        }else{
+                            oNode.setAttribute('orgdisabled' , 0 );
+                            oNode.removeAttribute('disabled');
+                        }
+
+                        if ( $G( 'orgbghide' ).checked ) {
+                          
+                            oNode.setAttribute( 'orgbghide', 1 );
+                            oNode.style.background = 'none';
+                        } else {
+                           
+                            oNode.setAttribute( 'orgbghide', 0 );
+                            oNode.style.background = '';
+                        }
+
+                        if ( gFontSize != '' ) {
+                            oNode.style.fontSize = gFontSize + 'px';
+                            oNode.setAttribute( 'orgfontsize', gFontSize );
+                        }
+                        if ( gAlign != '' ) {
+                            //style += 'text-align:' + gAlign + ';';
+                            oNode.style.textAlign = gAlign;
+                            oNode.setAttribute( 'orgalign', gAlign );
+                        }
+                        if ( gWidth != '' ) {
+                            if ( gVarfontwidth == 'PX' ){
+                                oNode.style.width = gWidth + 'px';
+                                //style += 'width:' + gWidth + 'px;';
+                                oNode.setAttribute( 'orgwidth', gWidth + 'px');
+                            }
+                            if( gVarfontwidth == '%' ){
+                                oNode.style.width = gWidth + '%';
+                                //style += 'width:' + gWidth + '%;';
+                                oNode.setAttribute( 'orgwidth', gWidth + '%');
+                            }
+                        }
+                        if ( gHeight != '' ) {
+                            if( gVarfontheight == 'PX' ){
+                                oNode.style.height = gHeight + 'px';   
+                                //style += 'height:' + gHeight + 'px;';
+                                oNode.setAttribute( 'orgheight', gHeight + 'px');
+                            }
+                            if( gVarfontheight == '%' ){
+                                oNode.style.height = gHeight + '%';   
+                                //style += 'height:' + gHeight + 'px;';
+                                oNode.setAttribute( 'orgheight', gHeight + '%');
+                            }
+                        }
+                        if ( gType != '' ) {
+                            oNode.setAttribute( 'orgtype', gType );
+                        }else {
+                            oNode.setAttribute( 'orgtype', "" );
+                        }
+                        if(glineClamp != ''){
+                            oNode.style.lineClamp = glineClamp;
+                            oNode.setAttribute( 'lineClamp',glineClamp);
+                        }else{
+                            oNode.style.lineClamp = "";
+                            oNode.setAttribute( 'lineClamp',"");
+                        }
+                            oNode.style.overflow = "hidden";
+                            oNode.style.textOverflow = "ellipsis";
+                            oNode.style.boxOrient = "vertical";
+                        editor.execCommand( 'insertHtml', oNode.outerHTML );
+                    } catch ( e ) {
+                        try {
+                            editor.execCommand( 'error' );
+                        } catch ( e ) {
+                            alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                        }
+                        return false;
+                    }
+                } else {
+
+                    oNode.setAttribute( 'title', gTitle );
+                    oNode.setAttribute( 'value', $G( 'orgvalue' ).value );
+                    $G( 'orghide' ).checked ? oNode.setAttribute( 'orghide', 1 ) : oNode.setAttribute( 'orghide', 0 );
+                    if ( $G( 'orgthide' ).checked ) {
+                        oNode.setAttribute( 'orgthide', 1 );
+                        oNode.style.border = 'none';
+                    } else {
+                        oNode.setAttribute( 'orgthide', 0 );
+                        oNode.style.border = "";
+                    }
+                    if ( $G( 'orgbghide' ).checked ) {
+                        oNode.setAttribute( 'orgbghide', 1 );
+                        oNode.style.background = 'none';
+                    } else {
+                        oNode.setAttribute( 'orgbghide', 0 );
+                        oNode.style.background = "";
+                    }
+                    if( $G( 'orgdisable' ).checked ){
+                        oNode.setAttribute("disabled","disabled")
+                        oNode.setAttribute("orgdisabled",1);
+                    }else{
+                        oNode.setAttribute("orgdisabled",0);
+                        oNode.removeAttribute("disabled");
+                    }
+                    if($G('gds') != ''){
+                        oNode.setAttribute( 'datasource', datasource );
+                    }else{
+                        oNode.setAttribute( 'datasource', "" );
+                    }
+                    if ( gFontSize != '' ) {
+                        oNode.style.fontSize = gFontSize + 'px';
+                        oNode.setAttribute( 'orgfontsize', gFontSize +'px' );
+                    } else {
+                        oNode.style.fontSize = '';
+                        oNode.setAttribute( 'orgfontsize', '' );
+                    }
+                    if ( gAlign != '' ) {
+                        oNode.style.textAlign = gAlign;
+                        oNode.setAttribute( 'orgalign', gAlign );
+                    } else {
+                        oNode.setAttribute( 'orgalign', '' );
+                    }
+                    if ( gWidth != '' ) {
+                        if( gVarfontwidth == "PX"){
+                            oNode.style.width = gWidth + 'px';
+                            oNode.setAttribute( 'orgwidth', gWidth + 'px');
+                        }
+                        if( gVarfontwidth == "%" ){
+                            oNode.style.width = gWidth + '%';
+                            oNode.setAttribute( 'orgwidth', gWidth + '%');
+                          }                
+                    } else {
+                        oNode.style.width = '';
+                        oNode.setAttribute( 'orgwidth', '' );
+                    }
+                    if ( gHeight != '' ){
+                        if( gVarfontheight == "PX"){
+                            oNode.style.height = gHeight + 'px';
+                            oNode.setAttribute( 'orgheight', gHeight + 'px' );
+                        }
+                        if( gVarfontheight == "%" ){
+                            oNode.style.height = gHeight + '%';
+                            oNode.setAttribute( 'orgheight', gHeight + '%' );
+                        }
+                    } else {
+                        oNode.style.height = '';
+                        oNode.setAttribute( 'orgheight', '' );
+                    }
+                    if ( gType != '' ) {
+                        oNode.setAttribute( 'orgtype', gType );
+                    } else {
+                        oNode.setAttribute( 'orgtype', '' );
+                    }
+                    if(glineClamp != ''){
+                            oNode.style.lineClamp = glineClamp;
+                            oNode.setAttribute( 'lineClamp',glineClamp);
+                        }else{
+                            oNode.style.lineClamp = "";
+                            oNode.setAttribute( 'lineClamp',"");
+                        }
+                            oNode.style.overflow = "hidden";
+                            oNode.style.textOverflow = "ellipsis";
+                            oNode.style.boxOrient = "vertical";
+                    delete UE.plugins[ thePlugins ].editdom;
+                }
+            };
+        </script>
+</body>
+
+</html>

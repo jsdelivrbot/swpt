@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script src="../../formdesign/self/js/jquery-3.2.1.min.js"></script>
+    <script src="../../httpData.config.js"></script>
+
+    <script type="text/javascript" src="../internal.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            color: #838383;
+        }
+
+        table {
+            font-size: 12px;
+            margin: 10px;
+            line-height: 30px
+        }
+
+        .txt,
+        select {
+            width: 300px;
+            height: 21px;
+            line-height: 21px;
+            border: 1px solid #d7d7d7;
+        }
+
+        select {
+            box-sizing: content-box;
+        }
+
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <label for="text">
+                    <var id="lang_input_text"></var>
+                </label>
+            </td>
+            <td>
+                <input class="txt" id="text" type="text" disabled="true" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="href">
+                    <var id="lang_input_url"></var>
+                </label>
+            </td>
+            <td>
+                <input class="txt" id="href" type="text" />
+                <!-- <select id="href">
+                    <option value="">请选择链接地址</option>
+                </select> -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="linkUrl"> 链接地址：</label>
+            </td>
+            <td>
+                <select id="linkUrl">
+                    <option value="">请选择链接地址</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="title">
+                    <var id="lang_input_title"></var>
+                </label>
+            </td>
+            <td>
+                <input class="txt" id="title" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="target">
+                    <var id="lang_input_target"></var>
+                </label>
+                <input id="target" type="checkbox" name="checkbox"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="targets"> 是否在本页面打开：</label>
+                <input id="targets" type="checkbox" name="checkbox" />
+            </td>
+        </tr>
+		<tr>
+            <td colspan="2">
+                <label for="targets"> 把开窗口名：</label>
+                <input id="winid" type="text" name="winid" />
+            </td>
+        </tr>
+      <tr>
+        <td colspan="2">
+          <label for="targets"> 图标地址：</label>
+          <input id="picaddr" type="text" name="picaddr" />
+        </td>
+      </tr>
+        <tr>
+            <td colspan="2">
+                <label for="back"> 添加返回按钮：</label>
+                <input id="back" type="checkbox" name="checkbox" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" id="msg"></td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+        var nodeId = $('#node_id', window.parent.document).val();
+		    var winId=null;
+        $( function () {
+            $.ajax( {
+                type: "get",
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                dataType: "json",
+                async: false,
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( '#linkUrl' ).append( '<option value=' + value.id + '>' + value.value + '</option>' );
+                    } )
+                },
+                error: function ( status ) {
+                    console.log( status )
+                    alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' );
+                }
+            } )
+        } )
+
+    </script>
+
+    <script type="text/javascript">
+        var range = editor.selection.getRange(),
+            link = range.collapsed ? editor.queryCommandValue( "link" ) : editor.selection.getStart(),
+            url,
+            link_url,
+            text = $G( 'text' ),
+            rangeLink = domUtils.findParentByTagName( range.getCommonAncestor(), 'a', true ),
+            orgText;
+
+        link = domUtils.findParentByTagName( link, "a", true );
+        if ( link ) {
+            url = utils.html( link.getAttribute( '_href' ) || link.getAttribute( 'href', 2 ) );
+            link_url = utils.html( link.getAttribute( '_href' ) || link.getAttribute( 'href', 2 ) );
+            console.log( link_url );
+
+            if ( rangeLink === link && !link.getElementsByTagName( 'img' ).length ) {
+                text.removeAttribute( 'disabled' );
+                orgText = text.value = link[ browser.ie ? 'innerText' : 'textContent' ];
+            } else {
+                text.setAttribute( 'disabled', 'true' );
+                text.value = lang.validLink;
+            }
+
+        } else {
+            if ( range.collapsed ) {
+                text.removeAttribute( 'disabled' );
+                text.value = '';
+            } else {
+                text.setAttribute( 'disabled', 'true' );
+                text.value = lang.validLink;
+            }
+
+        }
+        $G( "title" ).value = url ? link.title : "";
+        $G( "href" ).value = url ? url : '';
+        $G( "target" ).checked = url && link.target == "_blank" ? true : false;
+        $focus( $G( "href" ) );
+
+        $( function () {
+            $( "#target" ).click( function () {
+                $( "#targets" ).prop( "checked", false );
+                $( this ).prop( "checked", true );
+            } )
+            $("#targets").click(function () {
+                $("#target").prop("checked", false);
+                $(this).prop("checked", true);
+            })
+        } )
+
+        /* window.onload = function () {
+            if ( UE.plugins[ 'link' ].editdom ) {
+                console.log( 131 )
+                $( "#linkUrl" ).value = '科普APP';
+            }
+        } */
+
+        function handleDialogOk() {
+            var href = $G( 'href' ).value.replace( /^\s+|\s+$/g, '' ),
+                linkUrlId = $G( 'linkUrl' ).value.replace( /^\s+|\s+$/g, '' ),
+                linkUrl = prevent_Url+'editor/assets/ueditor/formdesign/preview.html?link=' + linkUrlId,
+              picaddr=$G( 'picaddr' ).value,
+                linkUrlText = $( '#linkUrl  option:selected' ).text();
+            if ( href ) {
+                if ( !hrefStartWith( href, [ "http", "/", "ftp://", '#' ] ) ) {
+                    href = "http://" + href;
+                }
+                console.log(picaddr);
+              if(picaddr){
+                text.value="<img src='"+picaddr+"' width='30' height='30' />"+text.value;
+              }
+				    var setTarget=$G( 'winid' ).value.replace( /^\s+|\s+$/g, '');
+                var setTargetName='';
+                if(setTarget!=''){
+                  setTargetName=setTarget;
+                }else{
+                  setTargetName=$G( "target" ).checked ? "_blank" : '_self';
+                }
+                var obj = {
+                    'href': href,
+                    'target':setTargetName,
+                    'title': $G( "title" ).value.replace( /^\s+|\s+$/g, '' ),
+                    '_href': href
+                };
+                //修改链接内容的情况太特殊了，所以先做到这里了
+                //todo:情况多的时候，做到command里
+                if ( orgText && text.value != orgText ) {
+                    //link[ browser.ie ? 'innerText' : 'textContent' ] = obj.textValue = text.value;
+                    link['innerHTML'] = obj.textValue = text.value;
+
+                    range.selectNode( link ).select()
+                }
+                if ( range.collapsed ) {
+                    //obj.textValue = text.value;
+                  obj.innerHTML=text.value;
+                }
+                editor.execCommand( 'link', utils.clearEmptyAttrs( obj ) );
+                dialog.close();
+            }
+
+            if ( linkUrlId != '' ) {
+                if ( !hrefStartWith( linkUrl, [ "http", "/", "ftp://", '#' ] ) ) {
+                    linkUrl = "http://" + linkUrl;
+                }
+                var obj;
+                if ( $G( "targets" ).checked ) {
+                    obj = {
+                        'href': linkUrlText,
+                        'target': $G( "target" ).checked ? "_blank" : '_self',
+                        'title': $G( "title" ).value.replace( /^\s+|\s+$/g, '' ),
+                        '_href': linkUrl
+                    };
+                } else {
+                    obj = {
+                        'href': linkUrlText,
+                        'target': $G( "target" ).checked ? "_blank" : '_self',
+                        'title': $G( "title" ).value.replace( /^\s+|\s+$/g, '' ),
+                        '_href': linkUrl,
+                        // 'onclick': "javascript:window.parent.location.href='" + linkUrl + "';"
+                        'onclick': "window.parent.location.href='" + linkUrl + "';return false;"
+                    };
+                }
+                //修改链接内容的情况太特殊了，所以先做到这里了
+                //todo:情况多的时候，做到command里
+                if ( orgText && text.value != orgText ) {
+                    //link[ browser.ie ? 'innerText' : 'textContent' ] = obj.textValue = text.value;
+                  link['innerHTML'] = obj.textValue = text.value;
+                    range.selectNode( link ).select()
+                }
+                if ( range.collapsed ) {
+                    obj.textValue = text.value;
+                }
+                editor.execCommand( 'link', utils.clearEmptyAttrs( obj ) );
+                dialog.close();
+            }
+            if ( $G( "back" ).checked ) {
+                var obj = {
+                    'href': '',
+                    'target': $G( "target" ).checked ? "_blank" : '_self',
+                    'title': $G( "title" ).value.replace( /^\s+|\s+$/g, '' ),
+                    '_href': '',
+                    'onclick': 'window.history.go(-1)'
+                };
+                //修改链接内容的情况太特殊了，所以先做到这里了
+                //todo:情况多的时候，做到command里
+                if ( orgText && text.value != orgText ) {
+                    //link[ browser.ie ? 'innerText' : 'textContent' ] = obj.textValue = text.value;
+                  link['innerHTML'] = obj.textValue = text.value;
+                    range.selectNode( link ).select()
+                }
+                if ( range.collapsed ) {
+                  obj.innerHTML=text.value;
+                    //obj.textValue = text.value;
+                }
+                editor.execCommand( 'link', utils.clearEmptyAttrs( obj ) );
+                dialog.close();
+            }
+        }
+        dialog.onok = handleDialogOk;
+        $G( 'href' ).onkeydown = $G( 'title' ).onkeydown = function ( evt ) {
+            evt = evt || window.event;
+            if ( evt.keyCode == 13 ) {
+                handleDialogOk();
+                return false;
+            }
+        };
+        $G( 'href' ).onblur = function () {
+            if ( !hrefStartWith( this.value, [ "http", "/", "ftp://", '#' ] ) ) {
+                $G( "msg" ).innerHTML = "<span style='color: red'>" + lang.httpPrompt + "</span>";
+            } else {
+                $G( "msg" ).innerHTML = "";
+            }
+        };
+
+        function hrefStartWith( href, arr ) {
+            href = href.replace( /^\s+|\s+$/g, '' );
+            // linkUrl = linkUrl.replace( /^\s+|\s+$/g, '' );
+            for ( var i = 0, ai; ai = arr[ i++ ]; ) {
+                if ( href.indexOf( ai ) == 0 ) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>

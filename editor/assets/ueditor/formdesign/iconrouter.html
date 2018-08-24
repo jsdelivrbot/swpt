@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>路由控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="leipi.style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!-- jQuery - 3.2.1 -->
+    <script src="./self/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+
+   <script src="../httpData.config.js"></script>
+  <!-- BtnSelect - 选择点击按钮 -->
+
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <script src="./self/btnSelect/btnSelect.js"></script>
+    <!-- Select - 下拉框 -->
+    <link rel="stylesheet" href="./self/select/select.css">
+    <script src="./self/select/select.js"></script>
+    <script type="text/javascript">
+        /*
+         * iconrouter 路由控件
+         *
+         *
+         * */
+
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th style="text-align:center;font-size:15px;" colspan="2">
+                    <span>请选择你想要的路由类型</span>
+                </th>
+            </tr>
+            <tr>
+                <td style="text-align:center;" colspan="2">
+                    <label for="one-menu" class="menuLabel">
+                        <input type="radio" name="menus" value="one-menu" id="one-menu"> 一级菜单
+                    </label>
+                    <label for="two-menu" class="menuLabel notAllow">
+                        <input type="radio" name="menus" value="two-menu" id="two-menu"> 二级菜单
+                    </label>
+                    <label for="three-menu" class="menuLabel notAllow">
+                        <input type="radio" name="menus" value="three-menu" id="three-menu"> 三级菜单
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;" colspan="2">
+                    <label for="font-type" class="menuLabel">
+                        <input type="radio" name="types" value="font-type" id="font-type"> 无字链接
+                    </label>
+                    <label for="icon-type" class="menuLabel">
+                        <input type="radio" name="types" value="icon-type" id="icon-type"> 图标链接
+                    </label>
+                </td>
+            </tr>
+            <!-- <tr>
+            	<th>
+                    <span>数据源</span>
+                </th>
+                <th>
+                    <span>数据字段</span>
+                </th>
+            </tr>
+            <tr>
+            	 <td>
+                    <select id="datasource">
+                        <option value="text">数据源</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="datazid">
+                        <option value="left">数据字段</option>
+                    </select>
+                </td>
+            </tr> -->
+            <!-- <tr>
+                <th>
+                    跳转目标
+                </th>
+                <th>
+                        <input type="text" name="orgTarget" id="orgSkipUrl">
+                </th>
+            </tr> -->
+            <tr>
+                <td style="text-align:center" colspan="2">
+                    <button class="btn btn-info" id="configSelect">确定选择</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        /*
+         * 一开始进来的选择界面 - 选择效果
+         *
+         */
+        var menusTarget,
+            typesTarget;
+
+        $( '#configSelect' ).on( 'click', function () {
+
+            var isChecked_Menus = false;
+            isChecked_Types = false;
+
+            $( '.menuLabel input' ).each( function ( index, elem ) {
+            	console.log(index,elem.value)
+                if ( elem.name === 'menus' ) {
+                    if ( elem.checked ) {
+                        menusTarget = elem.value;
+                        isChecked_Menus = true;
+                    }
+                } else {
+                    if ( elem.checked ) {
+                        typesTarget = elem.value;
+                        isChecked_Types = true;
+                    }
+                }
+            } );
+
+            if ( !isChecked_Menus || !isChecked_Types ) {
+                alert( '上下两个选项都要选择！' );
+                return false;
+            } else {
+                /*
+                 * 根据点击什么按钮，输出不同的界面
+                 *
+                 */
+                rendingTemplate( menusTarget, typesTarget )
+            }
+        } );
+
+        function rendingTemplate( menusTarget, typesTarget ) {
+            /*
+             * 渲染模板
+             *
+             */
+
+            var html = '';
+            if ( menusTarget === 'one-menu' && typesTarget === 'icon-type' ) {
+                html = '<tr><th><span>标题</span><span class="label label-important">*</span></th><th><span>副标题(描述)</span></th></tr>' +
+                    '<tr><td><input id="routerTitle" name="routerTitle" placeholder="路由的标题" type="text" /></td>' +
+                    '<td><input id="routerSubTitle" name="routerSubTitle" placeholder="路由的描述" type="text" /></td></tr>' +
+                    '<tr><th><span>图标选择</span><span class="label label-important">*</span></th><th><span>数据链接选择</span><span class="label label-important">*</span></th></tr>' +
+                    '<tr><td><div id="selectBox" class="selectBox"><div class="showBox"><div class="info"><span class="title">请选择图标...</span></div>' +
+                    '<div class="arrowBox"><div class="arrow"></div></div></div>' +
+                    '<ul class="listBox"><li><div class="selectShow"><img src="./images/iconrouter/作业训练.png" alt=""></div><span class="title" data-val="1">作业训练</span></li></ul></div>' +
+                    '<img width="50" height="50" src="" class="imgPost"><input type="hidden" name="selectBox" id="inputSelect" value=""></td>' +
+                    '<td><div id="dataSelect" class="selectBox"><div class="showBox"><div class="info"><span class="title" id="urlSelect">请选择链接...</span></div>' +
+                    '<div class="arrowBox"><div class="arrow"></div></div></div><ul class="listBox"></ul></div>' +
+                    '<input type="hidden" id="dataInputSelect"></td></tr>';
+            } else if ( menusTarget === 'one-menu' && typesTarget === 'font-type' ) {
+                html = '<tr><th><span>标题</span><span class="label label-important">*</span></th><th><span>数据链接选择</span><span class="label label-important">*</span></th></tr>' +
+                    '<tr><td><input id="routerTitle" name="routerTitle" placeholder="路由的标题" type="text" />' +
+                    '<td><div id="dataSelect" class="selectBox"><div class="showBox"><div class="info"><span class="title" id="urlSelect">请选择链接...</span></div>' +
+                    '<div class="arrowBox"><div class="arrow"></div></div></div><ul class="listBox"></ul></div><input type="hidden" id="dataInputSelect"></td></tr>' +
+                    '<tr><th><span title="字体颜色 默认为黑色">底色</span></th><th><span title="字体颜色 默认为黑色">文字颜色</span></th></tr>' +
+                    '<tr><td><input name="bgcolor" type="color" id="bgcolor"/></td><td><input name="fontcolor" type="color" id="fontcolor"/></td></tr>' +
+                    '<tr><th><span title="鼠标移入颜色 默认为灰色">鼠标移入颜色</span></th><th><span title="字体大小 默认为14px">字体大小</span></th></tr>' +
+                    '<tr><td><input name="hovercolor" type="color" id="hovercolor"/></td><td><input name="fontsize" type="text" id="fontsize" value="14px" /></td></tr>' +
+                    '<tr><th colspan="2"><span>隐藏</span></th></tr>' +
+                    '<tr><td colspan="2"><label class="checkbox inline"><input name="bkhide" id="bkhide" type="checkbox" > 边框</label></td></tr>';
+            }
+
+            $( 'tbody' ).html( html );
+            getLinks(); // 获取 数据链接
+
+            $( function () {
+                $.divSelect( 'selectBox', 'inputSelect' );
+                $.divSelect( 'dataSelect', 'dataInputSelect' );
+                $( '#routerTitle' ).select();
+            } )
+        }
+
+        function getLinks() {
+            /*
+             * 后台获取 数据链接
+             *
+             */
+            // var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            // $.ajax( {
+            //     url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage',
+            //     method: 'GET',
+            //     success: function ( res ) {
+            //         $.each( res.msg, function ( index, value ) {
+            //             $( '#dataSelect .listBox' ).append( '<li><span class="title" data-val=' + value.id + '>' + value.value + '</span></li>' );
+            //             if ( oNode !== null ) {
+            //                 if ( parseInt( oNode.getAttribute( 'routersrc' ) ) === value.id ) {
+            //                     $( '#urlSelect' ).html( value.value );
+            //                 }
+            //             }
+            //         } )
+            //     },
+            //     error: function ( res ) {
+            //         alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+            //     }
+            // } )
+        }
+
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'iconrouter';
+
+        function changeProduct() {
+            if ( $G( "product" ) ) {
+                $G( "product" ).checked = true;
+            }
+        }
+
+        window.onload = function () {
+            $( 'body', window.parent.document ).css( 'overflow', 'hidden' );
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var typesTarget = oNode.getAttribute( 'typesTarget' ),
+                    menusTarget = oNode.getAttribute( 'menusTarget' ),
+                    gRouterTitle = oNode.getAttribute( 'routerTitle' ),
+                    routerSrc = oNode.getAttribute( 'routerSrc' );
+
+                rendingTemplate( menusTarget, typesTarget );
+                console.log(typesTarget,menusTarget)
+                $( "#routerTitle" ).val( gRouterTitle );
+                $( "#dataInputSelect" ).val( routerSrc );
+
+                if ( typesTarget === 'font-type' ) {
+                    var gBgColor = oNode.getAttribute( 'bgcolor' ),
+                        gFontColor = oNode.getAttribute( 'fontcolor' ),
+                        gHoverColor = oNode.getAttribute( 'hovercolor' ),
+                        gFontSize = oNode.getAttribute( 'fontsize' ),
+                        gBkHide = oNode.getAttribute( 'bkhide' );
+                    $( "#bgcolor" ).val( gBgColor ); // 背景颜色
+                    $( "#fontcolor" ).val( gFontColor ); // 字体颜色
+                    $( "#hovercolor" ).val( gHoverColor ); // 字体hover颜色
+                    $( "#fontsize" ).val( gFontSize ); // 字体大小
+                    $( "#bkhide" ).val( gBkHide ); // 边框隐藏
+                }
+
+            }
+        }
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+            $( 'body', window.parent.document ).css( 'overflow', '' );
+
+        };
+        dialog.onok = function () {
+            var routerTitle = $( "#routerTitle" ).val(), // 路由标题
+                routerSrc = $( '#dataSelect .info .title' ).data( 'val' ); // 数据链接
+            if ( typesTarget === 'font-type' ) {
+                var bgcolor = $( "#bgcolor" ).val(), // 背景颜色
+                    fontcolor = $( "#fontcolor" ).val(), // 字体颜色
+                    hovercolor = $( "#hovercolor" ).val(), // 字体hover颜色
+                    fontsize = $( "#fontsize" ).val(), // 字体大小
+                    bkhide = $( "#bkhide" ).checked; // 边框隐藏
+            } else if ( typesTarget === 'icon-type' ) {
+                var routerSubTitle = $( "#routerSubTitle" ).val(),
+                    iconSrc = $( "#selectBox .selectShow img" ).src;
+            }
+
+            if ( $G( 'routerTitle' ).value == '' ) {
+                alert( '路由标题不能为空' );
+                $G( 'routerTitle' ).focus();
+                return false;
+            }
+
+            var url = prevent_Url+'editor/assets/ueditor/formdesign/preview.html?link=';
+            if ( !oNode ) {
+
+                try {
+                    oNode = createElement( 'input', 'leipiNewField' );
+                    oNode.setAttribute( 'routerTitle', routerTitle );
+                    oNode.setAttribute( 'type', 'text' );
+                    oNode.setAttribute( '_url', url + routerSrc );
+                    oNode.setAttribute( 'name', 'leipiNewField' );
+                    oNode.setAttribute( 'routerSrc', routerSrc );
+                    oNode.setAttribute( 'leipiPlugins', thePlugins );
+                    oNode.setAttribute( 'menusTarget', menusTarget );
+                    oNode.setAttribute( 'typesTarget', typesTarget );
+                    if ( typesTarget === 'font-type' ) {
+                        oNode.setAttribute( 'bgcolor', bgcolor );
+                        oNode.setAttribute( 'fontcolor', fontcolor );
+                        oNode.setAttribute( 'hovercolor', hovercolor );
+                        oNode.setAttribute( 'bkhide', bkhide );
+                        oNode.setAttribute( 'fontsize', fontsize );
+                        // html = "<a href='http://www.1388w.cn/editor/assets/ueditor/formdesign/preview.html?link=" + routerSrc + "'>" + routerTitle + "</a>"
+                    } else if ( typesTarget === 'icon-type' ) {
+                        html =
+                            "<div style='border:1px solid #bfbfbf;text-align:center;padding-bottom:5px;'>" +
+                            "<h3 style='text-align:center;border-bottom:1px solid #dcdcdc;font-size:18px;font-weight:bold;padding:0 0 16px 0;width:80%;margin:10px auto;'>" +
+                            routerTitle + "</h3>" +
+                            "<div style='width:80%;margin:0 auto;'>" +
+                            "<a href="+prevent_Url+"editor/assets/ueditor/formdesign/preview.html?link=" + routerSrc + "><img src=" + iconSrc +
+                            " style='margin:0 auto;text-align:center;width:90px;height:90px;'></a></div>" +
+                            "<h4><a style='text-decoration:none;color:#b3a8a8;' href=''>" + routerSubTitle + "</a></h4>" +
+                            "</div>";
+                    }
+
+                    editor.execCommand( 'insertHtml', oNode.outerHTML );
+                    return true;
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                oNode.setAttribute( 'routerTitle', routerTitle );
+                oNode.setAttribute( 'type', 'text' );
+                oNode.setAttribute( '_url', url + routerSrc );
+                oNode.setAttribute( 'name', 'leipiNewField' );
+                oNode.setAttribute( 'routerSrc', routerSrc );
+                oNode.setAttribute( 'leipiPlugins', thePlugins );
+                delete UE.plugins[ thePlugins ].editdom; //使用后清空这个对象，变回新增模式
+            }
+            $( 'body', window.parent.document ).css( 'overflow', '' );
+        };
+
+    </script>
+</body>
+
+</html>

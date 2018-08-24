@@ -1,0 +1,8 @@
+*{margin: 0;padding: 0;}
+.row>div{
+    text-align: center;
+    font-size: 12pt;
+}
+.title{
+    color: rgb(0,112,192);
+}

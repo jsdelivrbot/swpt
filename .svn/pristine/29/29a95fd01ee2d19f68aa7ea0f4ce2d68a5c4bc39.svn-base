@@ -1,0 +1,62 @@
+.content-wrap{
+	text-align: center;
+}
+.content-wrap h2{
+	padding-top: 100px;
+	padding-bottom: 40px;
+}
+
+.content-box{
+	width: 100%;
+	margin: 190px auto 80px;
+}
+
+.content-box>li{
+	width: 340px;
+	min-height: 925px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	float: left;
+	margin-right: 80px;
+}
+.content-box>li:nth-of-type(3){
+	margin-right: 0;
+}
+.content-box>li ul li i,.content-box>li ul li span{
+	display: block;
+}
+.content-box>li ul li i{
+	width: 52px;
+	height: 49px;
+	margin: 5px auto 20px;
+}
+.content-box>li ul li a{
+	color: #333;
+	font-weight: 600;
+	font-size: 18px;
+}
+.content-box>li:nth-of-type(1) ul li i{
+	background: url(../img/price_icon1.png);
+}
+.content-box>li:nth-of-type(2) ul li i{
+	background: url(../img/price_icon2.png);
+}
+.content-box>li:nth-of-type(3) ul li i{
+	background: url(../img/price_icon3.png);
+}
+.content-box>li ul li:nth-of-type(2){
+	margin-top: 50px;
+}
+.content-box>li ul li:nth-of-type(2) span{
+	margin: 10px 0;
+	line-height: 30px;
+}
+.content-box>li ul li:nth-of-type(3){
+	margin-top: 120px;
+}
+.content-box>li:nth-of-type(1) ul li:nth-of-type(3){
+	margin-top: 508px;
+}
+.content-box>li ul li:nth-of-type(3) strong{
+	font-size: 30px;
+}

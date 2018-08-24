@@ -1,0 +1,30 @@
+<script src="../js/thirdJS/jquery.js"></script>
+<link rel="stylesheet" href="../css/thirdCSS/bootstrap.css">
+
+<script src="../js/Common.js"></script>
+<link rel="stylesheet" href="../css/Common.css">
+<div id="task">
+    <div style="margin-top: 10px;border-bottom:0.5px solid;border-color: rgba(242, 242, 242, 1); height: 80px; width: 100%;padding: 0 !important;"
+        class="container taskInfo">
+        <div class="col-xs-2" style="height: 100%;padding: 0 !important;">
+            <img src="../images/u16.png" alt="图片" style="width: 50px;height: 50px;position: relative; left: 50%;margin-left: -25px;top:50%;margin-top:-25px; ">
+        </div>
+        <div class="col-xs-10 " style="height: 100%;;">
+            <div class="row" style="height: 50%;line-height: 40px;">
+                <div class="col-xs-8" style="color: darkseagreen;">标题</div>
+                <div class="col-xs-4" style="color: darkseagreen;">
+                    <span style="height: 20px;border-radius:8px;background-color: rgba(255, 153, 0, 0.692);color: #ffffff;padding: 3px;padding-left: 6px;padding-right: 6px;">单任务</span>
+                </div>
+            </div>
+            <div class="row" style="height: 50%;line-height: 40px;">
+                <div class="col-xs-8" style="color: darkseagreen;">负责人</div>
+                <div class="col-xs-4" style="color: darkseagreen;">状态</div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .taskInfo:hover {
+        background-color: rgba(153, 255, 0, 0.247058823529412);
+    }
+</style>

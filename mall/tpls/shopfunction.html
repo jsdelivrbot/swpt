@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<div>
+    <div class="shopfunction">
+        <div class="shop_header">
+            <a href="" class="shop_big">我的数据 ></a>
+            <a href="" class="shop_small">购买数据</a>
+        </div>
+        <div class="shop_content mt">
+            <div class="s_c_head">
+                <img src="{{shopidData.pic}}" alt="" class="s_c_img">
+                <span ng-bind="shopidData.name" class="s_c_name"></span>
+            </div>
+            <div class="s_c_body">
+                <ul>
+                    <li class="s_c_list">
+                        <div class="s_c_local">选择套餐</div>
+                        <div class="s_c_item">
+                            <ul class="s_c_ul">
+                                <li class="det_h_li" ng-repeat="sel in shopdata.selectdata"
+                                    ng-class="{det_active:$index === detnum}" ng-click="selfn($index)">{{sel}}天
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="s_c_list">
+                        <div class="s_c_local">套餐时间</div>
+                        <div class="s_c_item">
+                            {{shopdata.selectdata[shopdata.num]}}天
+                        </div>
+                    </li>
+                    <li class="s_c_list">
+                        <div class="s_c_local">应付金额</div>
+                        <div class="s_c_item det_h_money">
+                            ￥{{shopdata.mony*(shopdata.num+1)}}
+                        </div>
+                    </li>
+                    <li class="s_c_list">
+                        <div class="s_c_local">支付方式</div>
+                        <div  class="s_c_item">
+                            <label class="">
+                                <input type="radio" name="" value=""> <img src="https://juheimg.oss-cn-hangzhou.aliyuncs.com/www/ucenter/buyBao.png" alt="">
+                            </label>
+                            <label class="">
+                                <input type="radio" name=""  value="">
+                                <i class="s_c_i">余额支付(￥{{balance}})</i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="det_h_shop" ng-click="shopbtn()">
+                    确认购买
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert">
+        <div class="al_box">
+            <div class="loading" ng-if="!bol" >
+                <img src="./img/timg.gif" alt="">
+                购买中，请稍等
+            </div>
+            <div class="success" ng-if="bol">
+                <div class="iconfont icon-chenggong suc_icon"></div>
+                <p class="suc_p1">
+                    您已购买成功
+                </p>
+                <p class="suc_p2">
+                    感谢您的购买，请进入工作模块使用此功能
+                </p>
+                <div class="suc_btn_group">
+                    <a href="../home/index.html">进入我的工作</a>
+                    <a ui-sref="productList">返回购买中心</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.none{
+  text-align: center;
+  color:#454545;
+}
+.box{
+  padding:.5rem .2rem;
+  .everyone {
+  display: flex;
+  height: 1.333333rem;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  .photo {
+    width: 1.0666666rem;
+    height: 1.0666666rem;
+    background-color: #66afe9;
+    border-radius: 50%;
+  }
+  .party {
+    width: 30%;
+    text-indent: .4rem;
+    color:#454545;
+    letter-spacing: 1px;
+  }
+  .phone{
+    width: 30%;
+    color:#454545;
+  }
+  .btn {
+    width: 2.2666666rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+}
+

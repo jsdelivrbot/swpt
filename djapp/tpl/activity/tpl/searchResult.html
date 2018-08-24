@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>党建搜索结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">    
+    <link rel="stylesheet" href="../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../static/css/searchResult/sR_main.min.css">
+    <script src="../../../public/flexible/flexible.js"></script>
+    <script src="../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="back" onclick="historyUtils.back();">
+                <i class="iconfont">&#xe7a4;</i>
+            </div>
+            <h2 class="centerTitle">搜索结果页</h2>
+        </header>
+        <section id="body" class="body">
+            <div class="bodyMain">
+                <div class="project clear">
+                    <div class="pImg">
+                        <img src="" alt="">
+                    </div>
+                    <div class="pDesc">
+                        <h3>活动名称：
+                            <span class="pName"></span>
+                        </h3>
+                        <p>活动时间：
+                            <span class="pTime"></span>
+                        </p>
+                        <p>报名截止：
+                            <span class="pEndTime"></span>
+                            <span class="pStatus"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="noData" id="noData">
+                <p class="iconfont">&#xe609;</p>
+                <h2>抱歉！没有搜索到相关数据！</h2>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+<script src="../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../public/js/method.js"></script>
+<script src="../static/js/sR_main.js"></script>

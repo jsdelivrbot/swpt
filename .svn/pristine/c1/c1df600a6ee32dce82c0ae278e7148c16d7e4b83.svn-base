@@ -1,0 +1,279 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" class="posi-ab center-y margin-auto">
+    <p class="color-white">学习</p>
+    <!-- <img src="images/search2.png" class="posi-ab center    -y margin-auto"> -->
+    <!-- <div class="toggle-search posi-re margin-auto">
+        <img src="images/search2.png" alt="" class="posi-ab margin-auto center-y">
+        <input type="text" name="" id="" class="no-border posi-ab margin-auto center-y">
+    </div> -->
+</header>
+<main class="sepa-main">
+    <div class="toggle-search posi-re margin-auto">
+        <img src="images/search2.png" alt="" class="posi-ab margin-auto center-y">
+        <input type="text" name="" id="" class="no-border posi-ab margin-auto center-y">
+    </div>
+    <!-- <div class="sepa-options">
+        <div sort="0">
+            <img src="images/sorting.png" alt="">
+            <span>收藏</span>
+        </div>
+        <div sort="0">
+            <img src="images/sorting.png" alt="">
+            <span>时间</span>
+        </div>
+        <div>
+            <img src="images/filter.png" alt="">
+            <span>类型</span>
+        </div>
+    </div> -->
+    <div class="sepa-type dis-none">
+        <div div="timediv">
+            <p>时间：</p>
+            <ul>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">不限</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">最近</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">一周内</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">一月内</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">一年内</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div div="typediv">
+            <p>类别：</p>
+            <ul>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">不限</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别一</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别二</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别三</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别四</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别五</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="sepa-content">
+        <ul class="overflow-hidden">
+        </ul>
+    </div>
+</main>
+<script>
+    dj.setStorage( 'startPage', '0' );
+    $x.loadMainSchool = function ( data ) {
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/searchQuestionWrong',
+            contentType: 'application/json;charset=UTF-8',
+            data: data,
+            cache: false
+        } ).done( function ( m, n ) {
+            var result = m.msg;
+            if ( result.length > 0 ) {
+                $x.scrollBack = true;
+                dj.setStorage( 'startPage', parseInt( dj.getStorage( 'startPage' ) ) + 1 );
+                for ( var i in result ) {
+                    $( '.sepa-content ul' ).append( '<li class="posi-re" wid="' + result[ i ].wId + '" pid="' + result[ i ].id + '">' +
+                        '<img srx="images/list.png" src="' + imgSrc + '/' + result[ i ].image + '"/>' +
+                        '<div class="left">' +
+                        '<ol>' +
+                        '<li>' +
+                        '<p>' + result[ i ].title + '</p>' +
+                        '</li>' +
+                        '<li>' +
+                        '<p>&nbsp;</p>' +
+                        '</li>' +
+                        '<li>' +
+                        '<p>时间：' + dj.getDate( result[ i ].createTime, 'Y-M-D' ) + '</p>' +
+                        '<p>' +
+                        '<img src="images/share1.png" alt="">' +
+                        '<img src="images/consent.png" alt="">' +
+                        '</p>' +
+                        '</li>' +
+                        '</ol>' +
+                        '</div>' +
+                        '<div class="deletediv text-center"><span class="font-40 color-white">删除</span></div>' +
+                        '<p class="fraction-red">' + result[ i ].sum + '分</p>' +
+                        '</li>' );
+                }
+            }
+        } );
+    }
+    $x.loadMainSchool( { 'key': dj.getStorage( 'searchKey' ), 'startPage': dj.getStorage( 'startPage' ), 'userId': dj.getStorage( 'userId' ) } );
+    $( '.toggle-search input' ).val( dj.getStorage( 'searchKey' ) );
+    scrollBottom = function () { //上拉加载更多
+        if ( $x.scrollBack ) {
+            $x.scrollBack = false;
+            $x.loadMainSchool( { 'type': dj.getStorage( 'type' ), 'startPage': dj.getStorage( 'startPage' ), 'userId': dj.getStorage( 'userId' ) } );
+        }
+    }
+    $( '.toggle-search img' ).unbind().click( function () {
+        dj.setStorage( 'startPage', '0' );
+        $( '.sepa-content ul' ).children( '*' ).remove();
+        $x.loadMainSchool( { 'key': $( '.toggle-search input' ).val(), 'startPage': dj.getStorage( 'startPage' ), 'userId': dj.getStorage( 'userId' ) } );
+    } );
+    $( '.sepa-type ul>li' ).click( function () { //点击方框打勾
+        dj.setStorage( 'startPage', '0' );
+        $( '.sepa-content ul' ).children( '*' ).remove();
+        $x.data = { 'userId': dj.getStorage( 'userId' ) };
+        $( this ).find( 'div' ).toggleClass( 'sepa-type-check' );
+        $( this ).siblings().find( 'div' ).removeClass( 'sepa-type-check' );
+        $( '.sepa-type-check' ).each( function ( i, e ) {
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'timediv' ) {
+                if ( $( this ).parents( 'li' ).index() != 0 ) {
+                    $x.data.time = $( this ).parents( 'li' ).index();
+                }
+            }
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'typediv' ) {
+                if ( $( this ).parents( 'li' ).index != 0 ) {
+                    $x.data.type = $( this ).parents( 'li' ).index();
+                }
+            }
+        } );
+        $x.data.startPage = dj.getStorage( 'startPage' );
+        $x.loadMainSchool( $x.data );
+    } );
+    $( '.sepa-head>img' ).eq( 1 ).click( function () { //搜索框
+        $( '.toggle-search' ).stop( true, true ).slideToggle( 'fast' );
+    } );
+
+    $( '.sepa-options>div' ).click( function () { //点击类型
+        dj.setStorage( 'startPage', '0' );
+        $( '.sepa-content ul' ).children( '*' ).remove();
+        $x.data = { 'userId': dj.getStorage( 'userId' ) };
+        $( this ).addClass( 'color-red' ).siblings().removeClass( 'color-red' );
+        if ( $( this ).find( 'span' ).html() == '类型' ) {
+            $( '.sepa-type>div' ).toggle();
+        } else if ( $( this ).find( 'span' ).html() == '时间' ) {
+            if ( $( this ).attr( 'sort' ) == '0' ) {
+                $( this ).attr( 'sort', '1' );
+                $x.data.sort = '0';
+            } else {
+                $( this ).attr( 'sort', '0' );
+                $x.data.sort = '1';
+            }
+            $x.data.flag = '1';
+        } else if ( $( this ).find( 'span' ).html() == '收藏' ) {
+            if ( $( this ).attr( 'sort' ) == '0' ) {
+                $( this ).attr( 'sort', '1' );
+                $x.data.sort = '0';
+            } else {
+                $( this ).attr( 'sort', '0' );
+                $x.data.sort = '1';
+            }
+            $x.data.flag = '0';
+        }
+        $( '.sepa-type-check' ).each( function ( i, e ) {
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'timediv' ) {
+                if ( $( this ).parents( 'li' ).index() != 0 ) {
+                    $x.data.time = $( this ).parents( 'li' ).index();
+                }
+            }
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'typediv' ) {
+                if ( $( this ).parents( 'li' ).index != 0 ) {
+                    $x.data.type = $( this ).parents( 'li' ).index();
+                }
+            }
+        } );
+        $x.data.startPage = dj.getStorage( 'startPage' );
+        $x.loadMainSchool( $x.data );
+
+    } );
+
+    $( '.cole-head>img:first-child' ).off().click( function () { //返回
+        $( 'body' ).prePage();
+    } );
+
+    $( '.sepa-content' ).on( 'click', 'ul>li', function () { //打开试卷
+        dj.setStorage( { 'openTestId': $( this ).attr( 'pid' ), 'wid': $( this ).attr( 'wid' ) } );
+        $( 'body' ).nextPage( './answer-view.html', function () {
+            scrollBottom = function () {}
+        } );
+    } );
+    $( '.sepa-content' ).on( 'swipeleft', 'ul>li', function () { //向左滑动列表
+        $( this ).stop().animate( { 'left': '-1rem' }, 100 );
+    } );
+    $( '.sepa-content' ).on( 'swiperight', 'ul>li', function () { //向右滑动列表
+        $( this ).stop().animate( { 'left': '0' }, 100 );
+    } );
+
+    $( '.sepa-content ul' ).off().on( 'click', '.deletediv', function ( e ) { //删除错题
+        e.stopPropagation();
+        $x.deleteli = $( this ).parents( 'li' );
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/delQuestionWrong',
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json;charset=UTF-8',
+            data: { 'wId': $( this ).parents( 'li' ).attr( 'wid' ) }
+        } ).done( function ( m, n ) {
+            if ( m.status == 0 ) {
+                $x.deleteli.css( 'overflow', 'hidden' ).stop().animate( { 'height': '0' }, 100, function () {
+                    $( this ).remove();
+                } );
+            }
+        } );
+    } );
+
+</script>

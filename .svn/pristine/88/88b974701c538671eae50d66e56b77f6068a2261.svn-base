@@ -1,0 +1,127 @@
+.wrapper {
+  background: url("../image/bg@2x.png") no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  background-position: 0 0;
+}
+
+.wrapper .close {
+  position: absolute;
+  top: 2%;
+  right: 5%;
+}
+
+.wrapper .close i {
+  font-size: 0.8rem;
+  color: #707070;
+}
+
+.wrapper .loginForm {
+  width: 8.53333rem;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 0.42667rem;
+}
+
+.wrapper .loginForm .formLabel {
+  position: relative;
+  width: 8.53333rem;
+  height: 1.17333rem;
+  display: block;
+}
+
+.wrapper .loginForm .formLabel i {
+  color: #707070;
+  font-size: 0.77333rem;
+  position: absolute;
+  top: 53%;
+  transform: translate(0, -50%);
+  left: 0.66667rem;
+}
+
+.wrapper .loginForm .formLabel input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding-left: 1.6rem;
+  box-sizing: border-box;
+}
+
+.wrapper .loginForm .wrongMsg {
+  font-size: 0.37333rem;
+  color: #F4585A;
+  margin: 0.2rem 0;
+  display: none;
+}
+
+.wrapper .loginForm .submit {
+  margin-top: 1.6rem;
+  background: #F4585A;
+  width: 8.53333rem;
+  height: 1.17333rem;
+  color: #fff;
+  font-size: 0.42667rem;
+  outline: none;
+  border: none;
+}
+
+.wrapper .loginForm .bBtn {
+  font-size: 0.37333rem;
+}
+
+.wrapper .loginForm .bBtn .explain {
+  margin-top: 0.26667rem;
+  float: left;
+  width: 0.42667rem;
+  height: 0.42667rem;
+}
+
+.wrapper .loginForm .bBtn .explainC {
+  display: inline-block;
+  margin-top: 0.17333rem;
+}
+
+.wrapper .loginForm .bBtn .explainC .explainDesc {
+  color: #F4585A;
+}
+
+.wrapper .loginForm .bBtn .getAcc {
+  color: #F4585A;
+  float: right;
+  margin-top: 0.17333rem;
+}
+
+.wrapper .getAccBody {
+  margin: 0 auto;
+  text-align: center;
+  padding: 0.26667rem;
+  color: #fff;
+}
+
+.wrapper .getAccBody .content {
+  margin-top: 0.8rem;
+}
+
+.wrapper .getAccBody .content p {
+  line-height: 0.66667rem;
+  font-size: 0.4rem;
+}
+
+.wrapper .getAccBody .content p .important {
+  font-size: 0.45333rem;
+}
+
+.layui-layer-nobg {
+  box-shadow: none !important;
+}
+
+.layui-layer-shade {
+  opacity: .8 !important;
+}
+#regUser{
+  background-color: #ffffff;
+}

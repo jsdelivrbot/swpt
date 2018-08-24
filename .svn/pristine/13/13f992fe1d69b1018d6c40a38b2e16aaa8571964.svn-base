@@ -1,0 +1,18 @@
+<div class="top">
+     <span class="top-return" onclick="javascript:history.go(-1);"></span> 
+     <h1>上传资源</h1>
+   </div>
+  <div class="contrainer clearfix">
+      <!-- 左边导航栏 -->
+      <div class="navLeft">
+        <ul>
+        <li ng-repeat="s in navItems" ui-sref="{{s.href}}">
+              <a href="" ng-class="{'active':tab == s.id}" ng-click="navTab(s.id)">{{s.title}}</a>
+        </li>
+      </ul>
+      </div>
+      <!-- 右边内容页 -->
+      <div class="pulish">
+         <div style="padding:2rem" ui-view=""></div>
+      </div>
+  </div>

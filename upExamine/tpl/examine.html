@@ -1,0 +1,216 @@
+<link rel="stylesheet" href="/upLoadRe_pc/css/re_public.css">
+<link rel="stylesheet" href="/upLoadRe_pc/css/re_index.css">
+
+<style>
+    .modal{
+        background-color: rgba(33,33,33,0.6);
+    }
+    .modal_body{
+        width:90%;
+        margin: 20px auto;
+    }
+    .modal_body p {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .modal_body label{
+        display: block;
+        font-weight: normal;
+        height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
+    }
+    .modal_body label input{
+        margin:0 5px;
+        vertical-align: middle;
+    }
+    .modal_body  .selTab{
+        margin-bottom: 4rem;
+    }
+    .modal_body .handle  textarea{
+        width: 90%;
+        height: 100px;
+    }
+    .modal-footer{
+       text-align: center;
+    }
+    .page-list{
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+</style>
+
+<div class="examineItem">
+    <div class="examineType">
+        <div class="zy_type examine_item">
+                    <span>审核资源类型:</span>
+                        <ul>
+                            <li ng-repeat="s in  sourceType" ng-click="examType(s.id,s.uploadTypeName,$event)" ng-class="{active:examShow==s.id}">{{s.uploadTypeName}}</li>
+                        </ul>
+       
+        </div>
+        <div class="mk_type examine_item">
+            <span>模块类型:</span>
+            <ul>
+                    <li ng-repeat="s in  sourceType" ng-click="modelExam(s.id,s.uploadTypeName,$event)" ng-class="{active:sourceShows==s.id}">{{s.uploadTypeName}}</li>
+            </ul>
+        </div>
+        <div class="tj_type examine_item">
+            <span>推荐对象(岁):</span>
+            <ul>
+                <li ng-repeat="s in objectType" ng-click="objectExam(s.id,s.recommendedObjectName,$event)" ng-class="{active:objectShows==s.id}">{{s.recommendedObjectName}}</li>
+            </ul>
+        </div>
+        <div class="zy_type examine_item">
+            <span>书籍类型:</span>
+                <ul>
+                    <li ng-repeat="s in bookType"  ng-click="sourceExam(s.id,s.bookTypeName,$event)" ng-class="{active:bookShows==s.id}">{{s.bookTypeName}}</li>
+                </ul>
+        </div>
+     
+    </div>
+
+    <div class="sourceitem"  ng-if="video == 'video'">
+           <ul class="video_title">
+               <li>资源标题</li>
+               <li>视频名称</li>
+               <li>上传时间</li>
+               <li>操作</li>
+           </ul>
+           <div ng-repeat="v in sourceData">
+              <ul class="video_data" ng-repeat="s in v.videoList" id="{{s.id}}" data-url="{{s.videoPath}}">
+                <li>{{v.bookName}}</li>
+                <li >{{s.videoName}}</li>
+                <li>{{s.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</li>
+                <li><a ng-click="videoExamine($event,'video')">审核</a></li>
+              </ul>   
+           </div>
+         
+    </div>
+
+    <div class="sourceitem" ng-if="video == 'music'">
+            <ul class="video_title" id="1">
+                <li>资源标题</li>
+                <li>音频名称</li>
+                <li>上传时间</li>
+                <li>操作</li>
+            </ul>
+            <div ng-repeat="v in sourceData">
+                    <ul class="video_data" ng-repeat="s in v.musicList" id="{{s.id}}" data-url="{{s.musicPath}}">
+                      <li>{{v.bookName}}</li>
+                      <li >{{s.musicName}}</li>
+                      <li>{{s.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</li>
+                      <li><a ng-click="videoExamine($event,'video')">审核</a></li>
+                    </ul>   
+             </div>
+     </div>
+
+     <div class="sourceitem" ng-if="video == 'tushu'">
+            <ul class="video_title">
+                <li>资源标题</li>
+                <li>图书名称</li>
+                <li>上传时间</li>
+                <li>操作</li>
+            </ul>
+            <div ng-repeat="v in sourceData">
+                    <ul class="video_data" ng-repeat="s in v.musicList" id="{{s.id}}" data-url="{{s.musicPath}}">
+                      <li>{{v.bookName}}</li>
+                      <li >{{s.musicName}}</li>
+                      <li>{{s.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</li>
+                      <li><a ng-click="videoExamine($event,'video')">审核</a></li>
+                    </ul>   
+             </div>
+     </div>
+     <div class="sourceitem" ng-if="video == 'tiku'">
+            <ul class="video_title">
+                <li>资源标题</li>
+                <li>题库名称</li>
+                <li>上传时间</li>
+                <li>操作</li>
+            </ul>
+            <div ng-repeat="v in sourceData">
+                    <ul class="video_data" ng-repeat="s in v.musicList" id="{{s.id}}" data-url="{{s.musicPath}}">
+                      <li>{{v.bookName}}</li>
+                      <li >{{s.musicName}}</li>
+                      <li>{{s.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</li>
+                      <li><a ng-click="videoExamine($event,'video')">审核</a></li>
+                    </ul>   
+             </div>
+     </div>
+      <!-- 分页 --> 
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>
+
+  
+
+
+     <!-- 审核 -->
+     <div class="sweet-overlay" tabindex="-1" style="opacity: -0.04; display: none;"></div>
+     <div class="sweet-alert hideSweetAlert" data-custom-class="" data-has-cancel-button="false" data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false" data-animation="pop" data-timer="null" style="display: none; margin-top: -177px; opacity: -0.04;">
+         <div class="sa-icon sa-error" style="display: none;">
+           <span class="sa-x-mark">
+             <span class="sa-line sa-left"></span>
+             <span class="sa-line sa-right"></span>
+           </span>
+         </div>
+         <div class="sa-icon sa-warning" style="display: none;">
+           <span class="sa-body"></span>
+           <span class="sa-dot"></span>
+         </div>
+         <div class="sa-icon sa-info" style="display: none;"></div>
+         <div class="sa-icon sa-success" style="display: block;">
+           <span class="sa-line sa-tip"></span>
+           <span class="sa-line sa-long"></span>
+     
+           <div class="sa-placeholder"></div>
+           <div class="sa-fix"></div>
+         </div>
+         <div class="sa-icon sa-custom" style="display: none;"></div>
+         <h2>Good!</h2>
+         <p style="display: block;">弹出了一个操作成功的提示框</p>
+         <fieldset>
+           <input type="text" tabindex="3" placeholder="">
+           <div class="sa-input-error"></div>
+         </fieldset>
+         <div class="sa-error-container">
+           <div class="icon">!</div>
+           <p>Not valid!</p>
+         </div>
+         <div class="sa-button-container">
+           <button class="cancel" ng-click="cancelexam()" tabindex="2" style="display: none; box-shadow: none;">取消</button>
+           <button class="confirm" ng-click="confirmExam()" tabindex="1" style="display: inline-block; background-color: rgb(174, 222, 244); box-shadow: rgba(174, 222, 244, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">确定</button>
+         </div>
+      </div>
+
+       <!--审核不通过 -->
+       <div class="modal"  id="mdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header btn-success">
+                        <h4 class="modal-title text-center" id="myModalLabel">
+                            审核不通过原因
+                        </h4>
+                    </div>
+                    <div class="modal_body">
+                      <div class="selTab">  
+                        <p>选择标签</p>
+                        <label ng-repeat="item in contentText track by $index">
+                            <input type="checkbox"  ng-checked="chkItem[$index]" ng-click="content(chkItem[$index]==undefind?false:chkItem[$index], item, $index)">{{ item.context }} 
+                        </label> 
+                      </div>
+                      <div class="handle">
+                          <p>手动输入</p>
+                          <textarea row="3" id="textCont"></textarea>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="cancelExam()" class="btn btn-primary" data-dismiss="modal">
+                                    取消
+                             </button>
+                        <button type="button" ng-click="confirmInsert()" class="btn btn-primary" data-dismiss="modal">
+                            确定发送
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>

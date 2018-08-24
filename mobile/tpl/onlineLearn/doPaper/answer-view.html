@@ -1,0 +1,188 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+    <p class="color-white">答案查看</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main class="anvi-main">
+    <p class="text-center anvi-title color-ccc">《这里记录下考试的标题》</p>
+    <div class="anvi-start posi-re">
+        <p class="color-ccc">满分：100分</p>
+        <p class="color-ccc">考试时间：60分钟</p>
+        <button organizationNotes class="posi-ab margin-auto center-y color-white">组织笔记</button>
+        <button personalNotes class="posi-ab margin-auto center-y color-white">个人笔记</button>
+    </div>
+    <form id="anvi-form">
+        <input type="hidden" name="pId">
+        <input type="hidden" name="totalTime">
+        <article>
+            <section single>
+                <b>一、单选题(总分
+                    <span totalfraction>0</span>分，每题
+                    <span singlefraction></span>分)</b>
+            </section>
+            <section multiple>
+                <b>二、多选题(总分
+                    <span totalfraction>0</span>分，每题
+                    <span singlefraction></span>分，漏选
+                    <span leakfraction></span>分)</b>
+            </section>
+            <section subjective>
+                <b>三、结合所学知识，回答下列问题(总分
+                    <span totalfraction>0</span>分，每题
+                    <span singlefraction></span>分)</b>
+            </section>
+        </article>
+    </form>
+</main>
+<script>
+    $( '.anvi-main' ).hide();
+    $.ajax( {
+        url: ajaxUrl + '/papersQuestion/lookAnswer',
+        type: 'get',
+        dataType: 'json',
+        contentType: 'application/json;charset=UTF-8',
+        cache: false,
+        data: { 'pId': dj.getStorage( 'openTestId' ), 'wId': dj.getStorage( 'questionScoreId' ), 'userId': dj.getStorage( 'userId' ) }
+    } ).done( function ( m, n ) {
+        if ( m.status == 0 ) { //查询成功
+            var result = m.msg,
+                fraction0 = 0,
+                fraction1 = 0,
+                fraction2 = 0;;
+            $( '.anvi-main>p' ).html( result.title ); //试卷标题
+            dj.setStorage( 'noteTitle', result.title );
+            $( '.anvi-main .score' ).html( result.totalScore ); //试卷总分
+            $( '.anvi-main .time' ).html( result.testTime ); //考试时间
+            $( '[name="totalTime"]' ).val( result.testTime ); //考试时间
+            $( '[name="pId"]' ).val( result.types[ 0 ].pId ); //试卷ID
+            for ( var i in result.types ) {
+                var children = result.types[ i ].children;
+                for ( var n in children ) {
+                    if ( result.types[ i ].type == 0 & children.length != 0 ) {
+                        fraction0 += result.types[ i ].fraction;
+                        $( '.anvi-main [single]' ).append( '<div type="' + result.types[ i ].type + '" pid="' + result.types[ i ].pId + '" tid="' + children[ n ].id + '" ><p>（&nbsp;<span answer="' + children[ n ].answer + '">' + children[ n ].wrongAnswer + '</span>&nbsp;）' + fraction0 / result.types[ i ].fraction + '、' + children[ n ].title + '</p>' +
+                                '<img src="images/note.png" class="right anvi-note"><ul>' +
+                                '<li>A&nbsp;&nbsp;' + children[ n ].answerA + '</li>' +
+                                '<li>B&nbsp;&nbsp;' + children[ n ].answerB + '</li>' +
+                                '<li>C&nbsp;&nbsp;' + children[ n ].answerC + '</li>' +
+                                '<li>D&nbsp;&nbsp;' + children[ n ].answerD + '</li>' +
+                                '</ul></div>' ).find( 'b span[totalfraction]' ).html( fraction0 )
+                            .parents( 'section' ).find( 'span[singlefraction]' ).html( result.types[ i ].fraction )
+                            .callBack( function () {
+                                var div = $( '.anvi-main [single]' ).find( 'div' ).last(),
+                                    answer = div.find( 'p>span' ).attr( 'answer' ).replace( /\s+/g, "" ),
+                                    wronganswer = div.find( 'p>span' ).html().replace( /\s+/g, "" );
+                                if ( answer != wronganswer ) { //假如错了就给用户的答案上底色
+                                    div.find( 'p>span' ).addClass( 'mistake' );
+                                }
+                                if ( wronganswer == 'null' ) {
+                                    div.find( 'p>span' ).html( '' );
+                                }
+                                switch ( answer ) { //给题目的答案上颜色
+                                case 'A':
+                                    div.find( 'ul>li' ).eq( 0 ).addClass( 'color-red' );
+                                    break;
+                                case 'B':
+                                    div.find( 'ul>li' ).eq( 1 ).addClass( 'color-red' );
+                                    break;
+                                case 'C':
+                                    div.find( 'ul>li' ).eq( 2 ).addClass( 'color-red' );
+                                    break;
+                                case 'D':
+                                    div.find( 'ul>li' ).eq( 3 ).addClass( 'color-red' );
+                                    break;
+                                }
+                            } );
+                    } else if ( result.types[ i ].type == 1 & children.length != 0 ) {
+                        fraction1 += result.types[ i ].fraction;
+                        $( '.anvi-main [multiple]' ).append( '<div  type="' + result.types[ i ].type + '" pid="' + result.types[ i ].pId + '" tid="' + children[ n ].id + '"><p>（&nbsp;<span answer="' + children[ n ].answer + '">' + children[ n ].wrongAnswer + '</span>&nbsp;）' + fraction1 / result.types[ i ].fraction + '、' + children[ n ].title + '</p>' +
+                                '<img src="images/note.png" class="right anvi-note"><ul>' +
+                                '<li>A&nbsp;&nbsp;' + children[ n ].answerA + '</li>' +
+                                '<li>B&nbsp;&nbsp;' + children[ n ].answerB + '</li>' +
+                                '<li>C&nbsp;&nbsp;' + children[ n ].answerC + '</li>' +
+                                '<li>D&nbsp;&nbsp;' + children[ n ].answerD + '</li>' +
+                                '</ul></div>' ).find( 'b span[totalfraction]' ).html( fraction1 )
+                            .parents( 'section' ).find( 'span[singlefraction]' ).html( result.types[ i ].fraction )
+                            .parents( 'section' ).find( 'span[leakfraction]' ).html( result.types[ i ].leakFraction )
+                            .callBack( function () {
+                                var div = $( '.anvi-main [multiple]' ).find( 'div' ).last(),
+                                    answer = div.find( 'p>span' ).attr( 'answer' ).replace( /\s+/g, "" ),
+                                    wronganswer = div.find( 'p>span' ).html().replace( /\s+/g, "" ),
+                                    answerArr = answer.split( ',' );
+                                if ( answer != wronganswer ) {
+                                    div.find( 'p>span' ).addClass( 'mistake' );
+                                }
+                                if ( wronganswer == 'null' ) {
+                                    div.find( 'p>span' ).html( '' );
+                                }
+                                for ( var i in answerArr ) {
+                                    switch ( answerArr[ i ] ) {
+                                    case 'A':
+                                        div.find( 'ul>li' ).eq( 0 ).addClass( 'color-red' );
+                                        break;
+                                    case 'B':
+                                        div.find( 'ul>li' ).eq( 1 ).addClass( 'color-red' );
+                                        break;
+                                    case 'C':
+                                        div.find( 'ul>li' ).eq( 2 ).addClass( 'color-red' );
+                                        break;
+                                    case 'D':
+                                        div.find( 'ul>li' ).eq( 3 ).addClass( 'color-red' );
+                                        break;
+                                    }
+                                }
+                            } );
+                    } else if ( result.types[ i ].type == 2 & children.length != 0 ) {
+                        fraction2 += result.types[ i ].fraction;
+                        $( '.anvi-main [subjective]' ).append(
+                                '<div tid="' + children[ n ].id + '"><ul><li>' +
+                                '<p>' +
+                                fraction1 / result.types[ i ].fraction + '、' + children[ n ].title +
+                                '</p>' +
+                                '<textarea name="" placeholder="答案"></textarea>' +
+                                '</li></ul></div>' ).find( 'b span[totalfraction]' ).html( fraction2 ) //总分
+                            .parents( 'section' ).find( 'span[singlefraction]' ).html( result.types[ i ].fraction ); //每题分数
+                    }
+                }
+            }
+            $( '.anvi-main section' ).each( function ( i, e ) { //假如一个模块没有题目，则将此模块隐藏
+                if ( $( e ).find( 'b>span' ).eq( 0 ).html() == '0' ) { //如果一条题目没有总分，则会被隐藏
+                    $( e ).hide();
+                }
+            } );
+            $( '#anvi-form section>div>img' ).unbind().click( function () { //点击题目的笔记按钮
+                var div = $( this ).parents( 'div' );
+                dj.setStorage( {
+                    'noteUserId': dj.getStorage( 'userId' ),
+                    'noteTopic': div.attr( 'tid' ),
+                    'notePid': div.attr( 'pid' ),
+                    'noteType': div.attr( 'type' ),
+                    'createNote': '1',
+                    'noteQuestion': div.html()
+                } );
+                $( 'body' ).nextPage( './save-notes.html' );
+            } );
+        } else {
+            $( '.anvi-main' ).html( '<p style="margin-top:2rem;" class="text-center font-40">很抱歉！获取答案失败！<p>' );
+        }
+        $( '.anvi-main' ).fadeIn( 'slow' );
+    } );
+
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+
+    $( '.anvi-main button' ).unbind().click( function () {
+        if ( $( this ).index( 'button' ) == 0 ) { //组织笔记
+            dj.setStorage( 'noteList', '0' );
+            $( 'body' ).nextPage( './note-list-orz.html' );
+        } else { //个人笔记
+            dj.setStorage( 'noteList', '1' );
+            $( 'body' ).nextPage( './note-list-per.html' );
+        }
+    } );
+
+</script>

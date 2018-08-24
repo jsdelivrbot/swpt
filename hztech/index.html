@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="HandheldFriendly" content="true">
+		<link rel="stylesheet" href="css/index.css" />
+		<title></title>
+		<script>
+			;(function(designWidth, maxWidth) {
+				var doc = document,
+					win = window;
+				var docEl = doc.documentElement;
+				var tid;
+				var rootItem,rootStyle;
+			
+				function refreshRem() {
+					var width = docEl.getBoundingClientRect().width;
+					if (!maxWidth) {
+						maxWidth = 540;
+					};
+					if (width > maxWidth) {
+						width = maxWidth;
+					}
+					//与淘宝做法不同，直接采用简单的rem换算方法1rem=100px
+					var rem = width * 100 / designWidth;
+					//兼容UC开始
+					rootStyle="html{font-size:"+rem+'px !important}';
+					rootItem = document.getElementById('rootsize') || document.createElement("style");
+					if(!document.getElementById('rootsize')){
+					document.getElementsByTagName("head")[0].appendChild(rootItem);
+					rootItem.id='rootsize';
+					}
+					if(rootItem.styleSheet){
+					rootItem.styleSheet.disabled||(rootItem.styleSheet.cssText=rootStyle)
+					}else{
+					try{rootItem.innerHTML=rootStyle}catch(f){rootItem.innerText=rootStyle}
+					}
+					//兼容UC结束
+					docEl.style.fontSize = rem + "px";
+				};
+				refreshRem();
+			
+				win.addEventListener("resize", function() {
+					clearTimeout(tid); //防止执行两次
+					tid = setTimeout(refreshRem, 300);
+				}, false);
+			
+				win.addEventListener("pageshow", function(e) {
+					if (e.persisted) { // 浏览器后退的时候重新计算
+						clearTimeout(tid);
+						tid = setTimeout(refreshRem, 300);
+					}
+				}, false);
+			
+				if (doc.readyState === "complete") {
+					doc.body.style.fontSize = "16px";
+				} else {
+					doc.addEventListener("DOMContentLoaded", function(e) {
+						doc.body.style.fontSize = "16px";
+					}, false);
+				}
+			})(1920, 1920);				
+		</script>
+	</head>
+	<body>		
+		<div class="hzhead">
+			<div class="hzhead-block">
+				<div id="hzhead-time"></div>
+				<h1>坤智教育</h1>
+				<!--
+				<div class="hzhead-user">
+					<dl>
+						<dt><img src="img/20160922183030.png"> </dt>
+						<dd><a href="Openkeyboard:\" class="openkb">键盘</a></dd>
+						<dd class="ogOut" onclick="btnColse();">退出平台</dd>
+					</dl>
+				</div>		
+-->				
+			</div>
+		</div>
+		<div class="hzcontent">
+			<div class="hzcontent-block">
+				<div class="hzcontent-left">
+					<ul class="hzcontent-left-l">
+						<li onclick="goUrlFram('http://szxy.mypep.cn/home');">
+							<img src="img/DigitalCampus.png">
+							<span>人教数字校园</span>
+						</li>						
+						<li style="position: relative;">							
+							<img src="img/3DExperiment.png" id="loadimg">
+							<span>3D实验</span>	
+							<a href="OpenTheLaboratory:\" onclick="javascript:LaunchApp();" class="loadimg">
+							</a>
+							<!--<img src="img/load.gif" id="loadimg">-->
+						</li>						
+						<li onclick="goUrlFram('http://labcloud.spm-edu.com/');">
+							<img src="img/Virtualsimulation.png">
+							<span>学生虚拟仿真</span>
+						</li>
+					</ul>
+				</div>
+				<div class="hzcontent-right">
+					<ul class="hzcontent-right-r">
+						<li>
+							<img src="img/我爱阅读.png">
+							<span>我爱阅读</span>
+						</li>
+						<li>
+							<img src="img/课后托管.png">
+							<span>课后托管</span>
+						</li>
+						<li onclick="goUrlFram('http://hdy.91open.com/');">
+							<img src="img/智慧好党员平台.png">
+							<span>智慧好党员平台</span>
+						</li>
+						<li onclick="goUrlFram('http://kpvideo.spm-edu.com:235/Home');">
+							<img src="img/创客科学云平台.png">
+							<span>创客科学云平台</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="hzbottom">
+			<div class="hzbottom-block">
+				<div class="hzbottom-logo"><img src="img/logo.png"></div>
+				<div class="separation"></div>
+				<div class="hzbottom-company">
+					<p>广东省科学院<br>广东电子电器研究所<br> 广东坤智科技有限公司</p>
+					<p>电话：18022395058 (微信同号)</p>
+				</div>
+				<div class="hzbottom-wifi">
+					<img src="img/wifi.png" />
+				</div>
+			</div>			
+		</div>
+		<div id="maxdiv">			
+			<!--<span class="btngoiframe" onclick="goClose();">退出平台</span>-->
+			<iframe id='iframeid' src="" width="100%" height="100%"  scrolling="no"></iframe>
+		</div>		
+	</body>
+</html>
+<script type="text/javascript" src="js/index.js" ></script>

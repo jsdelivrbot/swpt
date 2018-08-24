@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>活动详情</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../static/css/activityDetail/aD_main.min.css">
+    <script src="../../../public/flexible/flexible.js"></script>
+    <script src="../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <header class="lcr">
+        <div class="back left" onclick="javascript:window.location.href='../index.html';">
+            <i class="iconfont">&#xe7a4;</i>
+        </div>
+        <div class="more right -mob-share-open">
+            <i class="iconfont">&#xe66e;</i>
+        </div>
+        <h2 class="centerTitle2" id="titleTarget"></h2>
+    </header>
+    <section class="activityMain">
+        <div class="banner">
+            <img id="imgTarget" src="" alt="">
+        </div>
+        <div class="activityDetail">
+            <h2>主题名称</h2>
+            <p id="aName"></p>
+            <h2>创建时间</h2>
+            <p id="aCreateTime"></p>
+            <h2>主题简要</h2>
+            <p id="aDesc"></p>
+        </div>
+        <div class="borderTop"></div>
+    </section>
+    <section class="records" id="records">
+        <h2 class="title">随堂记录</h2>
+        <div class="record clear" data-id="">
+            <div class="rImg left">
+                <img class="rImgTarget" src="" alt="">
+            </div>
+            <div class="rMain">
+                <h2 class="rTitle">标题：
+                    <span class="rTitleTarget"></span>
+                </h2>
+                <p class="rMainBody">正文：
+                    <span class="rMainBodyTarget"></span>
+                </p>
+                <p class="rTime">时间：
+                    <span class="rTime"></span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <!--MOB SHARE BEGIN-->
+    <div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-bottom" style="display: none">
+        <ul class="-mob-share-list">
+            <li class="share-edit -mob-share-close" id="uploadRecord">
+                <p>上传记录</p>
+            </li>
+            <li class="share-edit -mob-share-close" id="edit">
+                <p>编辑活动</p>
+            </li>
+            <li class="share-delete -mob-share-close" id="confirmDelete">
+                <p>删除活动</p>
+            </li>
+            <li class="-mob-share-weibo">
+                <p>新浪微博</p>
+            </li>
+            <li class="-mob-share-qzone">
+                <p>QQ空间</p>
+            </li>
+            <li class="-mob-share-qq">
+                <p>QQ好友</p>
+            </li>
+            <li class="-mob-share-douban">
+                <p>豆瓣</p>
+            </li>
+        </ul>
+        <div class="-mob-share-close">取消</div>
+    </div>
+    <div class="-mob-share-ui-bg"></div>
+    <script id="-mob-share" async="async" src="../../../public/js/mob-share/mob-share.js"></script>
+    <!--MOB SHARE END-->
+</body>
+
+</html>
+<script src="../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../public/js/method.js"></script>
+<script src="../../../public/layer/layer.js"></script>
+<script src="../static/js/aD_main.js"></script>

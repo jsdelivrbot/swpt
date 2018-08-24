@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<div>
+    <div class="pro_header" rolling>
+        <div class="h_box">
+            <div class="h_left">
+                <div ng-repeat="(key,value) in vip_moudle" class="h_main">
+                    <div class="h_list" ng-class="{state:key ==0}" ng-click="fn($event,$index,value.id)" ng-bind="value.m_name"></div>
+                </div>
+            </div>
+            <div class="h_right">
+                <input type="text" class="h_input clear" placeholder="请输入关键字">
+                <span class="iconfont icon-chazhao"></span>
+            </div>
+        </div>
+    </div>
+    <div class="pro_content">
+    <div ng-repeat="dm in vip_moudle">
+        <div class="c_group">
+            <div class="c_title">
+                <div class="c_div" ng-bind="dm.m_name" id="{{dm.id}}">
+
+                </div>
+            </div>
+            <ul class="c_ul">
+                <li ng-repeat="list in dm.child" class="c_li" moveli>
+                    <div class="cli_box">
+                        <div class="cli_img">
+                            <img src="{{list.pic}}" alt="" class="c_img">
+                        </div>
+                        <div ng-bind="list.name" class="cli_name">
+                        </div>
+                        <div class="cli_fee">试用</div>
+                    </div>
+                    <a class="cli_link" ui-sref="detailsPage({id:{{list.id}}})" ng-click="root(list,$event)">开通该服务</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

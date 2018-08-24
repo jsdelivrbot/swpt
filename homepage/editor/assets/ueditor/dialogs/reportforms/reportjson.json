@@ -1,0 +1,1102 @@
+{
+    "groupCount": {
+        "佳佳乐": {
+            "饮料": [{
+                "id": "1",
+                "productKind": "饮料",
+                "productName": "苹果汁",
+                "productNum": "每箱24瓶",
+                "orderNum": "0.00",
+                "price": "18.00"
+            }, {
+                "id": "2",
+                "productKind": "饮料",
+                "productName": "牛奶",
+                "productNum": "每箱24瓶",
+                "orderNum": "40.00",
+                "price": "19.00"
+            }],
+            "调味品": [{
+                "id": "3",
+                "productKind": "调味品",
+                "productName": "番茄酱",
+                "productNum": "每箱12瓶",
+                "orderNum": "70.00",
+                "price": "10.00"
+            }]
+        },
+        "康福食品": {
+            "调味品": [{
+                "id": "4",
+                "productKind": "调味品",
+                "productName": "盐",
+                "productNum": "每箱12瓶",
+                "orderNum": "0.00",
+                "price": "22.00"
+            }, {
+                "id": "5",
+                "productKind": "调味品",
+                "productName": "麻油",
+                "productNum": "每箱12瓶",
+                "orderNum": "0.00",
+                "price": "21.35"
+            }, {
+                "id": "6",
+                "productKind": "调味品",
+                "productName": "海苔酱",
+                "productNum": "每箱24瓶",
+                "orderNum": "0.00",
+                "price": "21.05"
+            }, {
+                "id": "7",
+                "productKind": "调味品",
+                "productName": "肉松",
+                "productNum": "每箱24瓶",
+                "orderNum": "100.00",
+                "price": "17.00"
+            }]
+        },
+        "妙生": {
+            "调味品": [{
+                "id": "8",
+                "productKind": "调味品",
+                "productName": "酱油",
+                "productNum": "每箱12瓶",
+                "orderNum": "0.00",
+                "price": "25.00"
+            }, {
+                "id": "9",
+                "productKind": "调味品",
+                "productName": "胡椒粉",
+                "productNum": "每箱30盒",
+                "orderNum": "0.00",
+                "price": "40.00"
+            }],
+            "特制品": [{
+                "id": "10",
+                "productKind": "特制品",
+                "productName": "海鲜粉",
+                "productNum": "每箱30盒",
+                "orderNum": "0.00",
+                "price": "30.00"
+            }]
+        },
+        "为全": {
+            "肉/家禽": [{
+                "id": "11",
+                "productKind": "肉/家禽",
+                "productName": "鸡",
+                "productNum": "每袋500克",
+                "orderNum": "0.00",
+                "price": "97.00"
+            }],
+            "海鲜": [{
+                "id": "12",
+                "productKind": "海鲜",
+                "productName": "蟹",
+                "productNum": "每袋500克",
+                "orderNum": "0.00",
+                "price": "31.00"
+            }],
+            "特制品": [{
+                "id": "13",
+                "productKind": "特制品",
+                "productName": "鸡精",
+                "productNum": "每盒24个",
+                "orderNum": "20.00",
+                "price": "10.00"
+            }]
+        },
+        "日正": {
+            "日用品": [{
+                "id": "14",
+                "productKind": "日用品",
+                "productName": "大众奶酪",
+                "productNum": "每袋6包",
+                "orderNum": "30.00",
+                "price": "21.00"
+            }, {
+                "id": "15",
+                "productKind": "日用品",
+                "productName": "德国奶酪",
+                "productNum": "每箱12瓶",
+                "orderNum": "0.00",
+                "price": "38.00"
+            }]
+        }
+    },
+    "productCount": {
+        "2017-09-23": {
+            "d": [{
+                "id": "1",
+                "productName": "苹果汁",
+                "price": "18.00",
+                "stock": "39.00",
+                "orderNum": "10.00"
+            }]
+        },
+        "2017-09-22": {
+            "饮料": [{
+                "id": "1",
+                "productName": "苹果汁",
+                "price": "18.00",
+                "stock": "39.00",
+                "orderNum": "10.00"
+            }, {
+                "id": "2",
+                "productName": "牛奶",
+                "price": "19.00",
+                "stock": "17.00",
+                "orderNum": "65.00"
+            }, {
+                "id": "3",
+                "productName": "汽水",
+                "price": "4.50",
+                "stock": "20.00",
+                "orderNum": ""
+            }, {
+                "id": "4",
+                "productName": "啤酒",
+                "price": "14.00",
+                "orderNum": "15.00",
+                "stock": "111.00"
+            }, {
+                "id": "5",
+                "productName": "蜜桃汁",
+                "price": "18.00",
+                "orderNum": "20.00",
+                "stock": "15.00"
+            }, {
+                "id": "6",
+                "productName": "绿茶",
+                "price": "263.50",
+                "orderNum": "17.00",
+                "stock": "15.00"
+            }, {
+                "id": "7",
+                "productName": "运动饮料",
+                "price": "18.00",
+                "orderNum": "69.00",
+                "stock": "5.00"
+            }, {
+                "id": "8",
+                "productName": "柳橙汁",
+                "price": "46.00",
+                "orderNum": "17.00",
+                "stock": "35.00"
+            }, {
+                "id": "9",
+                "productName": "矿泉水",
+                "price": "14.00",
+                "orderNum": "52.00",
+                "stock": "10.00"
+            }, {
+                "id": "10",
+                "productName": "苏打水",
+                "price": "15.00",
+                "orderNum": "15.00",
+                "stock": "40.00"
+            }, {
+                "id": "11",
+                "productName": "浓缩咖啡",
+                "price": "21.00",
+                "orderNum": "11.00",
+                "stock": "121.00"
+            }, {
+                "id": "12",
+                "productName": "柠檬汁",
+                "price": "11.00",
+                "orderNum": "22.00",
+                "stock": "33.00"
+            }],
+            "调味品": [{
+                "id": "13",
+                "productName": "蕃茄酱",
+                "price": "13.00",
+                "orderNum": "51.00",
+                "stock": "1.00"
+            }, {
+                "id": "14",
+                "productName": "盐",
+                "price": "3.50",
+                "orderNum": "22.00",
+                "stock": "11.00"
+            }, {
+                "id": "15",
+                "productName": "麻油",
+                "price": "32.00",
+                "orderNum": "12.00",
+                "stock": "41.00"
+            }, {
+                "id": "16",
+                "productName": "酱油",
+                "price": "11.00",
+                "orderNum": "12.00",
+                "stock": "13.00"
+            }, {
+                "id": "17",
+                "productName": "胡椒粉",
+                "price": "14.00",
+                "orderNum": "15.00",
+                "stock": "411.00"
+            }, {
+                "id": "18",
+                "productName": "味精",
+                "price": "23.00",
+                "orderNum": "25.00",
+                "stock": "761.00"
+            }],
+            "特制品": [{
+                "id": "19",
+                "productName": "海鲜粉",
+                "price": "14.00",
+                "orderNum": "15.00",
+                "stock": "15.00"
+            }, {
+                "id": "20",
+                "productName": "沙茶",
+                "price": "14.00",
+                "orderNum": "15.00",
+                "stock": "35.00"
+            }, {
+                "id": "21",
+                "productName": "烤肉酱",
+                "price": "14.00",
+                "orderNum": "15.00",
+                "stock": ""
+            }],
+            "肉类": [{
+                "id": "23",
+                "productName": "鸡",
+                "price": "90.00",
+                "orderNum": "15.00",
+                "stock": "29.00"
+            }, {
+                "id": "24",
+                "productName": "猪肉",
+                "price": "60.50",
+                "orderNum": "15.00",
+                "stock": ""
+            }, {
+                "id": "25",
+                "discount": "0.8",
+                "productName": "鸭肉",
+                "price": "197.50",
+                "orderNum": "15.00",
+                "stock": "115.00"
+            }]
+
+        },
+        "2017-09-21": {
+            "d": [{
+                "id": "1",
+                "productName": "苹果汁",
+                "price": "18.00",
+                "stock": "39.00",
+                "orderNum": "10.00"
+            }]
+        }
+    },
+    "dataGet": {
+        "胜网科技": [{
+            "orderNum": "10287",
+            "date": "1434038400",
+            "clientName": "富豪人寿",
+            "header": "孙阳",
+            "payState": "已付"
+        }, {
+            "orderNum": "10288",
+            "date": "1434297600",
+            "clientName": "宇欣实业",
+            "header": "卢浩天",
+            "payState": "已付"
+        }, {
+            "orderNum": "10289",
+            "date": "1436889600",
+            "clientName": "协昌妮绒有限公司",
+            "header": "金士鹏",
+            "payState": "未付"
+        }, {
+            "orderNum": "10290",
+            "date": "1468512000",
+            "clientName": "友恒信托",
+            "header": "张颖",
+            "payState": "已付"
+        }, {
+            "orderNum": "10291",
+            "date": "1436889600",
+            "clientName": "协昌妮绒有限公司",
+            "header": "金士鹏",
+            "payState": "未付"
+        }, {
+            "orderNum": "10292",
+            "date": "1473868800",
+            "clientName": "师大贸易",
+            "header": "王伟",
+            "payState": "已付"
+        }, {
+            "orderNum": "10293",
+            "date": "1475164800",
+            "clientName": "永业房屋",
+            "header": "张颖",
+            "payState": "未付"
+        }, {
+            "orderNum": "10294",
+            "date": "1475164800",
+            "clientName": "迈多贸易",
+            "header": "郑建杰",
+            "payState": "已付"
+        }, {
+            "orderNum": "10295",
+            "date": "1473868800",
+            "clientName": "阳林",
+            "header": "王伟",
+            "payState": "未付"
+        }, {
+            "orderNum": "10296",
+            "date": "1477929600",
+            "clientName": "通恒机械",
+            "header": "李芳",
+            "payState": "未付"
+        }, {
+            "orderNum": "10297",
+            "date": "1483200000",
+            "clientName": "富豪人寿",
+            "header": "孙阳",
+            "payState": "已付"
+        }, {
+            "orderNum": "10298",
+            "date": "1485878400",
+            "clientName": "宇欣实业",
+            "header": "卢浩天",
+            "payState": "已付"
+        }, {
+            "orderNum": "10299",
+            "date": "1487088000",
+            "clientName": "协昌妮绒有限公司",
+            "header": "金士鹏",
+            "payState": "未付"
+        }, {
+            "orderNum": "10300",
+            "date": "1489507200",
+            "clientName": "友恒信托",
+            "header": "张颖",
+            "payState": "已付"
+        }, {
+            "orderNum": "10301",
+            "date": "1494777600",
+            "clientName": "协昌妮绒有限公司",
+            "header": "金士鹏",
+            "payState": "未付"
+        }, {
+            "orderNum": "10302",
+            "date": "1495209600",
+            "clientName": "师大贸易",
+            "header": "王伟",
+            "payState": "已付"
+        }, {
+            "orderNum": "10303",
+            "date": "1497888000",
+            "clientName": "永业房屋",
+            "header": "张颖",
+            "payState": "未付"
+        }, {
+            "orderNum": "10304",
+            "date": "1498752000",
+            "clientName": "迈多贸易",
+            "header": "郑建杰",
+            "payState": "已付"
+        }, {
+            "orderNum": "10305",
+            "date": "1501344000",
+            "clientName": "阳林",
+            "header": "王伟",
+            "payState": "未付"
+        }, {
+            "orderNum": "10306",
+            "date": "1504022400",
+            "clientName": "通恒机械",
+            "header": "李芳",
+            "payState": "未付"
+        }],
+        "坤智科技": [{
+
+        }]
+    },
+    "data": {
+        "10290": [{
+            "productName": "饼干",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }],
+        "10291": [{
+            "productName": "饼干1",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒1",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵1",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }],
+        "10292": [{
+            "productName": "饼干2",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒2",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵2",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }],
+        "10293": [{
+            "productName": "饼干3",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒3",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵3",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }],
+        "10294": [{
+            "productName": "饼干4",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒4",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵4",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }],
+        "10295": [{
+            "productName": "饼干5",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒5",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵5",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }],
+        "10296": [{
+            "productName": "饼干6",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "啤酒6",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.25"
+        }, {
+            "productName": "蚵5",
+            "price": "12.25",
+            "number": "25",
+            "discount": "0.8",
+            "totalPrice": "306.26"
+        }]
+    },
+    "detail": {
+        "information": "订单基本信息",
+        "msg": {
+            "2017-8-18": [{
+                    "order": "10214",
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "韵达快递",
+                        "Freightfee": "666"
+                    }
+                },
+                {
+                    "order": 10214,
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "德邦快递",
+                        "Freightfee": "666"
+                    }
+                },
+                {
+                    "order": "10464",
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "菜鸟快递",
+                        "Freightfee": "555"
+                    }
+                },
+                {
+                    "order": 10214,
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "邮政快递",
+                        "Freightfee": "666"
+                    }
+                }
+            ],
+            "2017-9-20": [{
+                    "order": "104",
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "顺风快递",
+                        "Freightfee": "666"
+                    }
+                },
+                {
+                    "order": "1544",
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "顺风快递",
+                        "Freightfee": "666"
+                    }
+                },
+                {
+                    "order": "5555",
+                    "client": "山泰企业",
+                    "employees": "赵军",
+                    "OrderDate": "2010-01-04",
+                    "deliveryDate": "2010-01-05",
+                    "shipperInfo": {
+                        "shipperName": "余小姐",
+                        "shipperAddress": "光明北路2号",
+                        "postcode": "45456",
+                        "country": "中国",
+                        "area": "华北",
+                        "city": "北京"
+                    },
+                    "freightInfo": {
+                        "shippers": "顺风快递",
+                        "Freightfee": "555"
+                    }
+                }
+            ],
+            "2017-10-5": [{
+                "order": "10214",
+                "client": "山泰企业",
+                "employees": "赵军",
+                "OrderDate": "2010-01-04",
+                "deliveryDate": "2010-01-05",
+                "shipperInfo": {
+                    "shipperName": "余小姐",
+                    "shipperAddress": "光明北路2号",
+                    "postcode": "45456",
+                    "country": "中国",
+                    "area": "华北",
+                    "city": "北京"
+                },
+                "freightInfo": {
+                    "shippers": "顺风快递",
+                    "Freightfee": "666"
+                }
+            }]
+        }
+
+
+
+    },
+    "company": {
+        "广东公司": [{
+                "companyName": "广东茂名分公司",
+                "information": [{
+                        "name": "蒋洛蓉",
+                        "relations": "合同制员工",
+                        "Educational": "大专"
+                    },
+                    {
+                        "name": "王颖",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "专科"
+                    },
+                    {
+                        "name": "顾煜君",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "大学本科"
+                    },
+                    {
+                        "name": "蒋洛蓉",
+                        "relations": "合同制员工",
+                        "Educational": "大专"
+                    },
+                    {
+                        "name": "王颖",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "高中"
+                    },
+                    {
+                        "name": "顾煜君",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "大学本科"
+                    }
+                ]
+            },
+            {
+                "companyName": "广东高州分公司",
+                "information": [{
+                        "name": "蒋洛蓉02",
+                        "relations": "合同制员工",
+                        "Educational": "初中"
+                    },
+                    {
+                        "name": "王颖02",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "专科"
+                    },
+                    {
+                        "name": "顾煜君02",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "大学本科"
+                    },
+                    {
+                        "name": "蒋洛蓉",
+                        "relations": "合同制员工",
+                        "Educational": "博士"
+                    },
+                    {
+                        "name": "王颖",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "专科"
+                    },
+                    {
+                        "name": "顾煜君",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "大学本科"
+                    },
+                    {
+                        "name": "王颖",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "专科"
+                    },
+                    {
+                        "name": "王颖",
+                        "relations": "其他中介公司劳务派遣",
+                        "Educational": "专科"
+                    }
+                ]
+            }
+        ],
+        "茂名公司": [{
+            "companyName": "茂名化州分公司",
+            "information": [{
+                    "name": "蒋洛蓉02",
+                    "relations": "合同制员工",
+                    "Educational": "大专"
+                },
+                {
+                    "name": "王颖02",
+                    "relations": "其他中介公司劳务派遣",
+                    "Educational": "专科"
+                },
+                {
+                    "name": "顾煜君02",
+                    "relations": "其他中介公司劳务派遣",
+                    "Educational": "大学本科"
+                },
+                {
+                    "name": "蒋洛蓉",
+                    "relations": "合同制员工",
+                    "Educational": "大专"
+                },
+                {
+                    "name": "王颖",
+                    "relations": "其他中介公司劳务派遣",
+                    "Educational": "专科"
+                },
+                {
+                    "name": "顾煜君",
+                    "relations": "其他中介公司劳务派遣",
+                    "Educational": "大学本科"
+                }
+            ]
+        }]
+    },
+    "progress": {
+        "广州市": {
+            "1504195200": [{
+                "荔湾区": {
+                    "id": "1",
+                    "planPrice": "1900000",
+                    "actualPrice": "29000.0",
+                    "payoutPrice": "14300.0"
+                }
+            }, {
+                "白云区": {
+                    "id": "2",
+                    "planPrice": "1350000",
+                    "actualPrice": "37000.0",
+                    "payoutPrice": "10100.0"
+                }
+            }, {
+                "天河区": {
+                    "id": "3",
+                    "planPrice": "3150000",
+                    "actualPrice": "90000.0",
+                    "payoutPrice": "50100.0"
+                }
+            }, {
+                "越秀区": {
+                    "id": "4",
+                    "planPrice": "2350000",
+                    "actualPrice": "88000.0",
+                    "payoutPrice": "5100.0"
+                }
+            }, {
+                "海珠区": {
+                    "id": "5",
+                    "planPrice": "7750000",
+                    "actualPrice": "122000.0",
+                    "payoutPrice": "22300.0"
+                }
+            }, {
+                "花都区": {
+                    "id": "6",
+                    "planPrice": "2350000",
+                    "actualPrice": "88000.0",
+                    "payoutPrice": "5100.0"
+                }
+            }, {
+                "黄埔区": {
+                    "id": "7",
+                    "planPrice": "150000",
+                    "actualPrice": "2000.0",
+                    "payoutPrice": "5100.0"
+                }
+            }, {
+                "山卡拉": {
+                    "id": "8",
+                    "planPrice": "122350000",
+                    "actualPrice": "12315300.0",
+                    "payoutPrice": "1244000.0"
+                }
+            }],
+            "1501516800": [{
+                "荔湾区": {
+                    "id": "1",
+                    "planPrice": "1900000",
+                    "actualPrice": "180000.0",
+                    "payoutPrice": "50000.0"
+                }
+            }, {
+                "白云区": {
+                    "id": "2",
+                    "planPrice": "1350000",
+                    "actualPriceP": "2700.0",
+                    "payoutPriceP": "84000.0"
+                }
+            }, {
+                "天河区": {
+                    "id": "3",
+                    "planPrice": "3150000",
+                    "actualPriceP": "5000.0",
+                    "payoutPriceP": "40000.0"
+                }
+            }, {
+                "越秀区": {
+                    "id": "4",
+                    "planPrice": "2350000",
+                    "actualPriceP": "5300.0",
+                    "payoutPriceP": "44000.0"
+                }
+            }, {
+                "海珠区": {
+                    "id": "5",
+                    "planPrice": "7750000",
+                    "actualPriceP": "122300.0",
+                    "payoutPriceP": "233000.0"
+                }
+            }, {
+                "花都区": {
+                    "id": "6",
+                    "planPrice": "2350000",
+                    "actualPriceP": "5300.0",
+                    "payoutPriceP": "44000.0"
+                }
+            }, {
+                "黄埔区": {
+                    "id": "7",
+                    "planPrice": "150000",
+                    "actualPriceP": "5300.0",
+                    "payoutPriceP": "44000.0"
+                }
+            }, {
+                "山卡拉": {
+                    "id": "8",
+                    "planPrice": "122350000",
+                    "actualPriceP": "148.0",
+                    "payoutPriceP": "133.0"
+                }
+            }],
+            "1498838400": {},
+            "1506787200": {}
+        },
+        "深圳市": {
+
+        }
+    },
+    "archives": {
+        "帆软集团基本档案": {
+            "基本信息": [{
+                "numbering": "01",
+                "name": "小名",
+                "sex": "男",
+                "NativePlace": "广东",
+                "age": 20,
+                "serviceAge": 2
+            }],
+            "教育经历": [{
+                    "LearningTime": "2000年9月-2004年6月",
+                    "nature": "全日制",
+                    "Educational": "本科",
+                    "shcool": "东南大学",
+                    "majors": "计算机"
+                },
+                {
+                    "LearningTime": "2000年9月-2004年6月",
+                    "nature": "全日制",
+                    "Educational": "本科",
+                    "shcool": "东南大学",
+                    "majors": "计算机"
+                }
+            ],
+            "工作经历": [{
+                    "AtTime": "2000年01月-2001年05月",
+                    "WorkUnits": "南京帆软软件有限公司",
+                    "position": "初级工程师"
+                },
+                {
+                    "AtTime": "2000年01月-2001年05月",
+                    "WorkUnits": "南京帆软软件有限公司",
+                    "position": "初级工程师"
+                }
+            ],
+            "职称资格": [{
+                    "type": "职称",
+                    "JobTitle": "初级工程师",
+                    "GetDate": "2011-01-01"
+                },
+                {
+                    "type": "职称",
+                    "JobTitle": "初级工程师",
+                    "GetDate": "2011-01-01"
+                }
+            ],
+            "培训记录": [{
+                    "TrainingContent": "报表基础知识、模板制作",
+                    "TrainingDate": "2015年8月14日10:00–17:00",
+                    "TrainingLecturer": "李讲师",
+                    "TrainingLocation": "上海"
+                },
+                {
+                    "TrainingContent": "报表基础知识、模板制作",
+                    "TrainingDate": "2015年8月14日10:00–17:00",
+                    "TrainingLecturer": "李讲师",
+                    "TrainingLocation": "上海"
+                }
+            ],
+            "获奖记录": [{
+                    "AwardName": "最佳主题奖",
+                    "WinningProject": "主题设计",
+                    "WinningData": "2015-3-2",
+                    "WinningRating": "一等奖",
+                    "WinningRanking": "1899-12-31",
+                    "CertificateNumber": "01",
+                    "Awards": "内部"
+                },
+                {
+                    "AwardName": "最佳主题奖",
+                    "WinningProject": "主题设计",
+                    "WinningData": "2015-3-2",
+                    "WinningRating": "一等奖",
+                    "WinningRanking": "1899-12-31",
+                    "CertificateNumber": "01",
+                    "Awards": "内部"
+                }
+            ],
+            "专利": [{
+                    "ThePatent": "帆软专利",
+                    "PatentNo": "02",
+                    "TheInventor": "离",
+                    "TheFiling": "2014-08-01",
+                    "Authorization": "2015-01-01"
+                },
+                {
+                    "ThePatent": "帆软专利",
+                    "PatentNo": "02",
+                    "TheInventor": "离",
+                    "TheFiling": "2014-08-01",
+                    "Authorization": "2015-01-01"
+                }
+            ],
+            "学术论文": [{
+                    "PaperTitle": "FR工具构建短信平台统计分析系统",
+                    "PublishedJournals": "FR-实例方案",
+                    "PublishedDate": "2015-07-09",
+                    "author": "第一作者"
+                },
+                {
+                    "PaperTitle": "FR工具构建短信平台统计分析系统",
+                    "PublishedJournals": "FR-实例方案",
+                    "PublishedDate": "2015-07-09",
+                    "author": "第一作者"
+                }
+            ],
+            "著作": [{
+                    "BookName": "产品基础入门、多级上报主题及V8.0介绍",
+                    "Press": "帆软出版社",
+                    "releaseDate": "2014-06-01",
+                    "actualDate": "2017-05-05",
+                    "role": "攥写人"
+                },
+                {
+                    "BookName": "产品基础入门、多级上报主题及V8.0介绍",
+                    "Press": "帆软出版社",
+                    "releaseDate": "2014-06-01",
+                    "actualDate": "2017-05-05",
+                    "role": "攥写人"
+                }
+            ],
+            "学术会议": [{
+                    "meetingName": "年中会议",
+                    "meetingAgenda": "帆软发展",
+                    "meetingDates": "2015年8月27日9:30–17:00",
+                    "host": "FR",
+                    "meetinglocation": "海南"
+                },
+                {
+                    "meetingName": "年中会议",
+                    "meetingAgenda": "帆软发展",
+                    "meetingDates": "2015年8月27日9:30–17:00",
+                    "host": "FR",
+                    "meetinglocation": "海南"
+                }
+            ]
+
+        }
+    }
+
+}

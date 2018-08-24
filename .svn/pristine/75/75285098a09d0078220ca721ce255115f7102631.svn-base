@@ -1,0 +1,953 @@
+/* 主页 */
+
+.search-bar {
+    background: #ff3300;
+    padding-top: .15rem;
+    box-sizing: border-box;
+    z-index: 10000;
+}
+
+.search-bar>img {
+    width: .3rem;
+    left: .3rem;
+}
+
+.search-bar p {
+    font-size: .36rem;
+    right: .3rem;
+    line-height: .96rem;
+}
+
+.search-bar div {
+    background: white;
+    height: .64rem;
+    width: 75%;
+    margin: auto;
+    border-radius: 6px;
+    position: relative;
+}
+
+.search-bar>div>img {
+    height: .44rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: .05rem;
+    margin: auto;
+}
+
+.search-bar input {
+    border: none;
+    position: absolute;
+    left: .66rem;
+    right: 0;
+    height: .64rem;
+    font-size: .3rem;
+    width: 85%;
+}
+
+.search-bar-active {
+    width: 65% !important;
+}
+
+.main-container {
+    padding-top: .96rem;
+}
+
+.main-container .navbar {
+    height: .6rem;
+    padding-left: .1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.main-container .navbar ul {
+    width: 11.5rem;
+}
+
+.main-container .navbar li {
+    float: left;
+    font-size: .36rem;
+    margin-right: .4rem;
+    line-height: .6rem;
+    color: #dfdfdf;
+}
+
+.navbar-active {
+    color: red !important;
+    border-bottom: 2px solid red;
+    box-sizing: border-box;
+}
+
+.main-container .banner {
+    width: 100%;
+}
+
+.main-container .banner img {
+    width: 100%;
+}
+
+.main-container .main-content ul>li {
+    border-bottom: 1px solid #dfdfdf;
+    margin-bottom: .3rem;
+}
+
+.main-container .main-content ul>li>img {
+    max-width: 1.6rem;
+    max-height: 1.6rem;
+    float: left;
+}
+
+.main-container .main-content .left {
+    margin-bottom: .6rem;
+    float: initial;
+}
+
+.main-container .main-content ol {
+    padding-left: 1.84rem;
+}
+
+.main-container .main-content ol li p {
+    font-size: .28rem;
+    margin-bottom: .1rem;
+}
+
+.main-container .main-content ol li:first-child p {
+    height: .8rem;
+}
+
+.main-container .main-content ol li img {
+    width: .28rem;
+    margin-right: .5rem;
+}
+
+.main-container .main-content ol>li:nth-child(3) p:first-child {
+    float: left;
+    color: #dfdfdf;
+}
+
+.main-container .main-content ol>li:nth-child(3) p:last-child {
+    float: right;
+    color: #dfdfdf;
+}
+
+.main-content {
+    margin-top: 0;
+}
+
+/* 课程学习 */
+
+.cole-head {
+    background: #e13f2a;
+    top: 0;
+    z-index: 2;
+}
+
+.cole-head img:first-child {
+    width: .3rem;
+    left: .3rem;
+}
+
+.cole-head img:nth-child(3) {
+    width: .4rem;
+    right: .3rem;
+}
+
+.cole-head .submit {
+    padding: 0 .2rem;
+    height: .5rem;
+    right: .3rem;
+    background: yellow;
+}
+
+.cole-head p {
+    font-size: .42rem;
+    line-height: .96rem;
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: auto;
+}
+
+.toggle-search {
+    background: #d7d7d7;
+    border-radius: 6px;
+}
+
+.cole-main {
+    padding: 0 .3rem .3rem;
+}
+
+.cole-options div {
+    float: left;
+    width: 33%;
+    box-sizing: border-box;
+    padding-left: .5rem;
+    margin-bottom: .3rem;
+}
+
+.cole-options img {
+    width: .3rem;
+    float: left;
+    margin-top: .08rem;
+}
+
+.cole-options span {
+    font-size: .36rem;
+    float: left;
+}
+
+.cole-type p {
+    font-size: .32rem;
+    margin-bottom: .2rem;
+}
+
+.cole-type span {
+    font-size: .28rem;
+}
+
+.cole-type ul {
+    height: 1rem;
+}
+
+.cole-type ul>li {
+    margin: 0 .1rem .2rem 0;
+    float: left;
+}
+
+.cole-type ul>li label div {
+    width: .2rem;
+    height: .2rem;
+    border: 1px solid #999;
+    margin: .1rem .1rem 0 .2rem;
+}
+
+.cole-type-check {
+    background: url(../images/tick.png) no-repeat;
+    background-size: 100%;
+}
+
+.toggle-search {
+    height: 1rem;
+    width: 100%;
+    margin-top: .05rem !important;
+}
+
+.toggle-search img {
+    width: .3rem;
+    padding-left: .2rem;
+}
+
+.toggle-search input {
+    height: .5rem;
+    left: .7rem;
+    width: 85%;
+    border-radius: 5px;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.cole-options {
+    margin-top: .3rem;
+}
+
+.cole-content {
+    margin-top: .3rem;
+}
+
+.cole-content ul>li {
+    border-bottom: 1px solid #dfdfdf;
+    margin-bottom: .3rem;
+    clear: both;
+    height: 1.6rem;
+}
+
+.cole-content ul>li>img {
+    max-width: 1.6rem;
+    max-height: 1.6rem;
+    float: left;
+}
+
+.cole-content .left {
+    margin-bottom: .6rem;
+    float: initial;
+}
+
+.cole-content ol {
+    padding-left: 1.84rem;
+}
+
+.cole-content ol li p {
+    font-size: .28rem;
+    margin-bottom: .1rem;
+}
+
+.cole-content ol li img {
+    width: .28rem;
+    margin-right: .5rem;
+}
+
+.cole-content ol>li:nth-child(3) p:first-child {
+    float: left;
+    color: #dfdfdf;
+}
+
+.cole-content ol>li:nth-child(3) p:last-child {
+    float: right;
+    color: #dfdfdf;
+}
+
+[ask-submit] p:nth-child(2) {
+    margin-top: .5rem;
+}
+
+[ask-submit] button {
+    padding: .1rem;
+}
+
+[ask-submit] [return] {
+    margin-right: .5rem;
+}
+
+[ask-submit]>div {
+    margin: .36rem 0 .1rem 0;
+}
+
+/* 在线考试 */
+
+.cole-head .more {
+    width: .6rem !important;
+}
+
+.onex-main {
+    padding: .3rem;
+}
+
+.onex-title {
+    font-size: .36rem;
+    margin-bottom: .3rem;
+}
+
+.onex-start div {
+    height: 1rem;
+    width: 50%;
+}
+
+.onex-start .left p {
+    font-size: .32rem;
+    margin-bottom: .1rem;
+}
+
+.onex-start .right button {
+    padding: 0 .2rem;
+    height: .5rem;
+    background: red;
+    border: none;
+    font-size: .32rem;
+    right: 0;
+}
+
+.onex-main section b {
+    font-size: .36rem;
+    margin-bottom: .3rem;
+}
+
+.onex-main section p {
+    font-size: .34rem;
+    margin-bottom: .6rem;
+    font-weight: bold;
+}
+
+.onex-main section[single] ul,
+.onex-main section[multiple] ul {
+    padding: .6rem;
+}
+
+.onex-main section ul {
+    margin-bottom: 1rem;
+}
+
+.onex-main section li {
+    font-size: .3rem;
+    margin-bottom: .5rem;
+}
+
+.onex-main section textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    height: 3rem;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* 试卷制作系统 */
+
+.mapa-main {
+    margin-top: 1.2rem;
+    padding: 0 .3rem;
+}
+
+.mapa-main header {
+    margin-bottom: .5rem;
+}
+
+.mapa-main article {
+    font-size: .3rem;
+    border-bottom: 1px solid #ccc;
+    margin-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.mapa-main input {
+    border: none;
+    padding: 3px;
+}
+
+.mapa-topic {
+    margin-bottom: .3rem;
+}
+
+.fraction {
+    width: 1rem;
+}
+
+.mapa-main ul {
+    padding-left: .6rem;
+}
+
+.mapa-main ul>li {
+    margin-bottom: .3rem;
+    display: block;
+}
+
+.mapa-main ol {
+    line-height: .3rem;
+}
+
+.mapa-main ol>li {
+    float: left;
+    width: .8rem;
+    height: .4rem;
+    line-height: .4rem;
+    text-align: right
+}
+
+.mapa-main article>div {
+    margin-bottom: 1rem;
+}
+
+.mapa-main article>div>span {
+    line-height: .3rem;
+}
+
+.mapa-main article>button {
+    width: 80%;
+    height: .8rem;
+    font-size: .4rem;
+    margin: 1rem auto .3rem auto;
+}
+
+.mapa-main .detail header b:nth-child(4) {
+    margin-left: .2rem;
+}
+
+.mapa-main p {
+    margin-bottom: .3rem;
+}
+
+.mapa-main .detail div {
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border: 1px solid #999;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mapa-main .detail select {
+    height: .5rem;
+    width: 100%;
+    margin-top: .3rem;
+}
+
+.mapa-foot .next {
+    height: .8rem;
+    font-size: .4rem;
+    margin: 1rem auto .3rem auto;
+    width: 100%;
+}
+
+.mapa-foot {
+    padding: .3rem;
+}
+
+.mapa-foot button {
+    background-color: #e13f2a;
+    width: 3rem;
+    line-height: .8rem;
+    height: .8rem;
+}
+
+/* 考试结果 */
+
+.exre-main .content {
+    background: #fdebe9;
+    height: 2rem;
+}
+
+.exre-score {
+    height: 1rem;
+}
+
+.exre-score * {
+    font-size: .3rem;
+    display: inline-block;
+    height: 1rem;
+    ;
+}
+
+.exre-score p span {
+    line-height: 1rem;
+    vertical-align: middle;
+}
+
+.exre-score>span,
+.exre-score>p {
+    font-size: .7rem;
+    line-height: 1rem;
+    color: #e13f2a;
+}
+
+.exre-time {
+    height: 1rem;
+    top: .8rem;
+    line-height: .5rem;
+}
+
+.exre-time span:first-child {
+    line-height: 1rem;
+}
+
+.exre-time span:last-child {
+    line-height: 1rem;
+}
+
+.exre-main {
+    margin-top: 0;
+}
+
+.exre-main .btn button {
+    background: #e13f2a;
+    padding: .1rem .2rem;
+}
+
+.exre-main>p {
+    color: #e13f2a;
+    margin-top: .6rem;
+}
+
+/* 保存笔记 */
+
+.sano-main {
+    padding: .3rem .3rem;
+}
+
+.sano-main select {
+    background: none;
+    height: .5rem;
+    width: 100%;
+}
+
+.sano-main section {
+    margin-top: .5rem;
+}
+
+.sano-main textarea {
+    width: 98%;
+    height: 3rem;
+    margin-top: .2rem;
+    padding: 5px;
+}
+
+.sano-main article {
+    border-bottom: 1px solid #ccc;
+}
+
+.sano-main>button {
+    width: 100%;
+    height: .8rem;
+}
+
+.sano-main .btn button {
+    background: #e13f2a;
+    width: 2.5rem;
+    padding: .2rem 0;
+}
+
+/* 答案查看 */
+
+.anvi-title {
+    font-size: .36rem;
+    margin-bottom: .3rem;
+}
+
+.anvi-start p {
+    font-size: .32rem;
+    margin-bottom: .1rem;
+}
+
+.anvi-start button {
+    padding: 0 .2rem;
+    height: .5rem;
+    background: red;
+    border: none;
+    font-size: .32rem;
+    right: 0;
+}
+
+.anvi-start button:nth-child(3) {
+    right: 2rem;
+}
+
+.anvi-main section b {
+    font-size: .36rem;
+    margin-bottom: .3rem;
+}
+
+.anvi-main section p {
+    font-size: .34rem;
+    margin-bottom: .6rem;
+    font-weight: bold;
+}
+
+.anvi-main section ul {
+    margin-bottom: 1rem;
+}
+
+.anvi-main section li {
+    font-size: .3rem;
+    margin-bottom: .5rem;
+}
+
+.anvi-main section input {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    height: .6rem;
+    padding: 5px;
+}
+
+.anvi-main section textarea {
+    width: 100%;
+    border-radius: 5px;
+    height: 3rem;
+}
+
+.anvi-note {
+    width: .6rem;
+    margin-top: -.6rem;
+}
+
+.mistake {
+    background: red;
+    color: yellow;
+    font-weight: bold;
+}
+
+/* 笔记列表 */
+
+.noli-main section {
+    font-size: .1rem;
+    margin-bottom: 1rem;
+}
+
+.noli-main section b {
+    font-size: .36rem;
+    margin-bottom: .3rem;
+}
+
+.noli-main li {
+    font-size: .1rem;
+    border-bottom: 1px solid #ccc;
+    padding: .3rem 0;
+}
+
+.noli-main span {
+    font-size: .3rem;
+}
+
+.noli-main span:first-child {
+    float: left;
+    color: blue;
+}
+
+.noli-main .noli-topic {
+    display: inline-block;
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.noli-main .noli-time {
+    float: right;
+}
+
+/* 个人笔记2 */
+
+.sano-main2 section p {
+    font-size: .34rem;
+    margin-bottom: .6rem;
+    font-weight: bold;
+}
+
+.sano-main2 section ul {
+    margin-bottom: 1rem;
+}
+
+.sano-main2 section li {
+    font-size: .3rem;
+    margin-bottom: .5rem;
+    text-align: left;
+}
+
+.sano-main2 textarea {
+    width: 98%;
+    height: 3rem;
+    margin-top: .2rem;
+    padding: 5px;
+}
+
+.sano-main2>button {
+    width: 100%;
+    height: .8rem;
+}
+
+.sano-main2 .btn button {
+    background: #e13f2a;
+    width: 2.5rem;
+    padding: .2rem 0;
+}
+
+/* 笔记详情页 */
+
+.node-main section p {
+    font-size: .34rem;
+    margin-bottom: .6rem;
+    font-weight: bold;
+}
+
+.node-main section ul {
+    margin-bottom: 1rem;
+    padding-left: .3rem;
+}
+
+.node-main section li {
+    font-size: .3rem;
+    margin-bottom: .5rem;
+    text-align: left;
+}
+
+.node-main header {
+    margin: .5rem 0 .3rem;
+}
+
+.node-main textarea {
+    width: 98%;
+    height: 3rem;
+    margin-top: .2rem;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.node-main>button {
+    width: 100%;
+    height: .8rem;
+}
+
+.node-main .btn button {
+    background: #e13f2a;
+    width: 2.5rem;
+    padding: .2rem 0;
+}
+
+.node-main [section="topic"] {
+    border-bottom: 2px solid #dfdfdf;
+    margin-bottom: 1rem;
+}
+
+.node-main [section="experience"] {
+    border-bottom: 2px solid #dfdfdf;
+    padding-bottom: 1rem;
+}
+
+/* 组织笔记 */
+
+.lirz-main form {
+    font-size: .1rem;
+}
+
+.lirz-main select {
+    width: 100%;
+    border-radius: 5px;
+    height: .8rem;
+    margin: .3rem 0 .5rem;
+    ;
+}
+
+.lirz-main article {
+    padding-bottom: .3rem;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: .5rem;
+}
+
+.lirz-main article>ul img {
+    width: .4rem;
+}
+
+.lirz-main article>ul li {
+    display: inline;
+    margin-left: .3rem;
+}
+
+.lirz-main article>ul li span {
+    color: #8a8a8a;
+}
+
+.lirz-main article>ul li * {
+    vertical-align: middle;
+}
+
+.lirz-main section:nth-child(2) {
+    margin-bottom: 1rem;
+}
+
+.lirz-main section p {
+    font-size: .34rem;
+    margin-bottom: .6rem;
+    font-weight: bold;
+}
+
+.lirz-main section ul {
+    margin-bottom: 1rem;
+    padding-left: .3rem;
+}
+
+.lirz-main section li {
+    font-size: .3rem;
+    margin-bottom: .5rem;
+    text-align: left;
+}
+
+.lirz-main textarea {
+    width: 98%;
+    height: 3rem;
+    margin-top: .2rem;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.lirz-main>button {
+    width: 100%;
+    height: .8rem;
+}
+
+.lirz-main .btn button {
+    background: #e13f2a;
+    width: 2.5rem;
+    padding: .2rem 0;
+}
+
+.lirz-main article header {
+    margin-bottom: .3rem;
+}
+
+#lirz-options {
+    margin-left: .5rem;
+    height: 1rem;
+}
+
+#lirz-options div {
+    float: left;
+    width: 25%;
+    box-sizing: border-box;
+    margin-bottom: .3rem;
+}
+
+#lirz-options img {
+    width: .3rem;
+    float: left;
+    margin-top: .08rem;
+}
+
+#lirz-options span {
+    font-size: .36rem;
+    float: left;
+}
+
+.lirz-options-active {
+    border-bottom: 1px solid red;
+    color: red;
+}
+
+/* 评论详情页 */
+
+#code-main {
+    padding: 0;
+}
+
+#code-main textarea {
+    width: 98%;
+    height: 3rem;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#code-main section header {
+    margin: .8rem 0 .3rem 0;
+}
+
+#code-main article header {
+    margin-bottom: .3rem;
+}
+
+#dialogue {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: .6rem;
+    background: white;
+}
+
+#dialogue button {
+    width: 20%;
+    height: .8rem;
+}
+
+#dialogue input {
+    width: 75%;
+    height: .8rem;
+    padding: .3rem;
+    box-sizing: border-box;
+}
+
+#code-main .first-section {
+    padding: .5rem 0;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#code-main .first-section * {
+    line-height: .6rem;
+}
+
+#code-main .first-section>p {
+    padding: 0 0 .3rem .3rem;
+}
+
+#code-main .second-section {
+    background: #eeeaea;
+    margin-left: .3rem;
+    padding: .2rem;
+}

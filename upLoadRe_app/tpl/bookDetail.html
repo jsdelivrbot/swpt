@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/upLoadRe_app/css/re_public.css">
+<link rel="stylesheet" href="/upLoadRe_app/css/re_index.css">
+<div class="top">
+    <span class="top-return" onclick="javascript:history.go(-1);"></span>
+     <h1>资源详情</h1>
+     <a ng-click="createSource()" class="upload_source"></a>
+ </div>
+ <div class="book_detail clearfix">
+     <div class="book_infor clearfix">
+         <div class="infor_img">
+             <img src="{{imgSrc}}{{bookData.coverPhoto}}">
+         </div>
+         <div class="infor_de">
+             <div class="infor_tittle">书名:{{bookData.bookName}}</div>
+             <div class="infor_autor">作者：{{bookData.bookAuthor}}</div>
+             <div class="infor_pu">出版社：{{bookData.bookPress}}</div>
+             <div class="infor_ibsn">书籍编码：{{bookData.bookIBSN}}</div>
+             <div class="infor_object">推荐对象：{{bookData.recommendedList[0].recommendedObjectName}}</div>
+             <div class="infor_reason">书籍简介：{{bookData.briefIntroduction}}</div>
+         </div>
+     </div>
+     <div ng-if="type" class="videoShow">
+         
+            <div class="videoTop">
+                 <span class="top-return" ng-click="closeVideo($event)"></span> 
+                 <h1>{{videoTitle}}</h1>
+            </div>
+            <video ng-mouseenter="enterTop()"  ng-mouseleave="leaveTop()" src="{{videoPath}}"   object-fit = "fill" width="100%" height="200    " controls = "controls" type='video/mp4'></video>
+     </div>
+     <div class="jianjie">
+         <div class="jianjie_title">简介内容</div>
+         <div class="jianjie_ly">
+             {{bookData.recommendedReasons}}
+         </div>
+     </div>
+    <div class="content">
+        <ul class="clearfix">
+            <li ng-repeat="s in sourceType" ng-class="{'active':navId == s.id}" ng-click="navType(s.id)">{{s.type}}</li>
+        </ul>
+        <div class="video" ng-if="contentType == 'video'">
+                <div class="content_type" ng-repeat="v in bookData.videoList"  ng-click="playVideo(v.id,v.videoPath,$event)">
+                        <div class="content_book clearfix">
+                          <img src="img/u82.png" class="imglf"> 
+                          <span> {{v.videoName}}</span>
+                          <img src="img/u118.png" class="imgRg">
+                        </div>
+                    </div> 
+        </div>
+        <div class="music" ng-if="contentType == 'music'">
+            <div class="content_type" ng-repeat="m in bookData.musicList"> 
+                <div class="content_book">{{m.musicName}}</div>
+                <audio  src="{{imgSrc}}{{m.musicPath}}" controls="controls">
+                </audio>
+            </div>   
+        </div>
+        <div class="tushu" ng-if="contentType == 'tushu'">
+                <div class="content_type" ng-repeat="m in bookData.bookList"> 
+                    <div class="content_book">{{m.bookName}}</div>
+                    <audio src="{{imgSrc}}{{m.bookPath}}" controls="controls">
+                    </audio>
+                </div>   
+        </div>
+        <div class="tiku" ng-if="contentType == 'tiku'">
+                <div class="content_type" ng-repeat="m in bookData.queList"> 
+                    <div class="content_book">{{m.queName}}</div>
+                    <audio src="{{imgSrc}}{{m.quePath}}" controls="controls">
+                    </audio>
+                </div>   
+        </div>
+    </div>
+ </div>

@@ -1,0 +1,474 @@
+<html>
+
+<head>
+    <title>组合控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="./images/font_icon/iconfont.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <link rel="stylesheet" href="./self/css/pagedetails.css">
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript" src="../httpData.config.js"></script>
+
+    <script type="text/javascript">
+        function createElement(type, name) {
+            var element = null;
+            try {
+                element = document.createElement('<' + type + ' name="' + name + '">');
+            } catch (e) {}
+            if (element == null) {
+                element = document.createElement(type);
+                element.name = name;
+            }
+            return element;
+        }
+    </script>
+    <style>
+        input {
+            padding: 4px 6px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr></tr>
+            <tr>
+                <td style="text-align:center;" colspan="2">
+                    <label for="Tpl1" data-img="tpl1.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl1" id="Tpl1"> 模板一
+                    </label>
+                    <label for="Tpl2" data-img="tpl2.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl2" id="Tpl2"> 模板二
+                    </label>
+                    <label for="Tpl3" data-img="tpl3.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl3" id="Tpl3"> 模板三
+                    </label>
+                    <label for="Tpl4" data-img="tpl4.png" class="menuLabel">
+                        <input type="radio" name="tpl" value="Tpl4" id="Tpl4"> 模板四
+                    </label>
+                </td>
+            </tr>
+            <div class="tplBottom">
+                <p class="title"></p>
+                <img src="" alt="模板图像">
+            </div>
+            <tr>
+                <th colspan="2">
+                    <span>跳转目标</span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="orgFurl" id="orgfUrl">
+                        <option value="0">---请输入网址-</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var clearImg;
+        $('.menuLabel').hover(function(e) {
+            $('.tplBottom .title').html($(e.currentTarget).text());
+            $('.tplBottom img').prop('src', './images/pagedetails/' + $(e.currentTarget).data('img'));
+            $('.tplBottom').fadeIn();
+            clearTimeout(clearImg);
+        }, function() {
+            clearImg = setTimeout(function() {
+                $('.tplBottom').fadeOut();
+            }, 5000);
+        })
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            gdataSource = null,
+            thePlugins = 'pagedetails';
+        window.onload = function() {
+            /*
+             * 链接后台获取 数据链接
+             *
+             */
+            var nodeParentId = $('#nodeParentId', window.parent.document).val();
+            var nodeId = $("#node_id", window.parent.document).val();
+            $.ajax({
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function(res) {
+                    $.each(res.msg, function(index, value) {
+                        $("#orgfUrl").append('<option value=' + value.id + '>' + value.value + '</option>');
+                    })
+                },
+                error: function(res) {
+                    alert('抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！')
+                }
+            });
+        }
+
+        dialog.onok = function() {
+            if ($('#orgfUrl').val() == 0) {
+                orgfUrl = "";
+            } else {
+                orgfUrl = $('#orgfUrl').val();
+                orgUrlId = $('#orgfUrl').val();
+                orgUrlName = $('#orgfUrl option[value=' + orgfUrl + ']').text();
+            }
+            if (!oNode) {
+                var val = $('[name=tpl]:checked').val();
+                var html;
+                if (val === 'Tpl1') {
+                    html = `
+                        <div class='wifiblockBoxs' style='border: 1px solid #ddd;'>
+                            <div class='header_top' style='position: relative;'><span onclick='history.go(-1)' style='position: absolute;left: 20px;'>&lt;</span>书籍详情</div>
+                            <div class='contains'>
+                                <div class='contains_img'>
+                                    <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='图片上传' style='display: block;width: 100%;height: 100%;' value='图片上传 - 控件' datasource='' leipiplugins='addimage'>
+                                </div>
+                                <div class='contains_detail'>
+                                    <div class='contains_title'>
+                                        <input groupCon='' name="leipiNewField" type="text" title="文本框" value="书名" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        作者：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="作者" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        出版社：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="出版社" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        IBSN：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="IBSN" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        推荐对象：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="推荐对象" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                    <div class='contains_content'>
+                                        推荐理由：<input groupCon='' name="leipiNewField" type="text" title="文本框" value="推荐理由" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='spacing'>
+                                <div class='contains_title' style='font-size: 14px;'>
+                                    <input groupCon='' name="leipiNewField" type="text" title="文本框" value="简介" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                </div>
+                                <div class='contains_content'>
+                                    <input groupCon='' name="leipiNewField" type="text" title="文本框" value="简介内容" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;"/>
+                                </div>
+                            </div>
+                            <div class='nav_container'>
+                                <div id='books' class='nav_btn nav_btnActive'>图书</div>
+                                <div id='audio' class='nav_btn'>音频</div>
+                                <div id='video' class='nav_btn'>视频</div>
+                                <div id='question' class='nav_btn'>题库</div>
+                            </div>
+                            <div data-allowjump='false' class='wifiblock books_con' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="`+prevent_Url+`editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                <div class='nav_top nav_books'>
+                                    <input groupCon='' name='leipiNewField' type='text' identity='文件上传' title='文件上传' style='display: block;width: 100%;height: 100%;' value='文件上传 - 控件' datasource='' leipiplugins='addimage'>
+                                </div>
+                            </div>
+                            <div data-allowjump='false' class='wifiblock audio_con' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="``editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                <div class='nav_top nav_audio'>
+                                    <div style='flex: 2;'>
+                                        <input class='audioInput' groupCon='' name='leipiNewField' type='text' identity='文件上传' title='文件上传' style='display: block;width: 100%;height: 100%;' value='文件上传 - 控件' datasource='' leipiplugins='addimage'>
+                                    </div>
+                                    <audio src='' controls loop='false' class='audio'></audio>
+                                </div>
+                                <div class='nav_bottom'>
+                                    <div class='iconfont icon-bofangsanjiaoxing'><i></i>23384次播放</div>
+                                    <div class='iconfont icon-shijian'><i></i>00分00秒</div>
+                                </div>
+                            </div>
+                            <div data-allowjump='false' class='wifiblock video_con' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="${orgUrlName}" orgUrlId="${orgUrlId}" orgvalue="" orgTitle="" orgurl="`+prevent_Url+`editor/assets/ueditor/formdesign/preview.html?link=${orgfUrl}" style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                <div class='nav_top nav_video'>
+                                    <input groupCon='' name='leipiNewField'  type='text' identity='视频上传' title='视频上传' style='display: block;width: 100%;height: 100%;' value='视频上传 - 控件' datasource='' leipiplugins='addimage'>
+                                    <div class='video' style='margin-left: 100px;'></div>
+                                </div>
+                            </div>
+                            <div class='question_con'></div>
+                            <div style='padding: 8px;display: flex;'>
+                                <div style='margin-right: 16px;'><input groupCon='' name="leipiNewField" type="text" title="文本框" value="评论" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="150" style="border: 1px solid; text-align: left; width: 150px;padding: 4px 6px !important;"/></div>
+                                <div class='iconfont icon-fenxiang' style='margin-right: 16px;'><i></i></div>
+                                <div class='iconfont icon-guanzhu'><i></i></div>
+                            </div>
+                        </div>
+                    `;
+                } else if (val === 'Tpl2') {
+                    html = `
+                        <div class="tpl2">
+                            <div class="header">
+                                <div class="back" onclick="javascript:history.go(-1);"><i class="iconfont-tpl2 icon-fanhui"></i></div>
+                                <div class="title">
+                                    <p>内容详情</p>
+                                </div>
+                                <div class="sw_collect"><i class="iconfont-tpl2 icon-shoucang"></i></div>
+                            </div>
+                            <div class="contentCon">
+                                <div class="artTitle">
+                                    <div class="title">
+                                        <input groupCon='' name="leipiNewField" type="text" title="文本框" value="文章标题" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/>
+                                    </div>
+                                    <div class="time">
+                                        <input name="leipiNewField" type="text" value="文章发布时间" title="文章发布时间" leipiplugins="macros" orgtype="sys_datetime" orghide="0" orgwidth="100%" style="width: 100%;"/>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="contentImg">
+                                        <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='文章正文图片' style='display: block;width: 100%;' value='文章正文图片' datasource='' leipiplugins='addimage'>
+                                    </div>
+                                    <div class="contentText">
+                                        <input groupCon='' name="leipiNewField" type="text" title="文本框" value="文章正文文字" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottomTool">
+                                <div class="sw_comments"><i class="iconfont-tpl2 icon-pinglun"></i><span class="sw_commentsCount">0</span></div>
+                                <div class="-mob-share-open"><i class="iconfont-tpl2 icon-fenxiang"></i><span class="justPlaceholder"></span></div>
+                                <div class="sw_likes"><i class="iconfont-tpl2 icon-like"></i><span class="sw_likesCount">0</span></div>
+                            </div>
+                        </div>
+                        <div class="-mob-share-ui -mob-share-ui-theme -mob-share-ui-theme-slide-bottom" style="display: none">
+                            <ul class="-mob-share-list">
+                                <li class="-mob-share-qq">
+                                    <p>QQ好友</p>
+                                </li>
+                                <li class="-mob-share-weixin">
+                                    <p>微信</p>
+                                </li>
+                                <li class="-mob-share-weibo">
+                                    <p>新浪微博</p>
+                                </li>
+                                <li class="-mob-share-qzone">
+                                    <p>QQ空间</p>
+                                </li>
+                                <li class="-mob-share-douban">
+                                    <p>豆瓣</p>
+                                </li>
+                            </ul>
+                            <div class="-mob-share-close">取消</div>
+                        </div>
+                        <div class="-mob-share-ui-bg"></div>
+                        <div id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=24c26877d4cdf" cdata_tag="script" _ue_custom_node_="true"></div>
+                        <div class="tpl2 sw_comments_container" style="display:none;">
+                            <div class="comment">
+                                <div class="header">
+                                    <div class="sw_comments_back back"><i class="iconfont-tpl2 icon-fanhui"></i></div>
+                                    <div class="title"><p>评论中心</p></div>
+                                </div>
+                                <div class="commentCenter">
+                                    <div class="noComment"><i class="iconfont-tpl2 icon-wushuju"></i><p>暂时没有评论哦</p></div>
+                                    <div class="hasComment">
+                                        <div class="commentContent clear">
+                                            <div class="left userIcon">
+                                                <img class="userIconImg" src="" alt="用户头像">
+                                            </div>
+                                            <div class="right">
+                                                <p class="userName fz16">用户昵称</p>
+                                                <p class="commentTime fz16">03-24 11:13</p>
+                                                <p class="content fz16">评论正文</p>
+                                                <div class="commentTool"><span class="fz16 sw_deleteComments">删除</span><span class="fz16">举报</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bottomTool">
+                                        <input class="fz16" type="text" placeholder="说点什么吧..." id="commentText">
+                                        <button id="commentSend">发送</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (val === 'Tpl3') {
+                    html = `
+                        <div class="tpl3">
+                            <div class="banner">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <div class='wifiblock swiper-slide' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="" orgUrlId="" orgvalue="" orgTitle="" orgurl="`+prevent_Url+`editor/assets/ueditor/formdesign/preview.html?link="
+                                            style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                            <div class="bannerCon">
+                                                <div class="leftPic">
+                                                    <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='推荐专题图片' style='display: block;width: 100%;' value='推荐专题图片' datasource='' leipiplugins='addimage'>
+                                                </div>
+                                                <div class="rightMain">
+                                                    <h4 class="title"><input groupCon='' name="leipiNewField" type="text" title="推荐专题标题" value="推荐专题标题" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></h4>
+                                                    <div class="studyTime">
+                                                        <span class="studyTime timeText"><input groupCon='' name="leipiNewField" type="text" title="推荐专题学习时间" value="推荐专题学习时间" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></span>学时</div>
+                                                    <button class="startStudy">开始学习</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination swiper-pagination-bullets">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="topics">
+                                <div class='wifiblock' name='leipiNewField' leipiplugins='wifiblock' orgUrlName="" orgUrlId="" orgvalue="" orgTitle="" orgurl="`+prevent_Url+`editor/assets/ueditor/formdesign/preview.html?link="
+                                    style='padding: 8px;border-bottom: 1px solid #ddd;'>
+                                    <div class="topic clear">
+                                        <div class="topicImg">
+                                            <input groupCon='' name='leipiNewField'  type='text' identity='图片上传' title='专题图片' style='display: block;width: 100%;' value='专题图片' datasource='' leipiplugins='addimage'>
+                                        </div>
+                                        <div class="topicMain">
+                                             <h4 class="title"><input groupCon='' name="leipiNewField" type="text" title="专题标题" value="专题标题" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></h4>
+                                            <div class="process">
+                                                <div class="processLoading"></div>
+                                                <p>
+                                                    <span class="processText">0</span>%</p>
+                                            </div>
+                                            <div class="learnTime"><input groupCon='' name="leipiNewField" type="text" title="课程类型" value="课程类型" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%;"/>课  / <span class="learnTimeText"><input groupCon='' name="leipiNewField" type="text" title="专题学时" value="专题学时" datasource='' leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%;"/></span> 学时</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (val === 'Tpl4') {
+                    html = '<div id="lc-title-bar">' +
+                        '<img onclick="window.history.go(-1);" src="./images/tpl4_images/return.png" id="lc-return-btn">' +
+                        '<p class="title"><span class=""></span></p>' +
+                        '<img src="./images/tpl4_images/user.png" id="lc-user-btn">' +
+                        '</div>' +
+                        '<main id="lc-main">' +
+                        '<div>' +
+                        '<div>' +
+                        '<div id="lc-banner">' +
+                        '<div id="lc-study-image">' +
+                        '<img src="./images/tpl4_images/cover.png">' +
+                        '</div>' +
+                        '<div id="lc-study-detail">' +
+                        '<h1><input groupCon="" name="leipiNewField" type="text" title="学习章节标题" value="学习章节标题" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/></h1>' +
+                        '<h4>必修课<input groupCon="" name="leipiNewField" type="text" title="必修课学时" value="必修课学时" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/>学时</h4>' +
+                        '<div id="lc-progress">' +
+                        '<p>' +
+                        '<span style="width:50%;"></span>' +
+                        '</p>' +
+                        '</div>' +
+                        '<p style="font-size:1.4rem !important;">' +
+                        '已学' +
+                        '<span class="green" style="font-size:1.5rem !important;">0.04</span>' +
+                        '学时，未学' +
+                        '<span class="red" style="font-size:1.5rem !important;">3.96</span>' +
+                        '学时' +
+                        '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div id="lc-study-btn">' +
+                        '<span class="">上次学习到：1.建设马克思主义执政党的光辉指引</span>' +
+                        '<button type="button">开始学习</button>' +
+                        '</div>' +
+                        '<div class="video-hide" style="display:none;" id="lc-video">' +
+                        '<img src="./images/tpl4_images/close.png">' +
+                        // '<input type="text" groupcon="" name="leipiNewField" identity="视频上传" title="视频上传" style="display: block;width: 100%;" value="视频上传" datasource="" leipiplugins="addimage" allowupload="notallow" />' +
+                        '<video src="" controls="controls"></video>' +
+                        '</div>' +
+                        '<div id="lc-container">' +
+                        '<nav id="lc-navbar">' +
+                        '<a class="nav-active">目录</a>' +
+                        '<a>讨论</a>' +
+                        '<a>笔记</a>' +
+                        '<a>推荐</a>' +
+                        '</nav>' +
+                        '<div id="lc-tab" class="swiper-container">' +
+                        '<div class="swiper-wrapper">' +
+                        '<div class="swiper-slide" style="overflow: auto;">' +
+                        '<div id="lc-contents">' +
+                        '<div class="ul list">' +
+                        '<div class="li wifiblock">' +
+                        '<img src="./images/tpl4_images/light.png">' +
+                        '<span class="title">' +
+                        '<input  groupCon="" name="leipiNewField" type="text" title="目录标题" value="目录标题" datasource="" leipiplugins="text" orghide="0" orgthide="1" orgbghide="0" orgalign="left" orgwidth="100%" style="border: 1px solid; text-align: left;width:100%"/>' +
+                        '<p class="video-hide"><input type="text" groupcon="" name="leipiNewField" identity="视频上传" title="视频上传" style="display: block;width: 100%;" value="视频上传" datasource="" leipiplugins="addimage" allowupload="notallow" /></p>' +
+                        '</span>' +
+                        '<span class="duration">6:29</span>' +
+                        '<img src="./images/tpl4_images/playing.png">' +
+                        '</div>' +
+                        '</div>' +
+                        '<p>您学习过</p>' +
+                        '<ul class="once">' +
+                        '<li>' +
+                        '<span class="title">建设马克思主义的光辉历史</span>' +
+                        '<img src="./images/tpl4_images/playing.png">' +
+                        '</li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="swiper-slide" style="overflow: auto;">' +
+                           '<div id="lc-discuss">' +
+                        '<form>' +
+                        '<textarea placeholder="请输入要发布的内容"></textarea>' +
+                        '</form>' +
+                        '<button>发布</button>' +
+                        '<hr>' +
+                        '<p>' +
+                        '共' +
+                        '<span class="">4</span>' +
+                        '条讨论' +
+                        '</p>' +
+                        '<ul>' +
+                        '<li>' +
+                        '<span class="user">用户名</span>' +
+                        '<span class="blank"></span>' +
+                        '<span class="content">用户发布的内容用户发布的内容用户发布的内容用户发布的内容用户发布的内容用户发布的内容用户发布的内容用户发布的内容用户发布的内容用户发布的内容</span>' +
+                        '</li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="swiper-slide" style="overflow: auto;">' +
+                        '<div id="lc-notes">' +
+                        '<form>' +
+                        '<textarea placeholder="请输入要发布的内容"></textarea>' +
+                        '</form>' +
+                        '<button>发布</button>' +
+                        '<hr>' +
+                        '<p>' +
+                        '共' +
+                        '<span class="">4</span>' +
+                        '条笔记' +
+                        '</p>' +
+                        '<ul>' +
+                        '<li>' +
+                        '<span class="user">时间</span>' +
+                        '<span class="blank"></span>' +
+                        '<span class="content">用户发布的内容</span>' +
+                        '</li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="swiper-slide" style="overflow: auto;">' +
+                        '<div id="lc-recommend">' +
+                        '<p>您学习过</p>' +
+                        '<ul class="once">' +
+                        '<li>' +
+                        '<span class="title">建设马克思主义的光辉历史</span>' +
+                        '<img src="./images/tpl4_images/playing.png">' +
+                        '</li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</main>' +
+                        '<footer id="lc-foot-bar">' +
+                        '<button type="button">开始学习</button>' +
+                        '</footer>';
+                }
+                editor.execCommand('insertHtml', html);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>分类控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <script src="jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <link rel="stylesheet" href="./cropper/cropper.css">
+    <link rel="stylesheet" href="self/btnSelect/btnSelect.css">
+    <link rel="stylesheet" href="self/zTree/zTreeStyle/zTreeStyle.css">
+    <script type="text/javascript" src="./cropper/cropper.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="self/btnSelect/btnSelect.js"></script>
+
+   <script src="../httpData.config.js"></script>
+   <script src="self/zTree/jquery.ztree.all.js"></script>
+
+    <style>
+    	.ztree-main{
+    		float: left;
+    		width: 35%;
+    		height: 490px;
+    		border: 1px solid #CCCCCC;
+    		padding: 5px;
+    		box-sizing: border-box;
+    		overflow:hidden;
+    		overflow-y: auto;
+    	}
+    	.ztree-content{
+    		float: right;
+    		width: 65%;
+    		height: 490px;
+    		border: 1px solid #CCCCCC;
+    		padding: 5px;
+    		box-sizing: border-box;
+    	}
+    	div#rMenu {position:absolute; visibility:hidden; top:0; background-color: #555;text-align: left;padding: 2px;}
+		div#rMenu ul li{
+			margin: 1px 0;
+			padding: 0 5px;
+			cursor: pointer;
+			list-style: none outside none;
+			background-color: #DFDFDF;
+		}
+      .datatable{
+        padding-top: 3px;
+        max-height: 220px;
+        overflow: hidden;
+        overflow-y: auto;
+      }
+      .class-img-show{
+        padding: 3px;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        right: 45px;
+        top: 20px;
+      }
+      .class-img-show img{
+        max-width: 100%;
+        border-radius:6px;
+      }
+      .btn-xs {
+        padding: 1px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+      }
+    </style>
+</head>
+<body>
+	<div class="ztree-main">
+    <div>
+      <button type="button" class="btn btn-info btn-sm">导入分类</button>
+      <input type="checkbox" checked> 隐藏
+    </div>
+		<ul id="ztree" class="ztree"></ul>
+	</div>
+	<div class="ztree-content">
+		<form name="classFrm" id="classFrm" method="post" enctype="multipart/form-data">
+      <div class="class-img-show"><img src="images/teslogotimg.jpg"></div>
+		  <div class="form-group">
+		    <label for="orgname">控件名称</label>
+		    <input type="text" class="form-control"  id="orgname" placeholder="控件名称">
+		  </div>
+      <br />
+      <div class="form-group">
+        <label for="orgname">分类名</label>
+        <input type="text" class="form-control" name="nodetitle"  id="nodetitle" placeholder="分类名称">
+      </div>
+		  <div class="form-group">
+		    <label for="upfileimg">分类图</label>
+		    <input type="file" id="upfileimg" name="upfileimg" onchange="imgpreview()">
+		  </div>
+      <br>
+      <div class="form-group">
+        <label>属性列表 &nbsp;&nbsp;<span class="btn btn-info btn-xs" id="attribute-add">新增属性</span ></label>
+        <div class="datatable">
+          <table id="attribute-list" class="table table-condensed table-striped">
+            <tr>
+              <th>名称</th>
+              <th>操作</th>
+            </tr>
+            <!--<tr>-->
+              <!--<td>品牌名</td>-->
+              <!--<td><span id='attribute-edit' class="btn btn-warning btn-xs">编辑</span > <span class="btn btn-danger btn-xs">删除</span ></td>-->
+            <!--</tr>-->
+          </table>
+        </div>
+      </div>
+		  <!--<div class="form-group">-->
+		  		<!--<input type="radio" name="link-type" value="0" checked="checked"> 默认-->
+		  		<!--<input type="radio" name="link-type" value="1"> 外链接-->
+		  		<!--<input type="radio" name="link-type" value="2"> 内链接-->
+		  <!--</div>-->
+		  <!--<div class="form-group">-->
+		    <!--<label for="exampleInputFile">URL地址</label>-->
+		    <!--<input type="text" id="exampleInputFile">-->
+		  <!--</div>-->
+		  <!--<div class="form-group">-->
+		  	<!--<label>链接页面</label>-->
+		    <!--<select class="form-control">-->
+			  <!--<option>1</option>-->
+			  <!--<option>2</option>-->
+			  <!--<option>3</option>-->
+			  <!--<option>4</option>-->
+			  <!--<option>5</option>-->
+			<!--</select>-->
+		  <!--</div>-->
+		  <button type="button" class="btn btn-default" id="addNode">提交</button>
+		</form>
+	</div>
+	<div id="rMenu">
+		<ul>
+			<li id="m_add" onclick="addTreeNode();">增加</li>
+      <li id="m_edit" onclick="editTreeNode();">编辑</li>
+			<li id="m_del" onclick="removeTreeNode();">删除</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	var zTree, rMenu,rTreeEeit=false;
+	var addBtn=$("#addNode"); //提交按钮
+	var ptitle=$('#nodetitle'); //分类名
+  var attribute_lists=[];
+  var showImage,selfTarget;
+  var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+
+  function imgpreview(){
+    var files=$("#upfileimg")[0].files[0];
+   // console.log(file);
+    $(".class-img-show img").attr("src",URL.createObjectURL(files));
+  }
+  var nodeId =$("#node_id",window.parent.document).val();
+    function createElement( type, name ) {
+        var element = null;
+        try {
+            element = document.createElement( '<' + type + ' name="' + name + '">' );
+        } catch ( e ) {}
+        if ( element == null ) {
+            element = document.createElement( type );
+            element.name = name;
+        }
+        return element;
+    }
+
+    var oNode = null,
+        thePlugins = 'classification';
+    /*树结构开始*/
+    var setting = {
+    	callback: {
+				onRightClick: OnRightClick,
+        onClick: zTreeClick
+		  },data: {
+        keep: {
+          parent:true,
+          leaf:true
+        },
+        simpleData: {
+          enable: true,
+          rootPId:0
+        }
+      }
+    };
+	function OnRightClick(event, treeId, treeNode) {
+    
+		if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+			zTree.cancelSelectedNode();
+			showRMenu("root", event.clientX, event.clientY);
+		} else if (treeNode && ! treeNode.noR) {
+			zTree.selectNode(treeNode);
+			showRMenu("node", event.clientX, event.clientY);
+		}
+	}
+  function zTreeClick(event, treeId, treeNode, clickFlag) {
+    editTreeNode();
+	  //console.log(treeNode);
+    //console.log("[ onClick ]&nbsp;&nbsp;clickFlag = " + clickFlag + " (" + (clickFlag===1 ? "普通选中": (clickFlag===0 ? "<b>取消选中</b>" : "<b>追加选中</b>")) + ")");
+  }
+	function showRMenu(type, x, y) {
+		$("#rMenu ul").show();
+		if (type=="root") {
+			$("#m_del").hide();
+			$("#m_check").hide();
+			$("#m_unCheck").hide();
+		} else {
+			$("#m_del").show();
+			$("#m_check").show();
+			$("#m_unCheck").show();
+		}
+
+        y += document.body.scrollTop;
+        x += document.body.scrollLeft;
+        rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
+
+		$("body").bind("mousedown", onBodyMouseDown);
+	}
+	function hideRMenu() {
+		if (rMenu) rMenu.css({"visibility": "hidden"});
+		$("body").unbind("mousedown", onBodyMouseDown);
+	}
+	function onBodyMouseDown(event){
+		if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0)) {
+			rMenu.css({"visibility" : "hidden"});
+		}
+	}
+
+	function addTreeNode() {
+		hideRMenu();
+    rTreeEeit=false;
+    ptitle.val('');
+   // attribute_lists=[];
+    var html="<tr>\n" +
+      "<th>名称</th>\n" +
+      "<th>操作</th>\n" +
+      "</tr>";
+    $("#attribute-list").html(html);
+    addBtn.text("增加");
+	// 	var newNode = { name:"增加" + (addCount++)};
+	//  if (zTree.getSelectedNodes()[0]) {
+	// 	 	newNode.checked = zTree.getSelectedNodes()[0].checked;
+	// 	 	zTree.addNodes(zTree.getSelectedNodes()[0], newNode);
+	// 	 } else {
+	// 	 	zTree.addNodes(null, newNode);
+	// 	 }
+	}
+	function editTreeNode() {
+		hideRMenu();
+    rTreeEeit=true;
+		var nodes = zTree.getSelectedNodes();
+    addBtn.text("保存修改");
+    ptitle.val(nodes[0].name);
+    var html="<tr>\n" +
+      "<th>名称</th>\n" +
+      "<th>操作</th>\n" +
+      "</tr>";
+    var attr=nodes[0].attributes;
+    //attribute_lists=attr;
+    for(var i=0;i<attr.length;i++){
+      html+="<tr data-attrid='"+attr[i].id+"' data-attr='"+attr[i].title+"'>\n" +
+        "<td>"+attr[i].title+"</td>\n" +
+        "<td><span id='attribute-edit' class=\"btn btn-warning btn-xs\">编辑</span > <span id='attribute-del' class=\"btn btn-danger btn-xs\">删除</span ></td>\n" +
+        "</tr>";
+    }
+    $("#attribute-list").html(html);
+	}
+  function removeTreeNode() {
+    hideRMenu();
+    var nodes = zTree.getSelectedNodes();
+    if (nodes && nodes.length>0) {
+      if (nodes[0].children && nodes[0].children.length > 0) {
+        var msg = "要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！";
+        if (confirm(msg)==true){
+          zTree.removeNode(nodes[0]);
+        }
+      } else {
+        zTree.removeNode(nodes[0]);
+      }
+    }
+  }
+  function filterData(obj){
+    var tmpnodes=[];
+    for(var v in obj){
+      if(obj[v].isParent){
+        tmpnodes.push({id:obj[v].id,pId:obj[v].pId,name:obj[v].name,pic:obj[v].pic,attributes:obj[v].attributes,isParent:true});
+      }else{
+        tmpnodes.push({id:obj[v].id,pId:obj[v].pId,name:obj[v].name,pic:obj[v].pic,attributes:obj[v].attributes});
+      }
+    }
+    console.log(tmpnodes);
+    return tmpnodes;
+  }
+  function getOrSetItem(key,value) {
+    if (value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+    return (key && localStorage.getItem(key))||null;
+  }
+  function getAttrItem(){
+	  var arr=[];
+	  $("#attribute-list tr").each(function () {
+	    var attrid=$(this).data("attrid");
+      var attr=$(this).data("attr");
+      if(attrid && attr){
+        arr.push({"title":attr,"id":attrid});
+      }
+    });
+	  return arr;
+  }
+  //var zNodes =[];
+  var zNodes=[];
+	function showIconForTree(treeId, treeNode) {
+		return !treeNode.isParent;
+	};
+
+	$(document).ready(function(){
+    treeInit();
+	});
+	$(document).on("click","#addNode",addNode);
+	function treeInit() {
+    $.fn.zTree.init($("#ztree"),setting,zNodes);
+    zTree = $.fn.zTree.getZTreeObj("ztree");
+    rMenu = $("#rMenu");
+  }
+  function setTable(){
+    ptitle.val('');
+    var html="<tr>\n" +
+      "<th>名称</th>\n" +
+      "<th>操作</th>\n" +
+      "</tr>";
+    $("#attribute-list").html(html);
+  }
+  function addNode(){
+	  if(nodeId<1){
+	    alert("没有选择表单树节点");
+	    return false;
+    }
+    var title=ptitle.val();
+    if(title==''){
+      alert('分类名不能为空');
+      return false;
+    }
+    var attrlists=getAttrItem();
+    var nodes = zTree.getSelectedNodes(),treeNode = nodes[0];
+
+    var formData = new FormData();
+    formData.append("name",title);
+    formData.append("nodeId",nodeId);
+    formData.append("url",'');
+    formData.append("attributes",attrlists);
+    if($("#upfileimg")[0].files.length>0){
+      formData.append("image",$("#upfileimg")[0].files[0]);
+    }else{
+      formData.append("image",'');
+    }
+    //更新节点
+    if(rTreeEeit){
+      console.log("修改节点");
+      if (treeNode) {
+        formData.append("id",treeNode.id);
+        formData.append("pid",treeNode.pId);
+        $.ajax( {
+          url: prevent_HOST + 'pageDesignOperatorFacade/upSort',
+          method: "POST",
+          contentType: 'application/json;charset=UTF-8',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function ( res ) {
+            console.log(res);
+            if(res.status==0) {
+              nodes.name = title;
+              treeNode.name = title;
+              treeNode.attributes = attrlists;
+              zTree.updateNode(treeNode);
+              setTable();
+            }
+          }
+        });
+      }else{
+        alert("没有选择修改分类");
+        return false;
+      }
+    }else{
+      console.log("增加节点");
+      var tmpid=new Date().getTime();
+      var newnode=null;
+      if (treeNode) {
+        formData.append("pid",treeNode.id);
+        newnode={id:tmpid,pId:treeNode.id,name:title,pic:'',attributes: attrlists};
+        //newnode=zTree.addNodes(treeNode,newnode);
+       // console.log(newnode);
+      }else{
+        formData.append("pid",0);
+       // zTree.addNodes(null,{id:tmpid, pId:0,name:title,pic:'',attributes:attrlists});
+      }
+      $.ajax( {
+        url: prevent_HOST + 'pageDesignOperatorFacade/addSort',
+        method: "POST",
+        contentType: 'application/json;charset=UTF-8',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function ( res ) {
+          console.log(res);
+          if(res.status==0){
+            if (treeNode) {
+              treeNode.isParent=true;
+              newnode.id=res.msg.id;
+              newnode.pic=res.msg.url;
+              console.log(newnode);
+              zTree.addNodes(treeNode,newnode);
+            }else{
+              console.log({id:res.msg.id,pId:0,name:title,pic:res.msg.url,attributes:attrlists});
+              zTree.addNodes(null,{id:res.msg.id,pId:0,isParent:true,name:title,pic:res.msg.url,attributes:attrlists});
+            }
+            setTable();
+          }
+        }
+      });
+    }
+  }
+
+    /*树结构结束*/
+
+    window.onload = function () {
+        // $G( 'orgname' ).select();
+
+    }
+
+
+    var oNode = null,thePlugins = 'classification';
+    window.onload = function() {
+      if( UE.plugins[thePlugins].editdom ){
+        console.log("G");
+        console.log($G);
+        console.log('classification');
+        console.log(UE.plugins[thePlugins]);
+        oNode = UE.plugins[thePlugins].editdom;
+        var gTitle=oNode.getAttribute('title').replace(/"/g,"\"");
+        $G('orgname').value = gTitle;
+        var tmpgetnodes=getOrSetItem(oNode.getAttribute('classid'));
+        zNodes=JSON.parse(tmpgetnodes);
+        treeInit();
+      }
+    }
+
+    dialog.oncancel = function () {
+      if ( UE.plugins[ thePlugins ].editdom ) {
+        delete UE.plugins[ thePlugins ].editdom;
+      }
+    };
+    dialog.onok = function () {
+      var identity, gdataSource, gTitle, gdatazId;
+      if( $G('orgname').value == '') {
+        alert('控件名称不能为空');
+        return false;
+      }
+      gTitle=$G('orgname').value.replace(/\"/g,'"');
+      var allnode = zTree.getNodes();
+      var allnodes = filterData(zTree.transformToArray(allnode));
+      console.log(allnodes);
+      //隐藏类型
+      if ( !oNode ) {
+        var itemid=nodeId+'_classid'+(new Date().getTime());
+        getOrSetItem(itemid,allnodes);
+        $.ajax(
+          {
+            type: "POST",
+            url: "some.php",
+            data: JSON.stringify({"pluginId":itemid,"action":"add","nodes":allnodes[0].id}),
+            dataType:"json",
+            success: function(msg){
+              alert( "Data Saved: " + msg );
+            }
+          }
+        );
+        try {
+          oNode = createElement( 'input', 'leipiNewField' );
+          oNode.setAttribute( 'type', 'text' );
+          oNode.setAttribute( 'title', gTitle );
+          oNode.setAttribute( 'value', gTitle + ' - 控件' );
+          oNode.setAttribute( 'name', 'leipiNewField' );
+          oNode.setAttribute( 'leipiPlugins', thePlugins );
+          oNode.setAttribute( 'classid',itemid);
+          editor.execCommand( 'insertHtml', oNode.outerHTML );
+        } catch ( e ) {
+          try {
+            editor.execCommand( 'error' );
+          } catch ( e ) {
+            alert( '控件异常，反馈或寻求帮助！' );
+          }
+          return false;
+        }
+      } else {
+        oNode.setAttribute( 'title', gTitle );
+        oNode.setAttribute( 'value', gTitle + ' - 控件' );
+        getOrSetItem(oNode.getAttribute('classid'),allnodes);
+        delete UE.plugins[ thePlugins ].editdom;
+      }
+    };
+    function getId(){
+      var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      var n = 10, s = "";
+      for(var i = 0; i < n; i++){
+        var rand = Math.floor(Math.random() * str.length);
+        s += str.charAt(rand);
+      }
+      return s;
+    }
+  $(document).on("click","#attribute-add",function (){
+      var html="<tr>\n" +
+        "<td><input type='text' name='attribute-addtext'></td>\n" +
+        "<td><span class=\"btn btn-warning btn-xs\" id='attribute-addbtn'>保存</span > <span id='attribute-addcal' class=\"btn btn-danger btn-xs\">取消</span ></td>\n" +
+        "</tr>";
+      $("#attribute-list").append(html);
+  });
+  $(document).on('click','#attribute-addcal',function () {
+    $(this).closest('tr').remove();
+  });
+  $(document).on('click','#attribute-addbtn',function () {
+    var attribute_val=$("input[name='attribute-addtext']").val();
+    if(attribute_val==''){
+      alert('属性名不能为空');
+      return false;
+    }
+    //attribute_lists.push({"title":attribute_val});
+    var attrid=getId();
+    var html="<tr data-attrid='"+attrid+"' data-attr='"+attribute_val+"'>\n" +
+      "<td>"+attribute_val+"</td>\n" +
+      "<td><span id='attribute-edit' class=\"btn btn-warning btn-xs\">编辑</span > <span id='attribute-del' class=\"btn btn-danger btn-xs\">删除</span ></td>\n" +
+      "</tr>";
+    $("#attribute-list").append(html);
+    $(this).closest('tr').remove();
+  });
+  // $(document).on("click","#attribute-del",function () {
+  //   var deltr=$(this).closest("tr");
+  //   var delval=deltr.data("attr");
+  //   if(delval==''){
+  //     alert("数据有误");
+  //     return false;
+  //   }
+  //   for(var i=0;i<attribute_lists.length;i++){
+  //     if(attribute_lists[i].title==delval){
+  //       attribute_lists.splice(i,1);
+  //       deltr.remove();
+  //       break;
+  //     }
+  //   }
+  // });
+  $(document).on("click","#attribute-edit",function () {
+    var tdbtn=$(this).parent();
+    var tdval=tdbtn.prev();
+    var tdtmpval=tdval.html();
+
+    var editval=tdbtn.parent().data("attr");
+    if(editval==''){
+      alert("数据有误");
+      return false;
+    }
+    tdval.html("<input type='text' value='"+editval+"' name='attribute-edit'>");
+    tdbtn.html("<span class=\"btn btn-info btn-xs\" id='attribute-editsave'>保存</span > <span id='attribute-editcal' class=\"btn btn-danger btn-xs\">取消</span >");
+  });
+  $(document).on("click","#attribute-editsave",function () {
+    var tdbtn=$(this).parent();
+    var tdval=tdbtn.prev();
+
+    var attribute_val=$("input[name='attribute-edit']").val();
+    if(attribute_val==''){
+      alert('属性名不能为空');
+      return false;
+    }
+    tdval.html(attribute_val);
+    tdbtn.html("<span id='attribute-edit' class=\"btn btn-warning btn-xs\">编辑</span > <span id='attribute-del' class=\"btn btn-danger btn-xs\">删除</span >");
+    tdbtn.parent().data("attr",attribute_val);
+  });
+  $(document).on("click","#attribute-editcal",function () {
+    var tdbtn=$(this).parent();
+    var tdval=tdbtn.prev();
+
+    tdval.html(tdbtn.parent().data("attr"));
+    tdbtn.html("<span id='attribute-edit' class=\"btn btn-warning btn-xs\">编辑</span > <span id='attribute-del' class=\"btn btn-danger btn-xs\">删除</span >");
+  });
+  $(document).on("click","#attribute-del",function () {
+      if(!confirm("确定删除？"))return false;
+      var deltr=$(this).closest("tr");
+      deltr.remove();
+     // var delval=deltr.data("attr");
+      // for(var i=0;i<attribute_lists.length;i++){
+      //   if(attribute_lists[i].title==delval){
+      //     attribute_lists.splice(i,1);
+      //     deltr.remove();
+      //     break;
+      //   }
+      // }
+   });
+
+</script>

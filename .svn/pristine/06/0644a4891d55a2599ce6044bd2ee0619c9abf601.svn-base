@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统使用配置</title>
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <link rel="stylesheet" href="./css/system.css">
+    <script src="../public/part/angular/angular.min.js"></script>
+    <script src="../public/part/angular/angular-ui-router.min.js"></script>
+    <script src="../public/config.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/app.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="logo">胜网科技</div>
+</div>
+<div id="app" ng-app="app" ng-controller="total">
+    <div class="left">
+        <div class="l_item"  ui-sref="yuming" ng-click="ck($event)"><span class="iconfont icon-yuming"></span>域名</div>
+        <div class="l_item" ui-sref="dnsjiexi" ng-click="ck($event)"><span class="iconfont icon-dnsyunjiexi"></span>dns云解析</div>
+        <div class="l_item" ui-sref="yunxunizhuji" ng-click="ck($event)"><span class="iconfont icon-yunxunizhuji"></span>云虚拟主机</div>
+        <div class="l_item" ui-sref="qiyejianzhan" ng-click="ck($event)"><span class="iconfont icon-chuanzhongjianzhan" ></span>企业建站</div>
+    </div>
+    <div class="right">
+        <div ui-view>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

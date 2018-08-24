@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="../upLoadRe_pc/css/re_public.css">
+<link rel="stylesheet" href="../upLoadRe_pc/css/re_upfile_des.css">
+<link rel="stylesheet" href="/upLoadRe_pc/css/re_index.css">
+<link href="../upLoadRe_pc/js/context/context.standalone.css" rel="stylesheet" >
+<!-- <div class="re_upfile_top">
+    <span class="top-return" onclick="javascript:history.go(-1);"></span>
+    上传资源
+</div> -->
+<div class="source">
+<form  enctype="multipart/form-data" method="post" id="uploadFormSource" name="upfiles"> 
+        <div class="re_upfile_from">
+                <h4 class="re_upfile_title">选择上传资源</h4>
+                <!-- <select id="selName" ng-model="selectValue" ng-options="option.bookName for option in sourceName track by option.id" ng-change="loadChange(selectValue)"></select> -->
+                <select id="selName"  ng-model="selectValue"  ng-options="o.id as o.bookName for o in sourceName" ng-change="loadChange(selectValue)"></select>
+         </div>
+        <div class="re_upfile_from">
+                <h4 class="re_upfile_title">章节名称
+                    <span class="error_msg" ng-show="upfiledes.bookChapterName.$error.required">(标题不能为空)</span>
+                    <span class="error_msg ng-hide" ng-show="upfiledes.bookChapterName.$error.maxlength">(名称太长了,字数最多22个)</span>
+                </h4>
+            <div class="re_uf_style">
+                <input type="text" ng-model="chapterName" name="bookChapterName" value="" ng-maxlength="22" required placeholder="请输入名称，字数最多22个">
+            </div>
+        </div>
+
+        <div class="re_upfile_from">
+            <h4 class="re_upfile_title">上传{{des.video.title}}</h4>
+            <div class="re_upfile_block" ng-click="uploadvideo()">
+                <p>上传{{des.video.title}}</p>
+                <div class="uploadvideocontent">
+                    <div class="file_icon">
+                        <img src="{{des.video.pic}}">
+                    </div>
+                    <div class="file_name"> 
+                        上传{{des.video.title}}20%
+                    </div>
+                    <!--<progress id="upfile_progress_bar" value="0"></progress>-->
+                    <div class="upfile_progress_bar">
+                        <div class="upfile_progress"></div>
+                    </div>
+                    <div class="upfile_type">
+                        word/0M
+                    </div>
+                </div>
+            </div>
+            <div class="re_uf_bldes">
+                <span class="uf">名称</span>
+                <input type="text" ng-model="fileVideoName" name="fileVideoName" class="ufName uploadvideoName" value="{{fileVideoName}}"></br>
+                限制大小为：{{des.video.upfile_video_size}}MB &nbsp<br />（格式:{{des.video.upfile_video_ext}} ）
+                <input type="file" name="videoName" id="uploadvideo" onchange="angular.element(this).scope().fileSelected('uploadvideo')" {{curtype == "picture"?' multiple="true"':''}}>
+            </div>
+        </div>
+ 
+        <div class="re_upfile_from">
+            <h4 class="re_upfile_title">上传{{des.audio.title}}</h4>
+            <div class="re_upfile_block" ng-click="uploadaudio()">
+                <p>上传{{des.audio.title}}</p>
+                <div class="uploadaudiocontent">
+                    <div class="file_icon">
+                        <img src="{{des.audio.pic}}">
+                    </div>
+                    <div class="file_name">
+                        上传{{des.video.title}}20%
+                    </div>
+                    <!--<progress id="upfile_progress_bar" value="0"></progress>-->
+                    <div class="upfile_progress_bar">
+                        <div class="upfile_progress"></div>
+                    </div>
+                    <div class="upfile_type">
+                        word/0M
+                    </div>  
+                </div>
+            </div>
+            <div class="re_uf_bldes">
+                    <span class="uf">名称</span><input type="text" class="ufName uploadaudioName" name="fileAudioName" ng-model="fileAudioName" value="{{fileAudioName}}"></br>
+                限制大小为：{{des.audio.upfile_video_size}}MB &nbsp;<br />（格式:{{des.audio.upfile_video_ext|myjoin:","}} ）
+                <input type="file" name="musicName" id="uploadaudio" onchange="angular.element(this).scope().fileSelected('uploadaudio')" {{curtype == "picture"?' multiple="true"':''}}>
+            </div>
+        </div>
+
+<!-- 
+    <form  enctype="multipart/form-data" method="post" id="uploadSource" name="upfiledesSource">
+        <div class="re_upfile_from mb0">
+            <h4 class="re_upfile_title">上传{{des.question.title}}</h4>
+            <div class="re_upfile_block" ng-click="uploadenclosure()">
+                <p>上传{{des.question.title}}</p>
+                <div class="uploadenclosurecontent">
+                    <div class="file_icon">
+                        <img src="{{des.question.pic}}">
+                    </div>
+                    <div class="file_name">
+                        上传{{des.question.title}}20%
+                    </div>
+                
+                    <div class="upfile_progress_bar">
+                        <div class="upfile_progress"></div>
+                    </div>
+                    <div class="upfile_type">
+                        word/0M
+                    </div>
+                </div>
+            </div>
+            <div class="re_uf_bldes"> 
+                    <span class="uf">名称</span><input type="text" ng-model="cur_var.fileSorceName" class="ufName uploadenclosureName" value="{{fileSourceName}}"></br>
+                限制大小为：{{des.question.upfile_video_size}}MB &nbsp;<br />（格式:{{des.question.upfile_video_ext|myjoin:","}} ）
+                <input type="file" name="enclosure" id="uploadenclosure" onchange="angular.element(this).scope().fileSelected('uploadenclosure')"  multiple="true">
+            
+            </div>
+        </div>
+    </form> -->
+
+   <!-- <form  enctype="multipart/form-data" method="post" id="uploadImage" name="upfiledesImage">
+        <div class="re_upfile_from mb0">  
+            <h4 class="re_upfile_title">上传{{des.picture.title}}封面</h4>
+            <div class="re_upfile_block" ng-click="uploadcover()">
+                <p>上传{{des.picture.title}}</p>
+                <div class="uploadcovercontent">
+                    <div class="file_icon">
+                        <img src="/upLoadRe_pc/img/re_upfile_des/upfile_icon/icon_tupian.png">
+                    </div>
+                    <div class="file_name">
+                        上传{{des.picture.title}}20%
+                    </div>
+                   
+                    <div class="upfile_progress_bar">
+                        <div class="upfile_progress"></div>
+                    </div>
+                    <div class="upfile_type">
+                        word/0M
+                    </div>
+                </div>
+            </div>
+            <div class="re_uf_bldes">
+                    <span class="uf">名称</span><input type="text" ng-model="cur_var.fileCoverName" class="ufName uploadcoverName" value="{{fileCoverName}}">{{fileName}}</br>
+                限制大小为：{{des.picture.upfile_video_size}}MB &nbsp;<span ng-if="curtype==14">数量限制：20张</span><br />（格式:{{des.picture.upfile_video_ext|myjoin:","}} ）
+                <input type="file" accept="image/png,image/gif,image/jpeg" name="coverImg" id="uploadcover" onchange="angular.element(this).scope().fileSelected('uploadcover')">
+            </div>
+        </div>
+    </form>  -->
+        <div class="re_upfile_sumbt">
+            <div class="re_upfile_xieyi"><label for="read"><input id="read" type="checkbox" ng-click="setRead()">我已阅读</label><a href="###">《资源上传服务条款》</a></div>
+            <div id="re_upfile_sumbt" ng-click="upfileSumbt(upfiledes.$valid)">确定上传</div>
+        </div>
+</form>
+</div>
+<script src="/upLoadRe_pc/js/re_upfile_des.js"></script>
+<script src="/upLoadRe_pc/js/layer/layer.js"></script>
+<script src="/upLoadRe_pc/js/context/context.js"></script>

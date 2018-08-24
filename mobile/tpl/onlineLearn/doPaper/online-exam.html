@@ -1,0 +1,271 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" return class="posi-ab center-y margin-auto">
+    <p class="color-white">在线考试</p>
+    <img src="images/more.png" more class="more posi-ab center-y margin-auto">
+    <button class="submit dis-none color-red margin-auto posi-ab center-y font-32 no-border">提交试卷</button>
+</header>
+<main class="onex-main">
+    <p class="text-center onex-title color-ccc">《这里记录下考试的标题》</p>
+    <div class="onex-start">
+        <div class="left color-ccc">
+            <p>满分：
+                <span class="score"></span>分</p>
+            <p>考试时间：
+                <span class="time"></span>分钟</p>
+        </div>
+        <div class="right posi-re">
+            <button class="posi-ab margin-auto center-y color-white">开始考试</button>
+        </div>
+    </div>
+    <form id="onex-form">
+        <input type="hidden" name="pId">
+        <input type="hidden" name="totalTime">
+        <article>
+            <section single>
+                <b>一、单选题(总分
+                    <span totalfraction>0</span>分，每题
+                    <span singlefraction></span>分)</b>
+            </section>
+            <section multiple>
+                <b>二、多选题(总分
+                    <span totalfraction>0</span>分，每题
+                    <span singlefraction></span>分，漏选
+                    <span leakfraction></span>分)</b>
+            </section>
+            <section subjective>
+                <b>三、结合所学知识，回答下列问题(总分
+                    <span totalfraction>0</span>分，每题
+                    <span singlefraction></span>分)</b>
+            </section>
+        </article>
+    </form>
+</main>
+<script>
+    $( '.onex-main' ).hide();
+    $.ajax( { //打开页面就执行加载试卷动作
+        url: ajaxUrl + '/papersQuestion/searchQuestionContent',
+        type: 'get',
+        dataType: 'json',
+        contentType: 'application/json；charset=UTF-8',
+        cache: false,
+        data: { 'id': dj.getStorage( 'openTestId' ) }
+    } ).done( function ( m, n ) {
+        var result = m.msg,
+            fraction0 = 0,
+            fraction1 = 0,
+            fraction2 = 0;
+        if ( result == null || result.types.length == 0 ) {
+            $( '.onex-main' ).html( '<p style="margin-top:2rem;" class="text-center font-40">很抱歉！获取试卷失败！<p>' );
+            $( '.onex-main' ).fadeIn( 'slow' );
+            return;
+        }
+        $( '.onex-main>p' ).html( result.title ); //试卷题目
+        $( '.onex-main .score' ).html( result.totalScore ); //试卷总分
+        $( '.onex-main .time' ).html( result.testTime ); //考试时间
+        $( '[name="totalTime"]' ).val( result.testTime ); //考试时间
+        $( '[name="pId"]' ).val( result.types[ 0 ].pId ); //试卷ID
+        for ( var i in result.types ) {
+            var children = result.types[ i ].children;
+            for ( var n in children ) {
+                if ( result.types[ i ].type == 0 & children.length != 0 ) {
+                    fraction0 += result.types[ i ].fraction;
+                    $( '.onex-main [single]' ).append( '<div tid="' + children[ n ].id + '" ><p>（&nbsp;<span>&nbsp;&nbsp;</span>&nbsp;）' + fraction0 / result.types[ i ].fraction + '、' + children[ n ].title + '</p>' +
+                            '<ul>' +
+                            '<li>A&nbsp;&nbsp;' + children[ n ].answerA + '</li>' +
+                            '<li>B&nbsp;&nbsp;' + children[ n ].answerB + '</li>' +
+                            '<li>C&nbsp;&nbsp;' + children[ n ].answerC + '</li>' +
+                            '<li>D&nbsp;&nbsp;' + children[ n ].answerD + '</li>' +
+                            '</ul></div>' ).find( 'b span[totalfraction]' ).html( fraction0 )
+                        .parents( 'section' ).find( 'span[singlefraction]' ).html( result.types[ i ].fraction );
+                } else if ( result.types[ i ].type == 1 & children.length != 0 ) {
+                    fraction1 += result.types[ i ].fraction;
+                    $( '.onex-main [multiple]' ).append( '<div tid="' + children[ n ].id + '"><p>（&nbsp;<span>&nbsp;&nbsp;</span>&nbsp;）' + fraction1 / result.types[ i ].fraction + '、' + children[ n ].title + '</p>' +
+                            '<ul>' +
+                            '<li>A&nbsp;&nbsp;' + children[ n ].answerA + '</li>' +
+                            '<li>B&nbsp;&nbsp;' + children[ n ].answerB + '</li>' +
+                            '<li>C&nbsp;&nbsp;' + children[ n ].answerC + '</li>' +
+                            '<li>D&nbsp;&nbsp;' + children[ n ].answerD + '</li>' +
+                            '</ul></div>' ).find( 'b span[totalfraction]' ).html( fraction1 )
+                        .parents( 'section' ).find( 'span[singlefraction]' ).html( result.types[ i ].fraction )
+                        .parents( 'section' ).find( 'span[leakfraction]' ).html( result.types[ i ].leakFraction );
+                } else if ( result.types[ i ].type == 22 & children.length != 0 ) {
+                    fraction2 += result.types[ i ].fraction;
+                    $( '.onex-main [subjective]' ).append(
+                            '<div tid="' + children[ n ].id + '"><ul><li>' +
+                            '<p>' +
+                            fraction1 / result.types[ i ].fraction + '、' + children[ n ].title +
+                            '</p>' +
+                            '<textarea name="" placeholder="答案"></textarea>' +
+                            '</li></ul></div>' ).find( 'b span[totalfraction]' ).html( fraction2 ) //总分
+                        .parents( 'section' ).find( 'span[singlefraction]' ).html( result.types[ i ].fraction ); //每题分数
+                }
+            }
+        }
+        $( '.onex-main section' ).each( function ( i, e ) { //假如一个模块没有题目，则将此模块隐藏
+            if ( $( e ).children( 'div' ).length == '0' ) { //如果一条题目没有总分，则会被隐藏
+                $( e ).hide();
+            }
+        } );
+        $( '.onex-main' ).fadeIn( 'slow' );
+    } );
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+    $( '.onex-start button' ).click( function () { //点击开始考试按钮
+        $( this ).hide();
+        $( '.cole-head [more]' ).hide();
+        $( '.cole-head .submit' ).show();
+        $( '.onex-main [single], .onex-main [multiple]' ).off().on( 'click', 'ul>li', function () { //点击选项将选项字符显示到括号里
+            var answer = $( this ).parent().siblings( 'p' ).find( 'span' ),
+                text = '',
+                answerContainer = $( this ).parents( 'div' );
+            if ( $( this ).parents( '[single]' ).length > 0 ) {
+                switch ( $( this ).index() ) {
+                case 0:
+                    text += 'A';
+                    break;
+                case 1:
+                    text += 'B';
+                    break;
+                case 2:
+                    text += 'C';
+                    break;
+                case 3:
+                    text += 'D';
+                    break;
+                }
+            } else if ( $( this ).parents( '[multiple]' ).length > 0 ) {
+                $( this ).toggleClass( 'answer' );
+                $( this ).parent().find( '.answer' ).each( function ( i, e ) {
+                    switch ( $( e ).index() ) {
+                    case 0:
+                        text += 'A, ';
+                        break;
+                    case 1:
+                        text += 'B, ';
+                        break;
+                    case 2:
+                        text += 'C, ';
+                        break;
+                    case 3:
+                        text += 'D, ';
+                        break;
+                    }
+                } );
+                text = text.substring( 0, text.length - 2 );
+            }
+            answer.html( text );
+            answerContainer.attr( 'answer', text );
+        } );
+        var testTime = parseInt( $( '.onex-start .time' ).html() ) * 60;
+        Countdown = setInterval( function () {
+            testTime--;
+            if ( testTime == 0 ) {
+                clearInterval( Countdown );
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        content: '<b class="font-42">时间到！</b>',
+                        f: function () { //时间到以后自动提交
+                            submitAnswer();
+                        }
+                    } );
+                } );
+                return;
+            }
+            $( '.cole-head p' ).html( '倒计时&nbsp;&nbsp;&nbsp;<span class="time">' + JSON.stringify( parseInt( ( testTime / 60 ) ) ) + '</span>&nbsp;:&nbsp;' + ( JSON.stringify( testTime % 60 ).length > 1 ? testTime % 60 : '0' + testTime % 60 ) );
+            $( 'input[name="totalTime"]' ).val( parseInt( $( '.onex-start .time' ).html() ) - parseInt( $( 'header .time' ).html() ) );
+        }, 1000 );
+        return false;
+    } );
+    $( '.cole-head .submit' ).unbind().click( function () { //点击提交答案
+        var unfilled = '',
+            bl = true,
+            content = '';
+        $( '#onex-form section' ).each( function ( i, e ) {
+            bl = true;
+            // else if ( $( e ).index() == 2 ) {
+            //     unfilled += '三、';
+            // }
+            $( e ).find( 'div' ).each( function ( ix, et ) {
+                if ( $( et ).children( 'P' ).find( 'span' ).html() == '&nbsp;&nbsp;' ) {
+                    if ( bl ) {
+                        unfilled += '<p class="font-36 color-red">';
+                        if ( $( e ).index() == 0 ) {
+                            unfilled += '一、';
+                        } else if ( $( e ).index() == 1 ) {
+                            unfilled += '二、';
+                        }
+                    }
+                    bl = false;
+                    unfilled += $( et ).index() + '、'
+                }
+            } );
+            if ( !bl ) {
+                unfilled += '</p>'
+            }
+        } );
+        if ( unfilled ) {
+            content = '<div ask-submit><p class="text-center font-36">选项未填写</p>' + unfilled + '<div><button class="font-32" return>返回填写</button><button class="font-34" submit>仍然提交</button></div>';
+        } else {
+            content = '<div ask-submit><p class="text-center font-36">确定提交</p><p></p><p></p><p></p><div><button class="font-32" return>取消</button><button class="font-34" submit>确认</button></div>'
+        }
+        dj.curtain( function () {
+            dj.bulletMid( {
+                'f': function () {
+                    $( '.curtain' ).css( 'top', '0' );
+                    $( '[ask-submit] [return]' ).unbind().click( function () {
+                        dj.curtain();
+                        dj.bulletMid();
+                    } );
+                    $( '[ask-submit] [submit]' ).unbind().click( function () {
+                        submitAnswer();
+                        dj.curtain();
+                        dj.bulletMid();
+                    } );
+                },
+                'content': content,
+            } );
+        } );
+    } );
+
+    function submitAnswer() {
+        var data = {};
+        data.userId = dj.getStorage( 'userId' );
+        data.pId = $( '#onex-form [name="pId"]' ).val();
+        data.totalTime = $( '#onex-form [name="totalTime"]' ).val();
+        data.children = [];
+        $( '#onex-form section' ).each( function ( i, e ) {
+            var singlefraction = $( e ).find( 'span[singlefraction]' ).html(),
+                leakfraction = $( e ).find( 'span[leakfraction]' ).html();
+            $( e ).find( 'div' ).each( function ( ix, et ) {
+                data.children.push( {
+                    type: i,
+                    tId: $( this ).attr( 'tid' ),
+                    answer: $( this ).attr( 'answer' ),
+                    fraction: singlefraction,
+                    leakfraction: leakfraction
+                } );
+            } );
+        } );
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/questionScore',
+            contentType: 'application/json;charset=UTF-8',
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            data: JSON.stringify( data )
+        } ).done( function ( m, n ) { //返回评分
+            clearInterval( Countdown );
+            if ( m.status == 0 ) { //评分成功
+                dj.setStorage( { 'questionSum': m.msg.sum, 'questionTotalTime': m.msg.totalTime, 'questionScoreId': m.msg.id, 'questionStatus': '0' } );
+            } else {
+                dj.setStorage( 'questionStatus', '2' );
+            }
+            $( 'body' ).nextPage( './examination-results.html' );
+        } );
+    }
+
+</script>

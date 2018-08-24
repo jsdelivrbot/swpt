@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">    
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../public/part/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <link rel="stylesheet" href="css/Personal.css">
+</head>
+<body  ng-app="Personal"  ng-controller="myController">
+
+<!-- 模态框（Modal） -->
+    <div class="move ng-cloak" ng-if="!isPhone">
+        <div class="move_box">
+            <!--移动端个人详细数据-->
+            <div class="router" >
+                <div ng-click="isone()" class="r_left h_title">
+                    <span ng-class="{true:'active'}[router===1]">个人中心</span>
+                </div>
+                <div class="r_right h_title">
+                    <!--<span ng-class="{true:'active'}[router===2]">组织中心</span>-->
+                    <span ng-class="{true:'active'}"><a href="../workbench/workbench_blank.html?linkName=2">程序中心</a></span>
+                </div>
+            </div>
+            <div class="show">
+                <div ng-show="router == 1">
+                    <div class="gren">
+                        <div class="header container" >
+                            <div class="message row" ng-show="isLogIn">
+                                <span class="m_data">上次登录时间：2018/1/23</span>
+                                <span class="m_address">登录地址：北京</span>
+                                <span class="m_IP">IP：193.168.0.162</span>
+                                <span>欢迎 {{username}} 登录</span>
+                                <span class="revise">修改密码</span>
+                                <span ng-click="outLogin()" class="logoutlink">退出</span>
+                            </div>
+                            <div ng-show="!isLogIn" class="showlogin">
+                                <p>登录异常？</p>
+                                <a href="/login2" class="loginlink">登录</a>  <a href="/login2" class="loginlink">注册</a>
+                            </div>
+                        </div>
+                        <div class="user">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-4" style="background-color:#fbfbfb">
+                                        <div class="left">
+                                            <div class="l_head">
+                                                <div class="l_img">
+
+                                                </div>
+                                                <!--修改按钮-->
+                                                <div class="l_btn">
+                                                    <img src="./images/xiugai.png" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="l_body">
+                                                <div class="lists">
+                                                    <!--姓名-->
+                                                    <div class="list">
+                                                        姓名: <span class=" l_name">{{userName}}</span>
+                                                    </div>
+                                                    <!--联系方式-->
+                                                    <div class="list">
+                                                        联系方式: <span class=" l_phone">17616476666</span>
+                                                    </div>
+                                                    <!--我的地址-->
+                                                    <div class="list">
+                                                        我的地址: <span class=" l_address">广东省天河区天河东路</span>
+                                                    </div>
+                                                    <!--公司-->
+                                                    <div class="list" style="border-bottom: none;overflow: hidden">
+                                                        <span style="float: left;padding-right: 5px;">公司: </span>
+                                                        <ul class="l_ul" style="float: left">
+                                                            <li class="l_manage"><span>广东胜网科技有限公司</span>(管理员)</li>
+                                                            <li class="l_user"><span>广东坤智科技有限公司</span>(用户)</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="l_foot">
+                                                <div class="products">
+                                                    <div class="f_title">
+                                                        功能区
+                                                    </div>
+                                                    <div class="l_p_items">
+                                                        <ul>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        </ul>
+                                                        <ul>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0 "></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -27px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -52px 0"></a></li>
+                                                            <li><a href="###" style="background-position: -79px 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                            <li><a href="###" style="background-position: 0 0"></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div class="right">
+                                            <ul>
+                                                <li >
+                                                    <div style="background-position:0 0;"></div>
+                                                    <p>代发货</p>
+                                                </li>
+                                                <li >
+                                                    <div  style="background-position:-115px 0;"></div>
+                                                    <p>待收货</p>
+                                                </li>
+                                                <li >
+                                                    <div  style="background-position:-228px 0;"></div>
+                                                    <p>代付款</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-342px 0;"></div>
+                                                    <p>待评价</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-456px 0;"></div>
+                                                    <p>退款/售后</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-574px 0;"></div>
+                                                    <p>购物车</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:0 -187px;"></div>
+                                                    <p>VIP会员</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-115px -187px;"></div>
+                                                    <p>查看订单</p>
+                                                </li>
+                                                <li >
+                                                    <div  style="background-position:-228px -187px;"></div>
+                                                    <p>课程记录</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-342px -187px;"></div>
+                                                    <p>我的收藏</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-456px -187px;"></div>
+                                                    <p>我的积分</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-574px -187px;"></div>
+                                                    <p>我的地址</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:0 -374px;"></div>
+                                                    <p>推广</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-115px -374px;"></div>
+                                                    <p>功能管理</p>
+                                                </li>
+                                                <li >
+                                                    <div  style="background-position:-228px -374px;"></div>
+                                                    <p>资源管理</p>
+                                                </li>
+                                                <li >
+                                                    <div style="background-position:-342px -374px;"></div>
+                                                    <p>联系客服</p>
+                                                </li>
+                                                <li ng-click="userMove()">
+                                                    <div style=" background: url('./img/shezhi.png') center no-repeat;" class="kepuapp" ng-click="disnone($event)"></div>
+                                                    <p>设置</p>
+                                                </li>
+                                                <li ng-click="outLogin()">
+                                                    <div style=" background: url('./img/tuichu.png') center no-repeat;" class="kepuapp"></div>
+                                                    <p>退出</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--最新加入-->
+                    <div class="col-xs-12">
+                        <div class="c_box">
+                            <ul>
+                                <!--系统使用-->
+                                <li>
+                                    <a href="/workbenchs/workbench.html">
+                                        <div style="background-position: -3px 0;"></div>
+                                        <p>管理/发布</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../system/index.html">
+                                        <div style="background-position: -3px 0;"></div>
+                                        <p>系统使用配置</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../mall/index.html">
+                                        <div style="background-position: -144px 0;"></div>
+                                        <p>服务中心</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div style="background-position: -288px 0;"></div>
+                                    <p>机构运营</p>
+                                </li>
+                            </ul>
+                            <ul>
+                                <!--内部协同-->
+
+                                <li>
+                                    <a href="../workbench/workbench_blank.html?linkName=1">
+                                        <div style="background-position: -3px -141px;"></div>
+                                        <p>机构配置</p>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="../workbench/workbench_blank.html?linkName=1">
+                                        <div style="background-position: -3px -141px;"></div>
+                                        <p>机构配置</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../workbench/workbench_blank.html?linkName=2">
+                                        <div style="background-position: -144px -141px;"></div>
+                                        <p>功能配置</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../workbench/workbench_blank.html?linkName=3">
+                                        <div style="background-position: -288px -141px;"></div>
+                                        <p>组织流程</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--最新加入结束-->
+                <div ng-show="router == 2">
+                    <!--<div class="create"><a href="../enterprise/#" ng-click="disnone($event)">创建/加入组织?</a></div>-->
+                    <div class="create"><a href="../system/index.html">程序中心</a></div>
+                    <div class="company">
+                        <div class="header container">
+                            <div class="message row">
+                                <div class="c_option col-xs-4">
+                                    <select name="" id="select" class="form-control">
+                                        <option value="广东胜网科技有限公司">广东胜网科技有限公司</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <!--<div class="col-xs-4 " style="background-color:#fbfbfb">-->
+                                    <!--<div class="left">-->
+                                        <!--<div class="l_head">-->
+                                            <!--<div class="l_img">-->
+
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash;管理员按钮&ndash;&gt;-->
+                                        <!--</div>-->
+                                        <!--<div class="l_body">-->
+                                            <!--<div class="lists">-->
+                                                <!--&lt;!&ndash;公司&ndash;&gt;-->
+                                                <!--<div class="list">-->
+                                                    <!--公司: <span class=" l_firm">广东胜网科技有限公司</span>-->
+                                                <!--</div>-->
+                                                <!--&lt;!&ndash;职称&ndash;&gt;-->
+                                                <!--<div class="list">-->
+                                                    <!--职称: <span class=" l_position">行政人员</span>-->
+                                                <!--</div>-->
+                                                <!--&lt;!&ndash;组织邮箱&ndash;&gt;-->
+                                                <!--<div class="list">-->
+                                                    <!--组织邮箱: <span class=" l_email">GuangDong@shengwang.com</span>-->
+                                                <!--</div>-->
+
+                                            <!--</div>-->
+
+                                        <!--</div>-->
+                                        <!--<div class="l_foot">-->
+                                            <!--<div class="products">-->
+                                                <!--&lt;!&ndash;&lt;!&ndash;组织功能&ndash;&gt;-->
+                                                <!--<div class="f_title">-->
+                                                    <!--组织功能-->
+                                                <!--</div>-->
+                                                <!--<div class="l_p_items">-->
+                                                    <!--<ul>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0 "></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                    <!--</ul>-->
+                                                    <!--<ul>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0 "></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                    <!--</ul>-->
+                                                    <!--<ul>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0 "></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                    <!--</ul>-->
+                                                    <!--<ul>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0 "></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                    <!--</ul>-->
+                                                    <!--<ul>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0 "></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -27px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -52px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: -79px 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                        <!--<li><a href="###" style="background-position: 0 0"></a></li>-->
+                                                    <!--</ul>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+
+                                <!--</div>-->
+                                <div class="col-xs-12">
+                                    <div class="c_box">
+                                        <ul>
+                                            <!--系统使用-->
+                                            <li class="noneshow">
+                                                <div  class="c_b_title">
+                                                    <p>系统</p>
+                                                    <p>使用</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="../system/index.html">
+                                                    <div style="background-position: -3px 0;"></div>
+                                                    <p>系统使用配置</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="../mall/index.html">
+                                                    <div style="background-position: -144px 0;"></div>
+                                                    <p>服务中心</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div style="background-position: -288px 0;"></div>
+                                                <p>机构运营</p>
+                                            </li>
+                                        </ul>
+                                        <ul>
+                                            <!--内部协同-->
+
+                                            <li  class="noneshow">
+                                                <div class="c_b_title">
+                                                    <p>程序</p><p>中心</p>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <a href="../workbench/workbench_blank.html?linkName=1">
+                                                    <div style="background-position: -3px -141px;"></div>
+                                                    <p>机构配置</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="../workbench/workbench_blank.html?linkName=2">
+                                                    <div style="background-position: -144px -141px;"></div>
+                                                    <p>功能配置</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="../workbench/workbench_blank.html?linkName=3">
+                                                    <div style="background-position: -288px -141px;"></div>
+                                                    <p>组织流程</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!--<ul>
+                                            &lt;!&ndash;外部网站&ndash;&gt;
+                                            <li class="noneshow">
+                                                <div class="c_b_title" style="border-color: #ff2826;color:#ff2826">
+                                                    <p>外部</p><p>网站</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="../webManagement/workbench_blank.html?linkName=1" target="_blank">
+                                                    <div style="background-position: 1px -292px;"></div>
+                                                    <p>网页设置</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="../webManagement/workbench_blank.html?linkName=2" target="_blank">
+                                                    <div style="background-position: -140px -292px;"></div>
+                                                    <p>流程设置</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="../webManagement/workbench_blank.html?linkName=3" target="_blank">
+                                                    <div style="background-position: -284px -292px;"></div>
+                                                    <p>权限管理</p>
+                                                </a>
+                                            </li>
+                                        </ul>-->
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 模态框（Modal） -->
+        <div id="modal">
+            <div class="modal fade modstyle" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">我的订单</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="tab">
+                                <div class="t_title t_active">全部</div>
+                                <div class="t_title">待付款</div>
+                                <div class="t_title">代发货</div>
+                                <div class="t_title">待收货</div>
+                                <div class="t_title">待评价</div>
+                            </div>
+                            <div class="t_body">
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary">提交更改</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile">
+        <div  ui-view="">
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../public/part/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="pubic/js/angular.min.js"></script>
+<script type="text/javascript" src="pubic/js/angular-ui-router.js"></script>
+<script type="text/javascript" src="pubic/js/app.js"></script>
+<script>
+//    window.onload =function(){
+//        var user_move = document.getElementsByClassName("user_move")[0]
+//        var move = document.getElementsByClassName('move')[0].clientHeight
+//        user_move.style.height = move +'px'
+//    }
+</script>

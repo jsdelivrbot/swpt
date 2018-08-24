@@ -1,0 +1,84 @@
+.bodyContent{
+  height: 100%;
+  width: 100%;
+}
+.main_tpl{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+#contentId{
+  float: right;
+  width: 100px;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+#sidebar{
+  height: 100%;
+  width: 60px;
+  border-right: 1px solid #cccccc;
+  float: left;
+  box-sizing: border-box;
+}
+#icolist{
+  padding-left: 5px;
+  padding-top: 12px;
+}
+#icolist a {
+  display: block;
+  width: 50px;
+  height: 70px;
+  margin-bottom: 10px;
+  text-decoration-line: none;
+}
+#sidebar dl{
+  height: auto;
+  width: 50px;
+  text-align: center;
+  clear: both;
+  overflow: hidden;
+  padding-top: 3px;
+  padding-right: 0px;
+  padding-bottom: 3px;
+  padding-left: 0px;
+  margin-top: 3px;
+  margin-right: 0px;
+  margin-bottom: 3px;
+  margin-left: 0px;
+  color: #666;
+  cursor: pointer;
+}
+#sidebar dl:hover{
+  color: #217599;
+}
+#sidebar dl dt {
+  width: 50px;
+  height: 40px !important;
+  margin: 0px;
+  padding: 0px;
+}
+#sidebar dl dt img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+#sidebar dl dd{
+  width: 50px;
+  float: left;
+  font-size: 12px;
+  margin: 0px;
+  padding-top: 6px !important;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  line-height: 16px;
+  height: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#sidebar dl.curr_module{
+  color: #217599;
+}

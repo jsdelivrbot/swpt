@@ -1,0 +1,104 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+    <p class="color-white">试卷标题</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main class="node-main text-center">
+    <form>
+        <input type="hidden" name="type" value="1">
+        <input type="hidden" name="topic" value="1">
+        <input type="hidden" name="userId" value="1">
+        <input type="hidden" name="pId" value="1">
+        <article>
+            <section>
+            </section>
+            <section>
+                <header class="font-34 text-left">
+                    疑问
+                </header>
+                <textarea name="question" class="border-box font-30 dis-block margin-auto" placeholder="有什么问题，记录下来吧"></textarea>
+            </section>
+            <section>
+                <header class="font-34 text-left">
+                    心得
+                </header>
+                <textarea name="experience" class="border-box font-30 dis-block margin-auto" placeholder="题做完了，一定有很多心得吧"></textarea>
+            </section>
+        </article>
+    </form>
+    <div class="btn text-center">
+        <button class="font-34 color-white no-border border-box">保存</button>
+        <button class="font-34 color-white no-border border-box">保存并分享</button>
+    </div>
+</main>
+<script>
+    $( '.cole-head p' ).html( dj.getStorage( 'noteTitle' ) );
+    $( '.node-main' ).hide();
+    $( 'input[name="type"]' ).val( dj.getStorage( 'noteType' ) );
+    $( 'input[name="topic"]' ).val( dj.getStorage( 'noteTopic' ) );
+    $( 'input[name="userId"]' ).val( dj.getStorage( 'noteUserId' ) );
+    $( 'input[name="pId"]' ).val( dj.getStorage( 'notePid' ) );
+    $( '.node-main section' ).eq( 0 ).append( dj.getStorage( 'noteQuestion' ) ).callBack( function () {
+        $( '.node-main section' ).eq( 0 ).find( 'p' ).addClass( 'text-left' );
+        $( '.node-main section' ).eq( 0 ).find( 'img' ).remove();
+        $( '.node-main' ).fadeIn( 'slow' );
+        dj.setStorage( 'createNote', '0' );
+    } );
+    $( '.node-main .btn button' ).unbind().click( function () { //保存笔记
+        dj.curtain( function () {
+            dj.bulletMid( {
+                content: '<img id="loading" src="./images/loading.png" style="width: .8rem;" class="posi-ab margin-auto center-x center-y">' +
+                    '<p class="font-36" style="margin-top:1.8rem;">正在保存</p>',
+            } );
+        } );
+        var data = $( '.node-main form' ).getValue();
+        if ( $( this ).html() == '保存' ) {
+            data.status = '0';
+        } else if ( $( this ).html() == '保存并分享' ) {
+            data.status = '1';
+        }
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/saveNote',
+            contentType: 'application/json;charset=UTF-8;',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify( data )
+        } ).done( function ( m, n ) {
+            dj.loading( true );
+            if ( m.status == 2 ) {
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        f: function () {
+                            $( '#confirm' ).unbind().click( function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                            } );
+                        },
+                        content: '<div><p class="text-center font-36">保存失败</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    } );
+                } );
+            } else {
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        f: function () {
+                            $( '#confirm' ).unbind().click( function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                                $( 'body' ).prePage();
+                            } );
+                        },
+                        content: '<div><p class="text-center font-36">保存成功</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    } );
+                } );
+            }
+        } );
+    } );
+
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+
+</script>

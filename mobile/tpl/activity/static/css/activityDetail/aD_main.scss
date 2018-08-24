@@ -1,0 +1,70 @@
+.wrapper {
+    // height: 100vh;
+    overflow: hidden;
+}
+.mainDetail {
+    // height: 100%;
+    .banner {
+        height: 4rem /* 300/75 */;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .activityStatus {
+        color: #FE5C34;
+        background: #F2F2F2;
+        padding: .266667rem /* 20/75 */ .533333rem /* 40/75 */;
+        h2,p{
+            display: inline-block;
+        }
+        p {
+            float: right;
+        }
+    }
+    .activityMain {
+        padding: .266667rem /* 20/75 */ .533333rem /* 40/75 */;
+        // padding-bottom: 7rem /* 525/75 */;
+        box-sizing: border-box;
+        /* height: 100%;
+        overflow: scroll; */
+        .activityName {
+            font-weight: bold;
+            font-size: .48rem /* 36/75 */;
+            max-height: 1.2rem /* 90/75 */;
+            height: .8rem /* 60/75 */;
+        }
+        p {
+            line-height: 1.333333rem /* 100/75 */;
+            font-size: .373333rem /* 28/75 */;
+        }
+    }
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    .footerBtn {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: row;
+        text-align: center;
+        span {
+            box-sizing: border-box;
+            background: #fff;
+            float: left;
+            flex: 1;
+            border: 1px solid #ccc;
+            height: .933333rem /* 70/75 */;
+            line-height: .933333rem /* 70/75 */;
+            font-weight: bold;
+            font-size: .426667rem /* 32/75 */;
+        }
+        span.inReview {
+            background: #FF0000;
+            color: #FFFF00;
+        }
+    }
+}

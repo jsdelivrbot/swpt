@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的报名</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="党建活动页">
+    <link rel="stylesheet" href="../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../../../public/swiper/swiper-4.2.2.min.css">
+    <script src="../../../public/flexible/flexible.js"></script>
+    <script src="../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="back" onclick="window.history.go(-1);">
+                <i class="iconfont">&#xe7a4;</i>
+            </div>
+            <h2 class="centerTitle">我的活动</h2>
+        </header>
+        <section id="body">
+            <div class="tabNav" id="tabNav">
+                <span class="tabNav-slide actived">已报名</span>
+
+                <span class="tabNav-slide">已参与</span>
+
+                <span class="tabNav-slide">未完成</span>
+
+                <span class="tabNav-slide">已取消</span>
+            </div>
+            <div class="swiper-container" id="swiperNav">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide sNav">
+                        <div class="swiper-container" id="swiperBody">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" id="isApply">
+                                    <div class="body">
+                                        <div class="bodyMain">
+                                            <div class="project clear" data-id="">
+                                                <div class="pImg">
+                                                    <img src="">
+                                                </div>
+                                                <div class="pDesc">
+                                                    <h3>活动名称：
+                                                        <span class="pName"></span>
+                                                    </h3>
+                                                    <p>活动时间：
+                                                        <span class="pTime"></span>
+                                                    </p>
+                                                    <p>报名截止：
+                                                        <span class="pEndTime"></span>
+                                                        <span class="pStatus">报名中</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="noData" id="noData">
+                                            <p class="iconfont"></p>
+                                            <h2>抱歉！没有搜索到相关数据！</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide" id="isDone">
+                                    <div class="body">
+                                        <div class="bodyMain">
+                                            <div class="project clear" data-id="">
+                                                <div class="pImg">
+                                                    <img src="">
+                                                </div>
+                                                <div class="pDesc">
+                                                    <h3>活动名称：
+                                                        <span class="pName"></span>
+                                                    </h3>
+                                                    <p>活动时间：
+                                                        <span class="pTime"></span>
+                                                    </p>
+                                                    <p>报名截止：
+                                                        <span class="pEndTime"></span>
+                                                        <span class="pStatus">已结束</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="noData" id="noData">
+                                            <p class="iconfont"></p>
+                                            <h2>抱歉！没有搜索到相关数据！</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide" id="noDone">
+                                    <div class="body">
+                                        <div class="bodyMain">
+                                            <div class="project clear" data-id="">
+                                                <div class="pImg">
+                                                    <img src="">
+                                                </div>
+                                                <div class="pDesc">
+                                                    <h3>活动名称：
+                                                        <span class="pName"></span>
+                                                    </h3>
+                                                    <p>活动时间：
+                                                        <span class="pTime"></span>
+                                                    </p>
+                                                    <p>报名截止：
+                                                        <span class="pEndTime"></span>
+                                                        <span class="pStatus">不符合</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="noData" id="noData">
+                                            <p class="iconfont"></p>
+                                            <h2>抱歉！没有搜索到相关数据！</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide" id="isCancel">
+                                    <div class="body">
+                                        <div class="bodyMain">
+                                            <div class="project clear" data-id="">
+                                                <div class="pImg">
+                                                    <img src="">
+                                                </div>
+                                                <div class="pDesc">
+                                                    <h3>活动名称：
+                                                        <span class="pName"></span>
+                                                    </h3>
+                                                    <p>活动时间：
+                                                        <span class="pTime"></span>
+                                                    </p>
+                                                    <p>报名截止：
+                                                        <span class="pEndTime"></span>
+                                                        <span class="pStatus">主动取消</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="noData" id="noData">
+                                            <p class="iconfont"></p>
+                                            <h2>抱歉！没有搜索到相关数据！</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-scrollbar"></div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+<script src="../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../public/js/method.js"></script>
+<script src="../../../public/layer/layer.js"></script>
+<script src="../../../public/swiper/swiper-4.2.2.min.js"></script>
+<script src="../static/js/mA_main.js"></script>

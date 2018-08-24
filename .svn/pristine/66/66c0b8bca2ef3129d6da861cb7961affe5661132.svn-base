@@ -1,0 +1,1515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>报表控件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script src="echarts.common.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery.table2excel.js"></script>
+    <link rel="stylesheet" href="reportcss.css">
+    <script type="text/javascript">
+        /*
+         * reportforms 报表控件
+         *
+         *
+         * */
+
+        function createElement(type, name) {
+            var element = null;
+            try {
+                element = document.createElement('<' + type + ' name="' + name + '">');
+            } catch (e) {}
+            if (element == null) {
+                element = document.createElement(type);
+                element.name = name;
+            }
+            return element;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="content" id="content">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th style="text-align:center;font-size:15px">
+                    <span>请选择你需要的报表类型</span>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <span>典型报表</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-info selectReport">分组统计</button>
+                    <button type="button" class="btn btn-info selectReport">产品信息统计</button>
+                    <button type="button" class="btn btn-info selectReport">段落明细</button>
+                    <button type="button" class="btn btn-info selectReport">档案式报表</button>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>高级报表</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-info selectReport">数据钻取</button>
+                    <button type="button" class="btn btn-info selectReport">各分公司员工劳动关系详表</button>
+                    <button type="button" class="btn btn-info selectReport">图形化显示进度条</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        /*
+         * JS-Public-Method
+         * 
+         */
+        // 时间戳转回字符串
+        function unxiEcDate(oUnix, Exchange) {
+            var dateStringArr = [],
+                Exchange = Exchange.toUpperCase();
+            if (typeof oUnix == "object" && oUnix instanceof Array) {
+                var unxi = oUnix;
+            } else {
+                var unxi = Object.keys(oUnix);
+            }
+            // 如果是 时间戳 转为 日期
+            if (Exchange == "UTD") {
+                for (var i = 0; i < unxi.length; i++) {
+                    var d = new Date(unxi[i] * 1000),
+                        date = d.getFullYear() + "-" +
+                        (d.getMonth() + 1) + "-" +
+                        d.getDate();
+                    dateStringArr.push(date);
+                }
+            } else if (Exchange == "DTU") {
+                for (var i = 0; i < unxi.length; i++) {
+                    var d = new Date(unxi[i]),
+                        date = d.getTime() / 1000;
+                    dateStringArr.push(date);
+                }
+            }
+            return dateStringArr;
+        }
+
+        function ajax(options) {
+            options = options || {};
+            options.type = (options.type || "GET").toUpperCase();
+            options.dataType = options.dataType || "json";
+            var params = formatParams(options.data);
+
+            if (window.XMLHttpRequest) {
+                var xml = new XMLHttpRequest();
+            } else {
+                var xml = new ActiveXObject("Microsoft.XMLHTTP")
+            }
+
+            xml.onreadystatechange = function () {
+                if (xml.readyState == 4) {
+                    var status = xml.status;
+                    if (status >= 200 && status < 300) {
+                        options.success && options.success(xml.responseText, xml.responseXML)
+                    } else {
+                        options.fail && options.fail(status);
+                    }
+                }
+            }
+
+            if (options.type == "GET") {
+                xml.open("GET", options.url, options.async);
+                xml.send(null);
+            } else if (options.type == "POST") {
+                xml.open("POST", options.url, options.async);
+                xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xml.send(params);
+            }
+        }
+
+        function formatParams(data) {
+            var arr = [];
+            for (var name in data) {
+                arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+            }
+            arr.push(("v=" + Math.random()).replace(".", ""));
+            return arr.join("&");
+        }
+        // 去重
+        Array.prototype.Toheavy = function () {
+            res = [this[0]];
+            for (var i = 1; i < this.length; i++) {
+                var repeat = false;
+                for (var j = 0; j < res.length; j++) {
+                    if (this[i] == res[j]) {
+                        repeat = true;
+                        break;
+                    }
+                }
+                if (!repeat) {
+                    res.push(this[i]);
+                }
+            }
+            return res;
+        }
+
+        var selectReport = document.getElementsByClassName("selectReport"),
+            selection;
+        for (var i = 0; i < selectReport.length; i++) {
+            selectReport[i].addEventListener('click', function (e) {
+                ajax({
+                    url: "reportjson.json?1",
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (response, xml) {
+                        result = JSON.parse(response);
+                    },
+                    fail: function (status) {
+                        console.log(status);
+                    }
+                })
+
+                var content = $G("content");
+                content.innerHTML = "";
+                selection = e.target.innerText; // 选择的按钮
+                if (selection == "分组统计") {
+                    content.innerHTML = groupCountT();
+                } else if (selection == "产品信息统计") {
+                    content.innerHTML = productCountT();
+                } else if (selection == "数据钻取") {
+                    content.innerHTML = dataGetT();
+                } else if (selection == "段落明细") {
+                    content.innerHTML = detailT();
+                } else if (selection == "各分公司员工劳动关系详表") {
+                    content.innerHTML = companyT();
+                } else if (selection == "图形化显示进度条") {
+                    content.innerHTML = progressT();
+                } else if (selection == "档案式报表") {
+                    content.innerHTML = archivesT();
+                }
+            })
+        }
+        /*
+         * 不同类型的报表填入
+         *
+         * groupCountT() ---- 分组统计
+         * productCountT() ---- 产品信息统计
+         * dataGetT() ---- 数据钻取
+         * detailT() ----- 段落明细表
+         * companyT() ---- 公司员工表填
+         * progressT() ---- 图形化显示进度条
+         * archivesT()  ---档案式报表
+         * 
+         */
+
+        function groupCountT() {
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='产品首次订购分组统计'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.groupCount).length; i++) {
+                table += "<option value=" + Object.keys(result.groupCount)[i] + ">" + Object.keys(result.groupCount)[i] +
+                    "</option>"
+            }
+            table +=
+                "</select>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th><span>统计方向</span></th>" +
+                "<th><span>统计对象</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>" +
+                "<label>" +
+                "<input type='checkbox' id='product' name='countfx' class='countfx' value='1'>产品类别" +
+                "</label>" +
+                "<label>" +
+                "<input type='checkbox' id='supply' name='countfx' class='countfx' value='2'>供应商" +
+                "</label>" +
+                "</th>" +
+                "<td>" +
+                "<label>" +
+                "<input type='checkbox' id='orderNum' name='countdx' class='countdx' value='1' onchange='changeProduct()'>订单量" +
+                "</label>" +
+                "<label>" +
+                "<input type='checkbox' id='price' name='countdx' class='countdx' value='2' onchange='changeProduct()'>单价" +
+                "</label>" +
+                "</td>" +
+                "</tr>" +
+                "</table>";
+
+            return table;
+        }
+
+        function productCountT() {
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='产品信息统计'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.productCount).length; i++) {
+                table += "<option value=" + Object.keys(result.productCount)[i] + ">" + Object.keys(result.productCount)[
+                    i] + "</option>";
+            }
+            table += "</select>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th><span>条件预警</span></th>" +
+                "<th><span>统计</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>" +
+                "<label>" +
+                "库存量：<input type='number' name='stock' class='stock' id='stock' placeholder='不填则不预警'>" +
+                "</label>" +
+                "<label>" +
+                "订购总金额：<input type='number' name='totalPrice' class='totalPrice' id='totalPrice' placeholder='不填则不预警'>" +
+                "</label>" +
+                "</th>" +
+                "<td>" +
+                "<label>" +
+                "<input type='checkbox' id='count' name='count' class='count'>总金额统计" +
+                "</label>" +
+                "</td>" +
+                "</tr>" +
+                "</table>";
+
+            return table;
+        }
+
+        function dataGetT() {
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='订单信息列表'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.dataGet).length; i++) {
+                table += "<option value=" + Object.keys(result.dataGet)[i] + ">" + Object.keys(result.dataGet)[i] +
+                    "</option>";
+            }
+            table += "</select>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th><span>排序对象</span></th>" +
+                "<th><span>排序方式</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>" +
+                "<label>" +
+                "<input type='radio' name='sort' class='orderNum' id='orderNum' value='1'>订单号" +
+                "</label>" +
+                "<label>" +
+                "<input type='radio' name='sort' class='date' id='date' value='2'>订购日期" +
+                "</label>" +
+                "</th>" +
+                "<td>" +
+                "<label>" +
+                "<input type='radio' name='sortStyle' class='sortUp' id='sortUp' value='1'>升序" +
+                "</label>" +
+                "<label>" +
+                "<input type='radio' name='sortStyle' class='sortDown' id='sortDown' value='2'>降序" +
+                "</label>" +
+                "</td>" +
+                "</tr>" +
+                "</table>";
+
+            return table;
+        }
+
+        function detailT() {
+            function getdetailData() {
+                var AlldataArray = [];
+                for (var i in result.detail.msg) {
+                    for (var j = 0; j < result.detail.msg[i].length; j++) {
+                        AlldataArray.push(result.detail.msg[i][j].freightInfo.shippers)
+                    }
+                }
+                return ShippersData = AlldataArray.Toheavy();
+            }
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='段落明细'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.detail.msg).length; i++) {
+                table += "<option value=" + Object.keys(result.detail.msg)[i] + ">" + Object.keys(result.detail.msg)[i] +
+                    "</option>";
+            }
+            table += "</select>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th><span>条件预警</span></th>" +
+                "<th><span>统计</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>" +
+                "<label>" +
+                "订单号查询：<input type='text' name='stock' class='stock' id='stock' placeholder='不填则预警'>" +
+                "</label>" +
+                "</th>" +
+                "<td>" +
+                "<select id='selectShippers' name='selectShippersData'>" +
+                "<option value=''>请选择运货商</option>";
+            getdetailData() //运货商的数据
+            for (var i = 0; i < ShippersData.length; i++) {
+                table += "<option value=" + ShippersData[i] + ">" + ShippersData[i] + "</option>";
+            }
+            table += "</select>" +
+                "</td>"
+            "</tr>" +
+            "</table>";
+
+            return table;
+        }
+
+        function companyT() {
+            relationsArray = []; //学历数组
+            EducationalArray = []; //劳动关系数组
+            g = 0;
+
+            function getInfoArray() {
+                for (var i in result.company) {
+                    for (var k = 0; k < result.company[i].length; k++) {
+                        for (var j = 0; j < result.company[i][k].information.length; j++) {
+                            relationsArray.push(result.company[i][k].information[j].relations)
+                            EducationalArray.push(result.company[i][k].information[j].Educational)
+                        }
+                    }
+                }
+            }
+            getInfoArray()
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='各分公司员工劳动关系详表'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.company).length; i++) {
+                table += "<option value=" + Object.keys(result.company)[i] + ">" + Object.keys(result.company)[i] +
+                    "</option>";
+            }
+            table += "</select>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th  colspan='3'><span>条件筛选</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<th>" +
+                "<select id='selectRelations' name='selectShippersData'>" +
+                "<option value=''>请选择劳动关系</option>";
+            var relationsData = relationsArray.Toheavy()
+            for (var i = 0; i < relationsData.length; i++) {
+                table += "<option value=" + relationsData[i] + ">" + relationsData[i] + "</option>";
+            }
+            table += "</select>" +
+                "</th>" +
+                "<td>" +
+                "<select id='selectEducational' name='selectShippersData'>" +
+                "<option value=''>请选择学历</option>";
+            var EducationalData = EducationalArray.Toheavy()
+            for (var i = 0; i < EducationalData.length; i++) {
+                table += "<option value=" + EducationalData[i] + ">" + EducationalData[i] + "</option>";
+            }
+            table += "</select>" +
+                "</td>" +
+
+                "</tr>" +
+                "</table>";
+
+            return table;
+        }
+
+        function archivesT() { 
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='各分公司员工劳动关系详表'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.archives).length; i++) {
+                table += "<option value=" + Object.keys(result.archives)[i] + ">" + Object.keys(result.archives)[i] +
+                    "</option>";
+            }
+            table += "</select>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<th  colspan='3'><span>条件筛选</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "</tr>" +
+                "</table>";
+
+            return table;
+        }
+
+        function progressT() {
+            var table =
+                "<table class='table table-bordered table-striped'>" +
+                "<tr>" +
+                "<th><span>报表名称</span><span class='label label-important'>*</span></th>" +
+                "<th><span>选择报表</span><span class='label label-important'>*</span></th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td><input id='reportname' name='reportname' placeholder='必填项' type='text' value='图形化显示进度条'/></td>" +
+                "<td>" +
+                "<select id='selectreport' name='selectreport'>" +
+                "<option value=''>请选择...</option>";
+            for (var i = 0; i < Object.keys(result.progress).length; i++) {
+                table += "<option value=" + Object.keys(result.progress)[i] + ">" + Object.keys(result.progress)[i] +
+                    "</option>";
+            }
+            table += "</select></td></tr>";
+
+            $(document).ready(function () {
+                var show = false; // 还没有显示选择的节点
+                $("#selectreport").change(function () {
+                    var selected = $(this).val();
+                    if (show) {
+                        $("tr").remove(".addChild");
+                        show = false;
+                    }
+                    $.ajax({
+                        url: "reportjson.json",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (response) {
+                            var result = response.progress[selected],
+                                date = unxiEcDate(result, "utd");
+                            var html =
+                                "<tr class='addChild'><th><span>本期</span></th><th><span>同期</span></th></tr>";
+                            html +=
+                                "<tr class='addChild'><td><select id='nowTerm' name='nowTerm'>" +
+                                "<option value=''>请选择...</option>";
+                            for (var i = 0; i < date.length; i++) {
+                                html += "<option value=" + date[i] + ">" + date[i] +
+                                    "</option>";
+                            }
+                            html += "</select></td>";
+                            // ↓同期
+                            html += "<td><select id='theSameTerm' name='theSameTerm'>" +
+                                "<option value=''>请选择...</option>";
+                            for (var i = 0; i < date.length; i++) {
+                                html += "<option value=" + date[i] + ">" + date[i] +
+                                    "</option>";
+                            }
+                            html += "</select></td>";
+                            html += "</tr>";
+                            if (!show) {
+                                $(".table").append(html);
+                                show = true;
+                            }
+                        }
+                    })
+                });
+            })
+
+
+
+            table += "</table>";
+
+            return table;
+        }
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'reportforms';
+
+        function changeProduct() {
+            if ($G("product")) {
+                $G("product").checked = true;
+            }
+        }
+
+        dialog.oncancel = function () {
+            if (UE.plugins[thePlugins].editdom) {
+                delete UE.plugins[thePlugins].editdom;
+            }
+        };
+        dialog.onok = function () {
+            var selected = $G("selectreport").value; // 获取选择的哪个表单
+
+            if ($G('reportname').value == '') {
+                alert('报表名称不能为空');
+                $G('reportname').focus();
+                return false;
+            } else if ($G('selectreport').value == '') {
+                alert('请选择一个报表');
+                $G('selectreport').focus();
+                return false;
+            }
+
+            var result;
+            ajax({
+                url: "reportjson.json?1",
+                type: "GET",
+                dataType: "json",
+                async: false,
+                success: function (response, xml) {
+                    result = JSON.parse(response);
+                },
+                fail: function (status) {
+                    console.log(status);
+                }
+            })
+
+            /*
+             * 不同类型的报表生成
+             *
+             * groupCount() ---- 分组统计
+             * productCount() ---- 产品信息统计
+             * dataGet() ---- 数据钻取
+             * detail() ---- 段落明细
+             * company() ---- 各分公司员工劳动关系详表
+             * archives() ---- 档案式报表
+             * progress() ---- 图形化显示进度条
+             * 
+             */
+            function groupCount() {
+
+                /* 
+                 * groupCount ---- 分组统计
+                 * 
+                 * reportname -- 报表名称
+                 * selectreport -- 选择报表
+                 * 
+                 * 
+                 */
+
+                // 获取表单数据
+                var supply = Object.keys(result.groupCount), // 供应商
+                    kindName = result.groupCount[selected], // 你选择的供应商
+                    kindNameAll = Object.keys(kindName); // 你选择的供应商里面的类别
+
+                // 获取现在选用 统计什么方向和对象
+                // 把统计的方向放进一个数组里面方便处理
+                var countfx = document.getElementsByName("countfx"),
+                    countdx = document.getElementsByName("countdx");
+                var countfxValue = [],
+                    countdxValue = [];
+                for (var i = 0; i < countfx.length; i++) {
+                    if (countfx[i].checked == true) {
+                        countfxValue.push(countfx[i].value)
+                    }
+                    if (countdx[i].checked == true) {
+                        countdxValue.push(countfx[i].value)
+                    }
+                }
+
+                // 生成html
+                var html =
+                    "<table class='tableT' style='text-align:center;'>" +
+                    // 表头
+                    "<td class='titleT' style='font-weight:bold' colspan='6'>" + $G('reportname').value + "</td>" +
+                    // 标题
+                    "<tr class='menuT'><th>供应商</th><th>产品类别</th><th>产品名称</th><th>单位数量</th><th>订购量</th><th>单价</th></tr>";
+                for (var i = 0; i < kindNameAll.length; i++) {
+                    var kindNameDetail = eval("kindName." + kindNameAll[i]);
+                    for (var j = 0; j < kindNameDetail.length; j++) {
+                        // 供应商
+                        html += "<tr><td>" + selected + "</td>";
+                        // 产品类别
+                        html += "<td>" + kindNameDetail[j].productKind + "</td>";
+                        // 产品名称
+                        html += "<td>" + kindNameDetail[j].productName + "</td>";
+                        // 单位数量
+                        html += "<td>" + kindNameDetail[j].productNum + "</td>";
+                        // 订购量
+                        html += "<td>" + kindNameDetail[j].orderNum + "</td>";
+                        // 单价
+                        html += "<td>" + kindNameDetail[j].price + "</td>";
+                        html += "</tr>";
+                    }
+                }
+                // 判断统计对象的数组 计算
+                function dxValue(countdxValue) {
+                    var dxResult;
+                    if (countdxValue == "1") {
+                        dxResult = 1;
+                    } else if (countdxValue == "2") {
+                        dxResult = 2;
+                    } else {
+                        dxResult = 3;
+                    }
+                    return dxResult;
+                }
+                // 选择对象为订单量 计算订单量
+                function dxResult1() {
+                    for (var i = 0; i < kindNameAll.length; i++) {
+                        sum = 0;
+                        var kindNameDetail = eval("kindName." + kindNameAll[i]);
+                        html += "<tr><td style='font-weight:bold'>" + kindNameAll[i] + "订购量统计</td><td colspan='5'>";
+                        for (var j = 0; j < kindNameDetail.length; j++) {
+                            if (kindNameDetail.length == 1) {
+                                sum += parseFloat(kindNameDetail[j].orderNum);
+                            } else {
+                                sum += parseFloat(kindNameDetail[j].orderNum);
+                            }
+                        }
+                        html += sum;
+                        html += "</td></tr>";
+                    }
+                }
+                // 选择对象为单价 计算单价
+                function dxResult2() {
+                    for (var i = 0; i < kindNameAll.length; i++) {
+                        sum = 0;
+                        var kindNameDetail = eval("kindName." + kindNameAll[i]);
+                        html += "<tr><td style='font-weight:bold'>" + kindNameAll[i] + "单价统计</td><td colspan='5'>";
+                        for (var j = 0; j < kindNameDetail.length; j++) {
+                            if (kindNameDetail.length == 1) {
+                                sum += parseFloat(kindNameDetail[j].price);
+                            } else {
+                                sum += parseFloat(kindNameDetail[j].price) / kindNameDetail.length;
+                            }
+                        }
+                        html += sum;
+                        html += "</td></tr>";
+                    }
+                }
+                // 选择对象为全选
+                function dxResult3() {
+                    dxResult1();
+                    dxResult2();
+                }
+                // 统计方向为供应商
+                function fxResult() {
+                    html += "<tr><td style='font-weight:bold'>产品订购总金额</td><td colspan='5'>";
+                    for (var i = 0; i < kindNameAll.length; i++) {
+                        var kindNameDetail = eval("kindName." + kindNameAll[i]);
+                        for (var j = 0; j < kindNameDetail.length; j++) {
+                            sum += parseFloat(kindNameDetail[j].orderNum) * parseFloat(kindNameDetail[j].price);
+                        }
+                    }
+                    html += sum;
+                    html += "</td></tr>";
+                }
+
+                // 判断统计方向
+                if (countfxValue != "") {
+                    var dxResult = dxValue(countdxValue), // 统计对象
+                        sum = 0;
+                    if (countfxValue == "1") {
+                        html += "<tr><td colspan='6' style='font-weight:bold'>产品类别统计</td></tr>";
+                        if (dxResult == "1") {
+                            dxResult1();
+                        } else if (dxResult == "2") {
+                            dxResult2();
+                        } else {
+                            dxResult3();
+                        }
+                    } else if (countfxValue == "2") {
+                        html += "<tr><td colspan='6' style='font-weight:bold'>供应商统计</td></tr>";
+                        fxResult();
+                    } else {
+                        dxResult3();
+                        fxResult();
+                    }
+                }
+
+                html += "</table>";
+                return html;
+            }
+
+            function productCount() {
+                var count = $G("count").checked, // 获取现在是否选择统计金额
+                    stock = $G("stock").value, // 库存量
+                    totalPrice = $G("totalPrice").value, // 订购总金额
+                    colspan = count ? 6 : 5, // 表头colspan的
+                    jsonName = Object.keys(result.productCount), // 获取有多少个表
+                    kindName = Object.keys(result.productCount[selected]); // 获取正在选择的那个表
+                // 生成html 
+                var html =
+                    "<table class='tableT' style='text-align:center;'>" +
+                    // 表头
+                    "<td class='titleT' style='font-weight:bold' colspan=" + colspan + ">" + $G('reportname').value +
+                    "</td>" +
+                    // 标题
+                    "<tr class='menuT'><th>序号</th><th>产品名称</th><th>单价</th><th>库存量</th><th>订购量</th>";
+                // 如果选择了统计金额
+                if (count) {
+                    html += "<th>订购总金额</th>";
+                }
+                html += "</tr>";
+                // 产品数据
+                for (var i = 0; i < kindName.length; i++) {
+                    var allKindName = eval("result.productCount[selected]." + kindName[i]);
+                    html += "<tr style='font-weight:bold;'><td>产品类别：</td><td>" + kindName[i] + "</td></tr>";
+                    for (var j = 0; j < allKindName.length; j++) {
+                        // 序号
+                        html += "<tr><td>" + allKindName[j].id + "</td>" +
+                            // 产品名称
+                            "<td>" + allKindName[j].productName + "</td>" +
+                            // 单价
+                            "<td>" + allKindName[j].price + "</td>";
+                        // 库存量
+                        if (stock) {
+                            if (stock > parseFloat(allKindName[j].stock)) {
+                                html += "<td>" + allKindName[j].stock + "</td>";
+                            } else {
+                                html += "<td style='color:red;'>" + allKindName[j].stock + "</td>";
+                            }
+                        } else {
+                            html += "<td>" + allKindName[j].stock + "</td>";
+                        }
+                        // 订购量
+                        html += "<td>" + allKindName[j].orderNum + "</td>";
+                        // 订购总金额
+                        if (count) {
+                            var countPrice = parseInt(allKindName[j].price) * parseInt(allKindName[j].orderNum);
+                            if (isNaN(countPrice)) {
+                                countPrice = "";
+                            }
+                            if (totalPrice) {
+                                if (totalPrice > parseFloat(countPrice)) {
+                                    html += "<td>" + countPrice + "</td>";
+                                } else {
+                                    html += "<td style='color:red;'>" + countPrice + "</td>";
+                                }
+                            } else {
+                                html += "<td>" + countPrice + "</td>";
+                            }
+                        }
+                        html += "</tr>";
+                    }
+                }
+                html += "</table>";
+
+                return html;
+            }
+
+            function dataGet() {
+                var jsonName = result.dataGet[selected], // 当前选择表的对象
+                    sort, // 选择的排序对象
+                    sortStyle; // 选择的排序方式
+                // 判断选择了什么排序方式
+                for (var i = 0; i < 2; i++) {
+                    if (document.getElementsByName("sort")[i].checked) {
+                        sort = document.getElementsByName("sort")[i].value;
+                    }
+                    if (document.getElementsByName("sortStyle")[i].checked) {
+                        sortStyle = document.getElementsByName("sortStyle")[i].value;
+                    }
+                }
+                // 排序判定
+                if (sort == 1) {
+                    if (sortStyle == 2) { // 选择了 订单号 排序为 降序。
+                        jsonName.sort(getSortFun('desc', 'orderNum'));
+                    } else { // 选择了 订单号 排序 没选择排序方式默认升序
+                        jsonName.sort(getSortFun('asc', 'orderNum'));
+                    }
+                } else if (sort == 2) {
+                    if (sortStyle == 2) { // 选择了 日期 排序为 降序。
+                        jsonName.sort(getSortFun('desc', 'date'));
+                    } else { // 选择了 日期 排序 没选择排序方式默认升序
+                        jsonName.sort(getSortFun('asc', 'date'));
+                    }
+                } else { // 都没选择 默认以 订单号 排序，降序
+                    jsonName.sort(getSortFun('desc', 'orderNum'));
+                }
+
+                /* function getSortFun(order, sortBy) {
+                  var ordAlpah = (order == 'asc') ? '>' : '<';
+                  var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '? 1 : -1');
+                  return sortFun;
+                } */
+
+                function getSortFun(order, sortBy) {
+                    return order == "asc" ? function (a, b) {
+                        return a[sortBy] - b[sortBy];
+                    } : function (a, b) {
+                        return b[sortBy] - a[sortBy];
+                    }
+                }
+
+                var html =
+                    "<table style='text-align:center;' class='tableT'>" +
+                    // 弹出框
+                    "<div class='order-list-menu' id='order-list-menu'>" +
+                    "<div class='order-menu'>" +
+                    "<span id='orderDetail'>订单明细</span>" +
+                    "</div>" +
+                    "<div class='order-menu'>" +
+                    "<span id='express'>物流信息</span>" +
+                    "</div>" +
+                    "</div>" +
+                    // 表头
+                    "<td style='font-weight:bold' colspan='6' class='firstRow titleT'>" + $G('reportname').value +
+                    "</td>" +
+                    // 标题
+                    "<tr class='menuT'><th>订单号</th><th>订购日期</th><th>客户名称</th><th>负责员工</th><th>是否付款</th><th>导出列表</th></tr>";
+                for (var i = 0; i < jsonName.length; i++) {
+                    // 时间戳转回字符串
+                    var timeStamp = jsonName[i].date,
+                        d = new Date(timeStamp * 1000),
+                        date = d.getFullYear() + "-" +
+                        (d.getMonth() + 1) + "-" +
+                        d.getDate();
+
+                    // 订单号
+                    html += "<tr><td style='text-decoration:underline;cursor:pointer' class='orderNum'>" + jsonName[
+                            i].orderNum + "</td>" +
+                        // 订购日期
+                        "<td>" + date + "</td>" +
+                        // 客户名称
+                        "<td>" + jsonName[i].clientName + "</td>" +
+                        // 负责员工
+                        "<td>" + jsonName[i].header + "</td>" +
+                        // 是否付款
+                        "<td>" + jsonName[i].payState + "</td>" +
+                        // 导出订单
+                        "<td style='text-decoration:underline;cursor:pointer' class='noExl'>导出</td>"
+                }
+                html += "</table>";
+
+                /* 
+                 * 预览后实现的功能,请看5.html
+                 * 1. 点击订单号可以详细看此个订单
+                 * 2. 导出订单列表到excel
+                 * 如果要订单号导出订单明细要后端先实现
+                 */
+
+                /* (function(){
+
+                    var orderNums = document.getElementsByClassName("orderNum"), // 订单号
+                    orderMenu = document.getElementById("order-list-menu"), // 弹出框
+                    orderDetail = document.getElementById("orderDetail"), // 弹出框 - 订单明细
+                    express = document.getElementById("express"), // 弹出框 - 物流信息
+                    exportT = document.getElementsByClassName("noExl"), // 导出
+                    orderNum, // 当前点击的订单号
+                    result; // 
+                    
+                    // 弹出框弹出消失
+                    orderMenu.onmouseover = function(){
+                        this.style.display = "block";
+                    }
+                    orderMenu.onmouseout = function(){
+                        this.style.display = "none";
+                    }
+                    // 点击订单明细
+                    orderDetail.addEventListener('click',function(){
+                        var order = orderNum.innerText;
+                        $.ajax({
+                            url:"reportjson.json?1", 
+                            type:"GET",
+                            dataType:"json",
+                            async:false,
+                            success:function(response){
+                                result = response.data[order];
+                                console.log(result)
+                            }
+                        })
+                        newwindow = window.open("","", "height=400, width=850,toolbar=no");
+                        // 加载CSS文件
+                        var link = newwindow.document.createElement("link"),
+                            head = newwindow.document.getElementsByTagName('head')[0];
+                        link.href = 'http://ox0snft2d.bkt.clouddn.com/reportcss.css';
+                        link.rel = 'stylesheet';
+                        link.type = 'text/css';
+                        head.appendChild(link);
+                        // 点击订单号打开新窗口显示详细订单
+                        var html = "<table cellspacing='0' cellpadding='0' class='table'>"+
+                                "<td colspan='6' class='title'>订单明细</td>"+
+                                "<tr style='height:10px'></tr>"+
+                                "<tr class='menu'>"+
+                                "<td>订单号</td><td>产品名称</td><td>单价</td><td>数量</td><td>折扣</td><td>总金额</td></tr>";
+                        html += "<tr><td rowspan='3'>"+order+"</td>"
+                        for( var i = 0; i < result.length; i++ ){
+                            html += "<td>"+result[i].productName+"</td>"+
+                                    "<td>"+result[i].price+"</td>"+
+                                    "<td>"+result[i].number+"</td>"+
+                                    "<td>"+result[i].discount+"</td>"+
+                                    "<td>"+result[i].totalPrice+"</td></tr>";
+                        }
+                        html += "</table>";
+                        newwindow.document.body.innerHTML = html;
+                    })
+
+                    for( var i = 0; i < exportT.length; i++ ){
+                        exportT[i].addEventListener('click',function(){
+                            $("#tableExcel").table2excel({
+                                // 不被导出的表格行的CSS class类
+                                exclude: ".noExl",
+                                // 导出的Excel文档的名称
+                                name: "Excel Document Name",
+                                // Excel文件的名称
+                                filename: "订单信息列表"
+                            });   
+                        })
+                    }
+
+                    // 点击弹出弹出框
+                    for( var i = 0; i < orderNums.length; i++ ){
+                        orderNums[i].addEventListener('click',function(e){
+                            orderNum = e.target;
+                            orderMenu.style.top = (orderNum.offsetTop + 15) + "px";
+                            orderMenu.style.display = "block";
+                        })
+                    }
+                })(); */
+
+
+                return html;
+            }
+
+            function detail() {
+                var selected = $G("selectreport").value; //获取输入框订单值
+                var reportname = $G('reportname').value; //报表的名字
+                var detailData = result.detail.msg[selected]; //获取当前选择的日期匹配
+                stock = $G("stock").value; //如果有输入订单号,需要匹配订单号
+                var ShippersVal = $G('selectShippers').value; //获取选择的发货商
+                var html = '<table>' + '<tbody>' +
+                    '<tr style="height:51px;"><td style="background-color:rgb(235,247,252);color:rgb(42,135,198)"colspan="6" > &nbsp;' +
+                    selected + reportname + '</td></tr>'
+                //默认根据选择的日期帅选
+                for (var i = 0; i < detailData.length; i++) {
+                    if (stock) { //如果有输入订单号查询
+                        if (detailData[i].order == stock) {
+                            html += '<tr style="height:33px;"><td colspan="6"> &nbsp;&nbsp;&nbsp; 订单基本信息</td></tr>' +
+                                '<tr style="height:22px;"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">订单 &nbsp; ID</td><td>' +
+                                detailData[i].order +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">' +
+                                detailData[i].order +
+                                '</td><td style="background-color:rgb(255,255,255);color:rgb(102,102,102)">' +
+                                detailData[i].client +
+                                '</td><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">' +
+                                detailData[i].employees +
+                                '</td><td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                detailData[i].employees + '</td></tr>' +
+                                ' <tr style="height:21px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">订购日期</td><td >' +
+                                detailData[i].OrderDate +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">发货日期</td><td >' +
+                                detailData[i].deliveryDate +
+                                '</td> <td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">到货日期</td><td >' +
+                                detailData[i].deliveryDate + '</td></tr>' +
+                                '<tr style="height:22px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主信息</td> <td class="fh tac bw pl2 brw1 brss bbw1 bbss blw1 blss btw1 btss" style="background-color:rgb(220,242,240);color:rgb(102,102,102)"colspan="5" ></td></tr>' +
+                                '<tr style="height:21px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主名称</td><td >' +
+                                detailData[i].shipperInfo.shipperName +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主地址</td><td >' +
+                                detailData[i].shipperInfo.shipperAddress +
+                                '</td> <td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">邮编</td><td >' +
+                                detailData[i].shipperInfo.postcode + '</td></tr>' +
+                                '<tr style="height:20px;"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主国家</td><td>' +
+                                detailData[i].shipperInfo.country +
+                                '</td><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主地区</td><td >' +
+                                detailData[i].shipperInfo.area +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主城市</td><td>' +
+                                detailData[i].shipperInfo.city + '</td></tr>' +
+                                '<tr style="height:23px;" tridx="10" id="r-10-0"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">运货信息</td> <td style="background-color:rgb(220,242,240);color:rgb(102,102,102)"colspan="5" ></td></tr>' +
+                                '<tr style="height:25px;" tridx="11" id="r-11-0"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">运 货 商</td><td >' +
+                                detailData[i].freightInfo.shippers +
+                                '</td> <td style="background-color:rgb(220,242,240);color:rgb(51,51,51);" >运 货 费</td><td >' +
+                                detailData[i].freightInfo.Freightfee + '</td></tr>'
+                        } else {
+                            alert("查询的订单号不存在")
+                            return;
+                        }
+                    } else if (ShippersVal) {
+                        // console.log(detailData[i].freightInfo.shippers)
+                        if (detailData[i].freightInfo.shippers == ShippersVal) {
+                            html += '<tr style="height:33px;"><td colspan="6"> &nbsp;&nbsp;&nbsp; 订单基本信息</td></tr>' +
+                                '<tr style="height:22px;"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">订单 &nbsp; ID</td><td>' +
+                                detailData[i].order +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">' +
+                                detailData[i].order +
+                                '</td><td style="background-color:rgb(255,255,255);color:rgb(102,102,102)">' +
+                                detailData[i].client +
+                                '</td><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">' +
+                                detailData[i].employees +
+                                '</td><td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                detailData[i].employees + '</td></tr>' +
+                                ' <tr style="height:21px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">订购日期</td><td >' +
+                                detailData[i].OrderDate +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">发货日期</td><td >' +
+                                detailData[i].deliveryDate +
+                                '</td> <td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">到货日期</td><td >' +
+                                detailData[i].deliveryDate + '</td></tr>' +
+                                '<tr style="height:22px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主信息</td> <td class="fh tac bw pl2 brw1 brss bbw1 bbss blw1 blss btw1 btss" style="background-color:rgb(220,242,240);color:rgb(102,102,102)"colspan="5" ></td></tr>' +
+                                '<tr style="height:21px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主名称</td><td >' +
+                                detailData[i].shipperInfo.shipperName +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主地址</td><td >' +
+                                detailData[i].shipperInfo.shipperAddress +
+                                '</td> <td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">邮编</td><td >' +
+                                detailData[i].shipperInfo.postcode + '</td></tr>' +
+                                '<tr style="height:20px;"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主国家</td><td>' +
+                                detailData[i].shipperInfo.country +
+                                '</td><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主地区</td><td >' +
+                                detailData[i].shipperInfo.area +
+                                '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主城市</td><td>' +
+                                detailData[i].shipperInfo.city + '</td></tr>' +
+                                '<tr style="height:23px;" tridx="10" id="r-10-0"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">运货信息</td> <td style="background-color:rgb(220,242,240);color:rgb(102,102,102)"colspan="5" ></td></tr>' +
+                                '<tr style="height:25px;" tridx="11" id="r-11-0"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">运 货 商</td><td >' +
+                                detailData[i].freightInfo.shippers +
+                                '</td> <td style="background-color:rgb(220,242,240);color:rgb(51,51,51);" >运 货 费</td><td >' +
+                                detailData[i].freightInfo.Freightfee + '</td></tr>'
+                        }
+                    } else {
+                        html += '<tr style="height:33px;"><td colspan="6"> &nbsp;&nbsp;&nbsp; 订单基本信息</td></tr>' +
+                            '<tr style="height:22px;"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">订单 &nbsp; ID</td><td>' +
+                            detailData[i].order +
+                            '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">' +
+                            detailData[i].order +
+                            '</td><td style="background-color:rgb(255,255,255);color:rgb(102,102,102)">' +
+                            detailData[i].client +
+                            '</td><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">' + detailData[
+                                i].employees +
+                            '</td><td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                            detailData[i].employees + '</td></tr>' +
+                            ' <tr style="height:21px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">订购日期</td><td >' +
+                            detailData[i].OrderDate +
+                            '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">发货日期</td><td >' +
+                            detailData[i].deliveryDate +
+                            '</td> <td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">到货日期</td><td >' +
+                            detailData[i].deliveryDate + '</td></tr>' +
+                            '<tr style="height:22px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主信息</td> <td class="fh tac bw pl2 brw1 brss bbw1 bbss blw1 blss btw1 btss" style="background-color:rgb(220,242,240);color:rgb(102,102,102)"colspan="5" ></td></tr>' +
+                            '<tr style="height:21px;"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主名称</td><td >' +
+                            detailData[i].shipperInfo.shipperName +
+                            '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主地址</td><td >' +
+                            detailData[i].shipperInfo.shipperAddress +
+                            '</td> <td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">邮编</td><td >' +
+                            detailData[i].shipperInfo.postcode + '</td></tr>' +
+                            '<tr style="height:20px;"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主国家</td><td>' +
+                            detailData[i].shipperInfo.country +
+                            '</td><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主地区</td><td >' +
+                            detailData[i].shipperInfo.area +
+                            '</td><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">货主城市</td><td>' +
+                            detailData[i].shipperInfo.city + '</td></tr>' +
+                            '<tr style="height:23px;" tridx="10" id="r-10-0"><td  style="background-color:rgb(220,242,240);color:rgb(51,51,51);">运货信息</td> <td style="background-color:rgb(220,242,240);color:rgb(102,102,102)"colspan="5" ></td></tr>' +
+                            '<tr style="height:25px;" tridx="11" id="r-11-0"><td style="background-color:rgb(220,242,240);color:rgb(51,51,51);">运 货 商</td><td >' +
+                            detailData[i].freightInfo.shippers +
+                            '</td> <td style="background-color:rgb(220,242,240);color:rgb(51,51,51);" >运 货 费</td><td >' +
+                            detailData[i].freightInfo.Freightfee + '</td></tr>'
+                    }
+                }
+                html += '</tbody>' + '</table>'
+                return html;
+            }
+
+            function company() {
+                /*
+                 *result  ---请求返回的数据
+                 *result.detail.msg[selected]
+                 *CompanyData  ---获取选择的数据
+                 * table  ---表格字符串拼接
+                 */
+                var selected = $G("selectreport").value; //选择的报表
+                var reportname = $G("reportname").value; //表头内容
+                var CompanyData = result.company[selected]; //对应选择的报表的数据
+                var selectRelations = $G("selectRelations").value; //选择的劳动关系  
+                var selectEducational = $G("selectEducational").value; //选择的学历
+                var g = 0; //序号计数
+                var table = '<table>' + '<tbody>' +
+                    '<tr style="height:51px;"><td style="background-color:rgb(235,247,252);color:rgb(42,135,198)" colspan="5" > &nbsp;' +
+                    reportname + '</td></tr>';
+                for (var i = 0; i < CompanyData.length; i++) {
+                    table += '<tr style="height:45px;" >' +
+                        '<td  style="background-color:rgb(255,255,255);color:rgb(68,68,68);"colspan="5"> &nbsp; ' +
+                        CompanyData[i].companyName + '员工劳动关系详表</td>' +
+                        '</tr>'
+                    if (selectEducational || selectRelations) {
+                        table += '<tr style="height:32px;">' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">序号</td>' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">员工姓名</td>' +
+                            '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">劳动关系</td>' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">学历</td>' +
+                            '</tr>'
+                    } else {
+                        table += '<tr style="height:32px;">' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">分公司名称</td>' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">序号</td>' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">员工姓名</td>' +
+                            '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">劳动关系</td>' +
+                            '<td  style="background-color:rgb(255,255,255);color:rgb(102,102,102);">学历</td>' +
+                            '</tr>'
+                        table += '<tr style="height:27px;">' +
+                            '<td style="background-color:rgb(108,202,205);color:rgb(255,255,255);" rowspan="' + (
+                                CompanyData[i].information.length) + '" >' + CompanyData[i].companyName + '</td>'
+                    }
+                    for (var k = 0; k < CompanyData[i].information.length; k++) {
+                        if (selectRelations && selectEducational) {
+                            if (CompanyData[i].information[k].relations == selectRelations && selectEducational ==
+                                CompanyData[i].information[k].Educational) {
+                                g++; //序号
+                                table += '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    g + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].name + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].relations + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].Educational + '</td>' +
+                                    '</tr>'
+                            }
+                        } else if (selectRelations) {
+                            if (selectRelations == CompanyData[i].information[k].relations) {
+                                g++; //序号
+                                table += '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    g + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].name + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].relations + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].Educational + '</td>' +
+                                    '</tr>'
+                            }
+                        } else if (selectEducational) {
+                            if (selectEducational == CompanyData[i].information[k].Educational) {
+                                g++;
+                                table += '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    g + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].name + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].relations + '</td>' +
+                                    '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                    CompanyData[i].information[k].Educational + '</td>' +
+                                    '</tr>'
+                            }
+                        } else {
+                            table += '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' + (k +
+                                    1) + '</td>' +
+                                '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                CompanyData[i].information[k].name + '</td>' +
+                                '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                CompanyData[i].information[k].relations + '</td>' +
+                                '<td style="background-color:rgb(255,255,255);color:rgb(102,102,102);">' +
+                                CompanyData[i].information[k].Educational + '</td>' +
+                                '</tr>'
+                        }
+
+
+                    }
+
+                }
+                // console.log(table); 
+                table += '</tbody>' + '</table>'
+                return table;
+            }
+
+            function archives() {
+                var selected = $G("selectreport").value; //选择的报表
+                var reportname = $G("reportname").value; //表头内容
+                var archivesData = result.archives[selected]; //对应选择的报表的数据
+                // console.log(archivesData)
+                var table = '<table border="1" style="width:748px;">' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<th colspan="9">' + selected + '</th>' +
+                    '</tr>' +
+                    '<tr style="height:40px;text-align:center;">' +
+                    '<td style="background-color:rgb(195,231,248);" colspan="9">基本信息</td>' +
+                    '</tr>'
+                for (var i in archivesData) {
+                    if (i == "基本信息") {
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            // console.log(archivesData[i][k].age)
+                            table += '<tr style="height:40px;text-align:center;">' +
+                                '<td>编号</td>' +
+                                '<td colspan="4">' + archivesData[i][k].numbering + '</td>' +
+                                '<td >姓名</td>' +
+                                '<td colspan="3">' + archivesData[i][k].name + '</td>' +
+                                '</tr>' +
+                                '<tr style="height:40px;text-align:center;">' +
+                                '<td >性别</td>' +
+                                '<td colspan="4">' + archivesData[i][k].sex + '</td>' +
+                                '<td>籍贯</td>' +
+                                '<td colspan="3">' + archivesData[i][k].NativePlace + '</td>' +
+                                '</tr>' +
+                                '<tr style="height:40px;text-align:center;">' +
+                                '<td >年龄</td>' +
+                                '<td colspan="4">' + archivesData[i][k].age + '</td>' +
+                                '<td >工龄</td>' +
+                                '<td colspan="3">' + archivesData[i][k].serviceAge + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "教育经历") {
+                        table += '<tr style="height:40px; text-align:center;">' +
+                            '<td style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center;">' +
+                            '<td  style="background-color:rgb(239,250,252);" colspan="4">学习时间</td>' +
+                            '<td  style="background-color:rgb(239,250,252);">性质</td>' +
+                            '<td style="background-color:rgb(239,250,252);">学历</td>' +
+                            '<td  style="background-color:rgb(239,250,252);" colspan="2" >学校</td>' +
+                            '<td style="background-color:rgb(239,250,252);">专业</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table += '<tr style="height:40px;text-align:center;">' +
+                                '<td  colspan="4">' + archivesData[i][k].LearningTime + '</td>' +
+                                '<td >' + archivesData[i][k].nature + '</td>' +
+                                '<td>' + archivesData[i][k].Educational + '</td>' +
+                                '<td colspan="2" >' + archivesData[i][k].shcool + '</td>' +
+                                '<td>' + archivesData[i][k].majors + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "工作经历") {
+                        table += '<tr style="height:40px;text-align:center;">' +
+                            '<td style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center;">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="4">任职时间</td>' +
+                            '<td  style="background-color:rgb(239,250,252);" colspan="3">工作单位</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="2">职位</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center;">' +
+                                '<td  colspan="4">' + archivesData[i][k].AtTime + '</td>' +
+                                '<td colspan="3">' + archivesData[i][k].WorkUnits + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].position + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "职称资格") {
+                        table += '<tr style="height:40px;text-align:center;">' +
+                            '<td style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center;">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="4">类型</td>' +
+                            '<td  style="background-color:rgb(239,250,252);" colspan="3">职称</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="2">获得日期</td>'
+                        '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center;">' +
+                                '<td  colspan="4">' + archivesData[i][k].type + '</td>' +
+                                '<td colspan="3">' + archivesData[i][k].JobTitle + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].GetDate + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "培训记录") {
+                        table += '<tr style="height:40px;text-align:center;">' +
+                            '<td style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center;">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="4">培训内容</td>' +
+                            '<td  style="background-color:rgb(239,250,252);" colspan="2">培训日期</td>' +
+                            '<td style="background-color:rgb(239,250,252);">培训讲师</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="2">培训地点</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center">' +
+                                '<td colspan="4">' + archivesData[i][k].TrainingContent + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].TrainingDate + '</td>' +
+                                '<td>' + archivesData[i][k].TrainingLecturer + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].TrainingLocation + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "获奖记录") {
+                        table += '<tr style="height:40px;text-align:center">' +
+                            '<td  style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="2">获奖名称</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="2">获奖项目</td>' +
+                            '<td style="background-color:rgb(239,250,252);">获奖日期</td>' +
+                            '<td style="background-color:rgb(239,250,252);">奖励等级</td>' +
+                            '<td style="background-color:rgb(239,250,252);">奖励排名</td>' +
+                            '<td style="background-color:rgb(239,250,252);">证书编号</td>' +
+                            '<td style="background-color:rgb(239,250,252);">内/外部奖励</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center">' +
+                                '<td colspan="2">' + archivesData[i][k].AwardName + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].WinningProject + '</td>' +
+                                '<td>' + archivesData[i][k].WinningData + '</td>' +
+                                '<td>' + archivesData[i][k].WinningRating + '</td>' +
+                                '<td>' + archivesData[i][k].WinningRanking + '</td>' +
+                                '<td>' + archivesData[i][k].CertificateNumber + '</td>' +
+                                '<td>' + archivesData[i][k].Awards + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "专利") {
+                        table += '<tr style="height:40px;text-align:center">' +
+                            '<td  style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="4">专利名称</td>' +
+                            '<td style="background-color:rgb(239,250,252);">专利号</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="2">发明人</td>' +
+                            '<td style="background-color:rgb(239,250,252);">申请日</td>' +
+                            '<td style="background-color:rgb(239,250,252);">授权日</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center">' +
+                                '<td colspan="4">' + archivesData[i][k].ThePatent + '</td>' +
+                                '<td>' + archivesData[i][k].PatentNo + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].TheInventor + '</td>' +
+                                '<td>' + archivesData[i][k].TheFiling + '</td>' +
+                                '<td>' + archivesData[i][k].Authorization + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "学术论文") {
+                        table += '<tr style="height:40px;text-align:center">' +
+                            '<td  style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center">' +
+                            '<td tyle="background-color:rgb(239,250,252);" colspan="5">论文名称</td>' +
+                            '<td tyle="background-color:rgb(239,250,252);" colspan="2">发表期刊</td>' +
+                            '<td tyle="background-color:rgb(239,250,252);">发表日期</td>' +
+                            '<td tyle="background-color:rgb(239,250,252);">作者</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center">' +
+                                '<td colspan="5">' + archivesData[i][k].PaperTitle + '</td>' +
+                                '<td colspan="2">' + archivesData[i][k].PublishedJournals + '</td>' +
+                                '<td>' + archivesData[i][k].PublishedDate + '</td>' +
+                                '<td>' + archivesData[i][k].author + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "著作") {
+                        table += '<tr style="height:40px;text-align:center">' +
+                            '<td  style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="3">著作名称</td>' +
+                            '<td style="background-color:rgb(239,250,252);">出版社</td>' +
+                            '<td style="background-color:rgb(239,250,252);">发布日期</td>' +
+                            '<td style="background-color:rgb(239,250,252);">实际日期</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="3">角色</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center">' +
+                                '<td colspan="3">' + archivesData[i][k].BookName + '</td>' +
+                                '<td>' + archivesData[i][k].Press + '</td>' +
+                                '<td>' + archivesData[i][k].releaseDate + '</td>' +
+                                '<td>' + archivesData[i][k].actualDate + '</td>' +
+                                '<td colspan="3">' + archivesData[i][k].role + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                    if (i == "学术会议") {
+                        table += '<tr style="height:40px;text-align:center">' +
+                            '<td  style="background-color:rgb(195,231,248);" colspan="9">' + i + '</td>' +
+                            '</tr>' +
+                            '<tr style="height:40px;text-align:center">' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="3">会议名称</td>' +
+                            '<td style="background-color:rgb(239,250,252);">会议议题</td>' +
+                            '<td style="background-color:rgb(239,250,252);">会议日期</td>' +
+                            '<td style="background-color:rgb(239,250,252);">承办方</td>' +
+                            '<td style="background-color:rgb(239,250,252);" colspan="3">会议地点</td>' +
+                            '</tr>'
+                        for (var k = 0; k < archivesData[i].length; k++) {
+                            table +=
+                                '<tr style="height:40px;text-align:center">' +
+                                '<td colspan="3">' + archivesData[i][k].meetingName + '</td>' +
+                                '<td>' + archivesData[i][k].meetingAgenda + '</td>' +
+                                '<td>' + archivesData[i][k].meetingDates + '</td>' +
+                                '<td>' + archivesData[i][k].host + '</td>' +
+                                '<td colspan="3">' + archivesData[i][k].meetinglocation + '</td>' +
+                                '</tr>'
+                        }
+                    }
+                }
+                table += '</tbody>' + '</table>'
+                return table;
+            }
+
+            function progress() {
+                
+            }
+
+            if (!oNode) {
+
+                try {
+                    if (selection == "分组统计") {
+                        var html = groupCount();
+                    } else if (selection == "产品信息统计") {
+                        var html = productCount();
+                    } else if (selection == "数据钻取") {
+                        var html = dataGet();
+                    } else if (selection == "段落明细") {
+                        var html = detail();
+                    } else if (selection == "各分公司员工劳动关系详表") {
+                        var html = company();
+                    } else if (selection == "档案式报表") {
+                        var html = archives();
+                    }
+                    editor.execCommand('insertHtml', html);
+                    return true;
+                } catch (e) {
+                    try {
+                        editor.execCommand('error');
+                    } catch (e) {
+                        alert('控件异常，请到 [雷劈网] 反馈或寻求帮助！');
+                    }
+                    return false;
+                }
+            } else {
+                delete UE.plugins[thePlugins].editdom; //使用后清空这个对象，变回新增模式
+            }
+
+        };
+    </script>
+</body>
+
+</html>

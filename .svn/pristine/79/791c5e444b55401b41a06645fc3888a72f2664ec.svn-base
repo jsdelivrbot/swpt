@@ -1,0 +1,77 @@
+.activityMain {
+    .banner {
+        width: 100%;
+        height: 5rem /* 375/75 */;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .activityDetail {
+        padding: .266667rem /* 20/75 */ .266667rem /* 20/75 */;
+        text-align: center;
+        font-size: .4rem /* 30/75 */;
+        h2 {
+            display: inline-block;
+            color: red;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: .266667rem /* 20/75 */;
+            padding-bottom: .08rem /* 6/75 */;
+        }
+        p:not(:last-of-type) {
+            margin-bottom: .266667rem /* 20/75 */;
+        }
+    }
+    
+}
+
+.records {
+    padding: .266667rem /* 20/75 */ 0;
+    .title {
+        font-size: .48rem /* 36/75 */;
+        text-indent: .4rem /* 30/75 */;
+        padding-bottom: .2rem /* 15/75 */;
+        border-bottom: 1px solid #ccc;
+    }
+    .record {
+        padding: .533333rem /* 40/75 */ .4rem /* 30/75 */;
+        .rImg {
+            width: 2.666667rem /* 200/75 */;
+            height: 2.666667rem /* 200/75 */;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .rMain {
+            text-align: justify;
+            overflow: hidden;
+            padding-left: .266667rem /* 20/75 */;
+            font-size: .4rem /* 30/75 */;
+            height: 2.666667rem /* 200/75 */;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            position: relative;
+            h2,p {
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+            }
+            .rTitle {
+                font-weight: bold;
+            }
+            p {
+                font-size: .373333rem /* 28/75 */;
+            }
+        }
+    }
+    .record:not(:first-of-type) {
+        padding-top: 0;
+    }
+}
+
+
+

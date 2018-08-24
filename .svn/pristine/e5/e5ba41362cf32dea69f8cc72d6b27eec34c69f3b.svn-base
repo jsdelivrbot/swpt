@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>任务发布</title>
+    <script src="./js/thirdJS/jquery.js"></script>
+    <link rel="stylesheet" href="./css/thirdCSS/bootstrap.css">
+    <script src="./js/thirdJS/bootstrap.js"></script>
+
+    <script src="./js/httpData.all.js"></script>
+    <script src="./js/template.js"></script>
+    <script src="./js/Common.js"></script>
+    <link rel="stylesheet" href="./css/Common.css">
+    <link rel="stylesheet" href="./css/Index.css">
+    <script src="./js/Index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="i_top" class="row i_top text-center" style="height:5%;display: none;">
+            <div class="col-xs-2 topTitle" style="margin-top:1.5%;color: #999999;cursor: pointer;">
+                <span id="btnRet">返回</span>
+            </div>
+            <div class="col-xs-8 topTitle divMiddle" >
+                <div id="inquire_Info" >
+                    <div style=" height: 100% ;width:25%; float: left;margin-top:1.5%;">
+                        <select id="FindTypeId"  >
+                            <option value="">全部</option>
+                            <option value="1">计划</option>
+                            <option value="2">筹备</option>
+                            <option value="3">进行中</option>
+                            <option value="4">完成</option>
+                        </select>
+                    </div>
+                    <input id="txtContent" type="text" placeholder="搜索 标题/负责人/状态">
+                </div>
+                <div id="title" style="line-height:35px;color: #2697EB; font-size: 11pt;font-weight: 600; display: none; width: 100%;height: 100%;text-align: center;"></div>
+            </div>
+            <div id="findOrOk" onclick="findOrOk(this);" class="col-xs-2 topSelect">
+                查询
+            </div>
+        </div>
+        <div id="i_middle" class="row i_middle" style="height: 90%;">
+            <iframe id="iframeAll" style="overflow-y: hidden !important;"  src="./view/Index.html" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        <div id="createNew" style="cursor:pointer; color: #ffffff;text-align: center;line-height: 40px;font-size: 25pt; left:95%;top:98%;margin-top:-40px;margin-left:-40px;   height:40px;width: 40px;background-color: rgb(0, 140, 255);border-radius:50px;position: absolute; ">+</div>
+        <!-- <div id="i_botton" class="row showBorder i_botton" style="height:5%">
+            /***  需要底部导航 则去掉该div注释后进行内容操作
+        </div> -->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>二维码</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="generator" content="www.leipi.org" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <script type="text/javascript">
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>类型</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="orgname" onclick="javascript:this.select()" placeholder="必填项" value="二维码" type="text" />
+                </td>
+                <td>
+                    <select id="orgtype" class="form-control">
+                        <option value="text">文本</option>
+                        <option value="url">超链接 url</option>
+                        <option value="tel">电话</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <span>文本框样式</span>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    宽:
+                    <input id="orgwidth" name="leipiNewField" type="text" class="input-samll span1" placeholder="auto" onclick="this.value=this.value.replace(/\D/g,'')" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    <select id="orgvarfontwidth" style="width:75px;">
+                            <option>PX</option>
+                            <option selected>%</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;高
+                    <input id="orgheight" name="leipiNewField" type="text" class="input-samll span1" placeholder="auto" onclick="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    <select id="orgvarfontheight" style="width:75px;">
+                            <option>PX</option>
+                            <option selected>%</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="orgvalue">内容</label>
+                    <textarea class="input-block-level" rows="3" id="orgvalue" placeholder="二维码内容..."></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="alert alert-danger">提示：二维码只支持少量内容，请不要加入大量内容</div>
+    </div>
+    <script type="text/javascript">
+        var gVarfontwidth = $("#orgvarfontwidth option:selected").val();
+        $("#orgvarfontwidth").click(function(){
+           gVarfontwidth = $("#orgvarfontwidth option:selected").val();
+        }); 
+        var gVarfontheight = $("#orgvarfontheight option:selected").val();
+        $("#orgvarfontheight").click(function(){
+           gVarfontheight = $("#orgvarfontheight option:selected").val();
+        }); 
+    </script>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'qrcode';
+        window.onload = function () {
+            $G('orgname').select();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var gValue = oNode.getAttribute( 'value' ).replace( /&quot;/g, "\"" ),
+                    gTitle = oNode.getAttribute( 'title' ).replace( /&quot;/g, "\"" ),
+                    gWidth = oNode.getAttribute( 'orgwidth' ),
+                    gHeight = oNode.getAttribute( 'orgheight' ),
+                    gType = oNode.getAttribute( 'orgtype' );
+                $G( 'orgvalue' ).value = gValue;
+                $G( 'orgname' ).value = gTitle;
+                $G( 'orgwidth' ).value = gWidth;
+                $G( 'orgheight' ).value = gHeight;
+                $G( 'orgtype' ).value = gType;
+            }
+        }
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+        dialog.onok = function () {
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '控件名称不能为空' );
+                return false;
+            }
+            var gValue = $G( 'orgvalue' ).value.replace( /\"/g, "&quot;" ),
+                gTitle = $G( 'orgname' ).value.replace( /\"/g, "&quot;" ), 
+                gWidth = $G( 'orgwidth' ).value,
+                gHeight = $G( 'orgheight' ).value,
+                gType = $G( 'orgtype' ).value;
+
+            if ( !oNode ) {
+                try {
+                    oNode = createElement( 'img', 'leipiNewField' );
+                    oNode.setAttribute( 'title', gTitle );
+                    oNode.setAttribute( 'name', 'leipiNewField' );
+                    oNode.setAttribute( 'value', gValue );
+                    oNode.setAttribute( 'orgtype', gType );
+                    oNode.setAttribute( 'leipiPlugins', thePlugins );
+                    oNode.setAttribute( 'src', editor.options.UEDITOR_HOME_URL + 'formdesign' + '/images/qrcode.gif' );
+                    if( gWidth != '' ) {
+                        if( gVarfontwidth == "PX"){
+                           
+                            oNode.style.width = gWidth + 'px';
+                            oNode.setAttribute( 'orgwidth' , gWidth );
+                        }
+                        if( gVarfontwidth == "%" ){
+                            
+                            oNode.style.width = gWidth + '%';
+                            oNode.setAttribute( 'orgwidth' , gWidth );
+                        }
+                    } else{
+                            oNode.style.width = "";
+                            oNode.setAttribute( 'orgwidth' , "" );
+                    }
+                    if( gHeight != '' ){
+                        if( gVarfontheight == "PX"){
+                            oNode.style.height = gHeight + 'px';
+                            oNode.setAttribute( 'orgheight' , gHeight );
+                        }
+                        if( gVarfontheight == "%" ){
+                            oNode.style.height = gHeight + '%';
+                            oNode.setAttribute( 'orgheight' , gHeight );
+                        }
+                    }
+                    editor.execCommand( 'insertHtml', oNode.outerHTML );
+                    return true;
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                oNode.setAttribute( 'title', gTitle );
+                oNode.setAttribute( 'orgtype', gType );
+                oNode.setAttribute( 'value', gValue );
+                //oNode.innerHTML = $G('orgvalue').value;
+                if( gWidth != '' ) {
+                    if( gVarfontwidth == "PX"){
+                        console.log(gWidth);
+                        oNode.style.width = gWidth + 'px';
+                        oNode.setAttribute( 'orgwidth' , gWidth );
+                    }
+                    if( gVarfontwidth == "%" ){
+                        console.log(gWidth);
+                        oNode.style.width = gWidth + '%';
+                        oNode.setAttribute( 'orgwidth' , gWidth );
+                    }
+                }
+                if( gHeight != '' ){
+                    if( gVarfontheight == "PX"){
+                        oNode.style.height = gHeight + 'px';
+                        oNode.setAttribute( 'orgheight' , gHeight );
+                    }
+                    if( gVarfontheight == "%" ){
+                        oNode.style.height = gHeight + '%';
+                        oNode.setAttribute( 'orgheight' , gHeight );
+                    }
+                }
+
+                delete UE.plugins[ thePlugins ].editdom;
+                return true;
+            }
+        };
+
+    </script>
+</body>
+
+</html>

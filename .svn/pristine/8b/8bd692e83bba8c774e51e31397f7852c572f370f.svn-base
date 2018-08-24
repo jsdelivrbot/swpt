@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>党建活动详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="../../../../public/css/reset.min.css">
+    <link rel="stylesheet" href="../../../../public/css/public.min.css">
+    <link rel="stylesheet" href="../../static/css/activityDetail/aD_main.min.css">
+    <script src="../../../../public/flexible/flexible.js"></script>
+    <script src="../../../../public/flexible/flexible_css.js"></script>
+</head>
+
+<body>
+    <div class="wrapper confirmApply" id="confirmApply" style="display: block;">
+        <header>
+            <div class="back" onclick="historyUtils.back();">
+                <i class="iconfont">&#xe7a4;</i>
+            </div>
+            <h2 class="centerTitle">活动报名</h2>
+        </header>
+        <!-- <section class="banner">
+            <h2>活动报名</h2>
+        </section> -->
+        <section class="formContainer">
+            <p class="tip">
+                <span class="important">*</span>您的信息只提供本活动单位使用，请放心填写</p>
+            <form id="confirmForm" name="confirmForm" class="confirmForm">
+                <input type="hidden" id="userId" name="userId" value="">
+                <label for="pName">
+                    <span class="important">*</span>姓名</label>
+                <input type="text" id="pName" class="pName" name="name" placeholder="身份证姓名" required="" pattern="^[\u4e00-\u9fa5]{1,7}$|^[\dA-Za-z_]{1,14}$">
+                <label for="pPhoneNum">
+                    <span class="important">*</span>手机号</label>
+                <input type="tel" id="pPhoneNum" class="pPhoneNum" name="phone" placeholder="真实手机号" required="" pattern="^(1[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{9}$">
+                <label for="pAddr">
+                    <span class="important">*</span>详细地址</label>
+                <input type="text" id="pAddr" class="pAddr" name="address" placeholder="地址" required="">
+                <label for="pNote">留言</label>
+                <textarea cols="30" rows="6" id="pNote" class="pNote" name="message" placeholder="120字以内"></textarea>
+                <button type="submit" id="submit" class="submit">确认报名</button>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>
+<script src="../../../../public/jquery/jquery-1.7.2.min.js"></script>
+<script src="../../../../public/js/method.js"></script>
+<script src="../../../../public/layer/layer.js"></script>
+<script src="../../static/js/aA_main.js"></script>

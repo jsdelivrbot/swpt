@@ -1,0 +1,165 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+    <p class="color-white">试卷标题</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main class="node-main text-center">
+    <form>
+        <input type="hidden" name="type" value="1">
+        <input type="hidden" name="topic" value="1">
+        <input type="hidden" name="userId" value="1">
+        <input type="hidden" name="pId" value="1">
+        <article>
+            <section section="topic">
+            </section>
+            <section class="dis-none" section="question">
+                <header class="font-34 text-left">
+                    疑问
+                    <span class="right color-999"></span>
+                </header>
+                <textarea name="question" class="border-box font-30 dis-block margin-auto" placeholder="有什么问题，记录下来吧"></textarea>
+            </section>
+            <section class="dis-none" section="experience">
+                <header class="font-34 text-left">
+                    心得
+                </header>
+                <textarea name="experience" class="border-box font-30 dis-block margin-auto" placeholder="题做完了，一定有很多心得吧"></textarea>
+            </section>
+        </article>
+    </form>
+    <div class="btn text-center dis-none">
+        <button class="font-34 color-white no-border border-box">保存</button>
+        <button class="font-34 color-white no-border border-box">保存并分享</button>
+    </div>
+</main>
+<script>
+    $( '.cole-head p' ).html( dj.getStorage( 'noteTitle' ) );
+    $( '.node-main' ).hide();
+    $( 'input[name="type"]' ).val( dj.getStorage( 'noteType' ) );
+    $( 'input[name="topic"]' ).val( dj.getStorage( 'noteTopic' ) );
+    $( 'input[name="userId"]' ).val( dj.getStorage( 'noteUserId' ) );
+    $( 'input[name="pId"]' ).val( dj.getStorage( 'notePid' ) );
+    if ( dj.getStorage( 'createNote' ) != '1' ) {
+        $.ajax( { //打开页面就执行获取笔记详细信息的操作
+            url: ajaxUrl + '/papersQuestion/searchUserDetails',
+            type: 'get',
+            data: { 'topic': dj.getStorage( 'noteTopic' ), 'userId': dj.getStorage( 'userId' ) }
+        } ).done( function ( m, n ) {
+            if ( !m.msg ) {
+                $( '.node-main' ).html( '<p class="font-40 text-center">对不起，获取笔记失败！</p>' );
+                $( '.node-main' ).fadeIn( 'slow' );
+                return;
+            }
+            var result = m.msg,
+                section = $( '.node-main section' ).eq( 0 ),
+                answerArr = result.topic.answer.replace( /\s+/g, "" ).split( ',' );
+
+            if ( result.note[ 0 ].type == 0 || result.note[ 0 ].type == 1 ) {
+                var text = '<p class="text-left">（&nbsp;<span>' + result.topic.wrongAnswer + '</span>&nbsp;）' + result.topic.title + '</p>' +
+                    '<ul>' +
+                    '<li>A&nbsp;&nbsp;' + result.topic.answerA + '</li>' +
+                    '<li>B&nbsp;&nbsp;' + result.topic.answerB + '</li>' +
+                    '<li>C&nbsp;&nbsp;' + result.topic.answerC + '</li>' +
+                    '<li>D&nbsp;&nbsp;' + result.topic.answerD + '</li>' +
+                    '</ul>';
+            } else if ( result.note.type == 2 ) {}
+            for ( var n in result.note ) {
+                $( '.node-main form article' ).append( $( '.node-main form article [section="question"]' ).last()[ 0 ].outerHTML )
+                    .append( $( '.node-main form article [section="experience"]' ).last()[ 0 ].outerHTML ).callBack( () => {
+                        var qu = $( '.node-main form article [section="question"]' ).last().show(),
+                            ex = $( '.node-main form article [section="experience"]' ).last().show();
+                        qu.find( 'textarea' ).html( result.note[ n ].question );
+                        ex.find( 'textarea' ).html( result.note[ n ].experience );
+                        qu.find( 'header span' ).html( dj.getDate( result.note[ n ].createTime, 'Y-M-D' ) );
+                        ex.find( 'header span' ).html( dj.getDate( result.note[ n ].createTime, 'Y-M-D' ) );
+                    } );
+            }
+            $( '.node-main form' ).fillValue( result.note );
+            section.append( text ).callBack( function () {
+                if ( result.topic.wrongAnswer != result.topic.answer ) {
+                    section.find( 'span' ).addClass( 'mistake' );
+                }
+                if ( section.find( 'span' ).html() == 'null' ) {
+                    section.find( 'span' ).html( '' )
+                }
+                for ( var i in answerArr ) {
+                    switch ( answerArr[ i ] ) {
+                    case 'A':
+                        section.find( 'li' ).eq( 0 ).addClass( 'color-red' );
+                        break;
+                    case 'B':
+                        section.find( 'li' ).eq( 1 ).addClass( 'color-red' );
+                        break;
+                    case 'C':
+                        section.find( 'li' ).eq( 2 ).addClass( 'color-red' );
+                        break;
+                    case 'D':
+                        section.find( 'li' ).eq( 3 ).addClass( 'color-red' );
+                        break;
+                    }
+                }
+            } )
+            $( '.node-main' ).fadeIn( 'slow' );
+        } ).fail( function ( m, n ) {
+            $( '.node-main' ).html( '<p class="font-40 text-center">对不起，获取笔记失败！</p>' );
+            $( '.node-main' ).fadeIn( 'slow' );
+        } );
+    } else {
+        $( '.node-main section' ).eq( 0 ).append( dj.getStorage( 'noteQuestion' ) ).callBack( function () {
+            $( '.node-main section' ).eq( 0 ).find( 'p' ).addClass( 'text-left' );
+            $( '.node-main section' ).eq( 0 ).find( 'img' ).remove();
+            $( '.node-main' ).fadeIn( 'slow' );
+            dj.setStorage( 'createNote', '0' );
+        } );
+    }
+    $( '.node-main .btn button' ).unbind().click( function () { //保存笔记
+        var data = $( '.node-main form' ).getValue();
+        if ( $( this ).html() == '保存' ) {
+            data.status = '0';
+        } else if ( $( this ).html() == '保存并分享' ) {
+            data.status = '1';
+        }
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/saveNote',
+            contentType: 'application/json;charset=UTF-8;',
+            type: 'post',
+            dataType: 'json',
+            data: JSON.stringify( data )
+        } ).done( function ( m, n ) {
+            if ( m.status == 2 ) {
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        f: function () {
+                            $( '#confirm' ).unbind().click( function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                            } );
+                        },
+                        content: '<div><p class="text-center font-36">保存失败</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    } );
+                } );
+            } else {
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        f: function () {
+                            $( '#confirm' ).unbind().click( function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                                $( 'body' ).prePage();
+                            } );
+                        },
+                        content: '<div><p class="text-center font-36">保存成功</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    } );
+                } );
+            }
+        } );
+    } );
+
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try {
+            clearInterval( Countdown );
+        } catch ( e ) {}
+    } );
+
+</script>

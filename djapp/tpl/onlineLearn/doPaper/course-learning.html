@@ -1,0 +1,256 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" class="posi-ab center-y margin-auto">
+    <p class="color-white">学习</p>
+    <!-- <img src="images/search2.png" class="posi-ab center    -y margin-auto"> -->
+    <!-- <div class="toggle-search posi-re margin-auto">
+        <img src="images/search2.png" alt="" class="posi-ab margin-auto center-y">
+        <input type="text" name="" id="" class="no-border posi-ab margin-auto center-y">
+    </div> -->
+</header>
+<main class="cole-main">
+    <div class="toggle-search posi-re margin-auto">
+        <img src="images/search2.png" alt="" class="posi-ab margin-auto center-y">
+        <input type="text" name="" id="" class="no-border posi-ab margin-auto center-y">
+    </div>
+    <div class="cole-options">
+        <div sort="0">
+            <img src="images/sorting.png" alt="">
+            <span>收藏</span>
+        </div>
+        <div sort="0">
+            <img src="images/sorting.png" alt="">
+            <span>时间</span>
+        </div>
+        <div>
+            <img src="images/filter.png" alt="">
+            <span>类型</span>
+        </div>
+    </div>
+    <div class="cole-type">
+        <div div="timediv" class="dis-none">
+            <p>时间：</p>
+            <ul>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">不限</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">最近</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">一周内</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">一月内</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">一年内</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div div="typediv" class="dis-none">
+            <p>类别：</p>
+            <ul>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">不限</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别一</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别二</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别三</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别四</span>
+                    </label>
+                </li>
+                <li>
+                    <label for="">
+                        <div class="left"></div>
+                        <input class="left dis-none" type="checkbox" name="" id="">
+                        <span class="left">类别五</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cole-content">
+        <ul>
+        </ul>
+    </div>
+</main>
+<script>
+    dj.setStorage( 'startPage', '0' );
+    $x.scrollBack = true;
+    $x.loadMainSchool = function ( data ) {
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/searchShowQuestion',
+            contentType: 'application/json;charset=UTF-8',
+            data: data,
+            cache: false
+        } ).done( function ( m, n ) {
+            var result = m.msg;
+            if ( result && result.length > 0 ) {
+                dj.setStorage( 'startPage', parseInt( dj.getStorage( 'startPage' ) ) + 1 );
+                $x.scrollBack = true;
+                for ( var i in result ) {
+                    $( '.cole-content ul' ).append( '<li test-id="' + result[ i ].id + '"    >' +
+                        '<img srx="images/list.png" src="' + imgSrc + '/' + result[ i ].image + '"/>' +
+                        '<div class="left">' +
+                        '<ol>' +
+                        '<li>' +
+                        '<p>' + result[ i ].title + '</p>' +
+                        '</li>' +
+                        '<li>' +
+                        '<p>&nbsp;</p>' +
+                        '</li>' +
+                        '<li>' +
+                        '<p>时间：' + dj.getDate( result[ i ].createTime, 'Y-M-D' ) + '</p>' +
+                        '<p>' +
+                        '<img src="images/share1.png" alt="">' +
+                        '<img src="images/consent.png" alt="">' +
+                        '</p>' +
+                        '</li>' +
+                        '</ol>' +
+                        '</div>' +
+                        '</li>' );
+                }
+            }
+            if ( $( '.main-content ul>li' ).length == 0 ) {
+                $( '.main-content ul' ).append( '<p class="text-center font-36">很抱歉！没有找到试卷！</p>' );
+            }
+        } );
+    }
+    $x.loadMainSchool( { 'key': dj.getStorage( 'searchKey' ), 'startPage': dj.getStorage( 'startPage' ) } );
+    $( '.toggle-search input' ).val( dj.getStorage( 'searchKey' ) );
+    scrollBottom = function () { //上拉加载更多
+        $x.scrollBack = false;
+        $x.loadMainSchool( { 'type': dj.getStorage( 'type' ), 'startPage': dj.getStorage( 'startPage' ) } );
+
+    }
+    $( '.toggle-search img' ).unbind().click( function () {
+        dj.setStorage( 'startPage', '0' );
+        $( '.cole-content ul' ).children( '*' ).remove();
+        $x.loadMainSchool( { 'key': $( '.toggle-search input' ).val(), 'startPage': dj.getStorage( 'startPage' ) } );
+    } );
+    $( '.cole-type ul>li' ).click( function () { //点击方框打勾
+        dj.setStorage( 'startPage', '0' );
+        $( '.cole-content ul' ).children( '*' ).remove();
+        $x.data = {};
+        $( this ).find( 'div' ).toggleClass( 'cole-type-check' );
+        $( this ).siblings().find( 'div' ).removeClass( 'cole-type-check' );
+        $( '.cole-type-check' ).each( function ( i, e ) {
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'timediv' ) {
+                if ( $( this ).parents( 'li' ).index() != 0 ) {
+                    $x.data.time = $( this ).parents( 'li' ).index();
+                }
+            }
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'typediv' ) {
+                if ( $( this ).parents( 'li' ).index != 0 ) {
+                    $x.data.type = $( this ).parents( 'li' ).index();
+                }
+            }
+        } );
+        $x.data.startPage = dj.getStorage( 'startPage' );
+        $x.loadMainSchool( $x.data );
+    } );
+    $( '.cole-head>img' ).eq( 1 ).click( function () { //搜索框
+        $( '.toggle-search' ).stop( true, true ).slideToggle( 'fast' );
+    } );
+
+    $( '.cole-options>div' ).click( function () { //点击类型
+        dj.setStorage( 'startPage', '0' );
+        $( '.cole-content ul' ).children( '*' ).remove();
+        $x.data = {};
+        $( this ).addClass( 'color-red' ).siblings().removeClass( 'color-red' );
+        if ( $( this ).find( 'span' ).html() == '类型' ) {
+            $( '.cole-type>div' ).toggle();
+        } else if ( $( this ).find( 'span' ).html() == '时间' ) {
+            if ( $( this ).attr( 'sort' ) == '0' ) {
+                $( this ).attr( 'sort', '1' );
+                $x.data.sort = '0';
+            } else {
+                $( this ).attr( 'sort', '0' );
+                $x.data.sort = '1';
+            }
+            $x.data.flag = '1';
+        } else if ( $( this ).find( 'span' ).html() == '收藏' ) {
+            if ( $( this ).attr( 'sort' ) == '0' ) {
+                $( this ).attr( 'sort', '1' );
+                $x.data.sort = '0';
+            } else {
+                $( this ).attr( 'sort', '0' );
+                $x.data.sort = '1';
+            }
+            $x.data.flag = '0';
+        }
+        $( '.cole-type-check' ).each( function ( i, e ) {
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'timediv' ) {
+                if ( $( this ).parents( 'li' ).index() != 0 ) {
+                    $x.data.time = $( this ).parents( 'li' ).index();
+                }
+            }
+            if ( $( this ).parents( 'div' ).attr( 'div' ) == 'typediv' ) {
+                if ( $( this ).parents( 'li' ).index != 0 ) {
+                    $x.data.type = $( this ).parents( 'li' ).index();
+                }
+            }
+        } );
+        $x.data.startPage = dj.getStorage( 'startPage' );
+        $x.loadMainSchool( $x.data );
+
+    } );
+
+    $( '.cole-head>img:first-child' ).off().click( function () {
+        $( 'body' ).prePage( './main-school.html' );
+    } );
+
+    $( '.cole-content' ).off().on( 'click', 'ul>li', function () { //打开试卷
+        dj.setStorage( { 'openTestId': $( this ).attr( 'test-id' ) } );
+        $( 'body' ).nextPage( './online-exam.html', function () {
+            scrollBottom = function () {}
+        } );
+    } );
+
+</script>

@@ -1,0 +1,60 @@
+html,body,div,dl,dt,dd,ul,li,h1,h2,h3,a{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #666666;
+}
+table{
+    width: 90%;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+.curcompany{
+    border: 2px solid #ff0000;
+}
+td{
+    line-height: 30px;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+}
+td input{
+    width: 96%;
+    height: 100%;
+    border: none;
+    padding: 3px;
+    padding-left: 5px;
+}
+tr td:nth-of-type(1){
+    width: 180px;
+    text-align: right;
+    padding-right: 5px;
+}
+textarea{
+    width: 98%;
+    height: 100%;
+    padding: 3px;
+    padding-left: 5px;
+    border: none;
+}
+.edit{
+    border: 1px dashed #666;
+}
+.add_enterprise{
+    display: inline-block;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 1px 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.add_enterprise:hover{
+    background-color: #2a6190;
+    border-color: #2e6da4;
+}

@@ -1,0 +1,76 @@
+.content-wrap>h2{
+	padding: 50px 0 0 30px;
+}
+.content-wrap>p{
+	padding: 30px 0 0 30px;
+}
+.content-wrap>h4{
+	padding: 20px 0 10px 30px;
+}
+.list{
+	padding-left: 50px;
+	padding-bottom: 90px;
+}
+.list li{
+	list-style: initial;
+	padding: 25px 0;
+}
+
+
+.content-box{
+	text-align: center;
+}
+.content-box h2{
+	padding-bottom: 80px;
+}
+
+.content-box ul li{
+	width: 500px;
+	min-height: 280px;
+	float: left;
+	margin: 0 110px 100px 30px;
+	text-align: center;
+}
+.content-box ul li a{
+	color: #333;
+}
+.content-box ul li a span:hover{
+	color: #1296db;
+}
+.content-box ul li p{
+	text-align: initial;
+	line-height: 30px;
+}
+
+.content-box ul li i,.content-box ul li span{
+	display: block;
+	margin: 0 auto;
+}
+.content-box ul li span{
+	margin: 15px 0 20px;
+}
+.content-box ul li:nth-of-type(2),.content-box ul li:nth-of-type(4){
+	margin-right: 0;
+}
+.content-box ul li:nth-of-type(1) i,.content-box ul li:nth-of-type(2) i{
+	width: 53px;
+	height: 49px;
+	background-size: cover;
+}
+.content-box ul li:nth-of-type(3) i,.content-box ul li:nth-of-type(4) i{
+	width: 56px;
+	height: 60px;
+	background-size: cover;
+}
+.content-box ul li:nth-of-type(1) i{
+	background: url(../img/server_icon1.png) no-repeat;
+}
+.content-box ul li:nth-of-type(2) i{
+	background: url(../img/server_icon2.png) no-repeat;
+}
+.content-box ul li:nth-of-type(3) i{
+	background: url(../img/server_icon3.png) no-repeat;
+}
+.content-box ul li:nth-of-type(4) i{
+	background: url(../img/server_icon4.png) no-repeat;
+}

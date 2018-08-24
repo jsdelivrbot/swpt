@@ -1,0 +1,136 @@
+<div class="search-bar head-bar posi-fi">
+    <img src="images/return.png" return="" onclick="window.history.go(-1);" class="posi-ab center-y margin-auto" style="left:.3rem;">
+    <img src="images/return.png" alt="" class="dis-none posi-ab margin-auto center-y" id="search-img">
+    <div>
+        <img src="images/search3.png" />
+        <input type="text" name="" id="" value="" placeholder="搜索关键字" />
+    </div>
+    <p search-btn class="color-white right posi-ab margin-auto center-y dis-none">搜索</p>
+</div>
+</div>
+<div class="main-container">
+    <div class="navbar">
+        <ul>
+            <li class="navbar-active">
+                理论武装
+            </li>
+            <li>
+                党的建设
+            </li>
+            <li>
+                科学发展
+            </li>
+            <li>
+                能力提升
+            </li>
+            <li>
+                时政形势
+            </li>
+            <li>
+                十九大专题
+            </li>
+        </ul>
+    </div>
+    <div class="banner">
+        <ul>
+            <li>
+                <img src="images/banner.png" alt="">
+            </li>
+        </ul>
+    </div>
+    <main class="main-content">
+        <ul>
+        </ul>
+    </main>
+</div>
+<script>
+    dj.setStorage( 'startPage', '0' ); //初始化翻页
+    $x.loadMainSchool = function ( data ) {
+        if ( dj.getStorage( 'startPage' ) == '0' ) {
+            $( '.main-content ul' ).loadingWindow();
+        }
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/searchShowQuestion',
+            contentType: 'application/json;charset=UTF-8',
+            data: data,
+            cache: false
+        } ).done( function ( m, n ) {
+            var result = m.msg;
+            if ( result && result.length > 0 ) {
+                $( '.main-content ul' ).closeLoadingWindow();
+                $x.scrollBack = true;
+                dj.setStorage( 'startPage', parseInt( dj.getStorage( 'startPage' ) ) + 1 );
+                for ( var i in result ) {
+                    $( '.main-content ul' ).append( '<li test-id="' + result[ i ].id + '"    >' +
+                        '<img srx="images/list.png" src="' + imgSrc + '/' + result[ i ].image + '"/>' +
+                        '<div class="left">' +
+                        '<ol>' +
+                        '<li>' +
+                        '<p>' + result[ i ].title + '</p>' +
+                        '</li>' +
+                        '<li>' +
+                        '<p>&nbsp;</p>' +
+                        '</li>' +
+                        '<li>' +
+                        '<p>时间：' + dj.getDate( result[ i ].createTime, 'Y-M-D' ) + '</p>' +
+                        '<p>' +
+                        '<img src="images/share1.png">' +
+                        '<img src="images/collection.png">' +
+                        '</p>' +
+                        '</li>' +
+                        '</ol>' +
+                        '</div>' +
+                        '</li>' );
+                }
+            } else if ( dj.getStorage( 'startPage' ) == '0' ) {
+                $( '.main-content ul' ).clear().html( '<p class="text-center font-38">很抱歉！没有查询到相关信息！</p>' ).closeLoadingWindow();
+            }
+        } ).fail( ( m, n ) => {
+            console.log( m );
+            if ( dj.getStorage( 'startPage' ) == '0' ) {
+                $( '.main-content ul' ).clear().html( '<p class="text-center font-38">很抱歉！没有查询到相关信息！</p>' ).closeLoadingWindow();
+            }
+        } );
+    }
+    $x.loadMainSchool( { 'type': dj.getStorage( 'type' ), 'startPage': dj.getStorage( 'startPage' ) } );
+    $( '.navbar li' ).eq( dj.getStorage( 'type' ) ).addClass( 'navbar-active' ).siblings().removeClass( 'navbar-active' ); //返回上一页时点击的类别
+    scrollBottom = function () { //上拉加载更多
+        if ( $x.scrollBack ) { //上次上拉没有结果返回，则不允许下一次上拉加载
+            $x.scrollBack = false;
+            $x.loadMainSchool( { 'type': dj.getStorage( 'type' ), 'startPage': dj.getStorage( 'startPage' ) } );
+        }
+    }
+    $( '.search-bar input' ).unbind().click( function () {
+        dj.curtain( function () {
+            $( '.search-bar' ).find( 'div' ).toggleClass( 'search-bar-active' );
+            $( '.search-bar' ).find( 'p' ).toggle();
+            $( '.search-bar' ).find( 'img' ).eq( 0 ).toggle();
+        } );
+    } );
+    $( '.search-bar #search-img' ).unbind().click( function () { //取消搜索
+        dj.curtain( function () {
+            $( '.search-bar' ).find( 'div' ).toggleClass( 'search-bar-active' );
+            $( '.search-bar' ).find( 'p' ).toggle();
+            $( '.search-bar' ).find( 'img' ).eq( 0 ).toggle();
+        } );
+    } );
+    $( '.navbar li' ).unbind().click( function () {
+        $( '.main-content ul' ).children( '*' ).remove();
+        $( this ).addClass( 'navbar-active' ).siblings().removeClass( 'navbar-active' );
+        dj.setStorage( { "type": $( this ).index(), 'startPage': '0' } );
+        $x.loadMainSchool( { 'startPage': dj.getStorage( 'startPage' ), 'type': dj.getStorage( 'type' ) } );
+    } );
+    $( '.main-content' ).off().on( 'click', 'ul>li', function () { //打开试卷
+        dj.setStorage( { 'openTestId': $( this ).attr( 'test-id' ) } );
+        $( 'body' ).nextPage( './online-exam.html', function () {
+            scrollBottom = function () {}
+        } );
+    } );
+    $( '.search-bar [search-btn]' ).unbind().click( function () { //跳转到搜索页
+        dj.setStorage( 'searchKey', $( this ).siblings( 'div' ).find( 'input' ).val() );
+        $( 'body' ).css( 'overflow', 'initial' ).nextPage( './course-learning.html', function () {
+            scrollBottom = function () {}
+        } );
+    } );
+
+</script>

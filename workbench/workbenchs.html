@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>机构设置</title>
+    <link rel="stylesheet" href="./new/asssets/adminLTE/bootstrap.min.css">
+    <link href="../public/part/ligerlib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./new/asssets/css/workbenchs.css">
+    <link rel="stylesheet" href="./new/asssets/css/tree-control.css">
+    <link rel="stylesheet" href="./new/asssets/css/tree-control-attribute.css">
+    <link rel="stylesheet" href="./new/asssets/css/treecontrol.css">
+</head>
+<body>
+<div class="wrap" ng-app="myApp" ng-controller="myController" ng-cloak>
+    <!--侧边栏-->
+    <div id="aside">
+       <div class="l_header">
+           <h2 class="h_title" ng-click="setExpanded()">我的组织<span >ID:{{CodeById}}</span></h2>
+       </div>
+        <div class="s_box">
+            <div class="group user_select">
+                <div class="g_item zengjia" data-toggle="modal" data-target="#add">增加</div>
+                <div class="g_item xiugai" data-toggle="modal" data-target="#modify">修改</div>
+                <div class="g_item shanchu" data-toggle="modal" data-target="#delete">删除</div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="torclick">
+                <treecontrol class="tree-light"
+                             tree-model="dataForTheTree"
+                             options="treeOptions"
+                             expanded-nodes="expandedNodes"
+                             on-selection="onTreeLeafItemClickFunction(node,selected,$parentNode,$index,$event)"
+                             ng-mousedown="nga($event)"
+                >
+                 <span ng-click="rclick($event,$index)" ngid="{{node.id}}">{{node.name}}</span>
+                </treecontrol>
+            </div>
+        </div>
+        <div class="ultoggle" ng-show="ultoggle">
+            <ul>
+                <li ng-repeat="n in arrul" ng-click="changesend(n.id)">
+                    {{n.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--右侧内容区-->
+    <div id="main" ng-controller="myJob">
+        <div class="m_box">
+            <div class="leftbtn"></div>
+            <!--角色职位-->
+            <div class="m_item i_jczw" id="jczw">
+                <div class="m_header">
+                    职位
+                </div>
+                <div class="group user_select">
+                    <div class="g_item addJob" data-toggle="modal" data-target="#addJob">增加</div>
+                    <div class="g_item modJob" data-toggle="modal" data-target="#modJob">修改</div>
+                    <div class="g_item delJob" data-toggle="modal" data-target="#delJob">删除</div>
+                </div>
+                <div class="m_title">
+                    <span>职称</span>
+                </div>
+                <div class="m_content" style="border-left:0;border-top: 2px solid #ddd" ng-controller="myJob">
+                    <treecontrol class="tree-light"
+                                 tree-model="tree"
+                                 selected-node="node3"
+                                 expanded-nodes="expandedNodes" options="opts"
+                                 on-selection="onJobClick(node,selected)">
+                        {{node.posName}}
+                    </treecontrol>
+                </div>
+            </div>
+            <!--职位权限-->
+            <div class="m_item i_zwqx" id='zwqx' ng-controller="myData">
+                <div class="m_header">
+                    职位权限
+                </div>
+                <div class="m_content mc_scroll">
+                    <div class="r_btn"></div>
+                    <button  class="btn btn-block btn-primary  btn_qx" style="width: 50px;"ng-click="treeDataSave()">保存</button>
+                    <div class="tree_box">
+                        <!--<span id="treedata_save" onclick="treeDataSave()">保存</span>-->
+                        <!-- 职位权限树渲染 -->
+                        <ul id="treedata" style="width:100%;"></ul>
+                    </div>
+                </div>
+                <div class="modal fade" id="zwqxmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">增加功能</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-3 control-label">功能名称</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="zwqxnodeName" placeholder="请输入名称">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="zwqxnodeUrl" class="col-sm-3 control-label">Url链接</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="zwqxnodeUrl" placeholder="请输入url链接">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" id="" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="zwqxaddbtn()">提交</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+            <!--角色成员-->
+            <div class="m_item i_jscy" id="jscy" ng-controller="myusertree">
+                <div class="m_header">
+                    成员
+                </div>
+                <div class="m_content">
+                    <div class="group user_select">
+                        <div class="g_item Ubtnguanli" data-toggle="modal" data-target="#userAdmin" ng-click="modalpaging()">用户管理</div>
+                        <div class="g_item Ubtnshenhe" data-toggle="modal" data-target="#userReviewed" ng-click="reviewpaging()">用户审核</div>
+                        <div class="g_item " data-toggle="modal" data-target="" id="btnUserDel">删除</div>
+                    </div>
+                    <div class="m_title">
+                        <div class="c_left">成员账户</div><div class="r_left">成员姓名</div>
+                    </div>
+                    <div class="r_btn"></div>
+                    <div class="content">
+                        <treecontrol class="tree-light"
+                                     tree-model="usertree"
+                                     options="treeOptions"
+                                     on-selection="onUserTree(node,selected)"
+                                     selected-node="node1">
+                            <div class="user_item">
+                                <div class="c_left">{{node.username}}</div>
+                                <div class="c_right">{{node.chinese_name}}</div>
+                            </div>
+                        </treecontrol>
+                    </div>
+                </div>
+                <!--用户管理模态框-->
+                <div class="modal fade" id="userAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                用户管理
+                                <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body" ng-controller="modalTree">
+                                <div class="mt_ul">
+                                    <div class="mt_group">
+                                        <div class="mt_btn" data-toggle="modal" data-target="#addNewU">增加新用户</div>
+                                        <div class="mt_btn " data-toggle="modal" data-target="#modifyNewU" ng-click="tonewuser()">修改用户</div>
+                                        <div class="mt_btn" ng-click="deluser(arr)">删除用户</div>
+                                        <div class="mt_btn" id="#addUser" ng-click="adduser(arr)">增加到</div>
+                                    </div>
+                                    <div class="mt_title">
+                                        <div class="mt_input"><input type="checkbox" id="pool" ng-click="pick($event)"></div>
+                                        <div class="mt_item">用户名</div>
+                                        <div class="mt_item" class="mt_item">姓名</div>
+                                        <div class="mt_item">性别</div>
+                                        <div class="mt_item">手机</div>
+                                        <div class="mt_item">注册时间</div>
+                                        <div class="mt_item">状态</div>
+                                    </div>
+                                    <div class="nonelistpage" ng-if="pagenone">暂无用户</div>
+                                    <ul style="-webkit-padding-start:0">
+                                        <li ng-repeat="(key,value) in modaldata" ng-click="modalfn($event,key,value,Jid)" class="MT_Item">
+                                            <input type="checkbox" class="pk_item" ng-click="modalfn($event,key,value,Jid)">
+                                            <div class="MT_div">{{value.username}}</div>
+                                            <div class="MT_div">{{value.chinese_name}}</div>
+                                            <div class="MT_div">{{sex(value.sex)}}</div>
+                                            <div class="MT_div">{{value.family_phone}}</div>
+                                            <div class="MT_div">{{value.reg_data}}</div>
+                                            <div class="MT_div">{{value.is_online}}</div>
+                                        </li>
+                                    </ul>
+                                    <!--分页-->
+                                    <div class="benchpage reviewedpage" onselectstart="return false">
+                                        <div class="lastpage page_btn  btn">上一页</div>
+                                        <div ng-repeat="val in modalpage.sum" ng-bind="val" ng-click="modalPageActive(val)" class="listpage page_btn btn" ng-class="{'btn-primary':val === modalpage.activeNum}"></div>
+                                        <div ng-if="modalpage.bol" class="ellipsis pageitem">...</div>
+                                        <div class="pagecount page_btn btn" ng-if="modalpage.bol" ng-bind="modalpage.count" ng-class="{'btn-primary':modalpage.count === modalpage.activeNum}"></div>
+                                        <div class="nextpage page_btn lastpage btn" ng-click="modalPageActive()">下一页</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <!--用户审核模态框-->
+                <div class="modal fade" id="userReviewed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div id="loading">
+                            <div class="loadingbox">
+                                <img src="./new/asssets/img/timg.gif" alt="">
+                                <p>加载中...</p>
+                            </div>
+                        </div>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                用户审核
+                                <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <!--用户审核控制器-->
+                                <div class="mt_ul" ng-controller="reviewedTree">
+                                    <div class="mt_group">
+                                        <div class="mt_btn" ng-click="pass(arr)">通过</div>
+                                        <div class="mt_btn" id="#addUser" ng-click="refuse(arr)">拒绝</div>
+                                    </div>
+                                    <div class="mt_title">
+                                        <div class="mt_input"><input type="checkbox" id="pool" ng-click="pick($event)"></div>
+                                        <div class="mt_item">用户名</div>
+                                        <div class="mt_item" class="mt_item">姓名</div>
+                                        <div class="mt_item">性别</div>
+                                        <div class="mt_item">手机</div>
+                                        <div class="mt_item">注册时间</div>
+                                        <div class="mt_item">状态</div>
+                                    </div>
+                                    <ul style="-webkit-padding-start:0" class="i_ul">
+                                        <li ng-repeat="(key,value) in reviewdata" ng-click="reviewedfn($event,key,value,Jid)" class="MT_Item">
+                                            <input type="checkbox" class="pk_item" ng-click="reviewedfn($event,key,value,Jid)">
+                                            <div class="MT_div" ng-bind="value.username"></div>
+                                            <div class="MT_div" ng-bind="value.chinese_name"></div>
+                                            <div class="MT_div" ng-bind="value.sex"></div>
+                                            <div class="MT_div" ng-bind="value.family_phone"></div>
+                                            <div class="MT_div" ng-bind="value.reg_data"></div>
+                                            <div class="MT_div" ng-bind="value.is_online"></div>
+                                        </li>
+                                    </ul>
+                                    <div class="nonelistpage" ng-if="pagenone">暂无用户</div>
+                                    <!--分页-->
+                                    <div class="benchpage reviewedpage" onselectstart="return false">
+                                            <div class="lastpage page_btn  btn">上一页</div>
+                                                <div ng-repeat="val in reviewed.sum" ng-bind="val" ng-click="reviewedPageActive(val)" class="listpage page_btn btn" ng-class="{'btn-primary':val === reviewed.activeNum}"></div>
+                                                <div ng-if="reviewed.bol" class="ellipsis pageitem">...</div>
+                                                <div class="pagecount page_btn btn" ng-if="reviewed.bol" ng-bind="reviewed.count" ng-class="{'btn-primary':reviewed.count === reviewed.activeNum}"></div>
+                                            <div class="nextpage page_btn lastpage btn" ng-click="reviewedPageActive()">下一页</div>
+                                    </div>
+                                    <!--<tm-pagination conf="reviewedConf"></tm-pagination>-->
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+            <!--成员权限-->
+            <div class="m_item i_cyqx" ng-controller="sendTree">
+                <div class="m_header">
+                    成员权限
+                </div>
+                <div class="m_content mc_scroll">
+                    <div class="r_btn"></div>
+                    <button class="btn btn-block btn-primary  btn_qx" style="width: 50px;" ng-click="treeDataSave2()">
+                        保存
+                    </button>
+                    <ul id="memberrights"></ul>
+                </div>
+                <!--成员权限时间限制-->
+                <div id="datamodal" ng-click="datatg($event)">
+                    <div id="databox">
+                        <div class="data_header">
+                             权限限制
+                        </div>
+                        <div class="data_main">
+                            <div class="form-group" ng-repeat="item in arr">
+                                <div class="checkbox col-sm-6" >
+                                    <label>
+                                        <input type="checkbox" ng-click="ischeck($event,item)">{{item.title}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="data_main" ng-controller="startdata">-->
+                            <!--<div class="data_centent">-->
+                                <!--<div class="d_label">-->
+                                    <!--起始时间-->
+                                <!--</div>-->
+                                <!--<div class="datap">-->
+                                    <!--<p class="form-group">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" class="form-control" uib-datepicker-popup="{{format}}"-->
+                                               <!--ng-model="dat" is-open="popup1.opened" ng-required="true" close-text="关闭"-->
+                                               <!--clear-text="清空" current-text="今天" alt-input-formats="altInputFormats"/>-->
+                                        <!--<span class="input-group-btn">-->
+                   <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                           <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                       <!--</span>-->
+                                    <!--</div>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="data_main" ng-controller="enddata">-->
+                            <!--<div class="data_centent">-->
+                                <!--<div class="d_label">-->
+                                    <!--结束时间-->
+                                <!--</div>-->
+                                <!--<div class="datap">-->
+                                    <!--<p class="form-group">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" class="form-control" uib-datepicker-popup="{{format}}"-->
+                                               <!--ng-model="dat" is-open="popup1.opened" ng-required="true" close-text="关闭"-->
+                                               <!--clear-text="清空" current-text="今天" alt-input-formats="altInputFormats"-->
+                                               <!--placeholder="结束时间"-->
+                                         <!--ng-model="sendTime"/>-->
+                                        <!--<span class="input-group-btn">-->
+                   <!--<button type="button" class="btn btn-default" ng-click="open1()"><i-->
+                           <!--class="glyphicon glyphicon-calendar"></i></button>-->
+                       <!--</span>-->
+                                    <!--</div>-->
+                                    <!--</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="data_btn">
+                            <button ng-click="sendtreedate()" class="btn btn-block btn-primary">
+                                保存
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框-->
+<div id="modals">
+    <!--增加部门-->
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">部门名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="bumenname" placeholder="请输入部门">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="description" class="col-sm-3 control-label">描述</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="description" placeholder="请输入描述">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btnguanbi" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="btnPrimary" data-dismiss="modal">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--修改部门-->
+    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <!--原部门名-->
+                            <label for="oldname" class="col-sm-4 control-label">部门名称</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="oldname" value="" disabled placeholder="部门名不能为空">
+                            </div>
+                        </div>
+                    </div>
+                    <!--更改部门名-->
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="newname" class="col-sm-4 control-label">新部门名称</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="newname" placeholder="请输入部门">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="btnXiugai" data-dismiss="modal">提交修改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--删除部门-->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">删除部门</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="delname" class="col-sm-3 control-label">删除部门</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="delname"
+                                        disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnShanchu">确认删除</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--角色职位-->
+    <!--增加-->
+    <div class="modal fade" id="addJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加角色</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="jobname" class="col-sm-3 control-label">角色职称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="jobname" placeholder="请输入角色名">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="Jbtnguanbi" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="JbtnPrimary" data-dismiss="modal">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--修改-->
+    <div class="modal fade" id="modJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑职称</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <!--原职称名-->
+                            <label for="oldname" class="col-sm-4 control-label">角色职称</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Joldname" value="" disabled placeholder="角色名不能为空">
+                            </div>
+                        </div>
+                    </div>
+                    <!--更改部门名-->
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="newname" class="col-sm-4 control-label">新角色职称</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="Jnewname" placeholder="请输入部门">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="Jbtnxiugai" data-dismiss="modal">提交修改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--删除-->
+    <div class="modal fade" id="delJob" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">删除角色</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="delname" class="col-sm-3 control-label">删除部门</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="Jdelname"
+                                       disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="JbtnShanchu">确认删除</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!--用户管理增加用户-->
+    <div class="modal fade" id="addNewU" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body" style="overflow: hidden">
+
+                    <label for="md_user" class="col-sm-3 control-label">用户</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_user">
+                    </div>
+
+                    <label for="md_name" class="col-sm-3 control-label">姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_name">
+                    </div>
+
+                    <label for="md_key" class="col-sm-3 control-label">密码</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_key">
+                    </div>
+
+                    <label for="md_keys" class="col-sm-3 control-label">重复密码</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_keys">
+                    </div>
+
+                    <label for="md_phone" class="col-sm-3 control-label">手机</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_phone">
+                    </div>
+
+                    <label for="md_sex" class="col-sm-3 control-label">性别</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_sex">
+                    </div>
+
+                    <label for="md_change" class="col-sm-3 control-label">状态</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="md_change">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnAddUser" data-dismiss="modal">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--用户管理修改用户-->
+    <div class="modal fade" id="modifyNewU" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body" style="overflow: hidden">
+
+                    <label for="mnu_user" class="col-sm-3 control-label">用户</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mnu_user" disabled>
+                    </div>
+
+                    <label for="mnu_name" class="col-sm-3 control-label">姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mnu_name">
+                    </div>
+
+
+                    <label for="mnu_phone" class="col-sm-3 control-label">手机</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mnu_phone">
+                    </div>
+                    <label for="mnu_sex" class="col-sm-3 control-label">性别</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="mnu_sex">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnModifyU" data-dismiss="modal">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+</body>
+<script type="text/javascript" src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="./new/asssets/adminLTE/bootstrap.min.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/ligerui.all.js" type="text/javascript"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerTree.js"></script>
+<script type="text/javascript" src="./new/asssets/js/angular.min.js"></script>
+<script type="text/javascript"src="./new/asssets/js/angular-tree-control.js"></script>
+<script type="text/javascript" src="./new/asssets/js/ui-bootstrap-tpls-1.3.2.js"></script>
+<script type="text/javascript" src="./new/asssets/js/angular-locale_zh-cn.js"></script>
+<script type="text/javascript" src="./new/asssets/js/tm.pagination.js"></script>
+<script type="text/javascript" src="../public/config.js"></script>
+<script type="text/javascript" src="./new/asssets/js/config.js"></script>
+<script type="text/javascript" src="./new/public/js/app.js"></script>
+<script type="text/javascript" src="./new/asssets/js/move.js"></script>
+</html>

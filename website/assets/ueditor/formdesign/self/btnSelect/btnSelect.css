@@ -1,0 +1,34 @@
+.menuLabel {
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #ccc;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    transition: all 300ms linear;
+    user-select: none;
+}
+
+.menuLabel.click {
+    border: 1px solid #68a1f1;
+    color: #68a1f1;
+    background: #73B8EE;
+    color: #fff;
+}
+
+.menuLabel:hover {
+    background: #93b4e6;
+    color: #fff;
+}
+
+.menuLabel input {
+	display:none;
+    width: 0px;
+    height: 0px;
+}
+
+.menuLabel.notAllow:hover {
+    background: #a0a6af;
+    cursor: not-allowed;
+}

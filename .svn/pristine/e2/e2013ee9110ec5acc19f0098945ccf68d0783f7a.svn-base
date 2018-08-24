@@ -1,0 +1,69 @@
+
+var root_burl='/data/';
+var app=angular.module('dd8w',[
+	"ngRoute",
+    "upLoadRe_app",
+])
+.config(["$routeProvider",function($routeProvider){
+	$routeProvider.when('/index',{
+		templateUrl:"/upLoadRe_app/tpl/index.html",
+        controller:"rectr"
+	}).otherwise({
+			redirectTo:"/index"
+	});
+}]).factory('getData', ['$http', function($http){
+   var f = {};
+   f.des={
+    'question':{
+        'title':'题库',
+        'upfile_video_size':20,
+        'upfile_video_ext':['txt','doc','docx','xls','xlsx','ppt','pptx','pdf'],
+        'isEnclosure':false,
+        'isCover':false,
+        'pic':'/re/img/re_upfile_des/upfile_icon/icon_kejian.png',
+        'iscurriculum':false
+    },
+    'video':{
+        'title':'视频',
+        'upfile_video_size':50,
+        'upfile_video_ext':['mp4','flv','avi','rmvb','3gp','mpeg','swf'],
+        'isEnclosure':true,
+        'isCover':true,
+        'pic':'/re/img/re_upfile_des/upfile_icon/icon_shipin.png',
+        'iscurriculum':false
+    },
+    'audio':{
+        'title':'音频',
+        'upfile_video_size':50,
+        'upfile_video_ext':['mp3','wma'],
+        'isEnclosure':false,
+        'isCover':false,
+        'pic':'/re/img/re_upfile_des/upfile_icon/icon_yinpin.png',
+        'iscurriculum':false
+    },
+    'picture':{
+        'title':'图片',
+        'upfile_video_size':50,
+        'upfile_video_ext':['jpg','png','bmp','gif','jpeg'],
+        'isEnclosure':false,
+        'isCover':false,
+        'pic':'/re/img/re_upfile_des/upfile_icon/icon_tupian.png',
+        'iscurriculum':false
+    }
+ },
+   f.getUrlData=function(url,flag){
+       url=courseware_root_url+url;
+       return $http.get(url)
+           .then(function(r) {
+               return {"status":"ok","data":r.data};
+              
+           })
+           .catch(function(err) {
+               console.log('文件数据');
+               return {"status":"ok","data":g_data[flag]}
+           });
+   }
+   return f;
+}]).run(['$http',function($http){
+        //$http.post(accountQuery_root_url + "/accountQuery/getPhone",{});
+    }]);

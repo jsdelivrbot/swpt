@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../public/part/bootstrap/css/bootstrap3.min.css">
+</head>
+<body>
+<div class="caidan" style="width:100%;height: 20px;box-sizing: border-box;background-color: #ccc;">
+    <span>我的站群——设置</span>
+    <a target="maincontents" id="companyModal" style="margin-left: 10px;">新建站群</a>
+    <a target="maincontents" id="websites" style="margin-left: 10px;">站点设置</a>
+    <a target="maincontents" style="margin-left: 10px;" id="gongneng">网页设计</a>
+    <a target="maincontents" style="margin-left: 10px;" id="liucheng">流程设置</a>
+</div>
+</body>
+</html>

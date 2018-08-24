@@ -1,0 +1,339 @@
+<meta charset="utf-8" />
+<!--引入外部文件-->
+<link href="../public/part/ligerlib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../public/part/ligerlib/ligerUI/skins/Gray/css/all.css">
+<link rel="stylesheet" href="../public/part/bootstrap/css/bootstrap3.min.css">
+<link rel="stylesheet" href="./assets/css/ace.min.css">
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="./assets/css/ace-rtl.min.css" />
+<link href="../public/part/ligerlib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./css/workbench.css">
+<script src="../data/MemberRights.js"></script>
+<script src="../public/part/jquery/jquery-3.1.1.min.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/ligerui.all.js" type="text/javascript"></script>
+<script src="../public/part/angular/angular.min.js"></script>
+<script src="../public/part/bootstrap/js/bootstrap3.min.js"></script>
+<script src="./artTemplate/template.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerDialog.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerTab.js"></script>
+
+<script src="./assets/js/bootstrap-treeview.min.js"></script>
+<!-- 表格 -->
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="../public/part/ligerlib/ligerUI/js/plugins/ligerTree.js"></script>
+<script src="../public/config.js"></script>
+
+<script type="text/javascript" src="./js/workbench.js"></script>
+<script type="text/javascript" src="./js/active.js"></script>
+<!--<header id="pageloading"></header>-->
+<!-- 左边的菜单 -->
+<div class="indexs">
+    <div class="caidan">
+        <!--<span class="daohanSpan">我的站群——设    置</span>--><!--
+        --><a target="maincontents" id="websites" class="daohanA">站点设计</a><!--
+        --><a target="maincontents" id="gongneng" class="daohanA">站点权限</a><!--
+        --><a target="maincontents" id="liucheng" class="daohanA">站点流程</a>
+    </div>
+    <div id="gn" style="display: none;height: 100%;">
+        <iframe id="maincontents" src="" name="maincontents" frameborder="0" style="width: 100%;height: calc(100vh - 54px);"></iframe>
+    </div>
+</div>
+<div id="bgc" style="background: #fff;">
+</div>
+<!--<iframe id="lc" src="" id="lc" frameborder="0" style="width: 100%;height: 100%;display: none;"></iframe>-->
+<!--<div id="layout1" style="width:100%; margin-top:0px;" ng-controller="main">
+    <div positioenterprise-olditle="我的组织——设置" id="accordion1!!!" style="height:100%;" ng-controller="gourl">
+        <div id="tab1" style="height: 100%">
+            <div title="站群设置" style="height:100%;overflow-y:auto" class="{{id}}" ng-controller="work1Controller">
+                &lt;!&ndash;<div>功能设置</div><div>流程设置</div>&ndash;&gt;
+                <div style="width: 1000px;">
+                    <div id="toobar"></div>
+                </div>
+                <ul id="power_tree" style="margin-top:3px;">
+                </ul>
+            </div>
+            <div title="功能设置" style="height:100%;overflow-y:auto">
+                <div style="height:7px;"></div>
+                <ul id="power_tree" style="margin-top:3px;">
+                </ul>
+            </div>
+            <div title="流程设置" style="height:100%;overflow-y:auto">
+                <div style="height:7px;"></div>
+                <ul id="power_tree" style="margin-top:3px;">
+                </ul>
+            </div>
+        </div>
+    </div>
+    &lt;!&ndash; <div position="left" title="主要菜单"></div> &ndash;&gt;
+    &lt;!&ndash; 角色配置 &ndash;&gt;
+    &lt;!&ndash; 中间部分,嵌套一个左菜单和主页 &ndash;&gt;
+    <div position="center" id="framecenter2" style="width:100%;">
+        <div tabid="home" title="角色配置" class="peizhi" id="home">
+            <div id="pageloading"></div>
+            <div class="tabbable">
+                <div>
+                    &lt;!&ndash; 角色职位表格 &ndash;&gt;
+                    <div id="juese" class="tab-pane active" style="border-bottom: none;width:100%;height:100%">
+                        &lt;!&ndash; 角色职位 &ndash;&gt;
+                        <div class="biaoge" style="width:25%;height:100%">
+                            <h4>角色职位
+                                <span class="glyphicon glyphicon-user" style="color:#777"></span>
+                            </h4>
+                            <div>
+                                &lt;!&ndash; 角色职位表格渲染 &ndash;&gt;
+                                <div id="positionData" style="width:100%"></div>
+                            </div>
+                        </div>
+                        &lt;!&ndash; 角色权限树 &ndash;&gt;
+                        <div class="shenhe" style="width:25%;height:100%;position:relative;">
+                            <h4>职位权限
+                                <span class="glyphicon glyphicon-eye-open" style="color:#777"></span>
+                            </h4>
+                            <div class="tree_box">
+                                <span id="treedata_save" onclick="treeDataSave()">保存</span>
+                                &lt;!&ndash; 职位权限树渲染 &ndash;&gt;
+                                <ul id="treedata" style="width:200px;"></ul>
+                            </div>
+                        </div>
+                        &lt;!&ndash; 角色成员 &ndash;&gt;
+                        <div class="chengyuan" style="width:25%;height:100%">
+                            <h4>角色成员
+                                <span class="glyphicon glyphicon-user" style="color:#777"></span>
+                            </h4>
+                            <div class="table-responsive">
+                                <div class="table-responsive_top">
+                                    <button class="yg btn btn-info no-border" style="width: 48%; float: left;">
+                                        用户管理
+                                    </button>
+                                    <button style="width: 48%; float: right;;" class="ys btn btn-info no-border">
+                                        用户审核
+                                    </button>
+                                </div>
+                                &lt;!&ndash;用户成员表格渲染&ndash;&gt;
+                                <div id="MembersRole"></div>
+                            </div>
+                        </div>
+                        &lt;!&ndash; 成员权限树 &ndash;&gt;
+                        <div class="shenhe" style="width:25%;height:100%">
+                            <h4>成员权限
+                                <span class="glyphicon glyphicon-eye-open" style="color:#777"></span>
+                            </h4>
+                            <div class="tree_box">
+                                <span id="treedata_save" onclick="treeDataSave2()">保存</span>
+                                <ul id="memberrights"></ul>
+                                &lt;!&ndash; 成员权限树渲染 &ndash;&gt;
+                                &lt;!&ndash;<ul id="treedatas" style="width:200px;"></ul>&ndash;&gt;
+                            </div>
+                        </div>
+                    </div>
+
+                    &lt;!&ndash; 角色管理表格 &ndash;&gt;
+                    <div id="guangli" class="tab-pane" style="display:none">
+
+                    </div>
+                    &lt;!&ndash; 角色审核表格 &ndash;&gt;
+                    <div id="shenhe" class="tab-pane" style="display:none">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        &lt;!&ndash; 主页 &ndash;&gt;
+    </div>
+
+    &lt;!&ndash; 主页 &ndash;&gt;
+    <div id="gns" style="display: none;">
+        <iframe id="maincontentes" src="" name="maincontents" frameborder="0" style="width: 100%;height: 100%;"></iframe>
+    </div>
+    <div position="center" id="framecenter" style="width:100%;" class="zhuye">
+        <div tabid="home" title="我的主页" id="home" style="height:300px">
+            &lt;!&ndash;<iframe frameborder="0" name="home" id="home" src="./s/powermain.html"></iframe>&ndash;&gt;
+            <div id="pageloading"></div>
+            <div id="layout2" style="width:99.2%; margin:0 auto; margin-top:0px; display: none;" class="jigou">
+                <div position="left" title="主要菜单" style="height:100%" ng-controller="gourl">
+                    <div id="tab2" style="height:100%">
+                        <div title="角色功能" style="height:98%;overflow-y:auto" ng-controller="role1Controller">
+                            <ul id="tissue_nav_tree2" style="margin-top:3px;">
+
+                            </ul>
+                        </div>
+                        <div title="流程应用" style="height:100%;overflow-y:auto">
+                            <div style="height:3px;"></div>
+                            <ul id="flow_tree2" style="margin-top:3px;"> </ul>
+                            <ul id="appflow_tree2" style="margin-top:3px;" ng-controller="role2Controller"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div position="center" id="framecenter2">
+                <div tabid="home" title="我的主页" style="height:300px">
+                    <div id="pageloading"></div>
+                    <img src="./images/top_head.png" alt="">
+                    <img src="./images/set_index.png" alt="">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    &lt;!&ndash;    &lt;!&ndash; 如果是注册界面过来的 - 显示企业添加画面 &ndash;&gt;
+    <div class="companyContainer">
+        <div id="companyModal">
+            <iframe src="../enterprise/qiyezhuce.html" frameborder="0"></iframe>
+        </div>
+    </div>&ndash;&gt;
+
+    &lt;!&ndash;<div position="center" style="width:100%;">
+        <iframe src="http://192.168.0.193?pid=1" frameborder="0"></iframe>
+    </div>&ndash;&gt;
+    &lt;!&ndash;01  这是右边整块菜单内容&ndash;&gt;
+    <div id="ediPparentNode" style="width:auto;height:auto; margin:3px; display:none; overflow:hidden;">
+        <input name="selectid" type="hidden" value="" id="selectid" />
+        <div id="editParentNodeTree"></div>
+    </div>
+    <div id="addChildNode" style="display: none;line-height:35px;">
+        部门名称：
+        <input id="addChildName" type="text" />
+        &lt;!&ndash;<br /> 子节点简介/职位角色：
+        <input id="addChildPresentation" type="text" />
+        <br />&ndash;&gt;
+    </div>
+    <div id="addBrotherNode" style="display: none;line-height:35px;">
+        兄弟节点名字/部门：
+        <input id="addBrotherName" type="text" />
+        &lt;!&ndash;<br /> 兄弟节点简介/职位角色：
+        <input id="addBrotherPresentation" type="text" />
+        <br />&ndash;&gt;
+    </div>
+    <div id="editBrotherNode" style="display: none;line-height:35px;">
+        部门名称：
+        <input id="editBrotherNodeName" type="text" disabled="disabled" />
+        &lt;!&ndash;<br /> 上级节点：
+        <select id="editPBrotherNodeName"></select>&ndash;&gt;
+        <br /> 新部门名称：
+        <input id="newBrotherNodeName" type="text" />
+        &lt;!&ndash;<br /> 节点简介：
+        <input id="newBrotherNodeDes" type="text" />
+        <br />&ndash;&gt;
+    </div>
+    <div id="addNode" style="display: none;line-height:35px;">
+        职位角色：
+        <input id="addNodePresentation" type="text" />
+        <br />
+    </div>
+    <div id="editNode" style="display: none;line-height:35px;">
+        职位角色：
+        <input id="editNodeName" type="text" disabled="disabled" />
+        <br /> 新职位角色：
+        <input id="editNodePresentation" type="text" />
+        <br />
+    </div>
+
+    &lt;!&ndash; 用户管理 &ndash;&gt;
+    <div class="show_yg show_in" style="display:none">
+        &lt;!&ndash; 关闭按钮 &ndash;&gt;
+        <a herf="javascript:;" class="colsout">
+            <span class="colsout_txt">
+                关闭
+            </span>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </a>
+        &lt;!&ndash; 表格内容 &ndash;&gt;
+        <div style="border-left: 1px #95AADB solid;padding: 3px;box-sizing: border-box;">
+            <div class="l-loading" style="display:none" id="pageloading"></div>
+            <div class="l-clear"></div>
+            <div id="maingrid"></div>
+            <div style="display:none;"></div>
+        </div>
+    </div>
+    &lt;!&ndash; 用户管理修改弹出层 &ndash;&gt;
+    <div id="getUpdate" style="display: none;line-height:35px;">
+        用户:
+        <input id="getUpdateuserName" type="text" disabled="disabled" />
+        <br/> 姓名:
+        <input id="getUpdateName" type="text" />
+        <br /> 手机:
+        <input id="getUpdateMobile" type="tel" />
+        <br /> 性别:
+        <input id="getUpdateSex" type="text" />
+        <br />
+    </div>
+    &lt;!&ndash; 用户管理新增弹出层 &ndash;&gt;
+    <div id="getAddUser" style="display: none;line-height:35px;">
+        <table>
+            <tr>
+                <td>用户:</td>
+                <td>
+                    <input id="getAddUseruserName" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>姓名:</td>
+                <td>
+                    <input id="getAddUserName" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>密码:</td>
+                <td>
+                    <input id="getAddUserpwd" type="password" />
+                </td>
+            </tr>
+            <tr>
+                <td>重复密码:</td>
+                <td>
+                    <input id="getAddUserrpwd" type="password" />
+                </td>
+            </tr>
+            <tr>
+                <td>手机:</td>
+                <td>
+                    <input id="getAddUserMobile" type="tel" />
+                </td>
+            </tr>
+            <tr>
+                <td>性别:</td>
+                <td>
+                    <input id="getAddUserSex" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>状态:</td>
+                <td>
+                    <input id="getAddUserOnline" type="text" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    &lt;!&ndash; 用户审核 &ndash;&gt;
+    <div class="show_ys show_in" style="display:none">
+        <a herf="javascript:;" class="colsout">
+            <span class="colsout_txt">
+                关闭
+            </span>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </a>
+        &lt;!&ndash; 表格内容 &ndash;&gt;
+        <div style="border-left: 1px #95AADB solid;padding: 3px;box-sizing: border-box;">
+            <div class="l-loading" style="display:none" id="pageloading"></div>
+            <div class="l-clear"></div>
+            <div id="user_examine_grid"></div>
+            <div style="display:none;"></div>
+        </div>
+    </div>
+    &lt;!&ndash;权限管理部分&ndash;&gt;
+    <div class="biaodan show_in" style="display: none;">
+        <div id="biaodan">
+            <a herf="javascript:;" class="colsout">
+                <span class="colsout_txt">
+                    关闭
+                </span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+            <iframe src="biaodan/biaodan.html" frameborder="0" id="ifms"></iframe>
+        </div>
+    </div>
+</div>
+
+&lt;!&ndash;</body>&ndash;&gt;-->

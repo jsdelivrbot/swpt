@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省科学院</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <script src="public/part/jquery/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="public/part/bootstrap/bootstrap.min.css">
+    <script src="public/part/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="./js/index.js"></script>
+    <script>
+        if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = "/Mobile";
+        }
+    </script>
+    <!--<meta http-equiv="refresh" content="0;url=/home"/>-->
+</head>
+
+<body>
+    <!--左浮动菜单开始-->
+    <div id="sidebar">
+        <div id="icolist">
+            <a href="./homepage/view.html" target="maincontent" class="icoA">
+                <dl class="curr_module">
+                    <dt>
+                        <img src="./img/sidebar/Home-hover.png" alt="">
+                    </dt>
+                    <dd>网站首页</dd>
+                </dl>
+            </a>
+            <a href="./website/index.html" target="maincontent" class="icoA iconitem">
+                <dl>
+                    <dt>
+                        <img src="./img/sidebar/Home.png" alt="">
+                    </dt>
+                    <dd>站点管理</dd>
+                </dl>
+            </a>
+            <a href="./home" target="maincontent" class="icoA iconitem">
+                <dl>
+                    <dt>
+                        <img src="./img/sidebar/bzbg.png" alt="">
+                    </dt>
+                    <dd>工作</dd>
+                </dl>
+            </a>
+            <a href="./message" target="maincontent" id="icolist_one" class="icoA iconitem">
+                <dl>
+                    <dt>
+                        <img src="./img/sidebar/news.png" alt="">
+                    </dt>
+                    <dd class="logintitle">消息</dd>
+                </dl>
+            </a>
+            <a href="./workbenchs/workbench.html" target="maincontent" class="icoA iconitem">
+                <dl>
+                    <dt>
+                        <img src="./img/sidebar/xietong.png" alt="">
+                    </dt>
+                    <dd>组织</dd>
+                </dl>
+            </a>
+            
+            <a href="./account" target="maincontent" class="icoA iconitem">
+                <dl>
+                    <dt>
+                        <img src="./img/sidebar/Personal-Center.png" alt="">
+                    </dt>
+                    <dd>我的</dd>
+                </dl>
+            </a>
+        </div>
+    </div>
+    <!--<div class="lt"></div>-->
+    <div id="contentId">
+        <iframe id="maincontent" name="maincontent" src="./homepage/view.html" width="100%" height="100%" frameborder="0" scrolling="on"></iframe>
+    </div>
+    <!--<div id="rtoptool">-->
+        <!--<button type="button" class="btn btn-info btn-small btn-fun" aria-label="Left Align" id="rtoptooloff">-->
+            <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+        <!--</button>-->
+        <!--<button data-method="add" class="btn btn-info btn-small btn-fun gomethod"><img class="btn-img" src="./css/icon/add.png">添加数据</button>-->
+        <!--<button data-method="list" class="btn btn-info btn-small btn-fun gomethod"><img class="btn-img" src="./css/icon/watch.png">查看数据</button>-->
+        <!--<button data-method="del" class="btn btn-info btn-small btn-fun gomethod"><img class="btn-img" src="./css/icon/delete.png">删除数据</button>-->
+        <!--<button data-method="edit" class="btn btn-info btn-small btn-fun gomethod"><img class="btn-img" src="./css/icon/change.png">修改数据</button>-->
+        <!--&lt;!&ndash;<button _ngcontent-c2="" class="btn btn-info btn-small btn-fun"><img _ngcontent-c2="" class="btn-img" src="./css/icon/add.png">继续添加</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div _ngcontent-c2="" class="btn-group" role="group">-->
+            <!--<button class="btn btn-info btn-small dropdown-toggle btn-fun" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">-->
+                <!--<img _ngcontent-c2="" class="btn-img" src="./css/icon/changeFn.png">-->
+                <!--功能按钮-->
+                <!--<span class="caret"></span>-->
+            <!--</button>-->
+            <!--<ul class="dropdown-menu">-->
+                <!--<li _ngcontent-c2="">-->
+                    <!--<a _ngcontent-c2="" data-target="#toggleData" data-toggle="modal" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./assets/icon/show.png">显示/隐藏数据</a>-->
+                    <!--<a _ngcontent-c2="" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./css/icon/print.png">打印</a>-->
+                    <!--<a _ngcontent-c2="" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./css/icon/download.png">下载</a>-->
+                    <!--<a _ngcontent-c2="" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./css/icon/import.png">导入</a>-->
+                    <!--<a _ngcontent-c2="" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./css/icon/export.png">导出</a>-->
+                    <!--<a _ngcontent-c2="" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./css/icon/resouseDelete.png">回收站</a>-->
+                    <!--<a _ngcontent-c2="" href="javascript:;"><img _ngcontent-c2="" class="btn-img" src="./css/icon/share.png">分享</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>&ndash;&gt;-->
+    <!--</div>-->
+    <script type="text/javascript">
+        var win_w = $( "html" ).width();
+        console.log(win_w);
+        $( "#contentId" ).width( win_w - 60 );
+        /* if(localStorage["user"]){
+       var dom=$(".logintitle");
+       dom.html("退出");
+       dom.closest('a').attr("href","./login/out.html");
+   }*/
+    </script>
+</body>
+</html>

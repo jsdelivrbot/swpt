@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <title>您的表单</title>
+    <!-- jQuery -->
+    <script src="./self/js/jquery-3.2.1.min.js"></script>
+    <!-- 请求 前缀 配置文件 -->
+    <script src="../httpData.config.js"></script>
+   <!-- Bootstrap -->
+    <link rel="stylesheet" href="./bootstrap-3/css/bootstrap.css">
+    <script src="./bootstrap-3/js/bootstrap.js"></script>
+    <!-- 本页面的样式 -->
+    <link rel="stylesheet" href="./self/css/style.css">
+    <!-- Loading样式的css -->
+    <link rel="stylesheet" href="./self/css/loading.css">
+    <!-- Ueditor 自带的解析文件 -->
+    <script src="../ueditor.parse.js"></script>
+    <!-- Ueditor 提取的样式 -->
+    <!-- <link rel="stylesheet" href="./ueditor/style.css"> -->
+    <!-- 判断 终端 类型 -->
+    <script src="./self/js/isMobile.js"></script>
+    <!-- addImage - 解析 图片控件 需要用的资源文件 -->
+    <link rel="stylesheet" href="./self/addImage/addImage.css">
+    <script src="./self/addImage/addImage.js"></script>
+    <!-- Echarts - 报表控件 -->
+    <script src="./self/echarts/echarts.min.js"></script>
+    <!-- pdfjs - 在线预览配PDF文件 -->
+    <script src="./self/pdfjs/build/pdf.js"></script>
+    <!-- iframeRouter - 内嵌路由控件 -->
+    <link rel="stylesheet" href="./self/css/iframeRouter.css">
+    <link rel="stylesheet" href="./images/font/iconfont.css">
+    <link rel="stylesheet" href="./self/css/conterie.css">
+    <!-- pagedetails - 详情页 Tpl2 使用的iconfont -->
+    <link rel="stylesheet" href="./images/font_icon/iconfont.css">
+    <link rel="stylesheet" href="./images/tpl2_font_icon/iconfont.css">
+    <!-- zTree - 分类控件树形控件 -->
+    <link rel="stylesheet" href="./self/zTree/metroStyle/metroStyle.css">
+    <script src="./self/zTree/jquery.ztree.all.min.js"></script>
+    <!--添加、删除数据控件-->
+    <link rel="stylesheet" href="./self/css/glc.css">
+    <style>
+        input {
+            margin-bottom: 0 !important;
+        }
+      .submitBtnDiv{
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+      }
+    </style>
+</head>
+
+<body>
+    <!-- addImage modal -->
+    <div style="display:none;" class="modal fade" id="avatar-modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="100%" src="addimage-modal.html" frameborder="0" scrolling="auto"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /addImage modal -->
+    <div class="spinner" style="display:none">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <p class="resValue"></p>
+    </div>
+    <!-- addVideo modal -->
+    <div style="display:none;" class="modal fade" id="video-modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                    <h4 class="modal-title" id="avatar-modal-label">上传视频</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="100%" src="addvideo-modal.html" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container head">
+        <div class="header">
+            <h1>
+                <strong>预览表单</strong>
+                <small>如无问题请保存你的设计</small>
+            </h1>
+        </div>
+    </div> -->
+    <!--<div id="rtoptool">
+      <span class="rtoptooloff" aria-label="Left Align" id="rtoptooloff">
+        &rsaquo;
+      </span>
+      <span data-method="add" class="gomethod"><img class="btn-img" src="./self/icon/add.png">添加数据</span>
+      <span data-method="list" class="gomethod"><img class="btn-img" src="./self/icon/watch.png">查看数据</span>
+      <span data-method="del" class="gomethod"><img class="btn-img" src="./self/icon/delete.png">删除数据</span>
+      <span data-method="edit" class="gomethod"><img class="btn-img" src="./self/icon/change.png">修改数据</span>
+    </div>-->
+    <section class="container">
+        <form id="insertForm" onkeydown="if(event.keyCode==13)return false;">
+            <div class="bodyContent">
+
+            </div>
+          <div class="submitBtnDiv">
+            <button type="submit" class="btn btn-success" id="submitBtn" style="display:none;">提交</button>
+          </div>
+        </form>
+    </section>
+</body>
+
+</html>
+<script>
+    /*
+     * 自己编写的方法集合
+     *
+     */
+    var curreditnode=null;
+    $(function() {
+        jQuery.prototype.serializeObject = function() {
+            var obj = new Object();
+            $.each(this.serializeArray(), function(index, param) {
+                if (!(param.name in obj)) {
+                    obj[param.name] = param.value;
+                }
+            });
+            return obj;
+        };
+
+        var sep = '';
+        selectChange = function(event) {
+            var input = $(event.target).parent().parent().find('input[type="hidden"]')[0], // 隐藏域的 input
+                targetValue = event.target.value, // 当前点击 input 的值
+                targetChecked = event.target.checked, // 当前点击 input 是否选择
+                index; // 当前值在数组中的索引位置
+            // console.log( targetChecked );
+            if (targetChecked) {
+                input.value === '' ? sep = '' : sep = ','; // 以防点击修改的时候，value已经有值，再添加的话会没分隔符
+                input.value += sep + targetValue;
+                sep = ',';
+            } else {
+                var indexArr = input.value.split(',');
+                index = indexArr.indexOf(targetValue);
+                // console.log( indexArr );
+                if (indexArr.length === 1) {
+                    indexArr.splice(index, 1);
+                    sep = '';
+                    input.value = indexArr.toString();
+                } else {
+                    indexArr.splice(index, 1);
+                    input.value = indexArr.toString();
+                }
+            }
+        }
+
+        clearInputValue = function(event) {
+            var target = event.target,
+                can = target.getAttribute('clear');
+
+            if (can === 'true') {
+                target.setAttribute('value', '');
+                target.setAttribute('clear', 'false');
+            }
+        }
+
+        var row = 0;
+        tdAddRow = function(source, event) {
+            row++;
+            var target = $(`#${source.id} .template`),
+                clone = target.clone(true).removeClass('template').addClass('add');
+            // clone.find( 'input' ).attr( 'value', '' );
+            // console.log( clone.find( 'input' ) )
+            clone.find('input').val('');
+            clone.find('input').each(function(index, elem) {
+                elem.name = `list${row}${index}`;
+            })
+            clone.find('td').last().html("<a href='javascript:;' onclick='tdDelRow(this)'>删除</a>");
+            clone.insertBefore($('.fContainer'));
+        }
+
+        tdDelRow = function(that) {
+            $(that).parents('tbody').remove();
+        }
+
+        changeSum = function(event) {
+            var index = event.target.name.split('').pop(), // 总和是第几个列
+                input = $('input[name="list' + index + 'total"]'), // 显示总和的那个div
+                inputLen = $('.cContainer').length, // 现在有多少行
+                totalValue = 0; // 数值总和
+            for (var i = 0; i < inputLen; i++) {
+                // console.log( index )
+                totalValue = totalValue + ($('input[name="list' + i + index + '"].sum').val() == '' ? 0 : parseFloat($(
+                    'input[name="list' + i + index + '"].sum').val()));
+                // console.log( $( 'input[name="list' + i + index + '"].sum' ).val() )
+            }
+            input.attr('value', totalValue);
+        }
+    });
+
+    $(function() {
+        /*
+         * 这是保存用的，让后台把isLink变为true，nodeId改成当前的nodeId
+         * 就可以打包生成相对应的项目文件
+         */
+        var exportIsLink = false;
+        if (exportIsLink === true) {
+            var exportNodeId = 2875;
+            window.location.hash = '#link=' + exportNodeId;
+            $(function() {
+                if ($('.iframeRouterContainer').length !== 0) {
+                    var $elem = $('.btnContainer');
+                    for (var i = 0; i < $elem.length; i++) {
+                        console.log($elem.eq(i)[0].dataset.url);
+                    }
+                }
+            })
+        }
+    })
+</script>
+<script>
+    /*
+     * 预览页面 - 逻辑处理
+     *
+     */
+    //  模拟本地用户
+    var storage = window.localStorage;
+    // var user = { "id": 442, "username": "15729112830", "companyExit": false, "jsessionid": "363F968896C0B4C7EA1FBF8834C925EF" }
+    // localStorage.setItem( "user", JSON.stringify( user ) )
+    // console.log(JSON.parse(localStorage.getItem('user')))
+    if (browser.versions.mobile === true || browser.versions.android === true) {
+        $('.container').addClass('phone').removeClass('pc');
+        $('body').addClass('phone').removeClass('pc');
+        $('.btn').addClass('btn-small');
+    } else $('.container').addClass('pc').removeClass('phone');
+    if(JSON.parse(localStorage.getItem('user')) == null){
+        if($('#buttonBtn').attr('orgtitle')  == '注册'){
+        
+        }
+    }
+    $(function() {
+
+        var parseData, // 解析的对象
+            parseStauts, // 返回的信息
+            DataJson = [], //数据格式
+            fields = [], // 所有的字段
+            content = $(".bodyContent"), // 装载内容的容器
+            checkboxs = 0, // div的id，循环生成唯一值
+            source, // 来源地
+            isSrc = false, // 如果有 图片控件 就增加 Src 字段。
+            isAddImageSrc, //判断图片控件
+            wifiBlock = false,
+            numTimes = false, // 判断图形执行
+            reportId = [], // 图表的Id
+            reportData = []; // 图表的数据
+        // console.log( source )
+        try {
+            if (window.location.search !== "" || window.location.hash !== "") { // 在数据表页面跳转过来的
+                var urlInfo,
+                    urlDot;
+                if (window.location.search !== "") {
+                    urlInfo = 'search';
+                    urlDot = '?';
+                } else {
+                    urlInfo = 'hash';
+                    urlDot = '#';
+                }
+            if (window.location[urlInfo].split(urlDot)[1].split('=')[0] !== 'link') { // 跳转时url传参数link，就是仅仅查看表单作用
+                    var params = decodeURI(window.location.search), // 在数据表按 增加 然后ajax请求数据进来的
+                        nodeId = params.split('&')[0].split('=')[1],
+                        nodeName = params.split('&')[1].split('=')[1],
+                        method = params.split('&')[2].split('=')[1],
+                        selectId, // 选择的Id  -- 修改 用
+                        idData, // 根据SelectId单条查询出来的数据
+                        isSrcs = ""; // 给后台判断哪个是要将 图片控件 转为Src路径
+
+                    if (params.split('&')[3] !== undefined) var gid = params.split('&')[3].split('=')[1];
+                    $('#submitBtn').show(); // 预览界面把提交按钮显示出来。
+                    method !== 'add' ? selectId = params.split('&')[3].split('=')[1] : null;
+
+                    source = 'datatable';
+                    if(method=="add"){
+                      $("#submitBtn").text(params.split('&')[4].split('=')[1]);
+                    }
+                    var useMethod; // 使用的方法
+                    method === 'add' || method === 'addAgain' ? useMethod = 'insert' : useMethod = 'update';
+
+                    // $( '.container.head' ).hide(); // 数据表跳转过来的话 最上面的文字就不要了 （预览表单）
+                    if (method !== 'add') {
+                        var data = {
+                            "record": selectId,
+                            "node_id": nodeId,
+                            "classname": nodeName,
+                            "method": "getById"
+                        };
+
+                        $.ajax({ // 这是 修改 功能要使用的 把id的数据获取。
+                            url: prevent_HOST + 'pageDesignOperatorFacade/selectFormRecord',
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json; charset=UTF-8',
+                            async: false,
+                            data: JSON.stringify(data),
+                            success: function(res) {
+                                idData = res;
+                                console.log(res);
+                            }
+                        })
+
+                        $(function() {
+                            if (method === 'watch') {
+                                // 如果是在 数据表 里面点击 查看 进来的话，就把所有东西都禁用，只能查看，不能修改。
+                                $('[id^="data"]').attr('readonly', 'readonly');
+                                $('[id^="data"]').attr('disabled', 'disabled');
+                                $('input').attr('readonly', 'readonly');
+                                $('button').attr('disabled', 'disabled');
+                              $('#submitBtn').hide();
+                            }
+                        })
+                    }
+
+                    $.ajax({ // 这是获取模板。
+                        url: prevent_HOST + `pageDesignQueryFacade/getPageContent?id=${nodeId}`,
+                        type: 'GET',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=UTF-8',
+                        async: false,
+                        success: function(res) {
+                            console.log(res)
+                            parseData = res['msg'];
+                            parseStauts = res.status;
+                            if (parseData == "java.lang.NullPointerException") {
+                                window.location.href = prevent_Url + '404/index.html';
+                            }
+                        }
+                    })
+
+                    $("#insertForm").submit(function(e) {
+                        e.preventDefault();
+                        var record = $("#insertForm").serializeObject();
+                        if (gid) record.gid = gid; // 如果有关联的话 就添加 gid 字段
+                        record.id = selectId; // 数据表点击 修改 的时候要用的。
+                        delete record.leipiNewField; // 我也不知道为什么提交取值的时候会添加这个东西，貌似就是没用的，所以就把它删除了。
+                        isSrcs = isSrcs.substring(0, isSrcs.length - 1);
+                        // console.log( record );
+                        var data = {
+                            "record": record,
+                            "classname": nodeName,
+                            "method": useMethod
+                        }
+                        // console.log(data)
+                        if (isSrc) data.src = isSrcs; // 如果有 图片控件 就添加 Src 字段
+                        var tgurlinfo='';
+                        var tgnodereg = new RegExp("(^|&)tgurl=([^&]*)(&|$)", "i");
+                        var rrr = window.location.search.substr(1).match(tgnodereg);
+                        if (rrr != null) tgurlinfo= unescape(rrr[2]);
+
+                      if (method === 'add') { // 点击 添加数据 的请求
+                            data.record.isDelete = 0; // 添加要增加一个 isDelete字段。
+                            $.ajax({
+                                type: 'POST',
+                                url: prevent_HOST + 'pageDesignOperatorFacade/insertFormRecord',
+                                contentType: 'application/json; charset=UTF-8',
+                                dataType: 'json',
+                                data: JSON.stringify(data),
+                                success: function(res) {
+                                
+                                    if (res['status'] == 0) {
+                                        alert('恭喜您！' + res['statusMsg']);
+                                        if ($('.wifiblock').length !== 0) { // 代表有关联控件。要进行跳转到第二个页面添加数据。
+
+                                            var orgUrl = $('.wifiblock').attr('orgurl').split('?')[1].split('=')[1].split('&')[0],
+                                                orgUrlName = $('.wifiblock').attr('orgurlname');
+                                            if (window.location.href.split('&').length > 3) {
+                                                var gid = window.location.href.split('&')[3].split('=')[1];
+                                                    window.location.href = prevent_Url +
+                                                    'editor/assets/ueditor/formdesign/preview.html?id=' + orgUrl + '&name=' +
+                                                    orgUrlName + '&method=add&gid=' + gid;
+                                            } else {
+                                                window.location.href = prevent_Url +
+                                                    'editor/assets/ueditor/formdesign/preview.html?id=' + orgUrl + '&name=' +
+                                                    orgUrlName + '&method=add&gid=' + res['msg'];
+                                            }
+                                        }else if(tgurlinfo!=''){
+                                            window.location.href=tgurlinfo;
+                                        } else window.location.reload();
+                                    } else {
+                                        alert('抱歉！插入单条数据失败，请重试');
+                                    }
+                                }
+                            })
+                        } else { // 点击 修改数据 的请求
+                            data.record.isDelete = 0; // 添加要增加一个 isDelete字段。
+                            $.ajax({
+                                url: prevent_HOST + 'pageDesignOperatorFacade/updateFormRecord',
+                                type: 'POST',
+                                dataType: 'json',
+                                contentType: 'application/json; charset=UTF-8',
+                                data: JSON.stringify(data),
+                                success: function(res) {
+                                    console.log(res);
+                                    if (res['status'] == 0) {
+                                        alert('恭喜您！' + res['statusMsg']);
+                                        window.location.reload();
+                                    } else {
+                                        alert('抱歉！更新数据失败，请重试');
+                                    }
+                                }
+                            })
+                        }
+
+                    })
+                } else {
+                    var nodeId,
+                        gid,
+                        url;
+                    source = 'link';
+                    window.location.search !== "" ?
+                        nodeId = window.location.search.split('?')[1].split('=')[1] :
+                        nodeId = window.location.hash.split('#')[1].split('=')[1];
+
+                    function getQueryString(name) {
+                        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                        var r = decodeURI(window.location.search).substr(1).match(reg);
+                        if (r != null) return (r[2]);
+                        return null;
+                    }
+
+                    var gid = getQueryString('gid');
+                    if (gid !== null)
+                        url = prevent_HOST + `pageDesignQueryFacade/getPageContentGid?id=${nodeId}&gid=${gid}`;
+                    else
+                        url = prevent_HOST + `pageDesignQueryFacade/getPageContent?id=${nodeId}`;
+
+
+                    $.ajax({ // 这是获取模板。
+                        url: url,
+                        type: 'GET',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=UTF-8',
+                        async: false,
+                        success: function(res) {
+
+                            parseData = res['msg'];
+                            parseStauts = res.status;
+                        }
+                    })
+                }
+            } else { // 在百度编辑器按 预览 进来的
+                source = 'ueditor';
+                nodeId = $('#node_id', window.opener.document).val();
+                parseData = JSON.parse(window.opener.parseData()); // 从父窗口获取解析的数据 - parseData() 该方法在 ueditor.all.js 里面
+
+                if (window.opener.isPhone() === true) {
+                    $('body').addClass('mnPhone');
+                    $('.container').addClass('phone').removeClass('pc');
+                    $('.btn').addClass('btn-small');
+                };
+                $("#insertForm").submit(function(e) {
+                    e.preventDefault(); 
+                    /* 将列表控件新增的列保存起来 */
+                    $.each(parseData.data, function(index, value) {
+                        if (value.leipiplugins === 'listctrl') {
+                            $('#submitBtn').show();
+                            // 这是将新添加的数据保存到 orgrowvalue
+                            var allInput = $(`#${value.name} .cContainer.add`).find('input'),
+                                tmp = ''; // 用来存放所有Input的值的临时变量
+                            for (var i = 0; i < allInput.length; i++) {
+                                tmp += allInput[i].value + '`';
+                            }
+                            value.orgrowvalue = tmp;
+
+                            // 这是将默认的第一行数据保存回 orgcolvalue
+                            var defaultInput = $(`#${value.name} .cContainer.template`).find('input'),
+                                tmp = '';
+                            for (var i = 0; i < defaultInput.length; i++) {
+                                tmp += defaultInput[i].value + '`';
+                            }
+                            value.orgcolvalue = tmp;
+
+                            // 这是将总计的数量保存，方便下次打开能显示
+                            var total = $(`#${value.name} .total`),
+                                tmp = '';
+                            for (var i = 0; i < total.length; i++) {
+                                tmp += total[i].value + '`';
+                            }
+                            value.orgsumvalue = tmp;
+
+                        } else if (value.leipiplugins === 'addimage') {
+                            // 添加一个src去addimage里
+                            value.src = $('#' + value.name).val();
+                        }
+                    })
+                    //异步提交数据
+                    $.ajax({
+                        type: 'POST',
+                        url: prevent_HOST + 'pageDesignOperatorFacade/saveDesignPage',
+                        dataType: 'json',
+                        data: JSON.stringify(parseData),
+                        contentType: "application/json; charset=UTF-8;",
+                        beforeSend: function(XMLhttpRequest) {
+                            $('body').addClass('spinnerContainer');
+                            $('.resValue').html('请稍等，正在为您保存中...');
+                            $('.spinner').fadeIn();
+                            console.log(XMLhttpRequest);
+                        },
+                        complete: function(XMLhttpRequest, status) {
+                            if (XMLhttpRequest.status === 200) {
+                                $('.resValue').css('animation', 'font 1s').html('恭喜您，保存成功哦！:)');
+                                setTimeout(function() {
+                                    $('.spinner').fadeOut();
+                                    $('body').removeClass('spinnerContainer');
+                                    $('.resValue').css('animation', '');
+                                }, 1500);
+                            } else {
+                                $('.resValue').css('animation', 'font 1s').html('抱歉，保存失败，请重试！:(');
+                                setTimeout(function() {
+                                    $('.spinner').fadeOut();
+                                    $('body').removeClass('spinnerContainer');
+                                    $('.resValue').css('animation', '');
+                                }, 3000);
+                            }
+                        }
+                    });
+                });
+
+                for (var i = 0; i < parseData.data.length; i++) {
+                    if (parseData.data[i].leipiplugins === 'sort') {
+                        // 如果有分类控件 就要往后台去取数据
+                        $.ajax({ // 这是获取模板。
+                            url: prexvent_HOST + `pageDesignQueryFacade/getPageContent?id=${nodeId}`,
+                            type: 'GET',
+                            dataType: 'json',
+                            contentType: 'application/json; charset=UTF-8',
+                            async: false,
+                            success: function(res) {
+                                parseData = res['msg'];
+                            }
+                        })
+                    }
+                }
+                if (parseData.parse.indexOf('wifiblock') !== -1 || parseData.parse.indexOf('sort') !== -1) {
+                    // 如果有热区控件 就要往后台去取数据
+                    if (parseData.parse.indexOf('wifiblock') !== -1) {
+                        wifiBlock = true;
+                    }
+                    $.ajax({ // 这是获取模板。
+                        url: prevent_HOST + `pageDesignQueryFacade/getPageContent?id=${nodeId}`,
+                        type: 'GET',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=UTF-8',
+                        async: false,
+                        success: function(res) {
+                            parseData = res['msg'];
+                        }
+                    })
+                }
+
+            }
+            var parse, // 数据字段内容
+                nowDataSource; // 现在在用 parse 还是   
+            if (parseData.phoneParse !== null) {
+                if (browser.versions.mobile === true || browser.versions.android === true) { // 根据不同终端显示不同东西.
+                    if (parseData.phoneParse !== null) {
+                        parse = parseData.phoneParse;
+                        nowDataSource = 'phoneParse';
+                    } else {
+                        parse = parseData.parse
+                        nowDataSource = 'parse';
+                    }
+                } else {
+                    if (parseData.parse !== null) {
+                        parse = parseData.parse;
+                        nowDataSource = 'parse';
+                    } else {
+                        parse = parseData.phoneParse;
+                        nowDataSource = 'phoneParse';
+                        $('.container').addClass('phone').removeClass('pc');
+                    }
+                }
+            } else {
+                parse = parseData.parse;
+                nowDataSource = 'parse';
+            }
+            var datas = parseData.data; //  当前数据详细内容
+            //获取热区中是否有groupcon属性
+            for (var i = 0; i < datas.length; i++) {
+                if (parseData.data[i].hasOwnProperty("groupcon")) {
+                    groupcon = parseData.data[datas.length - 1].groupcon;
+                } else {
+                    groupcon = null;
+                }
+            }
+
+            //高级搜索
+            $('body').on('click', '.search_btn', function(e) {
+                var key = $(".searchData").val(),
+                    searchUrl = $('.wifiblock').attr('orgurl').split('&')[0];
+                // if ($('.wifiblockBox').children().length != 0) {
+                //     $('.wifiblockBox').children().remove();
+                // }
+                var searchData = {
+                    "key": key,
+                    "groupcon": groupcon,
+                    "nodeId": nodeId,
+                    'wifiField': searchUrl
+                };
+                $.ajax({
+                    url: prevent_HOST + `pageDesignQueryFacade/searchWifiKey`,
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json;charset=UTF-8',
+                    data: JSON.stringify(searchData),
+                    async: false,
+                    success: function(res) {
+                        parseData = res['msg'];
+                        
+                        //wifiblock();
+                        // var html = ``;
+                        // var searchLength = JSON.parse(parseData.data[1].sqldata).length;
+                        // for (var i = 0; i < searchLength; i++) {
+                        //     html +=
+                        //         `<div class="wifiblock" groupcon="${parseData.data[1].groupcon}" orgurlname="${parseData.node_name}" orgurlid="${parseData.node_id}" orgvalue="${parseData.data[1].groupcon}" orgtitle="" orgurl="${parseData.wifiField}&gid=${JSON.parse(parseData.data[1].sqldata)[i].id}" style="display: flex;display: -webkit-flex;color: #333;margin-top:10px">` +
+                        //         `<div class="wfImg"><img src="${JSON.parse(parseData.data[1].sqldata)[i][JSON.parse(parseData.data[1].datasource).field]}" leipiplugins="addimage" groupcon="${parseData.data[1].groupcon}" name="${parseData.data[1].name}" id="${parseData.data[1].name}"></div>` +
+                        //         `<div class="wfDetail"><div class="title"><p leipiplugins="text" groupcon="${parseData.data[1].groupcon}" type="text" max="undefined" title="${parseData.data[2].title}" id="${parseData.data[2].name}" name="${parseData.data[2].name}" orgheight="${parseData.data[2].orgheight}" orgwidth="${parseData.data[2].orgwidth}" placeholder="" orgthide="${parseData.data[2].orgthide}" orgbghide="${parseData.data[2].orgbghide}" datasource="${parseData.data[2].datasource}">${JSON.parse(parseData.data[2].sqldata)[i][JSON.parse(parseData.data[2].datasource).field]}</p></div>` +
+                        //         `<div class="detail"><div groupcon="${parseData.data[1].groupcon}" leipiplugins="textarea" id="${parseData.data[3].name}" name="${parseData.data[3].name}" title="${parseData.data[3].title}" style="font-size:;width:px;height:px;" datasource="${parseData.data[3].datasource}" sqldata="${parseData.data[3].sqldata}">${JSON.parse(parseData.data[3].sqldata)[i][JSON.parse(parseData.data[3].datasource).field]}</div>` +
+                        //         `</div><div class="autor"><p leipiplugins="text" groupcon="${parseData.data[1].groupcon}" type="text" max="undefined" title="${parseData.data[4].title}" id="${parseData.data[4].name}" name="${parseData.data[4].name}" orgheight="${parseData.data[4].orgheight}" orgwidth="${parseData.data[4].orgwidth}" placeholder="" orgthide="${parseData.data[4].orgthide}" orgbghide="${parseData.data[4].orghbghide}" datasource="${parseData.data[4].datasource}">${JSON.parse(parseData.data[4].sqldata)[i][JSON.parse(parseData.data[4].datasource).field]}</p></div>` +
+                        //         `<div class="confscource"><p leipiplugins="text" groupcon="${parseData.data[1].groupcon}" type="text" max="undefined" title="${parseData.data[5].title}" id="${parseData.data[5].name}" name="${parseData.data[5].name}" orgheight="${parseData.data[5].orgheight}" orgwidth="${parseData.data[5].orgwidth}" placeholder="" orgthide="${parseData.data[5].orgthide}" orgbghide="${parseData.data[5].orgbghide}" datasource="${parseData.data[5].datasource}0">${JSON.parse(parseData.data[5].sqldata)[i][JSON.parse(parseData.data[5].datasource).field]}</p></div><div class="orgCollect"></div></div></div>`
+                        // }
+                        // $('.wifiblockBox').append(html);
+                    }
+                })
+            })
+            if (parseData.fields != 0) {
+                /*
+                 * 这里开始是把所有 控件的字段 都解析 拼接出来。
+                 *
+                 */
+
+                $.each(datas, function(index, value) {
+                    if (value.parse_name) { // chekcbox 解析出来的name是不一样的
+                        fields.push(value.parse_name);
+                    } else {
+                        fields.push(value.name);
+                    }
+                })
+                var NODENAME = parseData[nowDataSource].indexOf('wifiblockBox')
+                // console.log( fields )
+                // 热区控件逻辑
+                if (wifiBlock) {
+                    var sqlDataLen = [];
+                    for (var i = 0; i < fields.length; i++) {
+                        sqlDataLen.push(JSON.parse(datas[i].sqldata).length);
+                        var sqlmax = sqlDataLen[0];
+                        for (var j = 0; j < sqlDataLen.length; j++) {
+                            if (sqlDataLen[j] > sqlmax) {
+                                sqlmax = sqlDataLen[j];
+                            }
+                        }
+                    }
+                }
+
+                if (parseData[nowDataSource].indexOf('wifiblockBox') !== -1) {
+                    var html = ``
+                    DataJson.forEach(function(item, array) {
+                        html += `
+                      <img src=""+item.data1>
+                      `
+                    })
+
+                } else {
+                    // 在parse里面匹配fields字段并替换
+                }
+                for (var i = 0; i < fields.length; i++) {
+                    var dataType = datas[i].leipiplugins,
+                        showData, // 变为预览状态的临时变量
+                        data = datas[i],
+                        // numTimes = false,
+                        inputValue = '';
+                    // console.log( data )
+                    // 将解析的数据变为预览状态
+                    if (dataType == "text") { //! 文本框
+                        // orgtype -- 没用
+                        var dataHide, // input是否隐藏
+                            dataThide, // input边框是否隐藏
+                            dataBghide, // input底色是否隐藏
+                            type, // input的类型判断
+                            max, min,
+                            placeholder;
+                        switch (data.orgtype) {
+                            case 'email':
+                                // placeholder = '请输入正确的 “邮箱” 地址';
+                                type = 'email';
+                                break;
+                            case 'int':
+                                // placeholder = '请输入 “整数” 类型';
+                                type = 'number';
+                                break;
+                            case 'float':
+                                // placeholder = '请输入 “浮点数” 类型';
+                                type = 'text';
+                                break;
+                            case 'idcard':
+                                // placeholder = '请输入正确的 “身份证” 号码';
+                                type = 'number';
+                                max = 999999999999999999;
+                                break;
+                            default:
+                                // placeholder = '请输入 “文本” ';
+                                type = 'text';
+                                break;
+                        }
+                        data.value === '' ? placeholder = '' : placeholder = data.value;
+                        data.orghide == 0 ? dataHide = "inline-block" : dataHide = "none";
+                        if (datas[i].groupcon != null && datas[i].groupcon != "null" && source !== 'datatable' && datas[i].searchId != "null") { //如果是组合控件中的热区
+                           
+                            showData = "<p leipiplugins='" + data.leipiplugins + "' groupCon='" + data.groupcon + "'type=" + type +
+                                " max='" + max + "' title='" + data.title + "' id='" +
+                                data.name + "' name='" + data.name + "' orgheight='" + data.orgheight + "' orgwidth='" + data.orgwidth +
+                                "' placeholder='" + placeholder + "' orgthide='" + data.orgthide + "' orgbghide='" +
+                                data.orgbghide + "' datasource = " + data.datasource + "></p>"
+                        } else if (datas[i].groupcon === '' && source !== 'datatable' && datas[i].datasource === "") { //如果是组合控件中的热区
+                            showData = "<p leipiplugins='" + data.leipiplugins + "' groupCon='" + data.groupcon + "'type=" + type +
+                                " max='" + max + "' title='" + data.title + "' id='" +
+                                data.name + "' name='" + data.name + "' orgheight='" + data.orgheight + "' orgwidth='" + data.orgwidth +
+                                "' placeholder='" + placeholder + "' orgthide='" + data.orgthide + "' orgbghide='" +
+                                data.orgbghide + "' datasource = " + data.datasource + "></p>"
+                        } else {
+                            console.log(data.style)
+                            showData = "<input class='searchData' leipiplugins='" + data.leipiplugins +
+                                "' onclick='clearInputValue(event)' orgtype=" + data.orgtype + " type=" + type +
+                                " max='" + max + "' title='" + data.title + "' id='" +
+                                data.name + "' name='" + data.name + "' orgheight='" + data.orgheight + "' orgwidth='" + data.orgwidth +
+                                "' style='" + data.style + "' placeholder='" + placeholder + "' orgthide='" + data.orgthide +
+                                "' orgbghide='" +
+                                data.orgbghide + "' datasource = " + data.datasource + ">";
+                        }
+                    } else if (dataType == "textarea") { //! 多行文本框
+                        if (NODENAME > -1) {
+                            numTimes = false;
+                            // !!!!!!!!!!!!!  ordrich -- 是否富文本格式  暂时没弄 迟点弄
+                            showData = "<div leipiplugins='" + data.leipiplugins + "' id='" + data.name + "' name='" + data.name +
+                                "' title='" + data.title +
+                                "' style='font-size:" + data.orgfontsize + ";width:" + data.orgwidth + "px;height:" + data.orgheight +
+                                "px;box-sizing:border-box;" + data.style + "' datasource=" + data.datasource + " sqldata=" + data.sqldata +
+                                ">" + data.value + "</div>";
+                        } else {
+                            numTimes = false;
+                            // !!!!!!!!!!!!!  ordrich -- 是否富文本格式  暂时没弄 迟点弄
+                            showData = "<textarea leipiplugins='" + data.leipiplugins + "' id='" + data.name + "' name='" + data.name +
+                                "' title='" + data.title +
+                                "' style='resize:none;font-size:" + data.orgfontsize + ";width:" + data.orgwidth + "px;height:" + data.orgheight +
+                                "px;box-sizing:border-box;" + data.style + "' datasource=" + data.datasource + " sqldata=" + data.sqldata +
+                                ">" + data.value + "</textarea>"
+                        }
+                    } else if (dataType == "select") { //! 下拉菜单
+                        // selected -- 没用
+                        showData = "<select leipiplugins='" + data.leipiplugins + "' datasource='" + data.datasource + "' id='" +
+                            data.name + "' name='" + data.name + "' title='" + data.title +
+                            "' size='" + data.size +
+                            "' selected='" + data.selected + "' style='" + data.style + "'>";
+                        var dataValue = data.value.split(","); // 控件内容 -- 把字符串分割为数组
+                        $.each(dataValue, function(key, value) {
+                            if (value == data.selected) {
+                                showData += "<option value='" + value + "' selected='" + value + "'>" + value + "</option>"
+                            } else {
+                                showData += "<option value='" + value + "'>" + value + "</option>"
+                            }
+                        })
+                        showData += "</select>";
+                    } else if (dataType == "radios") { //! 单选框
+                        var orderby = "inline-block"; // 排序方式
+                        data.orderby == 0 ? orderby = "block" : orderby = "inline-block";
+                        console.log(data.orderby,data.style);
+                        showData = "";
+                        showData += "<div leipiplugins='" + data.leipiplugins + "' style='display: block'" + data.style +
+                            ";>";
+                        $.each(data.options, function(key, value) {
+                            if (value.checked != undefined) {
+                                showData += "<label style='display:" + orderby + ";" + data.style +
+                                "'><input type='radio' name='" +
+                                    value.name + "' value='" + value.value +
+                                    "' checked='checked'>" + value.value + "&nbsp;&nbsp;</label>";
+                            } else {
+                                showData += "<label style='" + data.style +";display:"+ orderby +
+                                    ";'><input type=radio name=" +
+                                    value.name + " value='" + value.value +
+                                    "'>" + value.value + "&nbsp;&nbsp;</label>";
+                            }
+                        })
+                        showData += '</div>';
+                    } else if (dataType == "checkboxs") { //! 复选框
+                        var orderby = "inline-block"; // 排序方式
+                        data.orderby == "0" ? orderby = "block" : orderby = "inline-block";
+                        checkboxs++;
+                        showData = "";
+                        showData += "<div leipiplugins='" + data.leipiplugins + "' id='checkboxs" + checkboxs +
+                            "' style='display:block'>";
+                        $.each(data.options, function(key, value) {
+                            if (value.checked != undefined) {
+                                showData += "<label style='" + data.style + ";" + "display:" + orderby + "'><input style=' width:"+data.width+";height:"+data.height+"' type='" + value.type +
+                                    "' name='" +
+                                    value.name + "' value='" + value.value +
+                                    "' checked='checked' onchange='selectChange(event)'>" + value.value + "&nbsp;&nbsp;</label>";
+                            } else {
+                                showData += "<label style='"+ data.style + ";" +"display:" + orderby + ";'><input type='" + value.type +
+                                    "' name='" +
+                                    value.name + "' value='" + value.value +
+                                    "' onchange='selectChange(event)'>" + value.value + "&nbsp;&nbsp;</label>";
+                            }
+                        })
+                        showData += '<input type="hidden" name=' + data.name1 + ' types="checkboxs" value="" />'
+                        showData += '</div>';
+                    } else if (dataType == "macros") { //! 宏控件
+                        var dataHide; // 隐藏属性
+                        data.orghide == 0 ? dataHide = "inline-block" : dataHide = "none";
+                        var orgType = data.orgtype, // 数据orgtype
+                            dataOrgType; // 属于哪种形式
+                        var d = new Date(); // 获取时间
+                        switch (orgType) {
+                            case "sys_datetime":
+                                dataOrgType = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + "&nbsp;" + d.getHours() +
+                                    ":" + d.getMinutes() + "";
+                                break;
+
+                            case "sys_date":
+                                dataOrgType = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+                                break;
+
+                            case "sys_date_cn":
+                                dataOrgType = d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
+                                break;
+
+                            case "sys_date_cn_short1":
+                                dataOrgType = d.getFullYear() + "年" + (d.getMonth() + 1) + "月";
+                                break;
+
+                            case "sys_date_cn_short2":
+                                dataOrgType = (d.getMonth() + 1) + "月" + d.getDate() + "日"
+                                break;
+
+                            case "sys_date_cn_short3":
+                                dataOrgType = d.getFullYear() + "年";
+                                break;
+
+                            case "sys_date_cn_short4":
+                                dataOrgType = d.getFullYear();
+                                break;
+
+                            case "sys_time":
+                                dataOrgType = d.getHours() + ":" + d.getMinutes()
+                                break;
+
+                            case "sys_week":
+                                switch (d.getDay()) {
+                                    case 1:
+                                        dataOrgType = "星期一";
+                                        break;
+                                    case 2:
+                                        dataOrgType = "星期二";
+                                        break;
+                                    case 3:
+                                        dataOrgType = "星期三";
+                                        break;
+                                    case 4:
+                                        dataOrgType = "星期四";
+                                        break;
+                                    case 5:
+                                        dataOrgType = "星期五";
+                                        break;
+                                    case 6:
+                                        dataOrgType = "星期六";
+                                        break;
+                                    default:
+                                        dataOrgType = "星期日"
+                                        break;
+                                }
+                                break;
+
+                            default:
+                                dataOrgType = "出错啦~请重试..."
+                                break;
+                        }
+
+                        data.orgfontsize ? data.orgfontsize : data.orgfontsize = "14px";
+                        if (datas[i].groupcon === null && source !== 'datatable') {
+                            showData = "<p leipiplugins='" + data.leipiplugins + "' groupCon='" + data.groupcon + "' name=" + data.name +
+                                ">" + dataOrgType + "</p>"
+                        } else {
+                            showData = "<input leipiplugins='" + data.leipiplugins + "' name=" + data.name + " type=" + data.type +
+                                " title=" + data.title +
+                                " value=" + dataOrgType + " style='display:" + dataHide + ";font-size:" + data.orgfontsize +
+                                ";width:" + data.orgwidth + ";height:" + data.orgheight +
+                                ";'>";
+                        }
+                    } else if (dataType == "progressbar") { //! 进度条
+                        if (source === 'datatable') {
+                            showData = "<input name='" + data.name + "' type='text'>";
+                        } else {
+                            showData = "<div leipiplugins='" + data.leipiplugins +
+                                "' class='progress progress-striped'><div class='bar " + data.orgsigntype +
+                                "' style='width:" + data.orgvalue + "%;" + data.style + ";'></div></div>"
+                        }
+                    } else if (dataType == "qrcode") { //! 二维码
+                        // !!!!!!!!!!!!!  目前只是个假的二维码 只有图片
+                        if (source === 'datatable') {
+                            showData = "<input name='" + data.name + "' type='text'>";
+                        } else {
+                            showData = "<img leipiplugins='" + data.leipiplugins + "' src='images/qrcode.gif' id=" + data.name +
+                                " name=" + data.name + " style='width:" +
+                                data.orgwidth + ";height:" + data.orgheight + ";'>";
+                        }
+                    } else if (dataType == "listctrl") { //! 列表控件
+
+                        var dataColtype = data.orgcoltype.split('`'), // 类型
+                            dataColtypeLen = dataColtype.length - 1, // 类型的长度
+                            dataColvalue = data.orgcolvalue.split('`'), // 默认值
+                            dataSum = data.orgsum.split('`'), // 合计数据
+                            dataTitle = data.orgtitle.split('`'), // 表头名称
+                            dataUnit = data.orgunit.split('`'), // 单位
+                            dataRowvalue = data.orgrowvalue.split('`'), // 追加的内容的数据
+                            sumDisplay = 'none', // 最后一行合计的显示
+                            dataSumvalue = data.orgsumvalue.split('`');
+                        $('#submitBtn').show(); // 列表控件的时候，将提交按钮显示出来。
+                        for (var j = 0; j < dataSum.length; j++) {
+                            if (dataSum[j] === '1') sumDisplay = 'table-footer-group';
+                        }
+                        dataRowvalue.pop(); // 把最后多的一个删除
+                        var dataAverValueLen = dataRowvalue.length / dataColtypeLen; // 用 默认值的长度 除 类型的长度，知道分了几组
+
+                        showData = "<table leipiplugins='" + data.leipiplugins + "' name=" + data.name + " id=" + data.name +
+                            " cellspacing='0' class='table table-bordered table-condensed' style='width:" + data.orgwidth +
+                            "'>";
+                        showData += "<thead><tr><th colspan=" + (dataColtypeLen + 1) + " style='text-align:left;'>" + data.title +
+                            "<span class='pull-right'><button class='btn btn-small btn-primary' type='button' onclick='tdAddRow(" +
+                            data.name + ", event)'>新增一行</button></span></th></td><tr>";
+                        // --------- 第一行标题
+                        for (var j = 0; j < dataColtypeLen; j++) {
+                            showData += "<th>" + dataTitle[j] + "</th>";
+                        }
+                        showData += "<th>操作</th>";
+                        showData += "</tr></thead><tbody class='template cContainer'><tr>";
+                        // --------- 第二行内容
+                        for (var j = 0; j < dataColtypeLen; j++) {
+                            if (dataColtype[j] == "text") {
+                                showData += "<td><input class='input-medium' name='list0" + j + "' type=" + dataColtype[j] +
+                                    " value=" + dataColvalue[j] +
+                                    "> " + dataUnit[j] + "</td>"
+                            } else if (dataColtype[j] == "textarea") {
+                                showData += "<td><textarea class='input-medium' name='list0" + j + "' type=" + dataColtype[j] +
+                                    ">" + dataColvalue[j] +
+                                    "</textarea> " + dataUnit[j] + "</td>"
+                            } else {
+                                showData += "<td><input onchange='changeSum(event)' class='input-medium sum' name='list0" + j +
+                                    "' type='number' value=" +
+                                    dataColvalue[j] +
+                                    " > " +
+                                    dataUnit[j] +
+                                    "</td> ";
+                            }
+                        }
+                        showData += "<td></td></td></tbody>";
+                        // --------- 第二行追加的内容
+                        var tmpLen = 0;
+                        for (var j = 0; j < dataAverValueLen; j++) {
+                            var valueArr = dataRowvalue.slice(tmpLen, (tmpLen + dataColtypeLen));
+                            tmpLen = tmpLen + dataColtypeLen;
+                            showData += "<tbody class='cContainer add'><tr>";
+                            for (var k = 0; k < valueArr.length; k++) {
+                                if (dataColtype[k] === 'text') {
+                                    showData += "<td><input class='input-medium' name='list" + (j + 1) +
+                                        k + "' type=" + dataColtype[k] + " value=" + valueArr[k] + "></td>";
+                                } else {
+                                    showData += "<td><input onchange='changeSum(event)' class='input-medium sum' name='list" + (j + 1) +
+                                        k + "' type=" + dataColtype[k] + " value=" + valueArr[k] + "></td>";
+                                }
+                            }
+                            showData += "<td><a href='javascript:;' onclick='tdDelRow(this)'>删除</a></td></tbody></tr>";
+                        }
+                        showData += "<tbody class='fContainer' style='display:" + sumDisplay + "'><tr>";
+
+                        // --------- 第三行合计
+                        for (var j = 0; j < (dataColtypeLen + 1); j++) {
+                            // if( dataSumvalue[ j ] !== null || dataSumvalue[ j ] !== '' ) sumValue = dataSumvalue[ j ];
+
+                            if (dataSum[j] == "1") {
+                                var sumValue = dataColvalue[j];
+                                // --------- 第三行合计的数量的赋值
+                                if (dataSumvalue[j]) {
+                                    sumValue = dataSumvalue[j];
+                                }
+
+                                showData += "<td>合计：<input class='total' readonly='readonly' type='text' name='list" + j +
+                                    "total' class='input-small' value=" +
+                                    sumValue + "> " +
+                                    dataUnit[j] + "</td> "
+                            } else {
+                                showData += "<td><input class='total' type='hidden' value=''></td>";
+                            }
+                        }
+                        showData += "</tr></tbody></table>";
+                    } else if (dataType == "addimage") { //! 图片上传
+                        isSrc = true;
+                        isAddImageSrc = (data.identity);
+                        if (isAddImageSrc === '图片上传' || data.title === '图片上传') {
+                            isSrcs += data.name + ",";
+                        }
+
+                        if (source === 'datatable' && method !== 'watch') { // 如果是数据表进来，就显示上传的按钮
+                            // data.identity 是唯一标识 data.title 不是
+                            if (data.identity === '图片上传' || data.title === '图片上传') {
+                                showData = "<div><input name=" + data.name + " id=" + data.name +
+                                    " type='hidden'><a leipiplugins='" + data.leipiplugins +
+                                    "' class='btn btn-primary btn-small uploadImage' data-toggle='modal'>" + data.title +
+                                    "</a></div>";
+                            } else if (data.identity === '视频上传' || data.title === '视频上传') {
+                                showData = "<div><input name=" + data.name + " id=" + data.name +
+                                    " type='hidden'><a leipiplugins='" + data.leipiplugins +
+                                    "' class='btn btn-primary btn-small uploadVideo' data-toggle='modal'>" + data.title +
+                                    "</a></div>";
+                            } else if (data.identity === '文件上传' || data.title === '文件上传') {
+                                showData = "<div><input name=" + data.name + " id=" + data.name + " type='hidden'>" +
+                                    "<label class='btn btn-primary btn-small' for='uploadData' title=" + data.title + ">" + data.title +
+                                    "<input leipiplugins='" + data.leipiplugins +
+                                    "' type='file' id='uploadData' style='display: none;' name='fileVideo'>" +
+                                    "</label></div>";
+                            }
+                        } else if (source === 'datatable' && method === 'watch') { // 如果是数据表进来的，是点了 查看 某条数据的话，显示为一个图片
+                            if (data.identity === '图片上传' || data.title === '图片上传') {
+                                showData = "<img leipiplugins='" + data.leipiplugins + "' datasource='" + data.datasource +
+                                    "' allowupload='" + data.allowupload + "' style='width:71px;height:99px !important;' src=" +
+                                    idData['msg']['data']['data' + (i + 1)] + " />";
+                            } else if (data.identity === '视频上传' || data.title === '视频上传') {
+                                showData = "<video leipiplugins='" + data.leipiplugins + "' datasource='" + data.datasource +
+                                    "' allowupload='" + data.allowupload + "' style='width:71px;height:99px !important;' src=" +
+                                    idData['msg']['data']['data' + (i + 1)] + "></video>";
+                            } else if (data.identity === '文件上传' || data.title === '文件上传') {
+                                showData = "<div leipiplugins='" + data.leipiplugins + "' datasource='" + data.datasource +
+                                    "' allowupload='" + data.allowupload + "' style='width:71px;height:99px !important;' src=" +
+                                    idData['msg']['data']['data' + (i + 1)] + "></div>";
+                            }
+                        } else if (NODENAME > -1) {
+                            if (data.identity === '图片上传' || data.title === '图片上传') {
+                                showData = "<img src='' leipiplugins='" + data.leipiplugins + "' groupCon='" + data.groupcon + "' name=" +
+                                    data.name + " id=" + data.name + " >"
+                            } else if (data.identity === '视频上传' || data.title === '视频上传') {
+                                showData = "<video src='' leipiplugins='" + data.leipiplugins + "' groupCon='" + data.groupcon + "' name=" +
+                                    data.name + " id=" + data.name + " ></video>"
+                            } else if (data.identity === '文件上传' || data.title === '文件上传') {
+                                showData = "<div leipiplugins='" + data.leipiplugins + "' groupCon='" + data.groupcon + "' name=" + data.name +
+                                    " id=" + data.name + " ></div>";
+                            }
+                        } else {
+                            if (data.identity === '图片上传' || data.title === '图片上传') {
+                                showData = "<img src='' leipiplugins='" + data.leipiplugins + "' name=" + data.name + " id=" + data
+                                    .name + " >"
+                            } else if (data.identity === '视频上传' || data.title === '视频上传') {
+                                showData = "<video src='' style='border: 1px solid #ccc;vertical-align: middle;' leipiplugins='" +
+                                    data.leipiplugins + "' name=" + data.name + " id=" + data.name + "></video>"
+                            } else if (data.identity === '文件上传' || data.title === '文件上传') {
+                                showData =
+                                    "<span style='border: 1px solid #ccc;vertical-align: middle;display: inline-block' leipiplugins='" +
+                                    data.leipiplugins + "' name=" + data.name + " id=" + data.name + ">文件上传</span>"
+                            }
+                        }
+
+                    } else if (dataType == 'pinglun') { //评论
+                        showData = "<ul leipiplugins='" + data.leipiplugins + "' groupCon='" + nodeId + "' name='" + data.name +
+                            "'id='" + data.name + "'datasource='" + data.datasource + "'></ul>"
+                    } else if (dataType == "iframerouter") { //! 内嵌路由控件
+                      var nWidth =[];
+                      var nHeight =[];
+
+                      var nChecked = data.orgchecked.split( '`' ),
+                            nSrc = data.orgsrc.split( '`' ),
+                            nTarget = data.orgtarget.split( '`' ),
+                            nTitle = data.orgtitle.split( '`' );
+                          try{
+                            nWidth = data.orgwidth.split( '`' );
+                            nHeight = data.orgheight.split( '`' );
+                            nWidth.pop();
+                            nHeight.pop();
+                          }catch (e) {
+                            // window.close(); //关闭当前页面
+                          }
+
+                        // nLogin = data.orglogin.split( '`' );
+                        var routerPosition, // 路由位置
+                            defaultUrl = ''; // 默认选择的Urla
+                            nTitle.pop();
+                            nSrc.pop();
+                            nTarget.pop();
+                            nChecked.pop();
+
+                         // nLogin.pop();
+                        showData = '';
+                        for (var j = 0; j < nTitle.length; j++) {
+                            if (nChecked[j] === 'true') {
+                                defaultUrl = nTarget[j];
+                            }
+                        }
+                        if (data.orderby === '0') routerPosition = 'bottom';
+                        else routerPosition = 'top';
+                        showData += "<div class='iframeRouterContainer " + routerPosition +
+                            "'><div class='top'><iframe allowfullscreen='true' allowtransparency='true' id='iframeRouter' src='" +
+                            defaultUrl + "'></iframe></div>";
+                        showData += "<div class='bottom' >";
+                        for (var j = 0; j < nTitle.length; j++) {
+                            var url = nTarget[j];
+                            // showData += "<div class='btnContainer' data-url='" + url + "' data-loginControl='" + nLogin[ j ] + "'><span>";
+                          if(nWidth.length<1){
+                            showData += "<div class='btnContainer' data-url='" + url + "'><span>";
+                          }else{
+                            showData += "<div style='width:"+nWidth[j]+";height:"+nHeight[j]+"' class='btnContainer' data-url='" + url + "'><span>";
+                          }
+
+                            if (nSrc[j] !== '') {
+                                showData += "<img src='" + nSrc[j] + "'></img>";
+                            }
+                            if (nChecked[j] === 'true') {
+                                showData += "<p class='routerClick'>" + nTitle[j] + "</p></span></div>"
+                            } else {
+                                showData += "<p>" + nTitle[j] + "</p></span></div>";
+                            }
+                        }
+                        showData += "</div></div>";
+                    } else if (dataType == 'reportcontrol') { // 报表控件
+                        var parsingData, // 后台传入数据
+                            dataBody, // 表格内容
+                            dataHead, // 表头
+                            fieldsHead, // 列头
+                            columnsLength; // 列长
+                        if (source === 'ueditor') {
+                            var nodeId = window.opener.document.getElementById('node_id').value
+                            $.ajax({ // 这是获取模板。
+                                url: prevent_HOST + `pageDesignQueryFacade/getPageContent?id=${nodeId}`,
+                                type: 'GET',
+                                dataType: 'json',
+                                contentType: 'application/json; charset=UTF-8',
+                                async: false,
+                                success: function(res) {
+                                    parsingData = res['msg'];
+                                }
+                            })
+                        } else parsingData = parseData;
+                        if (parsingData.data[i]['leipiplugins'] === 'reportcontrol') {
+                            dataBody = parsingData.data[i].data;
+                            dataHead = parsingData.data[i];
+                        }
+                        fieldsHead = JSON.parse(dataHead.fields);
+                        columnsLength = Object.keys(fieldsHead).length;
+                        var inx;
+                        if (dataHead.visualreport === 'tableCommon' || dataHead.visualreport === 'tableCommones') {
+                            inx = 'bb';
+                            numTimes = false;
+                            showData =
+                                "<table class='tableT' style='text-align:center;'>" +
+                                // 表头
+                                "<td class='titleT' style='font-weight:bold' colspan=" + columnsLength + ">" + dataHead.title +
+                                "</td>" +
+                                // 标题
+                                "<tr class='menuT'>";
+                            // 标题数据
+                            for (var j = 0; j < columnsLength; j++) {
+                                showData += "<th>" + fieldsHead[Object.keys(fieldsHead)[j]] + "</th>";
+                            }
+                            showData += "</tr>";
+                            // 表格内容数据
+                            for (var j = 0; j < dataBody.length; j++) {
+                                var columns = Object.keys(dataBody[j]).filter(function(e) {
+                                    return e.indexOf("data") === 0;
+                                })
+                                showData += "<tr>"
+                                for (var x = 0; x < columns.length; x++) {
+                                    var y = columns[x]
+                                    showData += "<td>" + dataBody[j][y] + "</td>"
+                                    // console.log( dataBody[ j ][ y ] )
+                                }
+                                showData += "</tr>"
+                            }
+                            showData += "</table>";
+                        } else {
+                            inx = 'tb';
+                            showData = '<div style="height:250px;width:100%;" id="lineChart' + i + '"></div>';
+                            numTimes = true;
+                            elemId = 'lineChart';
+                            var legendData = [],
+                                items, columnData = [],
+                                sumArr = []
+                            // 图例数据
+                            for (var j = 0; j < columnsLength; j++) {
+                                legendData.push(fieldsHead[Object.keys(fieldsHead)[j]]);
+                            }
+                            for (var j = 0; j < dataBody.length; j++) {
+                                var columns = Object.keys(dataBody[j]).filter(function(e) {
+                                    return e.indexOf("data") === 0;
+                                })
+                            }
+                            for (var j = 0; j < columns.length; j++) {
+                                columnData[j] = [];
+                                for (var k = 0; k < dataBody.length; k++) {
+                                    columnData[j].push(dataBody[k][columns[j]])
+                                }
+                            }
+
+                            showCharts = function() {
+                                reportId.push('lineChart' + i); // 保存对应图表Id，以便有多个图表的时候重新渲染。
+                                var lineOption = {
+                                    title: {
+                                        text: dataHead.title
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis'
+                                    },
+                                    legend: {
+                                        // data: []
+                                        // data: [ "多行文本框123", "多行文本框456" ]
+                                    },
+                                    grid: {
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '3%',
+                                        containLabel: true
+                                    },
+                                    toolbox: {
+                                        feature: {
+                                            saveAsImage: {}
+                                        },
+                                        right: '4%'
+                                    },
+                                    xAxis: {
+                                        show: true,
+                                        type: 'category',
+                                        // boundaryGap: false,
+                                        data: []
+                                    },
+                                    yAxis: {
+                                        show: true,
+                                        type: 'value'
+                                    },
+                                    series: []
+                                };
+                                lineOption.legend.data = legendData;
+                                // 折线图、柱状图
+                                for (var j = 0; j < columnData.length; j++) {
+                                    items = 'item_' + j;
+                                    var chartType;
+                                    if (dataHead.visualreport === 'line') {
+                                        items = {
+                                            type: 'line',
+                                            data: columnData[j],
+                                            // barWidth: '30%',
+                                            label: {
+                                                normal: {
+                                                    show: true,
+                                                }
+                                            },
+                                            name: legendData[j] // 这是我想了TM一下午都想不到的一个操作。瞎了狗眼了操。
+                                        }
+                                        lineOption.series.push(items);
+                                    } else if (dataHead.visualreport === 'bar') {
+                                        items = {
+                                            type: 'bar',
+                                            data: columnData[j],
+                                            barWidth: '30%',
+                                            label: {
+                                                normal: {
+                                                    show: true,
+                                                }
+                                            },
+                                            name: legendData[j] // 这是我想了TM一下午都想不到的一个操作。瞎了狗眼了操。
+                                        }
+                                        lineOption.series.push(items);
+                                    }
+                                    var sum = 0;
+                                    for (var k = 0; k < columnData[j].length; k++) {
+                                        sum += parseInt(columnData[j][k])
+                                    }
+                                    sumArr.push(sum);
+                                }
+                                // 饼状图
+                                if (dataHead.visualreport === 'pie') {
+                                    items = {
+                                        name: dataHead.title,
+                                        type: 'pie',
+                                        radius: '55%',
+                                        center: ['50%', '60%'],
+                                        data: [],
+                                        itemStyle: {
+                                            emphasis: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    };
+                                    for (var j = 0; j < columnData.length; j++) {
+                                        pieData = 'pieData_' + j;
+                                        pieData = {
+                                            value: sumArr[j],
+                                            name: legendData[j]
+                                        };
+                                        items.data.push(pieData);
+                                    }
+                                    lineOption.tooltip.trigger = 'item';
+                                    lineOption.tooltip.formatter = '{a} <br/>{b} : {c} ({d}%)';
+                                    lineOption.xAxis.show = false;
+                                    lineOption.yAxis.show = false;
+                                    lineOption.series.push(items);
+                                }
+                                reportData.push(lineOption); // 保存对应图表数据，以便有多个图表的时候重新渲染。
+
+                                for (var k = 0; k < reportId.length; k++) {
+                                    var myChart = echarts.init(document.getElementById(reportId[k]));
+                                    myChart.setOption(reportData[k]);
+                                }
+                            }
+                        }
+                    } else if (dataType == 'button') { //! 按钮控件
+                        var flexDirection;
+                        var tbtntype='';
+                        var tgnode='';
+                        var winname='';
+                        try{
+                          if(data.btntype!='' && data.btntype!=null && data.btntype!='null'){
+                            tbtntype=data.btntype;
+                          }
+                        }catch (e) {
+                          // window.close(); //关闭当前页面
+                        }
+                        try{
+                          if(data.tgnode!='' && data.tgnode!=null && data.tgnode!='null'){
+                            tgnode=data.tgnode;
+                          }
+                        }catch (e) {
+                          // window.close(); //关闭当前页面
+                        }
+                        try{
+                          if(data.winname!='' && data.winname!=null && data.winname!='null'){
+                            winname=data.winname;
+                          }
+                        }catch (e) {
+                          // window.close(); //关闭当前页面
+                        }
+                        /*if(tgnode!='' || tgnode!="null"){
+                          var tgnodes=tgnode.split(":");
+                  if(tgnodes[0]!='0')
+                          urlinfo="tgnodeid="+tgnodes[0];
+                        }
+                        if(winname!=''){
+                          if(urlinfo!=""){
+                            urlinfo+="&winname="+winname;
+                          }else{
+                            urlinfo="winname="+winname;
+                          }
+                        }*/
+                        if(tbtntype==''){
+                          var url='';
+                          /*if(data.orgurl!='' || data.orgurl!="null"){
+                            url=data.orgurl;
+                            if(url.indexOf("?")){
+                              url+="&"+urlinfo;
+                            }else {
+                              url+="?"+urlinfo;
+                            }
+                          }*/
+
+                          data.orderby === '1' ? flexDirection = 'column-reverse' : flexDirection = 'column';
+                          if (data.mode === '0') showData = "<div id='buttonBtn' style='margin: 3px;border-radius: 3px;color:" + data.orgfontcolor + ";";
+                          else showData = "<div id='buttonBtn' style='color:" + data.orgfontcolor + ";background:" + data.orgbgcolor +
+                            ";";
+                          showData += "box-sizing:border-box;padding:3px;width:" + data.orgwidth + "; height:" + data.orgheight +
+                            "; display:inline-block;" + data.style + "' name='leipiNewField' leipiplugins='button' orgname='" +
+                            data.orgname + "' orderby='" + data.orderby + "' mode='" + data.mode + "' orgtitle='" + data.orgtitle +
+                            "'";
+                          showData += "orgwidth='" + data.orgwidth + "' orgheight='" + data.orgheight + "' orgsrc='" + data.orgsrc +
+                            "' orgurl='" + data.orgurl + "' tgnode='"+tgnode+"' winname='"+winname+"' ";
+                            showData += "orgwidth='"+data.orgwidth + "' orgheight='" + data.orgheight 
+                          showData += "orgbgcolor='" + data.orgbgcolor + "' orgFontColor='" + data.orgfontcolor + "'>";
+                          showData += "<div style='display:flex;flex-direction:" + flexDirection + "'>";
+                          if (data.mode === '0') showData += "<div style='width:100%;height:100%;text-align:center;'><img src='" +
+                            data.orgsrc + "' style='width:60%;height:100%;'></div>";
+                          showData +=
+                            "<div style='display:inline-block;width:100%;height:100%;text-align:center;'><p style='font-size:1rem;margin-top:5px;'>" +
+                            data.orgtitle + "</p></div>"
+                          showData += "</div></div>";
+                        }else{
+                          var btntype=data.btntype.split(",");
+                          var formnode=data.formnode.split(":");
+                          var orgurl='';
+                          showData = "";
+                          for(var via=0;via<btntype.length;via++){
+                            orgurl='';
+                            var btntypeval=btntype[via].split(":");
+                            if(btntypeval[0]=='add'){
+                              orgurl = '/editor/assets/ueditor/formdesign/preview.html?id='+formnode[0]+'&name='+formnode[1]+'&method=add&selectId='+formnode[0]+"&btnname="+btntypeval[1];
+
+                            }else if(btntypeval[0]=='list'){
+                              //orgurl = '/form/#/home/'+formnode[0]+'/'+formnode[1];
+                              orgurl = '/editor/assets/ueditor/formdesign/preview.html?link='+formnode[0];
+                            }else if(btntypeval[0]=='edit'){
+                              orgurl = '/editor/assets/ueditor/formdesign/preview.html?id='+formnode[0]+'&name='+formnode[1]+'&method=change&selectId='+formnode[0];
+                            }else if(btntypeval[0]=='del'){
+                            }else if(btntypeval[0]=='flow'){
+                            }
+                            /*if(orgurl.indexOf("?")){
+                              orgurl+="&"+urlinfo;
+                            }else{
+                              orgurl+="?"+urlinfo;
+                            }*/
+                            if(orgurl!=''){
+                              var tgurl='';
+                              if(data.orgurl!='' && data.orgurl!='null' && data.orgurl!=null){
+                                tgurl=data.orgurl;
+                              }else if(tgnode!=''){
+                                var tgnodes=tgnode.split(":");
+                                if(tgnodes[0]!='0')
+                                  tgurl="/editor/assets/ueditor/formdesign/preview.html?link="+tgnodes[0];
+                              }
+                              data.orderby === '1' ? flexDirection = 'column-reverse' : flexDirection = 'column';
+                              if (data.mode === '0') showData += "<div id='buttonBtn' style='cursor: pointer;margin: 3px;border-radius: 3px;color:" + data.orgfontcolor + ";";
+                              else showData += "<div id='buttonBtn' style='cursor: pointer;margin: 3px;color:" + data.orgfontcolor + ";background:" + data.orgbgcolor +
+                                ";";
+                              showData += "box-sizing:border-box;padding:3px;width:" + data.orgwidth + "; height:" + data.orgheight +
+                                "; display:inline-block;" + data.style + "' name='leipiNewField' leipiplugins='button' orgname='" +
+                                data.orgname + "' orderby='" + data.orderby + "' mode='" + data.mode + "' orgtitle='" + data.orgtitle +
+                                "'";
+                              showData += "orgwidth='" + data.orgwidth + "' orgheight='" + data.orgheight + "' orgsrc='" + data.orgsrc +
+                                "' orgurl='" + orgurl + "' winname='"+winname+"' tgurl='"+tgurl+"' ";
+                              showData += "orgbgcolor='" + data.orgbgcolor + "' orgFontColor='" + data.orgfontcolor + "'>";
+                              showData += "<div style='display:flex;flex-direction:" + flexDirection + "'>";
+                              if (data.mode === '0') showData += "<div style='width:100%;height:100%;text-align:center;'><img src='" +
+                                data.orgsrc + "' style='width:60%;height:100%;'></div>";
+                              showData +=
+                                "<div style='display:inline-block;width:100%;height:100%;text-align:center;'><p style='font-size:1rem;margin-top:5px;'>" +
+                                btntypeval[1] + "</p></div>"
+                              showData += "</div></div>";
+                            }
+
+                          }
+                        }
+
+                    }else if( dataType == "formlist"){
+                      showData = "";
+                      if(data.datafield!='' && data.datafield!=null){
+                        var datafile=data.datafield.substr(1).split(",");
+                        var dSource=data.datasource.split(":");
+                        $.ajax({ // 这是获取模板。http://htjy.kz38.cn:20890/pageDesignQueryFacade/selectFormRecordByNodeId?nodeId=2897
+                          url: prevent_HOST + `pageDesignQueryFacade/selectFormRecordByNodeId?nodeId=`+dSource[0],
+                          type: 'GET',
+                          dataType: 'json',
+                          contentType: 'application/json; charset=UTF-8',
+                          async: false,
+                          success: function(res) {
+                            console.log(res);
+                            showData=`<div class="list-group">`;
+                            if(res.status=='0'){
+                              if(datafile.length>0){
+                                var tdata=res.msg.data;
+                                var listhtml='';
+                                var listlink='';
+                                for(var i=0;i<tdata.length;i++){
+                                  listhtml='';
+                                  for(var j=0;j<datafile.length;j++){
+                                    listhtml+=tdata[i][datafile[j]]+" ";
+                                  }
+                                  if(data.frmedit=='1')listhtml+="<span  class='btn btn-info btn-xs badge'>编辑</span>";
+                                  if(data.frmdel=='1')listhtml+=" <span  class='btn btn-danger btn-xs badge'>删除</span>";
+                                  listlink=`/editor/assets/ueditor/formdesign/preview.html?id=`+tdata[i].gid+`&name=`+dSource[1]+`&method=watch&selectId=`+tdata[i].id;
+                                  showData+=`<a href="`+listlink+`" class="list-group-item" target="_blank">`+listhtml+`</a>`;
+                                }
+                              }
+                            }else{
+                              showData+="数据更新中...";
+                            }
+                            showData+=`</div>`;
+                          }
+                        })
+                      }
+                    } else if (dataType == 'sort') { //! 分类控件
+                        showData = "<ul leipiplugins='" + data.leipiplugins + "' id='nodeTree' name='" + data.name +
+                            "' nodeId='" + data.nodeid + "' class='ztree'></ul>";
+                        showData +=
+                            "<div id='treeView' class='treeView'><iframe id='treeViewIframe' name='treeViewIframe' frameborder='0' src=''></iframe></div>"
+                    } else if (dataType == 'glc') { //! 分类控件
+                      curreditnode=data.nodeid;
+                      showData = "<div id=\"rtoptool\">\n" +
+                        "      <span class=\"rtoptooloff\" aria-label=\"Left Align\" id=\"rtoptooloff\">\n" +
+                        "        &rsaquo;\n" +
+                        "      </span>\n" +
+                        "      <span data-method=\"add\" class=\"gomethod\"><img class=\"btn-img\" src=\"./self/icon/add.png\">添加数据</span>\n" +
+                        "      <span data-method=\"list\" class=\"gomethod\"><img class=\"btn-img\" src=\"./self/icon/watch.png\">查看数据</span>\n" +
+                        "      <span data-method=\"del\" class=\"gomethod\"><img class=\"btn-img\" src=\"./self/icon/delete.png\">删除数据</span>\n" +
+                        "      <span data-method=\"edit\" class=\"gomethod\"><img class=\"btn-img\" src=\"./self/icon/change.png\">修改数据</span>\n" +
+                        "    </div>";
+                    }else if (dataType == 'tpl'||dataType =='mtpl' ) { //! 分类控件
+                      showData = "";
+                    }else if( dataType == 'onlinehard' || dataType=='workword' || dataType=="workform" || dataType == 'workflow' || dataType=='schedule' || dataType=="beike" || dataType=='resource' || dataType=="task"){
+                        showData = "";
+                    }else if( dataType == 'teach' || dataType=='class' || dataType=="curriculum" || dataType == 'jiangtang' || dataType=='zujuan' || dataType=="yuejuan" || dataType=='chaxun' || dataType=="audit"){
+                        showData ="";
+                    }else if( dataType == "search"){
+                        showData = ""
+                    }
+                    function parseShow(obj) {
+                        return obj.replace(`{${fields[i]}}`, showData);
+                    }
+                    var parsen, // parse临时变量 i 为 0 1 时使用
+                        parsec; // 临时变量
+                    if (i == 0) {
+                        parsen = parseShow(parse);
+                        content.html(parsen);
+                    } else if (i == 1) {
+                        parsec = parseShow(parsen);
+                    } else {
+                        parsec = parseShow(parsec);
+                    }
+                    content.html(parsec);
+                    if (numTimes) showCharts();
+                }
+                // 数据源 -- 热区
+                $(document).ready(function() {
+                    if ($(".wifiblock") != undefined && source !== 'datatable') {
+                        var sqlDataLen = [], // 控件数据的长度
+                            sqlData = [], // 控件的数据
+                            wifiblock = $(".wifiblock").length,
+                            dataVal = [], // 储存该热区里面的控件的val
+                            dataField,
+                            nowNum = 0, // 防止重复循环同一个数值
+                            sqlMax, // 选择出数值最大的一个
+                            isDelete = false, // 判断是否已经删除原有的dom对象
+                            chooseNum = 0, // 要取的元素的下标，默认是0，当前一个热区循环3个后，就应该取第4个元素了
+                            chooseNumBak = 0; // 楼上的备份值
+                        var parseElem = $(parseData[nowDataSource]),
+                            wifiBlockElem = [];
+                        for (var k = 0; k < $('.wifiblock').length; k++) {
+                            wifiBlockElem.push($('.wifiblock')[k]);
+                        }
+                        for (var s = 0; s < wifiblock; s++) { // 循环有多少个热区
+                            if (s !== 0) chooseNum++; //
+                            chooseNumBak = chooseNum; // 防止第二次循环的时候被重新覆盖。
+                            var fieldLen = wifiBlockElem[s].innerHTML.match(/leipiplugins/ig).length; // 每一个热区有多少个控件
+                             
+                            var sqlDataTemp = $(wifiBlockElem[s]).find('[name^="data"]');
+                            for (var j = 0; j < sqlDataTemp.length; j++) {
+                                var dot = sqlDataTemp[0]['id'].split('data')[1];
+                                if (typeof sqlDataTemp[j] === 'object') sqlData.push(sqlDataTemp[j]);
+                            }
+                            var html = $(".wifiblock")[chooseNumBak].outerHTML;
+                            for (var j = 0; j < fieldLen; j++) {
+                                var num = $($('.wifiblock')[s]).find('[name^="data"]')[j].id.split('data')[1];
+                                //  if ( s === 0 ) {
+                                //      sqlDataLen.push( JSON.parse( datas[ j ].sqldata ).length )
+                                //  } else {
+                                //      sqlDataLen.push( JSON.parse( datas[ nowNum ].sqldata ).length )
+                                //  }
+                                sqlDataLen.push(JSON.parse(datas[num - 1].sqldata).length)
+                            
+                                sqlMax = sqlDataLen.sort(function(x, y) {
+                                    if (x > y) {
+                                        return -1;
+                                    } else {
+                                        return 1;
+                                    }
+                                })[0];
+                                nowNum++;
+                            };
+                            for (var j = 0; j < sqlData.length; j++) {
+                                for (k = 0; k < datas.length; k++) {
+                                    if (sqlData[j].id === datas[k].name) {
+                                        var val = JSON.parse(datas[k].sqldata);
+                                        dataVal.push(val);
+                                    }
+                                }
+                            }
+                            sqlDataLen = [];
+                            if (sqlMax === 0) sqlMax = 1;
+                            isDelete = false;
+                            for (var k = 0; k < sqlMax; k++) {
+                                $('.wifiblock')[chooseNum].after($(html).get(0));
+                                if (!isDelete) $('.wifiblock')[chooseNum].remove();
+                                isDelete = true;
+                                chooseNum = k + chooseNumBak;
+                            }
+
+                            //  往已有的控件循环添加数据
+                            for (var j = 0; j < dataVal.length; j++) {
+                                var dataValLen = dataVal[j].length;
+                                if (dataValLen !== 0) {
+                                    dataField = Object.keys(dataVal[j][0]);
+                                   
+                                    for (var k = 0; k < dataValLen; k++) {
+                                        if (s === 0) {
+                                            if (j === 0 && k === 0) var elem = $('[name="data' + [dot] + '"]')[k]
+                                            else var elem = $('[name="data' + [j + parseInt(dot)] + '"]')[k];
+                                        } else {
+                                            if ($('.wifiblockBoxs') != undefined) {
+                                                var elem = $('[name="data' + [dot] + '"]')[k];
+                                            } else {
+                                                var elem = $('[name="data' + [lastFieldLen + 1] + '"]')[k];
+                                            }
+
+                                        }
+                                        var setDataVal = dataVal[j][k][dataField[0]];
+                                        var pinglunID = dataVal[j][k][dataField[1]];
+                                        // console.log( elem.tagName )
+                                        switch (elem.tagName) { // 判断是什么类型的，进行怎么样的赋值
+                                            case 'INPUT':
+                                                elem.value += setDataVal;
+                                                break;
+                                            case 'UL': //如果是UL，则是评论控件，根据总评论内容，进行单列评论循环
+                                                $(elem).attr('cid', pinglunID)
+                                                if (!!setDataVal) { //判断setDataVal中是否拥有值
+                                                    //数组
+                                                    var arr = JSON.parse(setDataVal);
+                                                    //获取数组中的ID放入UL中，方便获取ID值
+                                                    arr.forEach(function(item, array) {
+                                                        //根据数组值进行循环渲染
+                                                        $(elem).append('<li><span>' + item.username + '&nbsp;:&nbsp;</span>' + item.content +
+                                                            '</li>')
+                                                    })
+                                                }
+                                                break;
+                                            case 'IMG':
+                                                elem.src = setDataVal;
+                                                break;
+
+                                            default:
+                                                elem.innerHTML += setDataVal;
+                                                break;
+                                        }
+                                        var wifiblockLinkId = $('.wifiblock')[k + chooseNumBak].getAttribute('orgurlid'),
+                                            wifiblockUrl = prevent_Url + 'editor/assets/ueditor/formdesign/preview.html?link=' +
+                                            wifiblockLinkId + '&gid=' + dataVal[j][k]['id'];
+                                        $('.wifiblock')[k + chooseNumBak].setAttribute('orgurl', wifiblockUrl);
+                                    }
+                                }
+                            }
+                            var lastFieldLen = fieldLen; // 保存上一个控件数量
+                            dataVal = []; // 重置存储值的数组，以免下一个循环错误
+                            sqlData = []; // 重置存储值的数组，以免下一个循环错误
+                        }
+
+                        // 为节点添加事件
+                        /* if ( parseData[ nowDataSource ].indexOf( 'wifiblockBox' ) !== -1 ) {
+
+                        } */
+                    }
+                })
+                // 数据表修改功能 -- 把获取的值循环到表上
+                $(document).ready(function() {
+                    if (idData !== undefined) {
+                        console.log(idData['msg'])
+
+                        var newArr = [];
+                        Object.keys(idData['msg']['data']).forEach((value, index, obj) => {
+                            if (value.indexOf('data') === 0) newArr.push(value);
+                        });
+
+                        $.each(newArr, (index, value) => { // 第一次循环。 循环 遍历 除了radio和checkboxs的 value 属性。
+                            var element = $('[name=' + value + ']');
+
+                            if (element.length === 1) {
+                                element.val(idData['msg']['data'][value]);
+                            } else if (element.length > 1) { // 处理 radios
+                                element.each((index, elem) => { // 第二次循环。 循环 radio 中的属性。
+                                    if (idData['msg']['data'][value] === elem.value) elem.checked = true;
+                                })
+                            }
+
+                            if (element.attr('types') == 'checkboxs') { // 处理 checkboxs
+                                var parentDiv = element.parent()[0].id,
+                                    selectValue = element.val().split(',');
+
+                                $(`#${parentDiv} label > input[type='checkbox']`).each((index, value) => {
+                                    $.each(selectValue, (sIndex, sVallue) => {
+                                        if (value.value == selectValue[sIndex]) value.checked = true;
+                                    })
+                                });
+                            }
+                        })
+                    }
+                })
+                // 热区关联跳转 -- gid 为 1 就 显示 1 的数据，这里是把数据循环上去
+                $(document).ready(function() {
+                    if (source !== 'datatable') {
+                        for (var i = 0; i < fields.length; i++) {
+                            if (datas[i].sqldata !== "[]") {
+                                var $target = $('#data' + (i + 1)),
+                                    tagName = $target.prop('tagName'),
+                                    val = JSON.parse(datas[i].sqldata)[0][Object.keys(JSON.parse(datas[i].sqldata)[0])[0]];
+                                // val = JSON.parse( datas[ i ].sqldata )[ 0 ][ 'data' + ( i + 1 ) ];
+                                switch (tagName) {
+                                    case 'INPUT':
+                                        $target.val(val);
+                                        break;
+                                    case 'IMG':
+                                        $target.prop('src', val);
+                                        break;
+                                    case 'TEXTAREA':
+                                        $target.html(val);
+                                        break;
+                                    case 'VIDEO':
+                                        $target.prop('src', val);
+                                        break;
+                                    default:
+                                        $target.html(val.split("\n").join("<br />"));
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                })
+                // 图文控件DOM事件
+                $(document).ready(function() {
+                    $('body').on('touchstart', '.seebtn', function(e) {
+                        e.stopPropagation(); // 阻止冒泡
+                        e.preventDefault()
+                        alert('已成功关注该用户');
+                    })
+                    // 转发功能
+                    $('body').on('touchstart', '.zhuanfa', function(e) {
+                        e.stopPropagation(); // 阻止冒泡
+                        e.preventDefault()
+                        alert('ic-zhuanfa');
+                    })
+                    // 点赞功能
+                    $('body').on('touchstart', '.dianzan', function(e) {
+                        e.stopPropagation(); // 阻止冒泡
+                        e.preventDefault()
+                        var color = $(this).css('color')
+                        if (color == 'rgb(255, 0, 0)') {
+                            this.style.color = 'rgb(54, 52, 52)'
+                        } else if (color == 'rgb(54, 52, 52)') {
+                            this.style.color = 'rgb(255, 0, 0)'
+                        }
+                    })
+                    // 评论功能
+                    var pinglunbox;
+                    $('body').on('click', '.pinglun', function(e) {
+                        e.stopPropagation(); // 阻止冒泡
+                        //                console.log($(window).scrollTop())
+                        //                console.log(window.innerHeight)
+                        //                var h = $(window).scrollTop()+window.innerHeight
+                        setTimeout(function() {
+                            var Wh = $(window).height()
+                            $('.inputKeys').css({
+                                'display': 'block',
+                                'top': Wh - 40 + 'px'
+                            })
+                        }, 500)
+                        pinglunbox = $(this).parent().next()
+                        $('.inputKeys input').focus()
+                        //                console.log(pinglunbox.children( 'ul' ).children())
+                    })
+                    $(document).click(function(e) {
+
+                        var name = e.target.className
+                        if ($('.inputKeys').css('bottom') == '2px' && name != 'inputKeys' && name != 'inputbox' && name !=
+                            'inputbtn' && name != 'txt') {
+                            $('.inputKeys').animate({
+                                'bottom': '-40px'
+                            })
+                        }
+                    })
+
+                    // 点击发表评论
+                    $('body').on('touchstart', '.inputbtn', function(e) {
+                        e.preventDefault()
+                        e.stopPropagation(); //阻止冒泡
+                        var txt = $('.inputKeys input').val() //表单值
+                        var user = JSON.parse(localStorage.getItem('user')) //用户名
+                        $('.inputKeys').css({})
+                        if (!user && !txt) {
+                            alert('亲输入回复内容')
+                        } else {
+                            var htm = '<li><span>' + user.username + '</span>&nbsp:&nbsp' + txt + '</li>'
+                            pinglunbox.children('ul').append(htm)
+                        }
+
+                        if (!pinglunbox.children('ul').attr('cid')) {
+                            var contentId = ''
+                        } else {
+                            var contentId = pinglunbox.children('ul').attr('cid')
+                        }
+                        ajaxData = {
+                            content: txt,
+                            contentId: contentId,
+                            field: pinglunbox.children('ul').attr('name'),
+                            userName: user.username,
+                            datasource: pinglunbox.children('ul').attr('datasource'),
+                            nodeId: nodeId
+                        }
+
+                        if (!!user && !!txt) {
+                            $.ajax({
+                                data: JSON.stringify(ajaxData),
+                                url: prevent_HOST + 'pageDesignOperatorFacade/insertComment',
+                                type: 'POST',
+                                contentType: 'application/json;chartset=UTF-8',
+                                success: function(data) {
+                                    console.log(data)
+                                }
+                            })
+                        } else {
+                            alert('发送失败')
+                        }
+                        $('.inputKeys input').val('');
+                    })
+                })
+                // 分类控件树形控件
+                $(document).ready(function() {
+                    if ($('#nodeTree').length !== 0) {
+
+                        // 与后台交互对接
+                        function treeMain(type, data) {
+                            $.ajax({
+                                url: prevent_HOST + 'pageDesignOperatorFacade/' + type,
+                                type: 'POST',
+                                dataType: 'json',
+                                contentType: 'application/json;charset=UTF-8',
+                                data: JSON.stringify(data),
+                                success: function(res) {
+                                    console.log(res);
+                                }
+                            })
+                        }
+
+                        var setting = {
+                            view: {
+                                addHoverDom: addHoverDom,
+                                removeHoverDom: removeHoverDom,
+                                selectedMulti: false
+                            },
+                            check: {
+                                enable: false
+                            },
+                            data: {
+                                simpleData: {
+                                    enable: true
+                                }
+                            },
+                            edit: {
+                                enable: true,
+                                renameTitle: '重命名',
+                                removeTitle: '删除'
+                            },
+                            callback: {
+                                beforeClick: function(treeId, treeNode) {
+                                    var zTree = $.fn.zTree.getZTreeObj("nodeTree");
+                                    $('#treeViewIframe').attr("src", treeNode.url);
+                                    return true;
+                                },
+                                beforeRename: function(treeId, treeNode, newName) {
+                                    var data = {
+                                        'id': treeNode.id,
+                                        'pid': treeNode.pId,
+                                        'name': newName,
+                                        'url': treeNode.url,
+                                        'nodeId': nodeId
+                                    };
+                                    treeMain('upSort', data);
+                                },
+                                beforeRemove: function(treeId, treeNode) {
+                                    $.ajax({
+                                        url: prevent_HOST + 'pageDesignOperatorFacade/delSort?id=' + treeNode.id,
+                                        type: 'GET',
+                                        dataType: 'json',
+                                        success: function(res) {
+                                            console.log(res);
+                                        }
+                                    })
+                                }
+                            }
+                        };
+                        var sortTreeNode;
+                        for (var i = 0; i < parseData.data.length; i++) {
+                            if (parseData.data[i].leipiplugins === 'sort') {
+                                sortTreeNode = parseData.data[i].children;
+                                sortTreeNode[0].isParent = true;
+                                sortTreeNode[0].open = true;
+                            }
+                        }
+
+                        $(document).ready(function() {
+                            $.fn.zTree.init($("#nodeTree"), setting, sortTreeNode);
+                        });
+
+                        var newCount = 1;
+                        var nodeId = window.location.search.split('=')[1].split('&')[0];
+
+                        function addHoverDom(treeId, treeNode) {
+                            var sObj = $("#" + treeNode.tId + "_span");
+                            if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+                            // add
+                            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId +
+                                "' title='添加节点' onfocus='this.blur();'></span>";
+                            sObj.after(addStr);
+                            var addBtn = $("#addBtn_" + treeNode.tId);
+                            if (addBtn) addBtn.bind("click", function() {
+                                var zTree = $.fn.zTree.getZTreeObj("nodeTree");
+                                var nodeName = prompt('输入节点名称', "new node" + (newCount++));
+                                var data = {
+                                    'pid': treeNode.id,
+                                    'name': nodeName,
+                                    'url': null,
+                                    'nodeId': nodeId
+                                };
+                                $.ajax({
+                                    url: prevent_HOST + 'pageDesignOperatorFacade/addSort',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    contentType: 'application/json;charset=UTF-8',
+                                    data: JSON.stringify(data),
+                                    success: function(res) {
+                                        console.log(res);
+                                        zTree.addNodes(treeNode, {
+                                            id: res.msg.id,
+                                            pId: treeNode.id,
+                                            name: nodeName
+                                        });
+                                    }
+                                })
+                                return false;
+                            });
+                            // addUrl
+                            var urlStr = "<span class='button url' id='addUrl_" + treeNode.tId +
+                                "' title='添加跳转链接' onfocus='this.blur();'></span>";
+                            sObj.after(urlStr);
+                            var addUrl = $("#addUrl_" + treeNode.tId);
+                            if (addUrl) addUrl.bind("click", function() {
+                                var url = prompt('输入您的跳转链接', prevent_Url +
+                                    'editor/assets/ueditor/formdesign/preview.html?link=');
+                                treeNode.url = url;
+                                var data = {
+                                    'id': treeNode.id,
+                                    'pid': treeNode.pId,
+                                    'name': treeNode.name,
+                                    'url': url,
+                                    'nodeId': nodeId
+                                };
+                                treeMain('upSort', data);
+                                return false;
+                            });
+                        };
+
+                        function removeHoverDom(treeId, treeNode) {
+                            $("#addBtn_" + treeNode.tId).unbind().remove();
+                            $("#addUrl_" + treeNode.tId).unbind().remove();
+                        };
+                    }
+                })
+            } else {
+                content.html(parse);
+            }
+        } catch (e) {
+            alert("页面预览失败！请关闭页面并重新尝试预览！");
+            // window.close(); //关闭当前页面
+        }
+        window.source = source;
+
+    })
+</script>
+<script>
+    $(function() {
+
+        /**
+         * isLogin - 判断用户是否登录
+         *
+         * 是否登录依据：
+         * 1. window.localstorage 是否存在 user 的字段
+         *
+         * @return String 返回用户的登录信息, 如果没登陆则返回 '' 空字符串
+         */
+
+        function isLogin() {
+            var user;
+            if (window.localStorage.getItem('user') !== null) {
+                user = JSON.parse(window.localStorage.getItem('user'));
+            } else user = '';
+
+            return user;
+        }
+
+        /**
+         * imgPlaceholder - 设置图像的占位符
+         *
+         * 判断依据：
+         * 1. 看元素的子元素IMG的SRC是否为空, 为空就设置一个占位符图片
+         *
+         * @param String elem IMG元素的父元素. 是要 jQuery Dom 选择器的格式来传
+         * 比如：  imgPlaceholder( '.contains.contains_img' );
+         */
+        function imgPlaceholder(elem) {
+            if ($(elem).length !== 0) {
+                var groupEl = $(elem);
+                for (var i = 0; i < groupEl.length; i++) {
+                    if ($(groupEl[i]).find('img').attr('src') === '') {
+                        $(groupEl[i]).find('img').attr('src', './images/placeholder.jpg')
+                    }
+                }
+            }
+        }
+
+        /**
+         * getNodeGid - 获取 NodeID 和 Gid
+         *
+         * @return Object 返回一个对象组合
+         */
+        function getNodeGid() {
+            var info = {
+                'nodeId': location.search.split('=')[1].split('&')[0],
+                'gId': window.location.search.split('=')[2]
+            };
+
+            return info;
+        }
+
+        /*
+         * iframeRouter - 内嵌路由控件
+         *
+         */
+        $('.iframeRouterContainer .bottom').on('click', '.btnContainer', function(e) {
+            var loginControl = e.currentTarget.dataset.logincontrol;
+            $('.btnContainer p').removeClass('routerClick');
+            $(e.currentTarget).find('p').addClass('routerClick');
+            if (loginControl === '0') {
+                if (window.localStorage.getItem('user') !== null) {
+                    $('#iframeRouter').attr('src', e.currentTarget.dataset.url);
+                } else {
+                    $('#iframeRouter').attr('src', 'http://' + localhost + '/login2/');
+                }
+            } else {
+                $('#iframeRouter').attr('src', e.currentTarget.dataset.url);
+            }
+        })
+
+        /*
+         * wifiblock
+         * 点击热区进行跳转
+         * 利用热区div的 orgurl 树形进行跳转
+         *
+         */
+        $('body').on('click', '.wifiblock', function(e) {
+            // e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            if ($(e.currentTarget).data('allowjump') !== false) {
+                if (source !== "datatable") {
+                    var urlJump = e.currentTarget.getAttribute('orgJump'),
+                        orgUrl = e.currentTarget.getAttribute('orgurl');
+                    if (urlJump === 'parent') {
+                        window.parent.location.href = orgUrl;
+                    } else if (urlJump === 'top') {
+                        window.top.location.href = orgUrl;
+                    } else {
+                        window.location.href = orgUrl;
+                    }
+                };
+            }
+        })
+
+        /*
+         * button
+         * 点击 按钮 进行跳转
+         * 利用 按钮div的 orgurl 树形进行跳转
+         *
+         */
+        $('body').on('click', '#buttonBtn', function(e) {
+            e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            if (source !== "datatable") {
+                var orgUrl = e.currentTarget.getAttribute('orgurl');
+                var tgurl = e.currentTarget.getAttribute('tgurl');
+                var winname = e.currentTarget.getAttribute('winname');
+
+                if(tgurl!='' && tgurl!=null){
+                    
+                  if(orgUrl.indexOf("?")){
+                    orgUrl+="&tgurl="+tgurl;
+                  }else {
+                    orgUrl+="?tgurl="+tgurl;
+                  }
+                }
+                if(winname!=''){
+                  $("#"+winname).attr("src",orgUrl);
+                }else{
+                  window.location.href = orgUrl;
+                }
+            };
+        })
+         /* 
+        * 注册按钮
+        * 登录后，注册和登录按钮不可点击
+        * 没登录时，退出不可用
+        * 
+        */
+       if(JSON.parse(localStorage.getItem('user')) != null){
+           $("#buttonreg").css('display','none');
+           $("#buttonLogin").css('display','none');
+
+           $('.loginTxt').html( JSON.parse(localStorage.getItem('user')).username );
+           $('.loginTxt').css('color','#fff')
+       }
+       /* 
+       *
+       * 点击注册
+       * 
+       */
+       $('body').on('click','#buttonreg',function(e){
+            e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            if (source !== "datatable") {
+                var orgUrl = e.currentTarget.getAttribute('orgurl');
+                window.location.href = orgUrl;
+            };
+       })
+       /* 
+        *点击退出登录
+        * 
+       */
+      $('body').on('click','#exitLogin',function(e){
+          if(JSON.parse(localStorage.getItem('user')) !=null){
+              localStorage.removeItem('user');
+              $("#buttonreg").css('display','block');
+              $("#buttonLogin").css('display','block');
+              window.location.reload();
+          }
+      })
+     /* 
+      *  点击登录
+      * 
+      */
+       $('body').on('click','#buttonLogin',function(e){
+            e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            if (source !== "datatable") {
+                var orgUrl = e.currentTarget.getAttribute('orgurl');
+                window.location.href = orgUrl;
+            };
+       })
+        /*
+         * =======  组合控件  =======
+         * 点赞功能
+         *
+         */
+        var count = parseInt($('.orgCollect').html());
+        $('body').on('click', '.orgCollect', function(e) {
+            $(this).addClass('Colactive');
+            $(this)[0].innerHTML = count + 1;
+            e.stopPropagation();
+        })
+
+        /*
+         * 点击导航添加 选中导航 效果
+         *
+         */
+        $(document).ready(function() {
+            if (window.location.href == $('.jinpin').attr("href")) {
+                $(".jinpin").addClass('navActive');
+            } else if (window.location.href == $('.tuijian').attr("href")) {
+                $(".tuijian").addClass('navActive');
+            } else if (window.location.href == $('.yidu').attr("href")) {
+                $(".yidu").addClass('navActive');
+            } else if (window.location.href == $('.shoucang').attr("href")) {
+                $(".shoucang").addClass('navActive');
+            }
+        })
+
+        /*
+         * 组合控件 如果没有上传图片
+         * 就上传一个占位图片
+         *
+         */
+        imgPlaceholder('.wifiblockBox .wifiblock .wfImg');
+
+        /*
+         * =======  详情页 Tpl1  =======
+         *
+         */
+        // 导航切换
+        $('.audio_con, .video_con, .question_con, .books_con').hide();
+        $('.books_con').show();
+        $('body').on('click', '.nav_container div', function(e) {
+            e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            $(this).siblings().removeClass('nav_btnActive');
+            $(this).addClass('nav_btnActive');
+            $('.audio_con, .video_con, .question_con, .books_con').hide();
+            var name = $(this).attr('id');
+            $('.' + name + '_con').show();
+        })
+
+        $(function() {
+            // 获取文件名
+            var audioLength = $('.nav_audio div[leipiplugins="addimage"]').length,
+                videoLength = $('.nav_video video').length,
+                booksLength = $('.nav_books div[leipiplugins="addimage"]').length;
+
+            for (var i = 0; i < audioLength; i++) {
+                if ($('.nav_audio div[leipiplugins="addimage"]')[i].innerHTML) {
+                    $('.audio')[i].setAttribute('src', $('.nav_audio div[leipiplugins="addimage"]')[i].innerHTML);
+                    $('.nav_audio div[leipiplugins="addimage"]')[i].innerHTML = $(
+                        '.nav_audio div[leipiplugins="addimage"]')[i].innerHTML.split('/')[4].split('.')[0];
+                }
+            }
+
+            for (var i = 0; i < videoLength; i++) {
+                $('.nav_video video')[i].setAttribute('style', 'height: 100px;');
+                $('.nav_video video')[i].setAttribute('src', $('.nav_video video')[i].innerHTML);
+                $('.nav_video video')[i].setAttribute('controls', 'controls');
+                var videoSrc = '';
+                if ($('.nav_video video')[i].innerHTML !== '') {
+                    videoSrc = $('.nav_video video')[i].innerHTML.split('/')[4].split('.')[0];;
+                }
+                $('.nav_video .video')[i].innerHTML = videoSrc;
+            }
+
+            for (var i = 0; i < booksLength; i++) {
+                var content = $('.nav_books div[leipiplugins="addimage"]')[i].innerHTML;
+                $('.nav_books div[leipiplugins="addimage"]')[i].innerHTML = '';
+                var node = document.createElement('a');
+                var textnode = document.createTextNode(content.split('/')[4].split('.')[0]);
+                if (content.split('.')[2] === 'pdf') {
+                    node.setAttribute('href',
+                      prevent_Url+'editor/assets/ueditor/formdesign/self/pdfjs/web/viewer.html?file=' + content);
+                } else {
+                    node.setAttribute('href', content);
+                }
+                node.appendChild(textnode);
+                $('.nav_books div[leipiplugins="addimage"]')[i].appendChild(node);
+            }
+        })
+
+        // 播放功能
+        $('body').on('click', '.icon-bofang1', function(e) {
+            e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            $(this).prev().find('.audio').get(0).play();
+            $(this).css('display', 'none');
+            $(this).next().css('display', 'inline-block');
+        })
+
+        // 暂停功能
+        $('body').on('click', '.icon-tingzhi', function(e) {
+            e.preventDefault(); // 阻止默认事件
+            e.stopPropagation(); // 阻止冒泡
+            $(this).prev().prev().find('.audio').get(0).pause();
+            $(this).prev().css('display', 'inline-block');
+            $(this).css('display', 'none');
+        })
+
+        /*
+         * 如果没有上传图片
+         * 就上传一个占位图片
+         *
+         */
+        imgPlaceholder('.contains .contains_img');
+
+        $(function() {
+
+            /**
+             * =======  详情页 Tpl2  =======
+             * 针对 详情页 Tpl2 的分享功能
+             * 设置 title 为标题
+             * 设置 meta description 为正文内容提取前30文字
+             *
+             */
+            if ($('.tpl2').length !== 0) {
+                if ($('#data1').html() !== '')
+                    window.document.title = '党建 - 新闻 | ' + $('#data1').html()
+                else
+                    window.document.title = '党建 - 新闻';
+
+                var dec;
+                if ($('#data4').html() !== undefined) {
+                    if ($('#data4').html() !== '')
+                        dec = $('#data4').html().substr(0, 30) + '...';
+                    else
+                        dec = '党建 - 新闻详情...';
+                } else
+                    dec = '党建 - 新闻详情...';
+
+                var metaDec = '<meta name="description" content=' + dec.replace(/\s/g, "") + '>';
+                $('head').append(metaDec)
+            }
+
+            /**
+             * 点赞功能 - 可复用
+             *
+             * 点赞机制：
+             * 1. 判断有没有登陆, 有则判断有没有点赞过, 没则允许点赞, 已经点赞的就取消点击事件
+             *
+             * 点赞功能要求：
+             * 1. 同一个页面只允许有一处点赞按钮。
+             * 2. 点赞图标必须为 iconfont 可以变色的图标
+             * 3. 触发点赞按钮的className为 sw_likes
+             * 4. 点赞计数的className为 sw_likesCount (可选择添加或不添加)
+             */
+
+            $('body').on('click', '.sw_likes', function() {
+                var user = isLogin();
+                var nodeGid = getNodeGid();
+                if (user !== '') {
+                    $.ajax({
+                        url: prevent_HOST + 'article/thumbsUp?nodeId=' + nodeGid.nodeId + '&gId=' + nodeGid.gId +
+                            '&uId=' + user.id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(res) {
+                            res['status'] === '0' ? $('.sw_likes').css('color', 'red') : $('.sw_likes').css('color',
+                                '#333333');
+                            if ($('.sw_likesCount').length !== 0) $('.sw_likesCount').html(res['msg']);
+                        }
+                    })
+                } else alert('抱歉, 您没有登录, 暂时不能点赞！');
+            })
+
+            /**
+             * 点赞功能 - 点赞数统计
+             * 判断有没有点赞统计框, 如果有则加载目前点赞数。
+             */
+            if ($('.sw_likesCount').length !== 0) {
+                var user = isLogin(),
+                    userId;
+                var nodeGid = getNodeGid();
+                user !== '' ? userId = user.id : userId = '';
+                $.ajax({
+                    url: prevent_HOST + 'article/selectThumbsUp?nodeId=' + nodeGid.nodeId + '&gId=' + nodeGid.gId +
+                        '&uId=' + userId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) {
+                        $('.sw_likesCount').html(res['msg']['count']);
+                        if (res['msg']['istrue']) $('.sw_likes').css('color', 'red');
+                        
+                    }
+                })
+            }
+
+            /**
+             * 收藏功能 - 可复用
+             *
+             * 收藏机制：
+             * 1. 判断有没有登陆, 有则判断有没有收藏过, 没则允许收藏
+             *
+             * 收藏功能要求：
+             * 1. 同一个页面只允许有一处收藏按钮。
+             * 2. 收藏图标必须为 iconfont 可以变色的图标
+             * 3. 触发收藏按钮的className为 sw_collect
+             */
+
+            $('body').on('click', '.sw_collect', function() {
+                var user = isLogin();
+                var nodeGid = getNodeGid();
+                if (user !== '') {
+                    var data = {
+                        'nodeId': nodeGid.nodeId,
+                        'gid': nodeGid.gId,
+                        'uid': user.id,
+                        'title': window.document.title,
+                        'imgUrl': $('img').eq(0).attr('src')
+                    };
+
+                    $.ajax({
+                        url: prevent_HOST + 'article/collection',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json;charset=utf-8',
+                        success: function(res) {
+                            if (res.status === '0') {
+                                $('.sw_collect').css('color', '#FF5722');
+                                $('.sw_collect').data('isCollect', true);
+                            } else {
+                                $('.sw_collect').css('color', '#000');
+
+                            }
+                        }
+                    })
+                } else alert('抱歉, 您没有登录, 暂时不能收藏！');
+            })
+
+            /**
+             * 收藏功能
+             * 判断有没有收藏过本文章，如果有则标识已收藏
+             */
+
+            if ($('.sw_collect').length !== 0) {
+                var user = isLogin();
+                var nodeGid = getNodeGid();
+                $.ajax({
+                    url: prevent_HOST + 'article/getCollectionGid?nodeId=' + nodeGid.nodeId + '&gId=' + nodeGid.gId +
+                        '&uId=' + user.id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) {
+                        if (res.msg) $('.sw_collect').css('color', '#FF5722');
+                    }
+                })
+            }
+
+            /**
+             * 评论功能
+             *
+             * 评论功能说明：
+             *
+             */
+
+            function getComments(callback) {
+                // 首次请求是在页面加载时已经请求，所以为了节省一次请求，所以取SessionStorage的值
+                if (window.sessionStorage.getItem('commentsInfo') !== null) {
+                    callback(JSON.parse(window.sessionStorage.getItem('commentsInfo')));
+                    window.sessionStorage.removeItem('commentsInfo');
+                } else {
+                    var nodeGid = getNodeGid();
+                    $.ajax({
+                        url: prevent_HOST + 'article/selectComment?nodeId=' + nodeGid.nodeId + '&gId=' + nodeGid.gId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(res) {
+                            callback(res);
+                            if ($('.sw_commentsCount').length !== 0) $('.sw_commentsCount').html(res['msg'].length);
+                        }
+                    })
+                }
+            }
+
+            function insertComments(content, callback) {
+                var user = isLogin();
+                var nodeGid = getNodeGid();
+                user !== '' ? userId = user.id : userId = '0';
+
+                if (user !== '') {
+                    var data = {
+                        'nodeId': nodeGid.nodeId,
+                        'gid': nodeGid.gId,
+                        'uid': user.id,
+                        'content': content
+                    }
+                    $.ajax({
+                        url: prevent_HOST + 'article/comment',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json;charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function(res) {
+                            if (res['status'] !== '2') callback(res)
+                            else alert(res['statusMsg']);
+                        }
+                    })
+                } else alert('抱歉, 您没有登录, 暂时不能评论！');
+            }
+
+            function deleteComments(commentId, pElem) {
+                if (confirm('确认删除这条评论吗？')) {
+                    $.ajax({
+                        url: prevent_HOST + 'article/delComment?id=' + commentId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(res) {
+                            res.status === '0' ? pElem.remove() : alert('删除失败');
+                        }
+                    })
+                }
+            }
+
+            function showComments(res, pElem, sElem) {
+                var resBak,
+                    deleteClone; // 这是要来判断是不是需要删除最后一个克隆的节点的
+                $(sElem).length === 1 ? deleteClone = true : deleteClone = false;
+                $(sElem).length > 1 ? resBak = resultUnique(res, sElem) : resBak = res;
+                if (window.sessionStorage.getItem('commentsElem') === null) window.sessionStorage.setItem(
+                    'commentsElem', $(sElem).clone(true)[0].outerHTML);
+                for (var i = 0; i < resBak.length; i++) {
+                    $(pElem).append(window.sessionStorage.getItem('commentsElem'));
+                    var flag = resBak[i]['id'] + '-' + resBak[i]['content'];
+                    deleteClone ? $(sElem)[i].dataset.commentFlag = flag : $(sElem).last()[0].dataset.commentFlag = flag;
+
+                    var user = isLogin();
+                    if (user !== '') {
+                        // 判断用户登录和评论是不是同一. 是就可以删除评论.
+                        var userCanDelete;
+                        deleteClone ? userCanDelete = user.id !== res[i]['uid'] : userCanDelete = user.id !== $(res).last()[
+                            0]['uid'];
+                        userCanDelete ?
+                            deleteClone ?
+                            $('.sw_deleteComments').eq(i).hide().data('canDelete', false) : $('.sw_deleteComments').last().hide()
+                            .data('canDelete', false) :
+                            deleteClone ?
+                            $('.sw_deleteComments').eq(i).show().data('canDelete', true) : $('.sw_deleteComments').last().show()
+                            .data('canDelete', true);
+                    } else $('.sw_deleteComments').hide();
+                }
+                if (deleteClone) $(sElem).last().remove(); // 删除最后一个多clone出来的元素。
+            }
+
+            function resultUnique(res, sElem) {
+                var returnRes = [];
+                for (var i = 0; i < res.length; i++) {
+                    var
+                        flag,
+                        resFlag = res[i]['id'] + '-' + res[i]['content'];
+                    $(sElem)[i] !== undefined ? flag = $(sElem)[i].dataset.commentFlag : flag = '';
+                    if (flag !== resFlag) returnRes.push(res[i]);
+                }
+                return returnRes;
+            }
+
+            /**
+             * 评论功能 - 评论数统计
+             * 判断有没有评论统计框, 如果有则加载目前评论数。
+             */
+
+            if ($('.sw_commentsCount').length !== 0) {
+                var nodeGid = getNodeGid();
+                $.ajax({
+                    url: prevent_HOST + 'article/selectComment?nodeId=' + nodeGid.nodeId + '&gId=' + nodeGid.gId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) {
+                        $('.sw_commentsCount').html(res['msg'].length);
+                        window.sessionStorage.setItem('commentsInfo', JSON.stringify(res));
+                    }
+                })
+            }
+
+
+            /**
+             * Tpl2 - 详情页逻辑处理
+             *
+             */
+
+            $('body').on('click', '.sw_comments', function() {
+                $('.sw_comments_container').fadeIn();
+                getComments(tpl2_comments);
+            })
+
+            $('body').on('click', '.sw_comments_back', function() {
+                $('.sw_comments_container').fadeOut();
+            })
+
+            $('body').on('click', '#commentSend', function(e) {
+                e.preventDefault();
+                if ($('#commentText').val() !== '') {
+                    var val = $('#commentText').val();
+                    insertComments(val, tpl2_comments);
+                } else {
+                    alert('您好！请输入你要评论的内容！');
+                    $('#commentText').focus();
+                    return false;
+                }
+            })
+
+            $('body').on('click', '.sw_deleteComments', function(e) {
+                if ($(e.target).data('canDelete')) deleteComments(e.target.dataset.commentId, $(e.target).parents(
+                    '.commentContent'))
+                else alert('抱歉！您没有权限删除别人的评论！别调皮啦！');
+            })
+
+            function tpl2_comments(result) {
+                if (result['msg'].length === 0) $('.comment .noComment').fadeIn()
+                else {
+                    $('.comment .noComment').hide();
+                    $('.comment .hasComment').fadeIn();
+                    $('#commentText').val(''); // 把input的值清空
+                    var res = result['msg'];
+                    showComments(res, '.comment .hasComment', '.comment .hasComment .commentContent');
+
+                    // 循环遍历数据
+                    for (var i = 0; i < result['msg'].length; i++) {
+                        var elem = $('.comment .hasComment .commentContent')[i];
+                        var date = new Date(res[i]['createTime']),
+                            commentTime = ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) +
+                            '-' +
+                            (date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' ') +
+                            (date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':') +
+                            (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+                        $(elem).find('.userIconImg').attr('src', './images/placeholder.jpg'); // 因为现在用户信息没有头像，所以暂时用默认的替代
+                        $(elem).find('.userName').html(res[i]['uid']); // 显示 用户昵称
+                        $(elem).find('.content').html(res[i]['content']); // 显示 评论内容
+                        $(elem).find('.commentTime').html(commentTime); // 显示 评论时间
+                        $(elem).find('.sw_deleteComments')[0].dataset.commentId = res[i]['id'];
+                    }
+                }
+            }
+
+            /* Tpl3 - 详情页逻辑处理 */
+            if ($('.tpl3').length !== 0) {
+                var script = '<script src="./self/swiper/swiper-4.2.2.min.js">',
+                    css = '<link rel="stylesheet" href="./self/swiper/swiper-4.2.2.min.css">';
+                $('head').append(script);
+                $('head').append(css);
+
+                var tpl3_swiper = new Swiper('.swiper-container', {
+                    autoplay: true,
+                    loop: true,
+                    slidesPerview: 'auto',
+                    pagination: {
+                        el: '.swiper-pagination'
+                    }
+                });
+            }
+
+            // Tpl4 - 详情页逻辑处理
+            if ($('#lc-main').length !== 0) {
+                var script = '<script src="./self/swiper/swiper-4.2.2.min.js">',
+                    css = '<link rel="stylesheet" href="./self/swiper/swiper-4.2.2.min.css">';
+                $('head').append(script).append(css);
+                let navSwiper = new Swiper('#lc-tab', { //内容页的切换
+                    preventLinksPropagation: false, //触摸滑动
+                    initialSlide: 0, //初始页
+                    on: {
+                        slideChangeTransitionEnd: () => { //切换到下一页完成的时候触发
+                            $('#lc-navbar a').eq($('#lc-tab .swiper-slide-active').index()).addClass('nav-active').siblings()
+                                .removeClass('nav-active');
+                        },
+                        init: () => { //初始化完成就执行这个
+                            $('#lc-tab').find('.swiper-wrapper').css({
+                                'height': '100%'
+                            });
+                        }
+                    }
+                });
+                $('#lc-navbar a').unbind().click(function() {
+                    $(this).addClass('nav-active').siblings().removeClass('nav-active');
+                    navSwiper.slideTo($(this).index());
+                });
+                $('#lc-study-btn button').unbind().click(() => { //打开视频页
+                    $('#lc-banner').hide();
+                    $('#lc-study-btn').hide();
+                    $('#lc-video').show();
+                    $('#lc-title-bar .title').show();
+                    $('#lc-video video')[0].play();
+                    let time = setInterval(() => {
+                            if (left < $('#lc-title-bar .title span').width()) {
+                                left++;
+                            } else {
+                                left = 0;
+                            }
+                            $('#lc-title-bar .title span').css('margin-left', '-' + left + 'px');
+                        }, 100),
+                        left = 0;
+                });
+                $('#lc-video').unbind().click(() => { //点击视频的时候出现返回键
+                    $('#lc-video img').fadeIn('fast');
+                    setTimeout(() => {
+                        $('#lc-video img').fadeOut('fast');
+                    }, 1000);
+                });
+                $('#lc-video img').unbind().click(() => {
+                    $('#lc-banner').show();
+                    $('#lc-study-btn').show();
+                    $('#lc-video').hide();
+                    $('#lc-title-bar .title').hide();
+                    $('#lc-video video')[0].pause();
+                    clearInterval(time);
+                });
+                $('.video-hide').hide(); //打开的时候将video隐藏
+                $('body').off(); //移除默认的热区跳转事件
+                $('#lc-contents .li').unbind().click(function() {
+                    $('#lc-video video').attr('src', $(this).find('video').html());
+                    $('#lc-study-btn button').click();
+                });
+                $('#lc-video video').attr('src', $('#lc-contents .li').eq(0).find('video').html()); //默认第一个视频
+            }
+        })
+
+      var toolbtn=true;
+      var rtl=$("#rtoptool");
+      $(document).on("click","#rtoptooloff",function () {
+        if(toolbtn){
+          rtl.animate({
+            width: "458px",
+            opacity:1
+          }, 1000 );
+          toolbtn=false;
+        }else{
+          rtl.animate({
+            width: "38px",
+            opacity:0.5
+          }, 1000 );
+          toolbtn=true;
+        }
+      });
+      /*添加、修改、删除按键*/
+      $('body').on('click', 'span.gomethod', function(e) {
+        e.preventDefault(); // 阻止默认事件
+        e.stopPropagation(); // 阻止冒泡
+        //var fw=$("#maincontent");
+        var method=$(this).data("method");
+        var url =null;
+        //console.log("index currNodeId:"+currNodeId);
+        if(method=="add"){
+          url = '/editor/assets/ueditor/formdesign/preview.html?id='+curreditnode+'&name=测试站点&method=add&selectId='+curreditnode;
+        }else if(method=="list"){
+          url = '/editor/assets/ueditor/formdesign/preview.html?id='+curreditnode+'&name=测试列表&method=watch';
+        }else if(method=="edit"){
+          url = '/editor/assets/ueditor/formdesign/preview.html?id='+curreditnode+'&name=测试站点&method=change&selectId='+curreditnode;
+        }else if(method=="del"){
+          url ='/editor/assets/ueditor/formdesign/preview.html?id='+curreditnode+'&name=测试站点&method=add&selectId='+curreditnode;
+        }
+        window.location.href=url;
+        console.log(url);
+        //fw.attr('src',url);
+      })
+    })
+</script>

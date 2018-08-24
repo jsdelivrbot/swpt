@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
+    <script src="./js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <img src="./images/return.png">
+        <div></div>
+    </header>
+    <main id="container">
+        <video src="http://1388w.cn:8888/swpt_2/folder/150716YesMen_desk.mp4" controls="controls"></video>
+        <ul id="menu">
+            <li class="active">目录
+                <div></div>
+            </li>
+            <li>讨论
+                <div></div>
+            </li>
+            <li>笔记
+                <div></div>
+            </li>
+            <li>推荐
+                <div></div>
+            </li>
+        </ul>
+        <div id="tab-container">
+            <div class="curtain"></div>
+            <div class="tab active">
+                <header>
+                    <span class="title active">目录</span>
+                </header>
+                <article content="zero">
+                    <dl>
+                        <dt>
+                            <span class="dot"></span>
+                            <span class="content">建设马克思主义执政党的光辉指引</span>
+                            <img src="./images/play.png">
+                        </dt>
+                    </dl>
+                </article>
+                <article content="zero">
+                    <p class="title">您学习过</p>
+                    <hr>
+                    <dl>
+                        <dt>
+                            <span class="content">建设马克思主义执政党的光辉指引</span>
+                            <img src="./images/play.png">
+                        </dt>
+                        <dt>
+                            <span class="content">建设马克思主义执政党的光辉指引</span>
+                            <img src="./images/play.png">
+                        </dt>
+                    </dl>
+                </article>
+            </div>
+            <div class="tab">
+                <header>
+                    <span class="active">我的讨论</span>
+                    <span>全部讨论</span>
+                </header>
+                <article content="zero">
+                    <textarea></textarea>
+                    <button>发布</button>
+                </article>
+                <article content="zero">
+                    <p>共
+                        <span id="discussQuantity">4</span>个讨论内容</p>
+                    <hr>
+                    <dl>
+                        <dt>
+                            <span class="userName">用户名</span>
+                            <span class="userContent">发布的内容和讨论内容等</span>
+                        </dt>
+                    </dl>
+                </article>
+                <article content="first" style="display: none;">
+                    <p>共
+                        <span id="discussQuantity">4</span>个讨论内容</p>
+                    <hr>
+                    <dl>
+                        <dt>
+                            <span class="userName">用户名</span>
+                            <span class="userContent">发布的内容和讨论内容等</span>
+                        </dt>
+                    </dl>
+                </article>
+            </div>
+            <div class="tab">
+                <header>
+                    <span class="active">我的笔记</span>
+                </header>
+                <article content="zero">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <button>发布</button>
+                </article>
+                <article content="zero">
+                    <p>共
+                        <span id="noteQuantity">4</span>个笔记</p>
+                    <dl>
+                        <dt>
+                            <span class="userName">用户名</span>
+                            <span>发布的内容和讨论内容等</span>
+                        </dt>
+                    </dl>
+                </article>
+            </div>
+            <div class="tab">
+                <header>
+                    <span class="active">推荐</span>
+                </header>
+                <article content="zero">
+                    <dl>
+                        <dt>
+                            <span class="dot"></span>
+                            <span class="content">建设马克思主义执政党的光辉指引</span>
+                            <img src="./images/play.png">
+                        </dt>
+                        <dt>
+                            <span class="dot"></span>
+                            <span class="content">建设马克思主义执政党的光辉指引</span>
+                            <img src="./images/play.png">
+                        </dt>
+
+                        <dt>
+                            <span class="dot"></span>
+                            <span class="content">建设马克思主义执政党的光辉指引</span>
+                            <img src="./images/play.png">
+                        </dt>
+
+                    </dl>
+                </article>
+            </div>
+        </div>
+    </main>
+    <script>
+        var show;
+        var showTime = () => {
+            show = setInterval( () => {
+                $( '#header' ).fadeOut();
+                $( '#menu' ).fadeOut().css( { 'right': '-25%' } );
+                $( '#tab-container' ).fadeOut().css( 'right', '-25%' );
+            }, 1000 );
+        }
+
+        $( '#header img' ).click( () => {
+            window.history.go( -1 );
+        } );
+
+        $( 'video' ).unbind().click( () => { //点击视频时，显示头部
+            $( '#header' ).show();
+            $( '#menu' ).show().animate( { 'right': '25%' } );
+            $( '#tab-container' ).show().animate( { 'right': '0' } );
+            clearInterval( show );
+            showTime();
+        } );
+
+        $( '#header' ).mouseenter( () => { //鼠标移到可消失部件时，停止消失
+            clearInterval( show );
+        } );
+
+        $( '#menu' ).mouseenter( () => {
+            clearInterval( show );
+        } );
+
+        $( '#tab-container' ).mouseenter( () => {
+            clearInterval( show );
+        } );
+
+        $( '#header' ).mouseleave( () => { //鼠标离开时，继续消失
+            clearInterval( show );
+            showTime();
+        } );
+
+        $( '#menu' ).mouseleave( () => {
+            clearInterval( show );
+            showTime();
+        } );
+
+        $( '#tab-container' ).mouseleave( () => {
+            clearInterval( show );
+            showTime();
+        } );
+
+        $( '#menu li' ).unbind().click( function () {
+            $( this ).addClass( 'active' ).siblings().removeClass( 'active' );
+            $( '#tab-container .tab' ).eq( $( this ).index() ).addClass( 'active' ).siblings().removeClass( 'active' );
+        } );
+
+        $( '#tab-container header span' ).unbind().click( function () {
+            $( this ).addClass( 'active' ).siblings().removeClass( 'active' );
+            $( this ).parents( '.tab' ).find( '[content]' ).hide();
+            switch ( $( this ).index() ) {
+            case 0:
+                $( this ).parents( '.tab' ).find( '[content="zero"]' ).show();
+                break;
+            case 1:
+                $( this ).parents( '.tab' ).find( '[content="first"]' ).show();
+                break;
+            default:
+                break;
+            }
+        } );
+
+    </script>
+</body>
+
+</html>

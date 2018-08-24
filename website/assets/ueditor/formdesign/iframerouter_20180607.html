@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>内嵌路由</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!-- jQuery - 3.2.1 -->
+    <script src="./self/js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!-- <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script> -->
+    <!-- Leipi -->
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>
+    <!-- Self -->
+    <script src="./self/js/publicMethod.js"></script>
+    <script src="../httpData.config.js"></script>
+    <!-- iframeRouterCss -->
+    <link rel="stylesheet" href="./self/css/iframeRouter.css">
+    <script type="text/javascript">
+        function createElement( type, name ) {
+            var element = null;
+            try {
+                element = document.createElement( '<' + type + ' name="' + name + '">' );
+            } catch ( e ) {}
+            if ( element == null ) {
+                element = document.createElement( type );
+                element.name = name;
+            }
+            return element;
+        }
+
+
+        //checkboxs
+        function isIE() {
+            if ( window.attachEvent ) {
+                return true;
+            }
+            return false;
+        }
+        //moveRow在IE支持而在火狐里不支持！以下是扩展火狐下的moveRow
+        if ( !isIE() ) {
+            function getTRNode( nowTR, sibling ) {
+                while ( nowTR = nowTR[ sibling ] )
+                    if ( nowTR.tagName == 'TR' ) break;
+                return nowTR;
+            }
+            if ( typeof Element != 'undefined' ) {
+                Element.prototype.moveRow = function ( sourceRowIndex, targetRowIndex ) //执行扩展操作
+                {
+                    if ( !/^(table|tbody|tfoot|thead)$/i.test( this.tagName ) || sourceRowIndex === targetRowIndex ) return false;
+                    var pNode = this;
+                    if ( this.tagName == 'TABLE' ) pNode = this.getElementsByTagName( 'tbody' )[ 0 ]; //firefox会自动加上tbody标签，所以需要取tbody，直接table.insertBefore会error
+                    var sourceRow = pNode.rows[ sourceRowIndex ],
+                        targetRow = pNode.rows[ targetRowIndex ];
+                    if ( sourceRow == null || targetRow == null ) return false;
+                    var targetRowNextRow = sourceRowIndex > targetRowIndex ? false : getTRNode( targetRow, 'nextSibling' );
+                    if ( targetRowNextRow === false ) pNode.insertBefore( sourceRow, targetRow ); //后面行移动到前面，直接insertBefore即可
+                    else { //移动到当前行的后面位置，则需要判断要移动到的行的后面是否还有行，有则insertBefore，否则appendChild
+                        if ( targetRowNextRow == null ) pNode.appendChild( sourceRow );
+                        else pNode.insertBefore( sourceRow, targetRowNextRow );
+                    }
+                }
+            }
+        }
+
+        /*删除tr*/
+        function fnDeleteRow( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            oTable.deleteRow( obj.rowIndex );
+        }
+        /*上移*/
+        function fnMoveUp( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            var minRowIndex = 1;
+            var curRowIndex = obj.rowIndex;
+            if ( curRowIndex - 1 >= minRowIndex ) {
+                oTable.moveRow( curRowIndex, curRowIndex - 1 );
+            }
+
+        }
+        /*下移*/
+        function fnMoveDown( obj ) {
+            var oTable = document.getElementById( "options_table" );
+            while ( obj.tagName != 'TR' ) {
+                obj = obj.parentNode;
+            }
+            var maxRowIndex = oTable.rows.length;
+            var curRowIndex = obj.rowIndex;
+            if ( curRowIndex + 1 < maxRowIndex ) {
+                oTable.moveRow( curRowIndex, curRowIndex + 1 );
+            }
+        }
+
+        /*生成tr*/
+        var count = 0;
+
+        function fnAddComboTr( gName, obj ) {
+            var oTable = document.getElementById( 'options_table' );
+            var new_tr_node = oTable.insertRow( oTable.rows.length );
+            var new_td_node0 = new_tr_node.insertCell( 0 ),
+                new_td_node1 = new_tr_node.insertCell( 1 ),
+                new_td_node2 = new_tr_node.insertCell( 2 ),
+                new_td_node3 = new_tr_node.insertCell( 3 );
+            new_td_node4 = new_tr_node.insertCell( 4 );
+            // new_td_node5 = new_tr_node.insertCell( 5 );
+
+            var sChecked = '';
+            if ( obj.checked ) sChecked = 'checked="checked"';
+            if ( !obj.name ) obj.name = '';
+            if ( !obj.value ) obj.value = '';
+            new_td_node0.innerHTML = '<td><input class="orgChecked' + count + '" type="radio" ' + sChecked + ' name="' + gName + '"></td>';
+            new_td_node1.innerHTML = '<td><input class="orgTitle' + count + '" type="text" value="' + obj.value + '" name="' + gName +
+                '" placeholder="选项值"></td>';
+            new_td_node2.innerHTML = '<td class="fileContainer"><label class="fileLabel">上传图片<input type="file" class="fileUpload upload' + count + '" /></label><img src="" class="previewImg' + count + '" name="previewImg" alt=""></td>'
+            new_td_node3.innerHTML = '<td><select data-id=' + count + ' class="dataSelect' + count + ' dataSelect"></select><br /><br /><input type="text" name="dataSelectInput" id="dataSelectInput' + count + '"></td>';
+            new_td_node4.innerHTML = '<td><input type="radio" id="loginControl_t' + count + '" name="loginControl' + count + '" value="0" /><label for="loginControl_t' + count + '">控制</label> <input type="radio" id="loginControl_f' + count + '" name="loginControl' + count + '" value="1" checked="" /><label for="loginControl_f">不控制</label></td>';
+            /* new_td_node5.innerHTML =
+                '<td><div class="btn-group"><a title="上移" class="btn btn-small btn-info" href="javascript:void(0);" onclick="fnMoveUp(this)"><i class="icon-white icon-arrow-up"></i></a><a title="下移" class="btn btn-small btn-info" href="javascript:void(0);" onclick="fnMoveDown(this)"><i class="icon-white icon-arrow-down"></i></a><a title="删除" class="btn btn-small btn-default" href="javascript:void(0);" onclick="fnDeleteRow(this)"><i class="icon-ban-circle"></i></a></div></td>'; */
+            return true;
+        }
+
+        function fnAdd() {
+            var dName = $G( 'hidname' ).value;
+            if ( !dName ) dName = 'leipiNewField';
+            fnAddComboTr( dName, {
+                "checked": false,
+                "name": 'leipiNewField',
+                "value": ''
+            } );
+            $( '.fileLabel' ).parent().addClass( 'fileContainer' ).siblings().addClass( 'td' );
+            getLinks( count );
+            count++;
+            isUpload = false;
+            $( function () {
+                $( 'body' ).on( 'change', '.dataSelect', function ( e ) {
+                    var selectId = $( e.currentTarget ).data( 'id' ),
+                        selectVal = $( e.currentTarget ).val();
+                    $( '#dataSelectInput' + selectId ).prop( 'value', prevent_Url + 'editor/assets/ueditor/formdesign/preview.html?link=' + selectVal );
+                } )
+            } )
+        }
+
+        function getLinks( targetNum ) {
+            /*
+             * 后台获取 数据链接
+             *
+             */
+            var nodeParentId = $( '#nodeParentId', window.parent.document ).val();
+            var nodeId = $( "#node_id", window.parent.document ).val();
+            $.ajax( {
+                url: prevent_HOST + 'nodeQueryFacade/getDataSourcePage?nodeId=' + nodeId,
+                method: 'GET',
+                success: function ( res ) {
+                    $.each( res.msg, function ( index, value ) {
+                        $( '.dataSelect' + targetNum ).append( '<option value=' + value.id + '>' + value.value + '</option>' );
+                    } )
+                    if ( UE.plugins[ thePlugins ].editdom ) {
+                        for ( var i = 0; i < count.length; i++ ) {
+                            $( '.dataSelect' + i + ' option[value=' + gTarget[ i ] + ']' ).attr( 'selected' );
+                        }
+                    }
+                },
+                error: function ( res ) {
+                    alert( '抱歉！获取 数据链接 失败！因为您好像还没有选择表哦！' )
+                }
+            } );
+        }
+
+        var isUpload; // 判断是否已经上传了图片
+        $( function () {
+            /*
+             * 点击上传图片，先不上传，先预览
+             *
+             */
+            $( '#options_table' ).on( 'click', '.fileLabel > input', function ( e ) {
+                if ( FileReader === undefined ) {
+                    if ( confirm( '抱歉, 您的浏览器并不支持预览功能, 如想显示预览图片, 请点确定, 我们为您跳转下载最新的Chrome浏览器！ ' ) ) window.open( 'https://www.baidu.com/link?url=W8-UUy0Mr_nSpYmg0iMxyMEzKDWBWcqcxnidV5Dqg0TccQFepC5Ew6vuRT5w-MelxeEEc5272AEwqm6e2bJsm9NMB_U811t1vI2vZvxhjRK&wd=&eqid=8910596e00010137000000065a684a73' )
+                } else {
+                    e.target.addEventListener( 'change', readFile );
+                }
+            } );
+
+            function readFile() {
+                var targetNum = this.classList[ 1 ].split( 'upload' )[ 1 ],
+                    file = this.files[ 0 ];
+                if ( !/image\/\w+/.test( file.type ) ) {
+                    alert( '文件必须为图片！' );
+                    return false;
+                }
+                var render = new FileReader();
+                render.readAsDataURL( file );
+                render.onload = function ( e ) {
+                    $( '.previewImg' + targetNum ).attr( 'src', this.result )
+                }
+            }
+
+            /*
+             * 点击按钮 - 上传图片至服务器
+             *
+             */
+
+            /* $( '#uploadImage' ).on( 'click', function ( e ) {
+                console.log( e )
+                var imgs = $( '.fileUpload' ),
+                    imgArr = [];
+                for ( var i = 0; i < imgs.length; i++ ) {
+                    var imgSrc = $( '.previewImg' + i ).attr( 'src' );
+                    imgArr.push( imgSrc );
+                }
+                if ( imgArr.length > 1 ) {
+                    $.ajax({
+                        url: prevent_HOST + '',
+                        method: 'POST',
+                        data: JSON.stringify(imgArr),
+                        contentType: 'application/json;charset=UTF-8',
+                        dataType: 'json',
+                        success: function( res ) {
+                            console.log(res);
+                            isUpload = true;
+                        },
+                        error: function( error ) {
+                            alert('上传失败，请重试！');
+                        }
+                    })
+                }
+
+            } ) */
+
+        } )
+
+    </script>
+</head>
+
+<body>
+    <div class="content">
+        <input id="hidname" type="hidden" />
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    <span>控件名称</span>
+                    <span class="label label-important">*</span>
+                </th>
+                <th>
+                    <span>路由按钮方位</span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="orgname" onclick="javascript:this.select()" placeholder="必填项" type="text" value="内嵌路由" /> </td>
+                <td>
+                    <label class="radio" title="最上">
+                        <input id="orgchecked1" name="orderby" value="1" type="radio"> 上 </label>
+                    <label class="radio" title="最下">
+                        <input id="orgchecked0" value="0" name="orderby" type="radio" checked="checked"> 下 </label>
+                  <label class="radio" title="最上">
+                    <input id="orgchecked2" name="orderby" value="2" type="radio"> 左 </label>
+                  <label class="radio" title="最上">
+                    <input id="orgchecked3" name="orderby" value="3" type="radio"> 右 </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <table class="table table-hover table-condensed" id="options_table">
+                        <tr>
+                            <th>默认选中路由</th>
+                            <th>标题</th>
+                            <th>图标</th>
+                            <th>跳转目标</th>
+                            <th>登陆访问控制</th>
+                            <!-- <th>操作</th> -->
+                        </tr>
+                    </table>
+                    <a title="添加选项" class="btn btn-primary" onclick="fnAdd()">添加选项</a>
+                    <!-- <a title="上传图片" id="uploadImage" class="btn btn-success">上传图片至服务器</a> -->
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var oNode = null,
+            thePlugins = 'iframerouter';
+            window.onload = function () {
+            $G( 'orgname' ).select();
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                oNode = UE.plugins[ thePlugins ].editdom;
+                var checked = oNode.getAttribute( 'orderby' );
+                //checked == '0' ? $G( 'orgchecked1' ).checked = true : $G( 'orgchecked0' ).checked = true;
+                $G( 'orgchecked'+checked ).checked = true;
+                // 获取oNode的值赋予变量
+                var gTitle = oNode.getAttribute( 'orgtitle' ).split( '`' ),
+                    gSrc = oNode.getAttribute( 'orgsrc' ).split( '`' ),
+                    gTarget = oNode.getAttribute( 'orgtarget' ).split( '`' ),
+                    gChecked = oNode.getAttribute( 'orgchecked' ).split( '`' );
+                    // gLogin = oNode.getAttribute( 'orglogin' ).split( '`' );
+
+                gTitle.pop();
+                gSrc.pop();
+                gTarget.pop();
+                gChecked.pop();
+                // gLogin.pop();
+
+                // $( 'input:radio[value=' + gLogin + ']' ).attr( 'checked', '' );
+
+                for ( var i = 0; i < gTitle.length; i++ ) {
+                    fnAdd();
+                    $( '.orgTitle' + i ).val( gTitle[ i ] );
+                    $( '.previewImg' + i ).attr( 'src', gSrc[ i ] );
+                    gChecked[ i ] === 'true' ? $( '.orgChecked' + i )[ 0 ].checked = true : $( '.orgChecked' + i )[ 0 ].checked = false;
+                    /* for ( var j = 0; j < 2; j++ ) {
+                        if ( $( 'input:radio[name="loginControl' + i + '"]' ).eq( j ).val() === gLogin[ i ] ) {
+                            $( 'input:radio[name="loginControl' + i + '"]' ).eq( j ).attr( 'checked', '' );
+                        }
+                    } */
+                }
+
+                $( function () {
+                    for ( var i = 0; i < gTarget.length; i++ ) {
+                        $( '#dataSelectInput' + i ).val( gTarget[ i ] );
+                        // $( '.dataSelect' + i + ' option[value=' + gTarget[ i ] + ']' ).prop( 'selected', 'selected' );
+                    }
+                } )
+            }
+        }
+        dialog.oncancel = function () {
+            if ( UE.plugins[ thePlugins ].editdom ) {
+                delete UE.plugins[ thePlugins ].editdom;
+            }
+        };
+        dialog.onok = function () {
+            if ( $G( 'orgname' ).value == '' ) {
+                alert( '控件名称不能为空' );
+                return false;
+            }
+            /* if ( isUpload !== undefined ) {
+                if ( !isUpload ) {
+                    alert( '请上传图片到服务器！' );
+                    $( '#uploadImage' ).fadeOut().fadeIn();
+                    return false;
+                }
+            } */
+            var gTitle = $G( 'orgname' ).value.replace( /\"/g, "&quot;" );
+
+            var gChecked = '1';
+            //if ( $G( 'orgchecked1' ).checked ) gChecked = '0';
+          gChecked=$("input[name=orderby]:checked").val();
+            var orgChecked = '', // 选中
+                orgTitle = '', // 标题
+                orgSrc = '', // 图标Src
+                orgTarget = ''; // 跳转目标
+                // orgLogin = ''; //
+            var html='';
+            var pic;
+            if ( count < 1 ) {
+                alert( '请添加选项' );
+                return false;
+            } else {
+              var title='';
+              var w=(count/100)*100;
+                for ( var i = 0; i < count; i++ ) {
+                    title=$( '.orgTitle' + i ).val();
+                    pic=$( '.previewImg' + i ).attr( 'src' );
+                    orgTitle += title;
+                    orgTitle += '`';
+                    orgSrc += pic;
+                    orgSrc += '`';
+                    orgTarget += $( '#dataSelectInput' + i ).val();
+                    orgTarget += '`';
+                    orgChecked += $( '.orgChecked' + i )[ 0 ].checked;
+                    orgChecked += '`';
+                    html+="<a href='' style='width: "+w+"%;display:inline-block;height:30px;line-height:30px;text-align: center;'>"+title+"</a>"
+                    // orgLogin += $( 'input:radio[name="loginControl' + i + '"]:checked' ).val();
+                    // orgLogin += '`';
+
+                }
+            }
+            if ( !oNode ) {
+                try {
+                    oNode = createElement( 'div', 'leipiNewField' );
+                    oNode.setAttribute( 'type', 'text' );
+                    oNode.setAttribute( 'name', 'leipiNewField' );
+                    oNode.setAttribute( 'leipiPlugins', thePlugins );
+                    oNode.setAttribute( 'orderby', gChecked );
+                    oNode.setAttribute( 'orgTitle', orgTitle );
+                    oNode.setAttribute( 'orgSrc', orgSrc );
+                    oNode.setAttribute( 'orgTarget', orgTarget );
+                    // oNode.setAttribute( 'orgLogin', orgLogin );
+                    oNode.setAttribute( 'orgChecked', orgChecked );
+                    oNode.setAttribute( 'ca', orgChecked );
+                    if(gChecked<1){
+                      oNode.setAttribute( 'style', 'width:100%;border: 1px solid #ccc;position: absolute;bottom: 0px;' );
+                    }else if(gChecked<2){
+                      oNode.setAttribute( 'style', 'width:100%;border: 1px solid #ccc;height: 50px;position: absolute;top:0px;' );
+                    }else if(gChecked<3){
+                      oNode.setAttribute( 'style', 'width:30px;border: 1px solid #ccc;height: 100%;position: absolute;left:0px;' );
+                    }else{
+                      oNode.setAttribute( 'style', 'width:30px;border: 1px solid #ccc;height: 100%;position: absolute;right:0px;' );
+                    }
+                    //oNode.innerHTML=html;
+                    console.log(oNode);
+                    editor.execCommand( 'insertHtml', oNode.outerHTML );
+                    return true;
+                } catch ( e ) {
+                    try {
+                        editor.execCommand( 'error' );
+                    } catch ( e ) {
+                        alert( '控件异常，请到 [雷劈网] 反馈或寻求帮助！' );
+                    }
+                    return false;
+                }
+            } else {
+                oNode.setAttribute( 'orderby', gChecked );
+                oNode.setAttribute( 'orgTitle', orgTitle );
+                oNode.setAttribute( 'orgSrc', orgSrc );
+                oNode.setAttribute( 'orgTarget', orgTarget );
+                oNode.setAttribute( 'orgChecked', orgChecked );
+                // oNode.setAttribute( 'orgLogin', orgLogin );
+                if(gChecked<1){
+                  oNode.setAttribute( 'style', 'width:100%;border: 1px solid #ccc;height: 50px;position: absolute;bottom: 0px;' );
+                }else if(gChecked<2){
+                  oNode.setAttribute( 'style', 'width:100%;border: 1px solid #ccc;height: 50px;position: absolute;top:0px;' );
+                }else if(gChecked<3){
+                  oNode.setAttribute( 'style', 'width:30px;border: 1px solid #ccc;height: 100%;position: absolute;left:0px;' );
+                }else{
+                  oNode.setAttribute( 'style', 'width:30px;border: 1px solid #ccc;height: 100%;position: absolute;right:0px;' );
+                }
+                oNode.innerHTML=html;
+                delete UE.plugins[ thePlugins ].editdom;
+                return true;
+            }
+        };
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" alt="" class="posi-ab center-y margin-auto">
+    <p class="color-white">试卷标题</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main id="code-main" class="text-center">
+    <form class="text-left">
+        <input type="hidden" name="username" value="1">
+        <input type="hidden" name="userId" value="1">
+        <input type="hidden" name="replyId" value="1">
+        <input type="hidden" name="pId" value="0">
+        <input type="hidden" name="nId" value="1">
+    </form>
+    <div id="dialogue">
+        <input type="text" class="no-border" placeholder="回复">
+        <button id="dialogue-btn" class="no-border">发布</button>
+    </div>
+</main>
+<script>
+    $( '.cole-head p' ).html( dj.getStorage( 'noteTitle' ) ); //试卷标题
+    $( '#code-main form input[name="nId"]' ).val( dj.getStorage( 'commentNid' ) ); //进来的笔记ID
+    $( '#code-main form input[name="userId"]' ).val( dj.getStorage( 'userId' ) ); //用户ID
+    $( '#code-main form input[name="username"]' ).val( dj.getStorage( 'userName' ) ); //用户名字
+    $( '.cole-head>img:first-child' ).unbind().click( function () { //返回
+        $( 'body' ).prePage();
+        try { clearInterval( Countdown ); } catch ( e ) {}
+    } );
+    $( '#code-main' ).append( $( dj.getStorage( 'commentTitle' ) ) ).callBack( () => {
+        $( '#code-main' ).find( 'article' ).last().css( 'padding', '.3rem .3rem 1rem' ).find( 'ul' ).remove();
+    } );
+    $.ajax( {
+        url: ajaxUrl + '/comment/searchComment',
+        type: 'get',
+        data: { 'nId': dj.getStorage( 'commentNid' ) }
+    } ).done( ( m, n ) => {
+        var result = m.msg,
+            children;
+        for ( var i in result ) {
+            children = result[ i ].children;
+            $( '#code-main' ).find( 'article' ).last()
+                .append( '<section class="text-left first-section font-10" commentid="' + result[ i ].id + '" replyid="' + result[ i ].replyId + '" pid="' + result[ i ].pId + '"><span class="font-34">' + result[ i ].username + '</span><p class="font-36 color-666">' + result[ i ].content + '</p></section>' )
+                .callBack( () => {
+                    $x.commentChildSection = $( '#code-main' ).find( 'article' ).last().find( 'section' ).last();
+                    for ( var i in children ) {
+                        $x.commentChildSection.append( '<section class="text-left second-section font-10" commentid="' + result[ i ].id + '" replyid="' + children[ i ].replyId + '" pid="' + children[ i ].pId + '"><span class="font-34">' + children[ i ].username + '</span><p class="font-36 color-666">' + children[ i ].content + '</p></section>' );
+                    }
+                } );
+        }
+    } );
+    $( '#dialogue-btn' ).unbind().click( () => { //发布评论
+        $.ajax( {
+            url: ajaxUrl + '/comment/insert',
+            type: 'post',
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify( $( '#code-main form' ).getValue( { 'content': $( '#dialogue input' ).val() } ) )
+        } ).done( ( m, n ) => {
+            if ( m.status == 0 ) {
+                var statusMsg = '评论成功';
+            } else {
+                var statusMsg = '评论失败';
+            }
+            dj.curtain( function () {
+                dj.bulletMid( {
+                    content: ' <p> ' + statusMsg + ' </p>',
+                    f: function () {
+                        if ( $x.commentId ) {
+                            $( '#code-main>article>section[commentid="' + $x.commentId + '"]' ).append( '<section class="text-left second-section font-10"><span class="font-34">' + dj.getStorage( 'userName' ) + '</span><p class="font-36 color-666">' + $( '#dialogue input' ).val() + '</p></section>' );
+                            $x.commentId = null;
+                        } else {
+                            $( '#code-main' ).find( 'article' ).last()
+                                .append( '<section class="text-left first-section font-10"><span class="font-34">' + dj.getStorage( 'userName' ) + '</span><p class="font-36 color-666">' + $( '#dialogue input' ).val() + '</p></section>' );
+                        }
+                        setTimeout( () => {
+                            dj.curtain();
+                            dj.bulletMid();
+                        }, 500 );
+                    }
+                } );
+            } );
+        } );
+
+    } );
+
+    $( '#code-main' ).on( 'click', '.first-section', function () {
+        $( '#code-main form input[name="pId"]' ).val( $( this ).attr( 'pid' ) );
+        $( '#code-main form input[name="replyId"]' ).val( $( this ).attr( 'replyid' ) );
+        $( '#dialogue input' ).val( '' ).attr( 'placeholder', '回复' + $( this ).find( 'span' ).html() + ':' ).focus();
+        $x.commentId = $( this ).attr( 'commentid' );
+    } );
+    $( '#code-main article' ).on( 'swipe', function () {
+        $x.commentId = null;
+        $( '#dialogue input' ).val( '' ).attr( 'placeholder', '回复' );
+    } );
+
+    // $( '#code-main' ).on( 'click', '.second-section', function ( e ) {
+    //     e.stopPropagation();
+    //     $( '#code-main form input[name="pId"]' ).val( $( this ).attr( 'pid' ) );
+    //     $( '#code-main form input[name="replyId"]' ).val( $( this ).attr( 'replyid' ) );
+    //     $( '#dialogue input' ).val( '' ).attr( 'placeholder', '回复' + $( this ).find( 'span' ).html() + ':' );
+    // } );
+
+</script>

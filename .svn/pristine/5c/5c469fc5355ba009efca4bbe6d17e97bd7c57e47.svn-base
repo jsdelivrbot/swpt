@@ -1,0 +1,27 @@
+#rtoptool{
+  position: fixed;
+  right: 20px;
+  top: 10px;
+  width: 40px;
+  height:32px;
+  background-color: #ffffff;
+  border-radius:4px;
+  z-index: 99999;
+  overflow: hidden;
+}
+#rtop-tool .btn-group.tool[_ngcontent-c2] {
+  margin: 0 0 10px 0;
+}
+#rtop-tool .btn-group, .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+#rtop-tool .btn-group.tool{
+  margin:  0 0 10px 0;
+}
+#rtop-tool img.btn-img, #rtop-tool .a-img {
+  width: 15px;
+  margin-right: 5px;
+  margin-top: -3px;
+}

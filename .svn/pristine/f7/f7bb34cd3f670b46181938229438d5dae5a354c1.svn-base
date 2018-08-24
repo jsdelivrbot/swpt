@@ -1,0 +1,260 @@
+<link rel="stylesheet" href="/upLoadRe_app/css/re_public.css">
+<link rel="stylesheet" href="/upLoadRe_app/css/re_index.css">
+<style>
+    @media (min-width: 768px){
+        .modal-dialog{
+            width:90%;
+        }
+    }
+    .table{
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    .table tr td:nth-child(oven){
+        background: #dddd;
+    }
+    .modal-footer{
+        text-align: center;
+    }
+</style>
+<div class="top">
+   <span class="top-return" onclick="javascript:history.go(-1);"></span>
+    <h1>资源发布</h1>
+    <span class="top-add" ng-click="addCourse()"></span>
+</div>
+<div class="pulish">
+    <a ui-sref="music" class="mySource">
+        <span>我的资源</span>
+        <span class="myImg"></span>
+    </a>
+    <p class="source_title" >我的资源</p>
+    <div class="pulish_nav_app">
+        <ul class="tabNav">
+            <li ng-repeat=" s in release" ng-class="{active:examine==s.id}" ng-click="examineType(s.id)">{{s.title}}</li>
+        </ul>
+    </div>
+
+    <div class="pulish_nav">
+        <div class="tabCon" ng-if="file_type == 'list'"> 
+                <div class="tabItem clearfix"  ng-repeat="s in sourceConent" data-exam="{{s.bookExamine}}" id="{{s.id}}" ng-click="sourceDetail($event)">
+                        <div class="del_lf">
+                            <img src="{{s.coverPhoto}}">
+                        </div>
+                        <div class="del_rg clearfix iuess">
+                            <p class="tab_title">
+                                <span>{{s.bookName}}</span>
+                            </p>  
+                            <p class="tab_state">{{stateList[$index]}}
+                            </p>
+                            <p class="item_time">{{s.uploadTime | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
+                            <div class="tab_time">
+                                
+                               <p class="tab_item"  ng-click="moreFile($event)">
+                                    <img src="img/u11.png">
+                                 </p>
+                            </div>
+                        </div>
+                    </div> 
+        </div> 
+        <div class="tabCon" ng-if="file_type =='fileChk'">
+            <div class="tabItem clearfix" id="1" ng-repeat="s in sourceConent" data-exam="{{s.bookExamine}}" ng-click="sourceDetail($event)">
+                <div class="del_lf">
+                    <img src="{{s.coverPhoto}}">
+                </div>
+                <div class="del_rg clearfix iuess">
+                    <p class="tab_title">
+                        <span>{{s.bookName}}</span>
+                    </p>  
+                    <p class="tab_state">{{stateList[$index]}}
+                    </p>
+                    <p class="item_time">{{s.uploadTime | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
+                    <div class="tab_time">
+                        
+                       <p class="tab_item"  ng-click="moreFile($event)">
+                            <img src="img/u11.png">
+                         </p>
+                    </div>
+                </div>
+            </div> 
+            </div> 
+    </div>
+  <!-- 分页 --> 
+  <div class="pageConf">
+       <tm-pagination conf="paginationConf"></tm-pagination>
+  </div>
+ 
+</div>
+
+
+<!-- 章节管理 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title text-center" id="myModalLabel">
+					章节管理
+				</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table">
+                  <tr>
+                    <th>章节</th>
+                    <th>视频</th>
+                    <th>音频</th>
+                    <th>图书</th>
+                    <th>题库</th>
+                    <th>操作</th>
+                  </tr>
+                 <tr>
+                     <td>第一节</td>
+                     <td>史前文明.mp4</td>
+                     <td>史前文明.mp3</td>
+                     <td>史前文明.png</td>
+                     <td>史前文明.pdf</td>
+                     <td><a ng-click="addChapter()">增</a><a ng-click="removeChapter()">删除</a><a ng-click="insertChapter()">修改</a></td>
+                 </tr> 
+                 <tr>
+                        <td>第二节</td>
+                        <td>史前文明.mp4</td>
+                        <td>史前文明.mp3</td>
+                        <td>史前文明.png</td>
+                        <td>史前文明.pdf</td>
+                        <td><a>增</a><a>删除</a><a>修改</a></td>
+                    </tr> 
+                    <tr>
+                            <td>第三节</td>
+                            <td>史前文明.mp4</td>
+                            <td>史前文明.mp3</td>
+                            <td>史前文明.png</td>
+                            <td>史前文明.pdf</td>
+                            <td><a>增</a><a>删除</a><a>修改</a></td>
+                        </tr> 
+                        <tr>
+                                <td>第四节</td>
+                                <td>史前文明.mp4</td>
+                                <td>史前文明.mp3</td>
+                                <td>史前文明.png</td>
+                                <td>史前文明.pdf</td>
+                                <td><a>增</a><a>删除</a><a>修改</a></td>
+                            </tr> 
+                </table>
+			</div>
+			<div class="modal-footer">
+				
+				<button type="button" class="btn btn-primary" data-dismiss="modal">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 添加 -->
+  <div class="sourceModal"ng-show="modalSource">
+    <div class="modal_add" >
+            <dl>
+                <dt><img src="img/u26.png"><a ui-sref="source">上传资源</a></dt>
+            </dl>
+            <dl>
+                <dt><img src="img/u27.png"><a ui-sref="conf">创建资源</a></dt>
+            </dl>
+            <dl ng-click="modalClose()">
+                <dt>关闭</dt>
+            </dl>
+    </div>
+  </div>
+    <!-- 更多 -->
+    <div class="sourceModal" ng-show="morethatFile">
+      <div class="modal_add">
+
+            <dl ng-click="shareSource()">
+                <dt><img src="img/u263.png">分 享</dt>
+            </dl>
+
+            <dl ng-click="editorSource()">
+                <dt> <img src="img/u225.png">编 辑</dt>
+            </dl>
+            <dl ng-click="delSource()">
+                <dt><img src="img/u260.png">删 除</dt>
+            </dl>
+            <dl>
+                <dt ng-click="moreClose()">关 闭</dt>
+            </dl>
+    
+     </div>
+   </div>
+    <div class="sourceModal" ng-show="shareModal">
+        <div class="modal_add" >   
+            <div class="mTitle">
+                <img src="img/u12.png">
+                <span>分享至</span>
+                <img src="img/u12.png">
+            </div>
+        <ul>
+            <li id="douban"><img src="img/u314.png"></li>
+            <li id="weixin"><img src="img/u315.jpg"></li>
+            <li id="weibo"><img src="img/u313.jpg"></li>
+            <li id="qzone"><img src="img/u312.jpg"></li>
+            <li id="qq"><img src="img/u311.jpg"></li>
+        </ul>
+        <span class="modalClose" ng-click="shareClose()">关  闭</span>
+        </div>
+   </div>  
+   <script>
+        mobShare.config( {
+     
+     debug: true, // 开启调试，将在浏览器的控制台输出调试信息
+    
+     appkey: '255bb23680637', // appkey
+    
+     params: {
+         url: 'www.baidu.com', // 分享链接
+         title: '百度', // 分享标题
+         description: '百度一下', // 分享内容
+         pic: '', // 分享图片，使用逗号,隔开
+         reason:'百度舒服的上的',//自定义评论内容，只应用与QQ,QZone与朋友网
+     },
+    
+     /**
+      * 分享时触发的回调函数
+      * 分享是否成功，目前第三方平台并没有相关接口，因此无法知道分享结果
+      * 所以此函数只会提供分享时的相关信息
+      * 
+      * @param {String} plat 平台名称
+      * @param {Object} params 实际分享的参数 { url: 链接, title: 标题, description: 内容, pic: 图片连接 }
+      */
+     callback: function( plat, params ) {
+     }
+    } );
+    
+    // 实例一个新浪微博的分享对象
+    var weibo    = mobShare( 'weibo' ),
+        qq       = mobShare( 'qq' ),
+        qzone    = mobShare( 'qzone' ),
+        weixin   = mobShare( 'weixin' ),
+        douban   = mobShare( 'douban' ),
+        facebook = mobShare( 'facebook' );
+    
+    // 然后通过用户事件触发分享（浏览器限制原因，打开新窗口必需通过用户事件触发）
+    // 原生js的使用方法
+    document.getElementById( 'weibo' ).onclick = function() {
+        weibo.send();
+    }
+    document.getElementById( 'qq' ).onclick = function() {
+        qq.send();
+    }
+    document.getElementById( 'qzone' ).onclick = function() {
+        qzone.send();
+    }
+    document.getElementById( 'weixin' ).onclick = function() {
+        weixin.send();
+    }
+    document.getElementById( 'douban' ).onclick = function() {
+        douban.send();
+    }
+
+    </script>
+<script type="text/javascript" src="../../404/js/jquery-1.10.2.js" ></script>
+<script src="/upLoadRe_app/js/re_index.js"></script>

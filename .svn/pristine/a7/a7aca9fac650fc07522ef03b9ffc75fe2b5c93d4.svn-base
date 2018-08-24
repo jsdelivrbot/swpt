@@ -1,0 +1,31 @@
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    color: #666666;
+}
+li{
+    padding: 10px;
+    margin-top: 5px;
+    border-bottom: 1px solid #cccccc;
+}
+.disk_file_dow{
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    padding: 1px 10px;
+    font-size: 12px;
+    background-color: #0682bb;
+    color: #ffffff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius:4px;
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.disk_file_dow:hover{
+    background-color: #046490;
+}

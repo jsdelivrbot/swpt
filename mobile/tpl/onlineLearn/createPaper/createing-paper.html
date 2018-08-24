@@ -1,0 +1,110 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" id="returnBtn" onclick="window.history.go(-1);" class="posi-ab center-y margin-auto">
+    <p class="color-white">试卷制作系统</p>
+    <img src="images/more.png" class="more posi-ab center-y margin-auto">
+</header>
+<main class="mapa-main">
+    <form id="mapa-title" enctype="multipart/form-data" method="POST">
+        <input type="hidden" name="userId" value="0">
+        <input type="hidden" name="type" value="0">
+        <section class="font-10">
+            <b class="font-36">试卷标题</span>
+                <input type="text" name="title" placeholder="请输入试卷标题" class="font-36">
+        </section>
+        <article class="detail">
+            <header>
+                <b class="font-36">考试时间:</b>
+                <input type="number" name="totalScore" placeholder="请输入" class="font-36 fraction">
+                <span class="font-36">分钟</span>
+                <b class="font-36">总分数：</b>
+                <input type="number" name="testTime" placeholder="请输入" class="font-36 fraction">
+                <span>分</span>
+            </header>
+            <p class="color-999">点击图片上传封面</p>
+            <div class="text-center color-999" id="addimage">
+                +
+            </div>
+            <input type="file" name="image" id="image" class="dis-none">
+            <span class="font-34">发布模块</span>
+            <select name="type" class="font-30">
+                <option value="0">理论武装</option>
+                <option value="1">党的建设</option>
+                <option value="2">科学发展</option>
+                <option value="3">能力提升</option>
+                <option value="4">时政形式</option>
+                <option value="5">十九大专题</option>
+            </select>
+        </article>
+    </form>
+</main>
+<footer class="mapa-foot text-center">
+    <button class="next color-white margin-auto font-40 no-border">下一步</button>
+</footer>
+
+<script>
+    var ajaxUrl = 'http://' + localHost + ':21008';
+    $('input[name="userId"]').val(dj.getStorage('userId'));
+    $('.mapa-main article>button').click(function () {
+        $(this).before($(this).siblings('div')[0].outerHTML);
+        $(this).parents('article').find('.mapa-topic').each(function (i, e) {
+            $(this).find('span').eq(0).html(i + 1 + '、');
+        });
+    });
+    $('.mapa-main').on('click', 'ol>li', function () {
+        var type = $(this).parents('article').attr('type');
+        if (type == 'single')
+            $(this).addClass('color-red').siblings().removeClass('color-red');
+        else if (type == 'multiple') {
+            $(this).toggleClass('color-red');
+        }
+    });
+    $('#addimage').click(function () {
+        $(this).siblings('input[type="file"]').click();
+    });
+    $('.mapa-foot .next').click(function () {
+        $.ajax({
+            url: ajaxUrl + '/papersQuestion/savePapersQuestion',
+            type: 'post',
+            dataType: 'json',
+            data: $('#mapa-title').getValue(),
+            contentType: false,
+            processData: false,
+            cache: false
+        }).done(function (m, n) {
+            if (m.status == 2) {
+                dj.curtain(function () {
+                    dj.bulletMid({
+                        f: function () {
+                            $('#confirm').unbind().click(function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                            });
+                        },
+                        content: '<div><p class="text-center font-36">保存失败</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    });
+                });
+            } else {
+                dj.curtain(function () {
+                    dj.bulletMid({
+                        f: function () {
+                            $('#confirm').unbind().click(function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                                $('body').nextPage(
+                                    './createing-paper2.html',
+                                    function () {
+                                        $('[name="pId"]').val(m.msg);
+                                    });
+                            });
+                        },
+                        content: '<div><p class="text-center font-36">保存成功</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    });
+                });
+            }
+        });
+    });
+    $('.mapa-main input[type="file"]').change(function () { //预览
+        $(this).siblings('div').addClass('img-container').html('<img src="' + window.URL.createObjectURL($(this)[
+            0].files[0]) + '"/>')
+    });
+</script>

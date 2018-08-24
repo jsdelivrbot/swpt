@@ -1,0 +1,199 @@
+<header class="cole-head head-bar posi-fi">
+    <img src="images/return.png" id="returnBtn" class="posi-ab center-y margin-auto">
+    <p class="color-white">试卷制作系统</p>
+    <img src="images/more.png" alt="" class="more posi-ab center-y margin-auto">
+</header>
+<main class="mapa-main">
+    <form id="mapa-main">
+        <input type="hidden" name="pId">
+        <article type="single">
+            <header>
+                <b class="font-36">一、单选题</b>
+                <input type="hidden" name="type" value="0">
+                <input type="number" name="fraction" placeholder="分数" class="font-36 fraction">
+                <span class="font-36">分/题</span>
+            </header>
+            <div>
+                <div class="mapa-topic">
+                    <span class="font-34">1、</span>
+                    <input type="text" name="title" placeholder="输入标题名称" class="font-34">
+                    <input type="hidden" name="answer">
+                </div>
+                <ul>
+                    <li>
+                        <span class="font-30">A</span>
+                        <input type="text" name="answerA" placeholder="输入选项" class="font-30">
+                    </li>
+                    <li>
+                        <span class="font-30">B</span>
+                        <input type="text" name="answerB" placeholder="输入选项" class="font-30">
+                    </li>
+                    <li>
+                        <span class="font-30">C</span>
+                        <input type="text" name="answerC" placeholder="输入选项" class="font-30">
+                    </li>
+                    <li>
+                        <span class="font-30">D</span>
+                        <input type="text" name="answerD" placeholder="输入选项" class="font-30">
+                    </li>
+                </ul>
+                <span class="left">点击正确答案</span>
+                <ol class="left">
+                    <li>A</li>
+                    <li>B</li>
+                    <li>C</li>
+                    <li>D</li>
+                </ol>
+            </div>
+            <button class="color-ccc margin-auto dis-block">+</button>
+        </article>
+        <article type="multiple">
+            <header>
+                <b class="font-36">二、多选题</b>
+                <input type="hidden" name="type" value="1">
+                <input type="number" name="leakfraction" placeholder="漏答" class="font-36 fraction">
+                <span class="font-36">分/题</span>
+                <input type="number" name="fraction" placeholder="分数" class="font-36 fraction">
+                <span class="font-36">分/题</span>
+            </header>
+            <div>
+                <div class="mapa-topic">
+                    <span class="font-34">1、</span>
+                    <input type="text" name="title" placeholder="输入标题名称" class="font-34">
+                    <input type="hidden" name="answer">
+                </div>
+                <ul>
+                    <li>
+                        <span class="font-30">A</span>
+                        <input type="text" name="answerA" placeholder="输入选项" class="font-30">
+                    </li>
+                    <li>
+                        <span class="font-30">B</span>
+                        <input type="text" name="answerB" placeholder="输入选项" class="font-30">
+                    </li>
+                    <li>
+                        <span class="font-30">C</span>
+                        <input type="text" name="answerC" placeholder="输入选项" class="font-30">
+                    </li>
+                    <li>
+                        <span class="font-30">D</span>
+                        <input type="text" name="answerD" placeholder="输入选项" class="font-30">
+                    </li>
+                </ul>
+                <span class="left">点击正确答案</span>
+                <ol class="left">
+                    <li>A</li>
+                    <li>B</li>
+                    <li>C</li>
+                    <li>D</li>
+                </ol>
+            </div>
+            <button class="color-ccc margin-auto dis-block">+</button>
+        </article>
+        <!-- <article>
+            <header>
+                <b class="font-36">三、简答题</b>
+                <input type="hidden" name="type" value="2">
+                <input type="text" name="fraction" placeholder="分数" class="font-36 fraction">
+                <span class="font-36">分/题</span>
+            </header>
+            <div>
+                <div class="mapa-topic">
+                    <span class="font-34">1、</span>
+                    <input type="text" name="title" placeholder="输入标题名称" class="font-34">
+                </div>
+                <ul>
+                    <li>
+                        <input type="text" placeholder="不必输入内容" class="font-30">
+                    </li>
+                </ul>
+            </div>
+            <button class="color-ccc margin-auto dis-block">+</button>
+        </article> -->
+    </form>
+</main>
+<footer class="mapa-foot text-center">
+    <button class="color-white margin-auto font-40 no-border save">保存</button>
+    <button class="color-white margin-auto font-40 no-border saveshare">保存并发布</button>
+</footer>
+
+<script>
+    $( '.mapa-main article>button' ).click( function () { //增加题目
+        var div = $( $( this ).siblings( 'div' )[ 0 ].outerHTML );
+        div.find( '.color-red' ).removeClass( 'color-red' );
+        $( this ).before( div );
+        $( this ).parents( 'article' ).find( '.mapa-topic' ).each( function ( i, e ) {
+            $( this ).find( 'span' ).eq( 0 ).html( i + 1 + '、' );
+        } );
+        return false;
+    } );
+    $( '.mapa-main' ).on( 'click', 'ol>li', function () { //选择答案
+        var type = $( this ).parents( 'article' ).attr( 'type' ),
+            li = $( this );
+        if ( type == 'single' ) { //单选题
+            $( this ).addClass( 'color-red' ).siblings().removeClass( 'color-red' );
+            $( this ).parents( 'ol' ).siblings( '.mapa-topic' ).find( 'input[name="answer"]' ).val( li.html() );
+        } else if ( type == 'multiple' ) { //多选题
+            $( this ).toggleClass( 'color-red' );
+            var v = '';
+            li.parent().find( '.color-red' ).each( function ( i, e ) {
+                v += $( e ).html() + ',';
+            } );
+            $( this ).parents( 'ol' ).siblings( '.mapa-topic' ).find( 'input[type="hidden"]' ).val( v.substring( 0, v.length - 1 ) );
+        }
+    } );
+    $( '.mapa-foot .save' ).click( function () { //这里还需要上一页返回的试卷ID
+        var data = {};
+        data.topic = [];
+        $( '.mapa-main article' ).each( function ( i, e ) {
+            data.topic[ i ] = {};
+            data.topic[ i ].type = $( e ).find( 'input[name="type"]' ).val();
+            data.topic[ i ].fraction = $( e ).find( 'input[name="fraction"]' ).val();
+            data.topic[ i ].leakfraction = $( e ).find( 'input[name="leakfraction"]' ).val();
+            data.topic[ i ].pId = $( '.mapa-main input[type="hidden"]' ).val(); //试卷ID
+            data.topic[ i ].children = [];
+            $( e ).children( 'div' ).each( function ( ie, el ) {
+                data.topic[ i ].children.push( $( el ).getValue() );
+            } );
+        } );
+        $.ajax( {
+            url: ajaxUrl + '/papersQuestion/saveQuestion',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify( data ),
+            cache: false
+        } ).done( function ( m, n ) {
+            if ( m.status == 2 ) {
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        f: function () {
+                            $( '#confirm' ).unbind().click( function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                            } );
+                        },
+                        content: '<div><p class="text-center font-36">保存失败</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    } );
+                } );
+            } else {
+                dj.curtain( function () {
+                    dj.bulletMid( {
+                        f: function () {
+                            $( '#confirm' ).unbind().click( function () {
+                                dj.curtain();
+                                dj.bulletMid();
+                                $( 'body' ).prePage();
+                            } );
+                        },
+                        content: '<div><p class="text-center font-36">保存成功</p><p></p><p></p><p></p><div><button style="padding:.1rem .3rem;margin-top:.3rem;" class="font-34" id="confirm">确认</button></div>'
+                    } );
+                } );
+            }
+        } );
+    } );
+    $( '#returnBtn' ).unbind().click( function () {
+        $( 'body' ).prePage();
+    } );
+
+</script>
